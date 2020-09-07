@@ -4,8 +4,22 @@
 ** Docs: https://tailwindcss.com/docs/configuration
 ** Default: https://github.com/tailwindcss/tailwindcss/blob/master/stubs/defaultConfig.stub.js
 */
+const defaultTheme = require('tailwindcss/defaultTheme')
+
 module.exports = {
-  theme: {},
+  future: {
+    removeDeprecatedGapUtilities: true
+  },
+  theme: {
+    extend: {
+      fontFamily: {
+        sans: [
+          'Open Sans',
+          ...defaultTheme.fontFamily.sans
+        ]
+      }
+    }
+  },
   variants: {},
   plugins: [],
   purge: {

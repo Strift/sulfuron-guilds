@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-red-900 rounded-t-lg flex px-4 py-2 font-semibold text-red-100">
+  <div :class="{ 'bg-blue-700': alliance, 'bg-red-800': !alliance }" class="rounded-t-lg flex px-4 py-2 font-semibold text-red-100">
     <div class="w-1/4 mr-6">
       Nom
     </div>
@@ -23,7 +23,12 @@
 
 <script>
 export default {
-
+  props: {
+    alliance: {
+      type: Boolean,
+      required: true
+    }
+  }
 }
 </script>
 
