@@ -4,7 +4,7 @@
     <!-- <div class="text-4xl ml-6 text-white">
       Guildes
     </div> -->
-    <div class="ml-auto text-gray-200 flex space-x-16">
+    <div class="ml-auto text-gray-200 flex space-x-20">
       <button class="flex items-center space-x-4">
         <img src="~/assets/images/horde-logo.png" alt="Horde" class="h-10">
         <div class="font-semibold">
