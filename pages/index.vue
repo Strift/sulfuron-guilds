@@ -1,5 +1,5 @@
 <template>
-  <FactionLayout :alliance="false">
+  <FactionLayout :alliance="true">
     <div class="container mx-auto font-sans">
       <Navbar class="py-12 mb-6" />
 

@@ -16,7 +16,10 @@ module.exports = {
         sans: [
           'Open Sans',
           ...defaultTheme.fontFamily.sans
-        ]
+        ],
+        transitionProperty: {
+          background: 'background'
+        }
       }
     }
   },

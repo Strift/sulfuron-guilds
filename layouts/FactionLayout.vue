@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ 'alliance': alliance, 'horde': !alliance }" class="background h-screen overflow-y-auto">
+  <div :class="{ 'alliance': alliance, 'horde': !alliance }" class="transition-background duration-300 ease-in h-screen overflow-y-auto">
     <slot name="default" />
   </div>
 </template>
@@ -21,19 +21,15 @@ html, body {
   height: 100%;
 }
 
-.background {
-  transition: background-image 0.5s ease;
-}
-
-.background.alliance {
+.alliance {
   background: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ),
-              url('https://bnetcmsus-a.akamaihd.net/cms/blog_header/8b/8BIKZFGNMCEW1568413423399.jpg');
+              url('~assets/images/alliance-background.jpg');
   background-size: cover;
 }
 
-.background.horde {
+.horde {
   background: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ),
-              url('https://wow.zamimg.com/uploads/screenshots/normal/936585-orgrimmar.jpg');
+              url('~assets/images/horde-background.jpg');
   background-size: cover;
 }
 </style>
