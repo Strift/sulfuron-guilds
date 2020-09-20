@@ -1,21 +1,21 @@
 <template>
-  <img :src="src" :alt="alt" :title="className">
+  <img :src="src" :alt="alt" :title="wowClass">
 </template>
 
 <script>
 export default {
   props: {
-    className: {
+    wowClass: {
       type: String,
       required: true
     }
   },
   computed: {
     src () {
-      return `/images/class-icon-${this.className.toLowerCase()}.png`
+      return `/images/class-icon-${this.wowClass.toLowerCase()}.png`
     },
     alt () {
-      return `${this.className.toUpperCase()} class icon`
+      return `Icone de classe ${this.wowClass.toUpperCase()}`
     }
   }
 }
