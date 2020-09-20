@@ -4,7 +4,7 @@
 }
 
 .slide-enter-active {
-  transition: all 250ms ease-in;
+  transition: all 500ms ease-out;
 }
 
 .slide-enter-to {
@@ -16,7 +16,7 @@
 }
 
 .slide-leave-active {
-  transition: all 250ms ease-out;
+  transition: all 500ms ease-in;
 }
 
 .slide-leave-to {

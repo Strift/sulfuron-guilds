@@ -1,16 +1,23 @@
 <template>
-  <div :class="{ 'alliance': alliance, 'horde': !alliance }" class="transition-background duration-300 ease-in h-screen overflow-y-auto">
-    <slot name="default" />
+  <div
+    :class="{ 'alliance': isAlliance, 'horde': isHorde }"
+    class="transition-background duration-1000 ease-in-out bg-cover h-screen overflow-y-auto relative"
+  >
+    <div class="absolute inset-0 bg-black bg-opacity-75">
+      <slot name="default" />
+    </div>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
-  props: {
-    alliance: {
-      type: Boolean,
-      required: true
-    }
+  computed: {
+    ...mapGetters([
+      'isAlliance',
+      'isHorde'
+    ])
   }
 }
 </script>
@@ -22,14 +29,10 @@ html, body {
 }
 
 .alliance {
-  background: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ),
-              url('~assets/images/alliance-background.jpg');
-  background-size: cover;
+  background-image: url('~assets/images/alliance-background.jpg');
 }
 
 .horde {
-  background: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ),
-              url('~assets/images/horde-background.jpg');
-  background-size: cover;
+  background-image: url('~assets/images/horde-background.jpg');
 }
 </style>
