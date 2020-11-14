@@ -1,5 +1,5 @@
 <template>
-  <button class="flex items-center text-gray-200 font-semibold text-left overflow-hidden w-40" @click="toggleFaction">
+  <button class="flex items-center font-semibold text-left overflow-hidden w-40" @click="toggleFaction">
     <transition name="slide" mode="out-in">
       <div v-if="isAlliance" key="alliance" class="flex items-center space-x-4">
         <img src="~/assets/images/alliance-logo.png" alt="Alliance" title="Logo de l'Alliance" class="h-10">

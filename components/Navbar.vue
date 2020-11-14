@@ -1,12 +1,12 @@
 <template>
-  <div class="flex items-center">
+  <header class="flex items-center py-12">
     <img src="~/assets/images/logo.png" alt="sulfuron.eu" title="Logo du site" class="h-12">
     <FactionButton class="ml-10" />
     <BlizzardButton class="flex items-center ml-auto">
       <BattleNetIcon class="h-8 w-8" />
       <div>Connexion</div>
     </BlizzardButton>
-  </div>
+  </header>
 </template>
 
 <script>
