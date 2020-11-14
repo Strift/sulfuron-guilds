@@ -1,20 +1,19 @@
 <template>
   <FactionLayout>
-    <div class="text-gray-400 mb-3 flex">
-      <div class="font-semibold text-2xl">
+    <div class="text-gray-400 flex flex-wrap border-b border-white mb-6 pb-6">
+      <div class="font-semibold text-2xl mb-3 md:mb-0">
         Guildes
       </div>
-      <input v-model="search" type="text" class="ml-auto px-3 rounded-full text-gray-700" placeholder="Nyk Trib">
+      <input v-model="search" type="text" class="py-1 max-w-sm md:ml-auto px-3 rounded-full text-gray-700" placeholder="Nyk Trib">
     </div>
-    <div class="text-white mb-12 border-t border-white pt-3 opacity-75 flex justify-end space-x-4">
+    <div class="hidden md:flex text-white mb-12 opacity-75 justify-end space-x-4">
       <label v-for="wowClass in wowClasses" :key="wowClass" class="flex items-center space-x-1">
         <input :id="wowClass" type="checkbox" :name="wowClass">
         <ClassIcon :wow-class="wowClass" class="h-5" />
-        <!-- <div>{{ wowClass }}</div> -->
       </label>
     </div>
 
-    <div class="grid grid-flow-row grid-cols-3 gap-12">
+    <div class="grid grid-flow-row grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
       <GuildCard
         v-for="guild in guilds.concat(guilds).concat(guilds)"
         :key="guild.name"

@@ -12,11 +12,11 @@
     <div class="bg-gray-800 text-gray-600">
       <div class="p-5">
         <div class="flex items-center space-x-2 mb-2">
-          <CalendarIcon class="text-gray-700" />
+          <CalendarIcon class="text-gray-700 flex-shrink-0" />
           <div>{{ playtime }}</div>
         </div>
         <div class="flex items-center space-x-2 mb-4">
-          <ClockIcon class="text-gray-700" />
+          <ClockIcon class="text-gray-700 flex-shrink-0" />
           <div>20h30 - 00h30</div>
         </div>
         <div class="font-semibold text-xs uppercase tracking-widest mb-2">

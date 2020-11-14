@@ -4,10 +4,10 @@
     class="transition-background duration-1000 ease-in-out bg-cover h-screen overflow-y-auto relative text-gray-200"
   >
     <div class="bg-black bg-opacity-75">
-      <div class="container mx-auto font-sans">
-        <Navbar class="mb-6" />
+      <div class="container mx-auto font-sans px-3">
+        <Navbar class="" />
         <slot name="default" />
-        <footer class="mt-12 py-12 text-center">
+        <footer class="py-12 text-center">
           Réalisé par Strift. Tous droits réservés.
         </footer>
       </div>
