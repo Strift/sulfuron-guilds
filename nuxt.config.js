@@ -62,5 +62,14 @@ export default {
   ** See https://nuxtjs.org/api/configuration-build/
   */
   build: {
+  },
+  /*
+  ** Generate configuration
+  ** See https://nuxtjs.org/docs/2.x/configuration-glossary/configuration-generate
+  */
+  generate: {
+    exclude: [
+      '/login'
+    ]
   }
 }

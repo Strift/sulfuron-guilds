@@ -91,3 +91,6 @@ sw.*
 
 # Firebase
 .firebase/
+
+# Local runtime configuration
+functions/.runtimeconfig.json
