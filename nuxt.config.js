@@ -69,7 +69,7 @@ export default {
   */
   generate: {
     exclude: [
-      '/login'
+      '/auth/battlenet'
     ]
   }
 }

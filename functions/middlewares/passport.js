@@ -10,7 +10,7 @@ const BATTLENET_CLIENT_SECRET = functions.config().battlenet.client_secret
 passport.use(new BnetStrategy({
   clientID: BATTLENET_CLIENT_ID,
   clientSecret: BATTLENET_CLIENT_SECRET,
-  callbackURL: `${HOSTNAME}/login/callback`,
+  callbackURL: `${HOSTNAME}/auth/battlenet/callback`,
   region: 'eu'
 }, function (accessToken, refreshToken, profile, done) {
   return done(null, profile)
