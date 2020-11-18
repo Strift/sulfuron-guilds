@@ -94,3 +94,6 @@ sw.*
 
 # Local runtime configuration
 functions/.runtimeconfig.json
+
+# Service account
+functions/service-account.json

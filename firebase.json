@@ -4,6 +4,7 @@
     "indexes": "firestore.indexes.json"
   },
   "hosting": {
+    "site": "sulfuron-guilds",
     "public": "dist",
     "ignore": [
       "firebase.json",
@@ -32,7 +33,13 @@
       "port": 5000
     },
     "ui": {
-      "enabled": false
+      "enabled": true
+    },
+    "auth": {
+      "port": 9099
+    },
+    "database": {
+      "port": 9000
     }
   }
 }

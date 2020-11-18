@@ -56,6 +56,7 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
+    '@nuxtjs/firebase'
   ],
   /*
   ** Build configuration
@@ -71,5 +72,22 @@ export default {
     exclude: [
       '/auth/battlenet'
     ]
+  },
+  /*
+  ** Firebase module configuration
+  */
+  firebase: {
+    config: {
+      apiKey: 'AIzaSyDgCfIFFy-5Lw8rQ-HF3M--T-oT270LdpE',
+      authDomain: 'sulfuron-guilds.firebaseapp.com',
+      databaseURL: 'https://sulfuron-guilds.firebaseio.com',
+      projectId: 'sulfuron-guilds',
+      storageBucket: 'sulfuron-guilds.appspot.com',
+      messagingSenderId: '229682010576',
+      appId: '1:229682010576:web:db892c4df7f3ba3b1281d5'
+    },
+    services: {
+      auth: true
+    }
   }
 }

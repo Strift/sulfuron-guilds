@@ -1,5 +1,5 @@
 <template>
-  <FactionLayout>
+  <div>
     <div class="text-gray-400 flex flex-wrap border-b border-white mb-6 pb-6">
       <div class="font-semibold text-2xl mb-3 md:mb-0">
         Guildes
@@ -25,18 +25,16 @@
         :supports="guild.supports"
       />
     </div>
-  </FactionLayout>
+  </div>
 </template>
 
 <script>
-import FactionLayout from '~/layouts/FactionLayout.vue'
-
 import ClassIcon from '~/components/icons/ClassIcon.vue'
 import GuildCard from '~/components/GuildCard.vue'
 
 export default {
+  layout: 'FactionLayout',
   components: {
-    FactionLayout,
     ClassIcon,
     GuildCard
   },
