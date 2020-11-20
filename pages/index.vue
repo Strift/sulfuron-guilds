@@ -1,9 +1,7 @@
 <template>
   <div>
-    <div class="text-gray-400 flex flex-wrap border-b border-white mb-6 pb-6">
-      <div class="font-semibold text-2xl mb-3 md:mb-0">
-        Guildes
-      </div>
+    <div class="text-gray-400 flex flex-wrap border-b border-yellow-100 pb-6 mb-6 items-center">
+      <FactionButton />
       <input v-model="search" type="text" class="py-1 max-w-sm md:ml-auto px-3 rounded-full text-gray-700" placeholder="Nyk Trib">
     </div>
     <div class="hidden md:flex text-white mb-12 opacity-75 justify-end space-x-4">
@@ -25,16 +23,20 @@
         :supports="guild.supports"
       />
     </div>
+    <div class="py-12 text-center mt-auto">
+      123 résultats.
+    </div>
   </div>
 </template>
 
 <script>
+import FactionButton from '~/components/FactionButton.vue'
 import ClassIcon from '~/components/icons/ClassIcon.vue'
 import GuildCard from '~/components/GuildCard.vue'
 
 export default {
-  layout: 'FactionLayout',
   components: {
+    FactionButton,
     ClassIcon,
     GuildCard
   },

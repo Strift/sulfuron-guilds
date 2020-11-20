@@ -1,3 +1,5 @@
+const errorOnlyInProd = process.env.NODE_ENV === 'production' ? 2 : 1
+
 module.exports = {
   root: true,
   env: {
@@ -14,5 +16,8 @@ module.exports = {
   plugins: [
   ],
   // add your custom rules here
-  rules: {}
+  rules: {
+    'no-unused-vars': errorOnlyInProd,
+    'vue/no-unused-components': errorOnlyInProd
+  }
 }

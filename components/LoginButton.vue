@@ -1,10 +1,8 @@
 <template>
-  <!-- <nuxt-link to="/auth/battlenet" class="flex py-2 px-4 border space-x-4 text-gray-200"> -->
   <a class="flex py-2 px-4 border space-x-4 text-gray-200" href="/auth/battlenet">
     <BattleNetIcon class="h-8 w-8" />
     <div>Connexion</div>
   </a>
-  <!-- </nuxt-link> -->
 </template>
 
 <script>

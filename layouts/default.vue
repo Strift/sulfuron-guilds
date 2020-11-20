@@ -1,11 +1,11 @@
 <template>
   <div
     :class="{ 'alliance': isAlliance, 'horde': isHorde }"
-    class="transition-background duration-1000 ease-in-out bg-cover overflow-y-auto relative text-gray-200 min-h-screen"
+    class="transition-background duration-1000 ease-in-out bg-cover overflow-y-auto relative min-h-screen"
   >
-    <div class="bg-black bg-opacity-75 flex flex-col min-h-screen h-full">
+    <div class="bg-black bg-opacity-75 flex flex-col min-h-screen h-full text-gray-200">
       <div class="container mx-auto font-sans px-3">
-        <Navbar class="" />
+        <Navbar class="mb-12" />
         <Nuxt />
       </div>
       <footer class="py-12 text-center mt-auto">
