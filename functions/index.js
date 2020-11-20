@@ -1,5 +1,4 @@
 const functions = require('firebase-functions')
-// require('./admin')
 
 const auth = require('./api/auth')
 
