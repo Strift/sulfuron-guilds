@@ -30,13 +30,9 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
-
 import FactionButton from '~/components/FactionButton.vue'
 import ClassIcon from '~/components/icons/ClassIcon.vue'
 import GuildCard from '~/components/GuildCard.vue'
-
-const AUTH_TOKEN_QUERY = 'auth_token'
 
 export default {
   components: {
@@ -62,21 +58,6 @@ export default {
       activity: 30,
       supports: 50
     }]
-  }),
-  computed: {
-    ...mapState({
-      authError: state => state.auth.error
-    })
-  },
-  async mounted () {
-    const token = this.$router.currentRoute.query[AUTH_TOKEN_QUERY]
-    if (!token) {
-      return
-    }
-    // console.log('Starting login')
-    await this.$store.dispatch('auth/login', token)
-    // console.log('Done login')
-    this.$router.push('/')
-  }
+  })
 }
 </script>

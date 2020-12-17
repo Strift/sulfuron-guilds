@@ -28,5 +28,16 @@ export const actions = {
     } catch (error) {
       commit('setError', error)
     }
+  },
+  autoLogin ({ commit }) {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        commit('setUser', {
+          name: user.uid
+        })
+      } else {
+        commit('setUser', null)
+      }
+    })
   }
 }

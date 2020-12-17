@@ -26,6 +26,8 @@
 import { mapGetters } from 'vuex'
 import Navbar from '~/components/Navbar.vue'
 
+const AUTH_TOKEN_QUERY = 'auth_token'
+
 export default {
   components: {
     Navbar
@@ -35,6 +37,16 @@ export default {
       'isAlliance',
       'isHorde'
     ])
+  },
+  async mounted () {
+    const token = this.$router.currentRoute.query[AUTH_TOKEN_QUERY]
+    if (!token) {
+      this.$store.dispatch('auth/autoLogin')
+      return
+    }
+
+    await this.$store.dispatch('auth/login', token)
+    this.$router.push('/')
   }
 }
 </script>
