@@ -32,6 +32,7 @@ export default {
   ** https://nuxtjs.org/guide/plugins
   */
   plugins: [
+    '~/plugins/vuefire.js'
   ],
   /*
   ** Auto import components
@@ -96,7 +97,11 @@ export default {
       appId: '1:229682010576:web:db892c4df7f3ba3b1281d5'
     },
     services: {
-      auth: true
+      auth: {
+        initialize: {
+          onAuthStateChangedMutation: 'auth/onAuthStateChanged'
+        }
+      }
     }
   }
 }

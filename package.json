@@ -23,7 +23,8 @@
     "@nuxtjs/firebase": "^7.1.1",
     "animate.css": "^4.1.1",
     "firebase": "^8.0.2",
-    "nuxt": "^2.14.0"
+    "nuxt": "^2.14.0",
+    "vuefire": "^2.2.5"
   },
   "devDependencies": {
     "@nuxtjs/dotenv": "^1.4.1",

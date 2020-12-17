@@ -41,7 +41,7 @@ export default {
   async mounted () {
     const token = this.$router.currentRoute.query[AUTH_TOKEN_QUERY]
     if (!token) {
-      this.$store.dispatch('auth/autoLogin')
+      // this.$store.dispatch('auth/autoLogin')
       return
     }
 

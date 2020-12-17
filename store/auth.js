@@ -12,6 +12,15 @@ export const mutations = {
   },
   setUser (state, user) {
     state.user = user
+  },
+  onAuthStateChanged (state, { authUser }) {
+    if (authUser) {
+      state.user = {
+        name: authUser.uid
+      }
+    } else {
+      state.user = null
+    }
   }
 }
 
