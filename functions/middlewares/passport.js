@@ -1,16 +1,17 @@
-const functions = require('firebase-functions')
 const passport = require('passport')
-const BnetStrategy = require('passport-bnet').Strategy
+const BattlenetStrategy = require('passport-bnet').Strategy
 
-const HOSTNAME = functions.config().hostname
-const BATTLENET_CLIENT_ID = functions.config().battlenet.client_id
-const BATTLENET_CLIENT_SECRET = functions.config().battlenet.client_secret
+const config = require('../config')
+
+const AUTH_FUNCTION_HOST = config.hosting.authFunction
+const BATTLENET_CLIENT_ID = config.battlenet.clientId
+const BATTLENET_CLIENT_SECRET = config.battlenet.clientSecret
 
 // Use the BnetStrategy within Passport.
-passport.use(new BnetStrategy({
+passport.use(new BattlenetStrategy({
   clientID: BATTLENET_CLIENT_ID,
   clientSecret: BATTLENET_CLIENT_SECRET,
-  callbackURL: `${HOSTNAME}/auth/battlenet/callback`,
+  callbackURL: `${AUTH_FUNCTION_HOST}/auth/battlenet/callback`,
   region: 'eu'
 }, function (accessToken, refreshToken, profile, done) {
   return done(null, profile)

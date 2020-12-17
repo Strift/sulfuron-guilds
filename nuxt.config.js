@@ -1,11 +1,6 @@
 
 export default {
   /*
-  ** Nuxt rendering mode
-  ** See https://nuxtjs.org/api/configuration-mode
-  */
-  mode: 'universal',
-  /*
   ** Nuxt target
   ** See https://nuxtjs.org/api/configuration-target
   */
@@ -50,7 +45,9 @@ export default {
     // Doc: https://github.com/nuxt-community/eslint-module
     '@nuxtjs/eslint-module',
     // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
-    '@nuxtjs/tailwindcss'
+    '@nuxtjs/tailwindcss',
+    // Doc: https://github.com/nuxt-community/dotenv-module
+    '@nuxtjs/dotenv'
   ],
   /*
   ** Nuxt.js modules
@@ -69,6 +66,18 @@ export default {
   ** See https://nuxtjs.org/docs/2.x/configuration-glossary/configuration-generate
   */
   generate: {
+    /*
+     * Do not re-generate when changes happen in these files or folders
+     */
+    cache: {
+      ignore: [
+        'functions',
+        '*.log'
+      ]
+    },
+    /*
+     * Do not generate page for these routes, as they will be handled by Firebase hosting
+     */
     exclude: [
       '/auth/battlenet'
     ]

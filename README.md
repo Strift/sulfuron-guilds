@@ -1,20 +1,9 @@
 # sulfuron-guilds
 
-## Build Setup
+## Development setup
+
+> Firebase Auth emulator doesn't work well,  at least not when trying to generate custom tokens with `firebase-admin`. 
 
 ```bash
-# install dependencies
-$ yarn install
-
-# serve with hot reload at localhost:3000
-$ yarn dev
-
-# build for production and launch server
-$ yarn build
-$ yarn start
-
-# generate static project
-$ yarn generate
+firebase emulators:start --only  hosting,functions,database
 ```
-
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).

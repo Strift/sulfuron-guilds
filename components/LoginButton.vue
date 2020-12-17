@@ -1,5 +1,5 @@
 <template>
-  <a class="flex py-2 px-4 border space-x-4 text-gray-200" href="/auth/battlenet">
+  <a class="flex items-center py-2 px-4 border space-x-4 text-gray-200" :href="`${hostname}/auth/battlenet`">
     <BattleNetIcon class="h-8 w-8" />
     <div>Connexion</div>
   </a>
@@ -11,6 +11,12 @@ import BattleNetIcon from '~/components/icons/BattleNetIcon.vue'
 export default {
   components: {
     BattleNetIcon
+  },
+  data: () => ({
+    hostname: null
+  }),
+  mounted () {
+    this.hostname = process.env.AUTH_FUNCTION_HOST
   }
 }
 </script>

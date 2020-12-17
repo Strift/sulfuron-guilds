@@ -1,5 +1,5 @@
 const functions = require('firebase-functions')
 
-const auth = require('./api/auth')
+const authentication = require('./api/authentication')
 
-exports.auth = functions.https.onRequest(auth)
+exports.auth = functions.https.onRequest(authentication)

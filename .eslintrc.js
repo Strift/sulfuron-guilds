@@ -18,6 +18,8 @@ module.exports = {
   // add your custom rules here
   rules: {
     'no-unused-vars': errorOnlyInProd,
-    'vue/no-unused-components': errorOnlyInProd
+    'vue/no-unused-components': errorOnlyInProd,
+    // https://github.com/babel/babel/issues/10904#issuecomment-730391306
+    'template-curly-spacing': 'off'
   }
 }
