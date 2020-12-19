@@ -1,8 +1,11 @@
+import { vuexfireMutations } from 'vuexfire'
+
 export const state = () => ({
   faction: 'Horde'
 })
 
 export const mutations = {
+  ...vuexfireMutations,
   toggleFaction (state) {
     if (state.faction === 'Alliance') {
       state.faction = 'Horde'

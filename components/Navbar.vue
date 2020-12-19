@@ -3,13 +3,13 @@
     <nuxt-link to="/" title="Accueil">
       <img src="~/assets/images/logo.png" alt="sulfuron.eu" class="mx-auto md:mx-0 h-10">
     </nuxt-link>
-    <div v-if="user" class="flex space-x-4 items-center ">
+    <div v-show="user" class="flex space-x-4 items-center ">
       <BattleNetIcon class="h-8 w-8" />
       <div class="font-semibold">
-        {{ user.name }}
+        {{ username }}
       </div>
     </div>
-    <LoginButton v-else class="shadow-lg" />
+    <LoginButton v-show="!user" class="shadow-lg" />
   </header>
 </template>
 
@@ -26,7 +26,10 @@ export default {
   computed: {
     ...mapState('auth', [
       'user'
-    ])
+    ]),
+    username () {
+      return this.user ? this.user.name : 'Username'
+    }
   }
 }
 </script>

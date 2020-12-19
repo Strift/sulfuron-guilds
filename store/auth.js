@@ -1,6 +1,3 @@
-import firebase from 'firebase/app'
-import 'firebase/auth'
-
 export const state = () => ({
   error: null,
   user: null
@@ -27,10 +24,10 @@ export const mutations = {
 export const actions = {
   async login ({ commit }, token) {
     try {
-      if (firebase.auth().currentUser) {
+      if (this.$fire.auth.currentUser) {
         return
       }
-      const { user } = await firebase.auth().signInWithCustomToken(token)
+      const { user } = await this.$fire.auth.signInWithCustomToken(token)
       commit('setUser', {
         name: user.uid
       })
@@ -39,7 +36,7 @@ export const actions = {
     }
   },
   autoLogin ({ commit }) {
-    firebase.auth().onAuthStateChanged((user) => {
+    this.$fire.auth.onAuthStateChanged((user) => {
       if (user) {
         commit('setUser', {
           name: user.uid

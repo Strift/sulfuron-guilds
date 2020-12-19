@@ -13,16 +13,17 @@
 
     <div class="grid grid-flow-row grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 mb-12">
       <GuildCard
-        v-for="(guild, index) in guilds.concat(guilds).concat(guilds)"
+        v-for="(guild, index) in guilds"
         :key="index"
         :name="guild.name"
         :type="guild.type"
-        :playtime="guild.playtime"
+        :days="guild.days"
         :recruitment="guild.recruitment"
         :activity="guild.activity"
         :supports="guild.supports"
       />
     </div>
+
     <div class="text-center mt-auto">
       123 résultats.
     </div>
@@ -30,6 +31,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import FactionButton from '~/components/FactionButton.vue'
 import ClassIcon from '~/components/icons/ClassIcon.vue'
 import GuildCard from '~/components/GuildCard.vue'
@@ -40,24 +42,25 @@ export default {
     ClassIcon,
     GuildCard
   },
+  async fetch () {
+    await this.$store.dispatch('guilds/enableSync')
+    // await this.$store.dispatch('guilds/add', {
+    //   name: 'Astral',
+    //   type: 'Classique',
+    //   playtime: ['Mercredi', 'Jeudi'],
+    //   recruitment: ['Rogue', 'Druid', 'Shaman'],
+    //   activity: 30,
+    //   supports: 50
+    // })
+  },
   data: () => ({
     search: '',
-    wowClasses: ['Druid', 'Hunter', 'Mage', 'Paladin', 'Priest', 'Rogue', 'Shaman', 'Warlock', 'Warrior'],
-    guilds: [{
-      name: 'Les Croisés de Pandragon',
-      type: 'Classique',
-      playtime: 'Lun, Mar, Mer, Jeu, Ven, Sam, Dim',
-      recruitment: ['Rogue', 'Druid', 'Shaman'],
-      activity: 30,
-      supports: 50
-    }, {
-      name: 'Astral',
-      type: 'Classique',
-      playtime: 'Mer, Jeu',
-      recruitment: ['Rogue', 'Druid', 'Shaman'],
-      activity: 30,
-      supports: 50
-    }]
-  })
+    wowClasses: ['Druid', 'Hunter', 'Mage', 'Paladin', 'Priest', 'Rogue', 'Shaman', 'Warlock', 'Warrior']
+  }),
+  computed: {
+    ...mapState({
+      guilds: state => state.guilds.list
+    })
+  }
 }
 </script>

@@ -32,7 +32,6 @@ export default {
   ** https://nuxtjs.org/guide/plugins
   */
   plugins: [
-    '~/plugins/vuefire.js'
   ],
   /*
   ** Auto import components
@@ -101,6 +100,9 @@ export default {
         initialize: {
           onAuthStateChangedMutation: 'auth/onAuthStateChanged'
         }
+      },
+      firestore: {
+        emulatorPort: 8080
       }
     }
   }

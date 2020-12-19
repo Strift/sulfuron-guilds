@@ -13,7 +13,7 @@
       <div class="p-5">
         <div class="flex items-center space-x-2 mb-2">
           <CalendarIcon class="text-gray-700 flex-shrink-0" />
-          <div>{{ playtime }}</div>
+          <div>{{ days }}</div>
         </div>
         <div class="flex items-center space-x-2 mb-4">
           <ClockIcon class="text-gray-700 flex-shrink-0" />
@@ -57,7 +57,7 @@ export default {
   props: {
     name: { type: String, required: true },
     type: { type: String, required: true },
-    playtime: { type: String, required: true },
+    days: { type: Array, required: true },
     recruitment: { type: Array, required: true },
     activity: { type: Number, required: true },
     supports: { type: Number, required: true }
