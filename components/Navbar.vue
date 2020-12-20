@@ -3,32 +3,20 @@
     <nuxt-link to="/" title="Accueil">
       <img src="~/assets/images/logo.png" alt="sulfuron.eu" class="mx-auto md:mx-0 h-10">
     </nuxt-link>
-    <div v-show="user" class="flex space-x-4 items-center ">
-      <BattleNetIcon class="h-8 w-8" />
-      <div class="font-semibold">
-        {{ username }}
-      </div>
-    </div>
-    <LoginButton v-show="!user" class="shadow-lg" />
+    <nuxt-link v-if="isLoggedIn" to="/compte" class="px-4 py-1 rounded font-semibold text-yellow-600 border border-yellow-600 hover:bg-yellow-600 hover:text-gray-900 shadow-lg">
+      Mon compte
+    </nuxt-link>
+    <nuxt-link v-else to="/connexion" class="px-4 py-1 rounded font-semibold bg-yellow-600 border border-yellow-600 text-gray-900 shadow-lg">
+      Connexion
+    </nuxt-link>
   </header>
 </template>
 
 <script>
-import { mapState } from 'vuex'
-import LoginButton from '~/components/LoginButton.vue'
-import BattleNetIcon from '~/components/icons/BattleNetIcon.vue'
-
 export default {
-  components: {
-    BattleNetIcon,
-    LoginButton
-  },
   computed: {
-    ...mapState('auth', [
-      'user'
-    ]),
-    username () {
-      return this.user ? this.user.name : 'Username'
+    isLoggedIn () {
+      return this.$store.state.auth.user !== null
     }
   }
 }
