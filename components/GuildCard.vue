@@ -33,10 +33,10 @@
       </div>
     </div>
     <div class="px-5 py-2 bg-gray-700 text-gray-500 rounded-b-lg flex">
-      <a :href="websiteUrl" class="flex items-center space-x-1 hover:text-blue-600 text-sm">
+      <a :href="websiteUrl" target="_blank" class="flex items-center space-x-1 hover:text-blue-600 text-sm">
         <span class="text-sm font-semibold">{{ readableWebsiteUrl }}</span>
       </a>
-      <a :href="contactUrl" class="flex items-center space-x-1 hover:text-blue-600 ml-auto text-sm">
+      <a :href="contactUrl" target="_blank" class="flex items-center space-x-1 hover:text-blue-600 ml-auto text-sm">
         <span class="font-semibold">Contact</span>
       </a>
     </div>
