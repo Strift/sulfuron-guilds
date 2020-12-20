@@ -23,6 +23,7 @@
     "@nuxtjs/firebase": "^7.1.1",
     "animate.css": "^4.1.1",
     "firebase": "^8.2.1",
+    "fuse.js": "^6.4.3",
     "nuxt": "^2.14.0",
     "vuexfire": "^3.2.5"
   },
