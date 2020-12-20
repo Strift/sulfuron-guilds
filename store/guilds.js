@@ -15,7 +15,7 @@ export const actions = {
   disableSync: firestoreAction(function ({ unbindFirestoreRef }) {
     unbindFirestoreRef('list', false)
   }),
-  add: firestoreAction(function ({ bindFirestoreRef }, guild) {
+  add: firestoreAction(function (ctx, guild) {
     const ref = this.$fire.firestore.collection('guilds').doc()
     return ref.set(guild)
   })

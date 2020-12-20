@@ -18,9 +18,14 @@
         :name="guild.name"
         :type="guild.type"
         :days="guild.days"
+        :time-range="guild.timeRange"
         :recruitment="guild.recruitment"
+        :image-url="guild.imageUrl"
+        :website-url="guild.websiteUrl"
+        :contact-url="guild.contactUrl"
         :activity="guild.activity"
         :supports="guild.supports"
+        class="shadow-md"
       />
     </div>
 
@@ -42,17 +47,6 @@ export default {
     ClassIcon,
     GuildCard
   },
-  async fetch () {
-    await this.$store.dispatch('guilds/enableSync')
-    // await this.$store.dispatch('guilds/add', {
-    //   name: 'Astral',
-    //   type: 'Classique',
-    //   playtime: ['Mercredi', 'Jeudi'],
-    //   recruitment: ['Rogue', 'Druid', 'Shaman'],
-    //   activity: 30,
-    //   supports: 50
-    // })
-  },
   data: () => ({
     search: '',
     wowClasses: ['Druid', 'Hunter', 'Mage', 'Paladin', 'Priest', 'Rogue', 'Shaman', 'Warlock', 'Warrior']
@@ -61,6 +55,22 @@ export default {
     ...mapState({
       guilds: state => state.guilds.list
     })
+  },
+  async mounted () {
+    // Performing data fetching in mounted hook because of NuxtFirebase issues with SSR
+    await this.$store.dispatch('guilds/enableSync')
+    // await this.$store.dispatch('guilds/add', {
+    //   name: 'Astral',
+    //   type: 'Classique',
+    //   days: ['Mercredi', 'Jeudi'],
+    //   timeRange: '20h30 - 00h00',
+    //   recruitment: ['Rogue', 'Druid', 'Shaman'],
+    //   activity: 30,
+    //   supports: 50,
+    //   imageUrl: 'https://astral.gg/_nuxt/img/41e90eb.svg',
+    //   websiteUrl: 'https://astral.gg',
+    //   contactUrl: 'https://discord.gg/KFKJJdr'
+    // })
   }
 }
 </script>

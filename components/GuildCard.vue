@@ -1,7 +1,7 @@
 <template>
-  <div class="shadow-md">
+  <div>
     <div class="bg-gray-900 p-5 flex items-center rounded-t-lg">
-      <img src="~/assets/images/astral.svg" alt="" class="h-12 mr-5">
+      <img :src="imageUrl" alt="" class="h-12 mr-5">
       <div class="text-gray-500 font-semibold text-lg leading-6">
         {{ name }}
       </div>
@@ -13,11 +13,11 @@
       <div class="p-5">
         <div class="flex items-center space-x-2 mb-2">
           <CalendarIcon class="text-gray-700 flex-shrink-0" />
-          <div>{{ days }}</div>
+          <div>{{ readableDays }}</div>
         </div>
         <div class="flex items-center space-x-2 mb-4">
           <ClockIcon class="text-gray-700 flex-shrink-0" />
-          <div>20h30 - 00h30</div>
+          <div>{{ timeRange }}</div>
         </div>
         <div class="font-semibold text-xs uppercase tracking-widest mb-2">
           Recrutement
@@ -33,11 +33,11 @@
       </div>
     </div>
     <div class="px-5 py-2 bg-gray-700 text-gray-500 rounded-b-lg flex">
-      <div class="text-sm font-semibold">
-        astral.gg
-      </div>
-      <a href="#" class="flex items-center space-x-1 hover:text-blue-600 ml-auto text-sm">
-        <div class="font-semibold">Contact</div>
+      <a :href="websiteUrl" class="flex items-center space-x-1 hover:text-blue-600 text-sm">
+        <span class="text-sm font-semibold">{{ readableWebsiteUrl }}</span>
+      </a>
+      <a :href="contactUrl" class="flex items-center space-x-1 hover:text-blue-600 ml-auto text-sm">
+        <span class="font-semibold">Contact</span>
       </a>
     </div>
   </div>
@@ -58,9 +58,21 @@ export default {
     name: { type: String, required: true },
     type: { type: String, required: true },
     days: { type: Array, required: true },
+    timeRange: { type: String, required: true },
     recruitment: { type: Array, required: true },
+    imageUrl: { type: String, required: true },
+    websiteUrl: { type: String, required: true },
+    contactUrl: { type: String, required: true },
     activity: { type: Number, required: true },
     supports: { type: Number, required: true }
+  },
+  computed: {
+    readableDays () {
+      return this.days.map(day => day.slice(0, 3)).join(', ')
+    },
+    readableWebsiteUrl () {
+      return this.websiteUrl.replace(/(^\w+:|^)\/\//, '')
+    }
   }
 }
 </script>

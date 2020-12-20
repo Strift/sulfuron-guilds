@@ -37,7 +37,7 @@ export default {
   ** Auto import components
   ** See https://nuxtjs.org/api/configuration-components
   */
-  components: true,
+  components: false,
   /*
   ** Nuxt.js dev-modules
   */
@@ -102,7 +102,7 @@ export default {
         }
       },
       firestore: {
-        emulatorPort: 8080
+        emulatorPort: process.env.NODE_ENV === 'development' ? 8080 : undefined
       }
     }
   }
