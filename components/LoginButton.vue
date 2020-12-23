@@ -1,5 +1,5 @@
 <template>
-  <a class="flex items-center py-2 px-4 border space-x-4 text-gray-200" :href="`${hostname}/auth/battlenet`">
+  <a class="inline-flex items-center py-2 px-4 border space-x-4 text-gray-200" :href="`${hostname}/auth/battlenet`">
     <BattleNetIcon class="h-8 w-8" />
     <div>Connexion</div>
   </a>

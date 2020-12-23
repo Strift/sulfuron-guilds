@@ -1,23 +1,32 @@
 <template>
-  <div>
-    <!-- <div v-show="user" class="flex space-x-4 items-center ">
-      <BattleNetIcon class="h-8 w-8" />
-      <div class="font-semibold">
-        {{ username }}
-      </div>
+  <div class="mx-auto max-w-md flex flex-col items-center space-y-10 bg-blue-800 bg-opacity-50 p-8 rounded-lg mt-32">
+    <h1 class="text-3xl text-gray-200 leading-none text-shadow-md font-light">
+      Connexion via Battle.net
+    </h1>
+    <div class="space-y-4">
+      <p class="text-gray-500 ">
+        La connexion est uniquement requise pour pouvoir administrer une guilde.
+      </p>
+      <p class="text-gray-600">
+        En cliquant sur Connexion, vous serez redirigé vers le site de Blizzard.
+      </p>
     </div>
-    <LoginButton v-show="!user" class="shadow-lg" /> -->
+    <LoginButton class="shadow-md hover:shadow-lg" />
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import LoginButton from '~/components/LoginButton.vue'
-import BattleNetIcon from '~/components/icons/BattleNetIcon.vue'
 
 export default {
   components: {
-    BattleNetIcon,
     LoginButton
+  },
+  computed: {
+    ...mapGetters('auth', [
+      'isLoggedIn'
+    ])
   }
 }
 </script>
