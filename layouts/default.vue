@@ -1,18 +1,18 @@
 <template>
-  <div>
+  <div class="min-h-screen flex flex-col">
     <div
       :class="{ 'alliance': isAlliance, 'horde': isHorde }"
-      class="transition-background duration-1000 ease-in-out bg-cover overflow-y-auto relative min-h-screen"
+      class="background relative flex-1 flex flex-col bg-gray-900"
     >
-      <div class="bg-black bg-opacity-75 flex flex-col min-h-screen h-full text-gray-200">
+      <div class="bg-black bg-opacity-50 relative flex-1">
         <div class="container mx-auto font-sans px-3 md:px-0">
           <Navbar class="mb-6 md:mb-12" />
           <Nuxt />
         </div>
       </div>
-      <div class="h-12 md:h-24" style="background-image: linear-gradient(180deg, rgba(0,0,0,0.75), rgb(0,0,0))" />
+      <div class="h-12 md:h-24 relative mt-auto" style="background-image: linear-gradient(180deg, rgba(0,0,0,0.5), rgb(0,0,0))" />
     </div>
-    <footer class="bg-black py-12 text-gray-500">
+    <footer class="bg-black py-12 text-gray-500 mt-auto">
       <div class="container mx-auto flex">
         <div>
           Réalisé par Strift. Tous droits réservés.
@@ -57,11 +57,20 @@ html, body {
   height: 100%;
 }
 
-.alliance {
-  background-image: url('~assets/images/alliance-background.jpg');
+.background::before {
+  content: "";
+  filter: grayscale(100%);
+  mix-blend-mode: screen;
+  @apply absolute top-0 left-0 w-full h-full transition-background duration-1000 ease-in-out;
 }
 
-.horde {
+.alliance::before {
+  background-image: url('~assets/images/alliance-background.jpg');
+  @apply bg-cover;
+}
+
+.horde::before {
   background-image: url('~assets/images/horde-background.jpg');
+  @apply bg-cover;
 }
 </style>

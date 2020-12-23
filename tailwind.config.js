@@ -8,7 +8,8 @@ const defaultTheme = require('tailwindcss/defaultTheme')
 
 module.exports = {
   future: {
-    removeDeprecatedGapUtilities: true
+    removeDeprecatedGapUtilities: true,
+    purgeLayersByDefault: true
   },
   theme: {
     extend: {

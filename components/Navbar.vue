@@ -1,12 +1,25 @@
 <template>
-  <header class="flex flex-col md:flex-row items-center md:justify-between space-y-8 md:space-y-0 h-24">
-    <nuxt-link to="/" title="Accueil">
-      <img src="~/assets/images/logo.png" alt="sulfuron.eu" class="mx-auto md:mx-0 h-10">
+  <header class="flex flex-col md:flex-row items-center space-y-8 md:space-y-0 space-x-12 h-24">
+    <nuxt-link
+      to="/"
+      title="Accueil"
+      class="md:ml-0 md:mr-auto"
+    >
+      <img src="~/assets/images/logo.png" alt="sulfuron.eu" class="mx-auto h-10">
     </nuxt-link>
-    <nuxt-link v-if="isLoggedIn" to="/compte" class="px-4 py-1 rounded font-semibold text-yellow-600 border border-yellow-600 hover:bg-yellow-600 hover:text-gray-900 shadow-lg">
+    <nuxt-link
+      v-show="!pathIs('/compte')"
+      to="/compte"
+      title="Mon compte"
+      class="font-semibold text-blue-500 text-shadow-sm"
+    >
       Mon compte
     </nuxt-link>
-    <nuxt-link v-else to="/connexion" class="px-4 py-1 rounded font-semibold bg-yellow-600 border border-yellow-600 text-gray-900 shadow-lg">
+    <nuxt-link
+      v-show="!isLoggedIn && !pathIs('/connexion')"
+      to="/connexion"
+      class="w-40 py-2 rounded-full text-center text-shadow-sm font-semibold bg-blue-900 bg-opacity-25 border-2 border-blue-500 text-blue-500 hover:bg-opacity-50 hover:text-blue-400 shadow-md hover:shadow-lg"
+    >
       Connexion
     </nuxt-link>
   </header>
@@ -17,6 +30,11 @@ export default {
   computed: {
     isLoggedIn () {
       return this.$store.state.auth.user !== null
+    }
+  },
+  methods: {
+    pathIs (path) {
+      return this.$route.path === path
     }
   }
 }
