@@ -1,8 +1,13 @@
 <template>
   <div>
-    <div class="flex flex-col md:flex-row items-start md:items-center md:justify-between space-y-5 md:space-y-0 text-gray-400 border-b border-gray-200 pb-6 mb-6">
-      <FactionButton />
-      <input v-model="textQuery" type="text" class="py-1 w-full md:max-w-xs px-3 rounded-full text-gray-700" placeholder="Nyk Trib">
+    <div class="flex flex-col md:flex-row items-start md:items-center md:justify-between space-y-5 md:space-y-0 text-gray-200 border-b border-gray-300 pb-6 mb-6">
+      <FactionButton class="text-lg" />
+      <input
+        v-model="textQuery"
+        type="text"
+        class="px-4 py-2 max-w-xs rounded-full text-gray-300 bg-gray-700 focus:bg-gray-600 bg-opacity-50 focus:bg-opacity-50 border border-gray-500 border-opacity-25 outline-none"
+        placeholder="🔍 Nyk Trib..."
+      >
     </div>
     <div class="hidden md:flex text-white mb-12 opacity-75 justify-end space-x-4">
       <label v-for="(wowClass) in wowClasses" :key="wowClass" class="flex items-center space-x-1">
@@ -74,11 +79,6 @@ export default {
       })
     }
   },
-  methods: {
-    resultText (count) {
-      return count > 1 ? 'résultats' : 'résultat'
-    }
-  },
   async mounted () {
     // Performing data fetching in mounted hook because of NuxtFirebase issues with SSR
     await this.$store.dispatch('guilds/enableSync')
@@ -97,6 +97,11 @@ export default {
     this.fuse = new Fuse(this.guilds, {
       keys: ['name', 'type', 'days', 'recruitment']
     })
+  },
+  methods: {
+    resultText (count) {
+      return count > 1 ? 'résultats' : 'résultat'
+    }
   }
 }
 </script>

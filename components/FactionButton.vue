@@ -1,21 +1,22 @@
 <template>
   <button class="flex items-center font-semibold text-left overflow-hidden w-40" @click="toggleFaction">
     <transition name="slide" mode="out-in">
-      <div v-if="isAlliance" key="alliance" class="flex items-center space-x-4">
-        <img src="~/assets/images/alliance-logo.png" alt="Alliance" title="Logo de l'Alliance" class="h-10">
+      <div v-if="isAlliance" key="alliance" class="flex items-center w-full">
+        <img src="~/assets/images/alliance-logo.png" alt="Blason de l'Alliance" title="Alliance" class="h-10 mr-4">
         <div>Alliance</div>
+        <SwitchIcon class="h-5 ml-auto" />
       </div>
-      <div v-else key="horde" class="flex items-center space-x-4">
-        <img src="~/assets/images/horde-logo.png" alt="Horde" title="Logo de la Horde" class="h-10">
+      <div v-else key="horde" class="flex items-center w-full">
+        <img src="~/assets/images/horde-logo.png" alt="Blason de la Horde" title="Horde" class="h-10 mr-4">
         <div>Horde</div>
+        <SwitchIcon class="h-5 ml-auto" />
       </div>
     </transition>
-    <SwitchIcon class="h-5 ml-auto" />
   </button>
 </template>
 
 <script>
-import { mapState, mapGetters, mapMutations } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 import SwitchIcon from '~/components/icons/SwitchIcon'
 
 export default {
@@ -23,7 +24,6 @@ export default {
     SwitchIcon
   },
   computed: {
-    ...mapState(['faction']),
     ...mapGetters(['isAlliance'])
   },
   methods: {

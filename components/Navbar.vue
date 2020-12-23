@@ -8,10 +8,18 @@
       <img src="~/assets/images/logo.png" alt="sulfuron.eu" class="mx-auto h-10">
     </nuxt-link>
     <nuxt-link
+      v-show="!pathIs('/')"
+      to="/"
+      title="Portail des guildes"
+      class="font-semibold text-blue-500 text-shadow-sm uppercase tracking-wide"
+    >
+      Retour au portail
+    </nuxt-link>
+    <nuxt-link
       v-show="!pathIs('/compte') && isLoggedIn"
       to="/compte"
       title="Mon compte"
-      class="font-semibold text-blue-500 text-shadow-sm"
+      class="font-semibold text-blue-500 text-shadow-sm uppercase tracking-wide"
     >
       Mon compte
     </nuxt-link>
