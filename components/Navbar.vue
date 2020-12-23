@@ -8,7 +8,7 @@
       <img src="~/assets/images/logo.png" alt="sulfuron.eu" class="mx-auto h-10">
     </nuxt-link>
     <nuxt-link
-      v-show="!pathIs('/compte')"
+      v-show="!pathIs('/compte') && isLoggedIn"
       to="/compte"
       title="Mon compte"
       class="font-semibold text-blue-500 text-shadow-sm"
@@ -16,7 +16,7 @@
       Mon compte
     </nuxt-link>
     <nuxt-link
-      v-show="!isLoggedIn && !pathIs('/connexion')"
+      v-show="!pathIs('/connexion') && !isLoggedIn"
       to="/connexion"
       class="w-40 py-2 rounded-full text-center text-shadow-sm font-semibold bg-blue-900 bg-opacity-25 border-2 border-blue-500 text-blue-500 hover:bg-opacity-50 hover:text-blue-400 shadow-md hover:shadow-lg"
     >
@@ -26,11 +26,11 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   computed: {
-    isLoggedIn () {
-      return this.$store.state.auth.user !== null
-    }
+    ...mapGetters('auth', ['isLoggedIn'])
   },
   methods: {
     pathIs (path) {

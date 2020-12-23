@@ -19,7 +19,7 @@
           </div>
         </div>
       </div>
-      <BaseButton color="red">
+      <BaseButton color="red" @click="logout">
         Déconnexion
       </BaseButton>
     </div>
@@ -43,6 +43,12 @@ export default {
     ]),
     username () {
       return this.user?.name
+    }
+  },
+  methods: {
+    logout () {
+      console.log('logout')
+      this.$store.dispatch('auth/logout')
     }
   }
 }

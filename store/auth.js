@@ -35,15 +35,18 @@ export const actions = {
       commit('setError', error)
     }
   },
-  autoLogin ({ commit }) {
-    this.$fire.auth.onAuthStateChanged((user) => {
-      if (user) {
-        commit('setUser', {
-          name: user.uid
-        })
-      } else {
-        commit('setUser', null)
-      }
-    })
+  async logout ({ commit }) {
+    try {
+      await this.$fire.auth.signOut()
+      // state update is handled by onAuthStateChanged
+    } catch (error) {
+      commit('setError', error)
+    }
+  }
+}
+
+export const getters = {
+  isLoggedIn (state) {
+    return state.user !== null
   }
 }
