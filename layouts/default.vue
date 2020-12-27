@@ -12,25 +12,21 @@
       </div>
       <div class="h-12 md:h-24 relative mt-auto" style="background-image: linear-gradient(180deg, rgba(0,0,0,0.5), rgb(0,0,0))" />
     </div>
-    <footer class="bg-black py-12 text-gray-500 mt-auto">
-      <div class="container mx-auto flex">
-        <div>
-          Réalisé par Strift. Tous droits réservés.
-        </div>
-      </div>
-    </footer>
+    <Footer class="mt-auto" />
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
 import Navbar from '~/components/Navbar.vue'
+import Footer from '~/components/Footer.vue'
 
 const AUTH_TOKEN_QUERY = 'auth_token'
 
 export default {
   components: {
-    Navbar
+    Navbar,
+    Footer
   },
   computed: {
     ...mapGetters([

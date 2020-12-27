@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-auto max-w-md flex flex-col items-center space-y-10 bg-blue-800 bg-opacity-50 p-8 rounded-lg mt-32">
+  <div class="mx-auto max-w-md flex flex-col items-center space-y-10 bg-gray-900 bg-opacity-75 p-8 rounded-lg mt-32">
     <h1 class="text-3xl text-gray-200 leading-none text-shadow-md font-light">
       Connexion via Battle.net
     </h1>

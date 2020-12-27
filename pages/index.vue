@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="flex flex-col md:flex-row items-start md:items-center md:justify-between space-y-5 md:space-y-0 text-gray-200 border-b border-gray-300 pb-6 mb-6">
-      <FactionButton class="text-lg" />
+    <div class="flex flex-col md:flex-row items-start md:items-center md:justify-between space-y-5 md:space-y-0 text-gray-200 border-b border-gray-500 border-opacity-25 pb-6 mb-6">
+      <FactionButton />
       <input
         v-model="textQuery"
         type="text"
@@ -34,7 +34,7 @@
       />
     </div>
 
-    <div class="text-center mt-auto">
+    <div class="text-center mt-auto text-gray-300">
       {{ filteredSearchResults.length }} {{ resultText(filteredSearchResults.length) }}.
     </div>
   </div>

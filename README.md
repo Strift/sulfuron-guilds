@@ -3,6 +3,7 @@
 ## Stack
 
 - SVG icons from [heroicons](https://heroicons.com/)
+- Social icons from [css.gg](https://css.gg/)
 
 ## Development setup
 
