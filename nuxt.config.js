@@ -9,8 +9,7 @@ export default {
   ** Runtime config
   */
   publicRuntimeConfig: {
-    baseURL: process.env.BASE_URL || 'http://localhost:5000',
-    authFunctionHost: process.env.AUTH_FUNCTION_HOST || 'http://localhost:5001/sulfuron-guilds/us-central1/auth'
+    baseURL: process.env.BASE_URL || 'http://localhost:5000'
   },
   /*
   ** Headers of the page
