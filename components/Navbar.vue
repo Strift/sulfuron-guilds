@@ -18,10 +18,15 @@
     <nuxt-link
       v-show="!pathIs('/compte') && isLoggedIn"
       to="/compte"
-      title="Mon compte"
-      class="font-semibold text-yellow-600 text-shadow-sm uppercase tracking-wide"
+      :title="accountLinkTitle"
+      class="flex items-baseline space-x-2"
     >
-      Mon compte
+      <span v-if="ownsUnpublishedGuild" class="bg-red-500 text-sm text-white font-semibold rounded-full h-5 w-5 inline-block text-center">
+        1
+      </span>
+      <span class="font-semibold text-yellow-600 text-shadow-sm uppercase tracking-wide">
+        Mon compte
+      </span>
     </nuxt-link>
     <nuxt-link
       v-show="!pathIs('/connexion') && !isLoggedIn"
@@ -38,7 +43,10 @@ import { mapGetters } from 'vuex'
 
 export default {
   computed: {
-    ...mapGetters('auth', ['isLoggedIn'])
+    ...mapGetters('auth', ['isLoggedIn', 'ownsUnpublishedGuild']),
+    accountLinkTitle () {
+      return 'Mon compte' + (this.ownsUnpublishedGuild ? ' - 1 notification' : '')
+    }
   },
   methods: {
     pathIs (path) {

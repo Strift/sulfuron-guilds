@@ -1,6 +1,7 @@
 export const state = () => ({
   error: null,
-  user: null
+  user: null,
+  guild: null
 })
 
 export const mutations = {
@@ -18,6 +19,9 @@ export const mutations = {
     } else {
       state.user = null
     }
+  },
+  setGuild (state, guild) {
+    state.guild = guild
   }
 }
 
@@ -42,11 +46,24 @@ export const actions = {
     } catch (error) {
       commit('setError', error)
     }
+  },
+  async fetchGuild ({ commit }) {
+    try {
+      const querySnapshot = await this.$fire.firestore.collection('guilds')
+        .where('ownerUID', '==', this.$fire.auth.currentUser.uid)
+        .get()
+      querySnapshot.forEach(doc => commit('setGuild', doc.data()))
+    } catch (error) {
+      commit('setError', error)
+    }
   }
 }
 
 export const getters = {
   isLoggedIn (state) {
     return state.user !== null
+  },
+  ownsUnpublishedGuild (state) {
+    return state.guild && state.guild.published === false
   }
 }

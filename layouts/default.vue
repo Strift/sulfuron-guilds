@@ -35,14 +35,19 @@ export default {
     ])
   },
   async mounted () {
-    const token = this.$router.currentRoute.query[AUTH_TOKEN_QUERY]
-    if (!token) {
-      // this.$store.dispatch('auth/autoLogin')
-      return
-    }
+    await this.handleLogin()
+    this.$store.dispatch('auth/fetchGuild')
+  },
+  methods: {
+    async handleLogin () {
+      const token = this.$router.currentRoute.query[AUTH_TOKEN_QUERY]
+      if (!token) {
+        return
+      }
 
-    await this.$store.dispatch('auth/login', token)
-    this.$router.push('/')
+      await this.$store.dispatch('auth/login', token)
+      this.$router.push('/')
+    }
   }
 }
 </script>

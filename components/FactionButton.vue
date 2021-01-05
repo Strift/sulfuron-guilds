@@ -17,7 +17,7 @@
 
 <script>
 import { mapGetters, mapMutations } from 'vuex'
-import SwitchIcon from '~/components/icons/SwitchIcon'
+import SwitchIcon from '~/components/icons/SwitchIcon.vue'
 
 export default {
   components: {
