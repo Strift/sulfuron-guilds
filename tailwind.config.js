@@ -37,7 +37,7 @@ module.exports = {
       'nuxt.config.js'
     ],
     options: {
-      whitelist: ['bg-red-900', 'border-red-500', 'text-red-500', 'text-red-400']
+      whitelist: ['bg-red-900', 'border-red-500', 'text-red-500', 'hover:text-red-400']
     }
   }
 }
