@@ -1,5 +1,5 @@
 <template>
-  <a class="inline-flex items-center py-2 px-4 border space-x-4 text-gray-200" :href="`${authFunctionHost}/auth/battlenet`">
+  <a class="inline-flex items-center py-2 px-4 border space-x-4 text-gray-200" :href="`${$config.authFunctionHost}/auth/battlenet`">
     <BattleNetIcon class="h-8 w-8" />
     <div>Connexion</div>
   </a>
@@ -11,13 +11,7 @@ import BattleNetIcon from '~/components/icons/BattleNetIcon.vue'
 export default {
   components: {
     BattleNetIcon
-  },
-  fetch ({ $config }) {
-    this.authFunctionHost = $config.authFunctionHost
-  },
-  data: () => ({
-    authFunctionHost: null
-  })
+  }
 }
 </script>
 
