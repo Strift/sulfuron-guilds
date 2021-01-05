@@ -6,6 +6,7 @@
   "hosting": {
     "site": "sulfuron-guilds",
     "public": "dist",
+    "trailingSlash": true,
     "ignore": [
       "firebase.json",
       "**/.*",

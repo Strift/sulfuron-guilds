@@ -71,7 +71,14 @@ export default {
       return this.days.map(day => day.slice(0, 3)).join(', ')
     },
     readableWebsiteUrl () {
-      return this.websiteUrl.replace(/(^\w+:|^)\/\//, '')
+      let hostname
+      try {
+        const url = new URL(this.websiteUrl)
+        hostname = url.hostname
+      } catch (error) {
+        hostname = this.websiteUrl
+      }
+      return hostname
     }
   }
 }
