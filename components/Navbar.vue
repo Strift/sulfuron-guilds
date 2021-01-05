@@ -16,8 +16,8 @@
       Retour au portail
     </nuxt-link>
     <nuxt-link
-      v-show="!pathIs('/compte') && isLoggedIn"
-      to="/compte"
+      v-show="!pathIs('/compte/') && isLoggedIn"
+      to="/compte/"
       :title="accountLinkTitle"
       class="flex items-baseline space-x-2"
     >
@@ -29,8 +29,8 @@
       </span>
     </nuxt-link>
     <nuxt-link
-      v-show="!pathIs('/connexion') && !isLoggedIn"
-      to="/connexion"
+      v-show="!pathIs('/connexion/') && !isLoggedIn"
+      to="/connexion/"
       class="w-40 py-2 rounded-full text-center text-shadow-sm font-semibold bg-yellow-900 bg-opacity-25 border-2 border-yellow-500 text-yellow-500 hover:bg-opacity-50 hover:text-yellow-400 shadow-md hover:shadow-lg"
     >
       Connexion
