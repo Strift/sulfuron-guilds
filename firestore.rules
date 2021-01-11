@@ -3,7 +3,7 @@ service cloud.firestore {
   match /databases/{database}/documents {
 
     match /guilds/{guild} {
-      allow read, write;
+      allow read;
     }
   }
 }
