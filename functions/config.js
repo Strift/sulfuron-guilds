@@ -1,6 +1,7 @@
 const functions = require('firebase-functions')
 
 module.exports = {
+  development: functions.config().development,
   hosting: {
     app: functions.config().hosting.app,
     authFunction: functions.config().hosting.auth_function

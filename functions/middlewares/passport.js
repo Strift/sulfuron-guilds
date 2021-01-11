@@ -3,8 +3,11 @@ const BattlenetStrategy = require('passport-bnet').Strategy
 
 const config = require('../config')
 
-const APP_HOST = config.hosting.app
-// const AUTH_FUNCTION_HOST = config.hosting.authFunction
+const HOSTING_EMULATOR_HOST = 'http://localhost:5000'
+
+const RUNNING_IN_DEV = config.development
+
+const APP_HOST = RUNNING_IN_DEV ? HOSTING_EMULATOR_HOST : config.hosting.app
 const BATTLENET_CLIENT_ID = config.battlenet.clientId
 const BATTLENET_CLIENT_SECRET = config.battlenet.clientSecret
 
