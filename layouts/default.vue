@@ -2,15 +2,15 @@
   <div class="min-h-screen flex flex-col">
     <div
       :class="{ 'alliance': isAlliance, 'horde': isHorde }"
-      class="background relative flex-1 flex flex-col bg-gray-900"
+      class="background relative flex-1 flex flex-col"
     >
-      <div class="bg-black bg-opacity-50 relative flex-1">
+      <div class="bg-gray-900 bg-opacity-75 relative flex-1">
         <div class="container mx-auto font-sans px-3 md:px-0">
           <Navbar class="mb-6 md:mb-12" />
           <Nuxt />
         </div>
       </div>
-      <div class="h-12 md:h-24 relative mt-auto" style="background-image: linear-gradient(180deg, rgba(0,0,0,0.5), rgb(0,0,0))" />
+      <div class="h-12 md:h-24 relative mt-auto" style="background-image: linear-gradient(180deg, rgba(26,32,44,0.75), rgb(26,32,44))" />
     </div>
     <Footer class="mt-auto" />
   </div>

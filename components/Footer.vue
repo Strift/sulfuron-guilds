@@ -1,5 +1,5 @@
 <template>
-  <footer class="bg-black py-12 text-gray-300 space-y-12">
+  <footer class="bg-gray-900 py-12 text-gray-300 space-y-12">
     <div class="container mx-auto flex">
       <div class="w-1/2">
         <img src="~/assets/images/logo.png" alt="sulfuron.eu" class="h-10">

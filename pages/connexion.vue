@@ -1,36 +1,30 @@
 <template>
-  <div class="mx-auto max-w-md flex flex-col items-center space-y-10 bg-gray-900 bg-opacity-75 p-8 rounded-lg mt-32">
-    <h1 class="text-3xl text-gray-200 leading-none text-shadow-md font-light">
-      Connexion via Battle.net
-    </h1>
-    <div class="space-y-4">
-      <p class="text-gray-500 ">
-        La connexion est uniquement requise pour pouvoir administrer une guilde.
+  <LoginCard class="mx-auto">
+    <div class="flex flex-col h-full">
+      <h1 class="font-bold text-gray-900 text-4xl leading-none pb-8">
+        Connectez-vous via Battle.net
+      </h1>
+      <p class="text-gray-700">
+        La connexion est nécessaire uniquement pour administrer une guilde.
       </p>
-      <p class="text-gray-600">
-        En cliquant sur Connexion, vous serez redirigé vers le site de Blizzard.
-      </p>
+      <div class="mt-auto text-center">
+        <LoginButton class="shadow-md hover:shadow-lg mb-12" />
+        <p class="text-gray-500 text-center">
+          En cliquant sur Connexion, vous serez redirigé vers le site de Blizzard.
+        </p>
+      </div>
     </div>
-    <LoginButton class="shadow-md hover:shadow-lg" />
-  </div>
+  </LoginCard>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 import LoginButton from '~/components/LoginButton.vue'
+import LoginCard from '~/components/LoginCard.vue'
 
 export default {
   components: {
-    LoginButton
-  },
-  computed: {
-    ...mapGetters('auth', [
-      'isLoggedIn'
-    ])
+    LoginButton,
+    LoginCard
   }
 }
 </script>
-
-<style>
-
-</style>
