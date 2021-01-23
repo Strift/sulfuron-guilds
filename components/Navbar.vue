@@ -10,39 +10,56 @@
     <nuxt-link
       v-show="!pathIs('/')"
       to="/"
-      title="Portail des guildes"
-      class="font-semibold text-yellow-600 text-shadow-sm uppercase tracking-wide"
+      title="Accueil"
+      class=" text-blue-300 text-shadow-sm text-lg flex items-center space-x-2"
     >
-      Retour au portail
+      <ArrowLeftIcon />
+      <span>
+        Retour au portail
+      </span>
     </nuxt-link>
     <nuxt-link
       v-show="!pathIs('/compte/') && isLoggedIn"
       to="/compte/"
       :title="accountLinkTitle"
-      class="flex items-baseline space-x-2"
+      class="text-blue-300 text-shadow-sm text-lg flex items-center space-x-2"
     >
       <span v-if="ownsUnpublishedGuild" class="bg-red-500 text-sm text-white font-semibold rounded-full h-5 w-5 inline-block text-center">
         1
       </span>
-      <span class="font-semibold text-yellow-600 text-shadow-sm uppercase tracking-wide">
+      <UserIcon />
+      <span>
         Mon compte
       </span>
     </nuxt-link>
     <nuxt-link
-      v-show="!pathIs('/connexion/') && !isLoggedIn"
+      v-show="!pathIs('/connexion/') && !isLoggedIn && !isAuthenticating"
       to="/connexion/"
-      class="w-40 py-2 rounded-full text-center text-shadow-sm font-semibold bg-yellow-900 bg-opacity-25 border-2 border-yellow-500 text-yellow-500 hover:bg-opacity-50 hover:text-yellow-400 shadow-md hover:shadow-lg"
+      class="text-blue-300 hover:text-blue-200 bg-blue-900 bg-opacity-25 hover:bg-opacity-75 text-shadow-sm text-lg flex items-center space-x-2 border border-blue-300  px-4 py-2 rounded-full"
     >
-      Connexion
+      <UserIcon />
+      <span>
+        Connexion
+
+      </span>
     </nuxt-link>
   </header>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
+import ArrowLeftIcon from './icons/ArrowLeftIcon.vue'
+import UserIcon from './icons/UserIcon.vue'
 
 export default {
+  components: {
+    ArrowLeftIcon,
+    UserIcon
+  },
   computed: {
+    ...mapState('auth', {
+      isAuthenticating: state => state.loading
+    }),
     ...mapGetters('auth', ['isLoggedIn', 'ownsUnpublishedGuild']),
     accountLinkTitle () {
       return 'Mon compte' + (this.ownsUnpublishedGuild ? ' - 1 notification' : '')

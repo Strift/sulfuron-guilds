@@ -19,22 +19,22 @@
           </div>
         </div>
       </div>
-      <BaseButton color="red" @click="logout">
+      <DangerButton @click="logout">
         Déconnexion
-      </BaseButton>
+      </DangerButton>
     </div>
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
-import BaseButton from '~/components/ui/BaseButton.vue'
+import DangerButton from '~/components/ui/DangerButton.vue'
 import BattleNetIcon from '~/components/icons/BattleNetIcon.vue'
 
 export default {
   name: 'Account',
   components: {
-    BaseButton,
+    DangerButton,
     BattleNetIcon
   },
   computed: {
