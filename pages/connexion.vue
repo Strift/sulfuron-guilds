@@ -1,6 +1,21 @@
 <template>
   <LoginCard class="mx-auto">
-    <div class="flex flex-col h-full">
+    <div v-if="isAuthenticating" class="flex flex-col h-full">
+      <h1 class="font-bold text-gray-900 text-4xl leading-none pb-8">
+        Connexion en cours...
+      </h1>
+      <OrbitSpinner
+        :animation-duration="600"
+        :size="120"
+        class="m-auto"
+        color="#4299E1"
+      />
+      <p class="text-gray-500 text-center mt-auto">
+        Veuillez patienter.
+      </p>
+    </div>
+
+    <div v-else class="flex flex-col h-full">
       <h1 class="font-bold text-gray-900 text-4xl leading-none pb-8">
         Connectez-vous via Battle.net
       </h1>
@@ -18,13 +33,25 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+import { OrbitSpinner } from 'epic-spinners'
 import LoginButton from '~/components/LoginButton.vue'
 import LoginCard from '~/components/LoginCard.vue'
 
 export default {
   components: {
+    OrbitSpinner,
     LoginButton,
     LoginCard
+  },
+  computed: {
+    ...mapState('auth', {
+      isAuthenticating: state => state.loading
+    })
   }
 }
 </script>
+
+<style>
+
+</style>

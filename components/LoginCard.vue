@@ -9,12 +9,6 @@
   </div>
 </template>
 
-<script>
-export default {
-
-}
-</script>
-
 <style scoped>
 .w-left-pane {
   width: 256px;

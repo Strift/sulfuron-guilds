@@ -1,10 +1,14 @@
 export const state = () => ({
+  loading: false,
   error: null,
   user: null,
   guild: null
 })
 
 export const mutations = {
+  setLoading (state, loading) {
+    state.loading = loading
+  },
   setError (state, error) {
     state.error = error
   },
@@ -28,6 +32,7 @@ export const mutations = {
 export const actions = {
   async login ({ commit }, token) {
     try {
+      commit('setLoading', true)
       if (this.$fire.auth.currentUser) {
         return
       }
@@ -37,6 +42,8 @@ export const actions = {
       })
     } catch (error) {
       commit('setError', error)
+    } finally {
+      commit('setLoading', false)
     }
   },
   async logout ({ commit }) {
