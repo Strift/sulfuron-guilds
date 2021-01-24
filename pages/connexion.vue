@@ -34,7 +34,7 @@
 
 <script>
 import { mapState } from 'vuex'
-import { OrbitSpinner } from 'epic-spinners'
+import OrbitSpinner from 'epic-spinners/src/components/lib/OrbitSpinner.vue'
 import LoginButton from '~/components/LoginButton.vue'
 import LoginCard from '~/components/LoginCard.vue'
 
