@@ -20,7 +20,7 @@
     </nuxt-link>
     <nuxt-link
       v-show="!pathIs('/compte/') && isLoggedIn"
-      to="/compte/"
+      to="/compte/profil/"
       :title="accountLinkTitle"
       class="text-blue-300 text-shadow-sm text-lg flex items-center space-x-2"
     >
