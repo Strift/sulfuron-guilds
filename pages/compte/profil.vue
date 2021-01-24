@@ -1,8 +1,8 @@
 <template>
   <div class="space-y-10">
-    <h2 class="text-blue-100 text-2xl leading-none font-semibold text-shadow border-b border-gray-700 pb-5">
+    <AccountPageTitle>
       Battle.net
-    </h2>
+    </AccountPageTitle>
     <div class="flex shadow-md">
       <div class="w-20 h-20 bg-gray-900 rounded-l flex items-center">
         <BattleNetIcon class="h-10" />
@@ -21,6 +21,7 @@
 
 <script>
 import { mapState } from 'vuex'
+import AccountPageTitle from '~/components/ui/AccountPageTitle.vue'
 import DangerButton from '~/components/ui/DangerButton.vue'
 import BattleNetIcon from '~/components/icons/BattleNetIcon.vue'
 
@@ -28,6 +29,7 @@ export default {
   name: 'Profile',
   layout: 'account',
   components: {
+    AccountPageTitle,
     DangerButton,
     BattleNetIcon
   },

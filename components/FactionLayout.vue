@@ -4,15 +4,16 @@
       :class="{ 'alliance': isAlliance, 'horde': isHorde }"
       class="bg-faction relative flex-1 flex flex-col"
     >
-      <div class="bg-gray-900 bg-opacity-75 relative flex-1">
-        <div class="container mx-auto font-sans px-3 md:px-0">
+      <div class="bg-gray-900 bg-opacity-75 relative flex-1 max-h-screen overflow-y-scroll flex flex-col">
+        <div class="container mx-auto font-sans px-3 md:px-0 flex-1">
           <Navbar class="mb-6 md:mb-16" />
           <slot name="default" />
         </div>
+        <div class="mt-12 h-24 flex-none" style="background-image: linear-gradient(180deg, rgba(26,32,44,0), rgb(26,32,44))" />
+        <Footer />
       </div>
-      <div class="h-12 md:h-24 relative mt-auto" style="background-image: linear-gradient(180deg, rgba(26,32,44,0.75), rgb(26,32,44))" />
     </div>
-    <Footer class="mt-auto" />
+    <NotificationList class="fixed bottom-0 w-full" />
   </div>
 </template>
 
@@ -20,13 +21,15 @@
 import { mapGetters } from 'vuex'
 import Navbar from '~/components/Navbar.vue'
 import Footer from '~/components/Footer.vue'
+import NotificationList from '~/components/NotificationList.vue'
 
 const AUTH_TOKEN_QUERY = 'auth_token'
 
 export default {
   components: {
     Navbar,
-    Footer
+    Footer,
+    NotificationList
   },
   computed: {
     ...mapGetters([
