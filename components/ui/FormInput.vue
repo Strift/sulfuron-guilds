@@ -1,6 +1,6 @@
 <template>
   <div>
-    <label :for="name" class="font-semibold text-blue-400 block mb-4 leading-none text-shadow-sm">
+    <label :for="name" class="font-semibold text-blue-400 block leading-none text-shadow-sm mb-4">
       {{ label }}
     </label>
     <div class="group relative inline-block shadow-md">

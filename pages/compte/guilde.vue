@@ -32,6 +32,27 @@
       </div>
     </div>
     <AccountPageTitle>
+      Horaires
+    </AccountPageTitle>
+    <div class="flex space-x-16">
+      <FormInput
+        name="start-hour"
+        label="Heure de début"
+        value="20h30"
+      />
+      <FormInput
+        name="end-hour"
+        label="Heure de fin"
+        value="00h00"
+      />
+    </div>
+    <FormCheckboxList
+      v-model="selectDays"
+      :checkbox-labels="days"
+      name="days"
+      label="Jours"
+    />
+    <AccountPageTitle>
       Recrutement
     </AccountPageTitle>
   </div>
@@ -39,6 +60,7 @@
 
 <script>
 import FormInput from '~/components/ui/FormInput.vue'
+import FormCheckboxList from '~/components/ui/FormCheckboxList.vue'
 import AccountPageTitle from '~/components/ui/AccountPageTitle.vue'
 
 export default {
@@ -46,8 +68,13 @@ export default {
   layout: 'account',
   components: {
     FormInput,
+    FormCheckboxList,
     AccountPageTitle
-  }
+  },
+  data: () => ({
+    selectDays: [false, false, false, false, false, false, false],
+    days: ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche']
+  })
 }
 </script>
 
