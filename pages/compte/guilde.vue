@@ -34,16 +34,18 @@
     <AccountPageTitle>
       Horaires
     </AccountPageTitle>
-    <div class="flex space-x-16">
+    <div class="flex">
       <FormInput
         name="start-hour"
         label="Heure de début"
         value="20h30"
+        class="w-1/2"
       />
       <FormInput
         name="end-hour"
         label="Heure de fin"
         value="00h00"
+        class="w-1/2"
       />
     </div>
     <FormCheckboxList
@@ -60,6 +62,19 @@
       :checkbox-labels="classes"
       name="classes"
       label="Classes"
+    />
+    <AccountPageTitle>
+      Contact
+    </AccountPageTitle>
+    <FormInput
+      name="website-url"
+      label="Site"
+      value="https://astral.gg"
+    />
+    <FormInput
+      name="contact-url"
+      label="Contact"
+      value="https://discord.gg/KFKJJdr"
     />
   </div>
 </template>
