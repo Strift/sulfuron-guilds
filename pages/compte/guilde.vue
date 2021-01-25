@@ -55,6 +55,12 @@
     <AccountPageTitle>
       Recrutement
     </AccountPageTitle>
+    <FormCheckboxList
+      v-model="selectClasses"
+      :checkbox-labels="classes"
+      name="classes"
+      label="Classes"
+    />
   </div>
 </template>
 
@@ -73,7 +79,9 @@ export default {
   },
   data: () => ({
     selectDays: [false, false, false, false, false, false, false],
-    days: ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche']
+    selectClasses: [false, false, false, false, false, false, false, false, false],
+    days: ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'],
+    classes: ['Druide', 'Hunter', 'Mage', 'Paladin', 'Priest', 'Rogue', 'Warlock', 'Warrior']
   })
 }
 </script>
