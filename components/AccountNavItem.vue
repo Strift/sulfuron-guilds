@@ -6,9 +6,9 @@
   >
     <li
       :class="[ isActive && 'bg-blue-900 text-blue-500 border-transparent', !isActive && 'bg-gray-900 border-gray-800 border-opacity-75' ]"
-      class="py-3 px-8 flex items-center bg-opacity-50 text-gray-500 text-shadow-sm border-b"
+      class="flex items-center bg-opacity-50 text-gray-500 text-shadow-sm border-b hover:text-blue-500"
     >
-      <a :href="href" @click="navigate">
+      <a :href="href" class="py-3 px-8 w-full" @click="navigate">
         <slot name="default" />
       </a>
     </li>
