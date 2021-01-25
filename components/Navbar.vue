@@ -17,16 +17,18 @@
             </span>
           </span>
         </NavbarLink>
-        <NavbarLink
-          v-if="showAccountButton"
-          :to="(isLoggedIn || isAuthenticating) ? '/compte/profil/' : '/connexion/'"
-        >
-          <span class="space-x-2 flex items-center justify-center bg-blue-900 bg-opacity-25 hover:bg-opacity-75 border border-blue-300 px-4 py-2 rounded-full shadow">
-            <UserIcon />
-            <span v-if="isLoggedIn || isAuthenticating">Mon compte</span>
-            <span v-else>Connexion</span>
-          </span>
-        </NavbarLink>
+        <client-only>
+          <NavbarLink
+            v-if="showAccountButton"
+            :to="(isLoggedIn || isAuthenticating) ? '/compte/profil/' : '/connexion/'"
+          >
+            <span class="space-x-2 flex items-center justify-center bg-blue-900 bg-opacity-25 hover:bg-opacity-75 border border-blue-300 px-4 py-2 rounded-full shadow">
+              <UserIcon />
+              <span v-if="isLoggedIn || isAuthenticating">Mon compte</span>
+              <span v-else>Connexion</span>
+            </span>
+          </NavbarLink>
+        </client-only>
       </ul>
     </nav>
   </header>
