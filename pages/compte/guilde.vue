@@ -26,7 +26,7 @@
         <div class="font-semibold text-blue-400 block mb-4 leading-none text-shadow-sm">
           Logo
         </div>
-        <div class="h-32 w-32 p-4 bg-gray-900 rounded-lg items-center justify-center flex">
+        <div class="h-32 w-32 p-4 bg-gray-900 rounded-lg items-center justify-center flex shadow">
           <img src="~assets/images/astral.svg" alt="">
         </div>
       </div>
