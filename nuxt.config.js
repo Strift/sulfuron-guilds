@@ -9,7 +9,7 @@ export default {
   ** Runtime config
   */
   publicRuntimeConfig: {
-    baseURL: process.env.BASE_URL || 'http://localhost:5000'
+    baseURL: process.env.BASE_URL || 'https://sulfuron-guilds.web.app'
   },
   /*
   ** Headers of the page
@@ -57,6 +57,7 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
+    // Doc: https://firebase.nuxtjs.org/
     '@nuxtjs/firebase'
   ],
   /*
@@ -102,7 +103,7 @@ export default {
     services: {
       auth: {
         initialize: {
-          onAuthStateChangedMutation: 'auth/onAuthStateChanged'
+          onAuthStateChangedMutation: 'account/onAuthStateChanged'
         }
       },
       firestore: {

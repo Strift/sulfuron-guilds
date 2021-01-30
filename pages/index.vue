@@ -82,21 +82,12 @@ export default {
   async mounted () {
     // Performing data fetching in mounted hook because of NuxtFirebase issues with SSR
     await this.$store.dispatch('guilds/enableSync')
-    // await this.$store.dispatch('guilds/add', {
-    //   name: 'Astral',
-    //   type: 'Classique',
-    //   days: ['Mercredi', 'Jeudi'],
-    //   timeRange: '20h30 - 00h00',
-    //   recruitment: ['Rogue', 'Druid', 'Shaman'],
-    //   activity: 30,
-    //   supports: 50,
-    //   imageUrl: 'https://astral.gg/_nuxt/img/41e90eb.svg',
-    //   websiteUrl: 'https://astral.gg',
-    //   contactUrl: 'https://discord.gg/KFKJJdr'
-    // })
     this.fuse = new Fuse(this.guilds, {
       keys: ['name', 'type', 'days', 'recruitment']
     })
+  },
+  async beforeDestroy () {
+    await this.$store.dispatch('guilds/disableSync')
   },
   methods: {
     resultText (count) {

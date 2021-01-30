@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapGetters } from 'vuex'
 import AccountPageTitle from '~/components/ui/AccountPageTitle.vue'
 import DangerButton from '~/components/ui/DangerButton.vue'
 import BattleNetIcon from '~/components/icons/BattleNetIcon.vue'
@@ -34,16 +34,13 @@ export default {
     BattleNetIcon
   },
   computed: {
-    ...mapState('auth', [
-      'user'
-    ]),
-    username () {
-      return this.user?.name
-    }
+    ...mapGetters('account', [
+      'username'
+    ])
   },
   methods: {
     async logout () {
-      await this.$store.dispatch('auth/logout')
+      await this.$store.dispatch('account/logout')
       this.$router.push('/connexion/')
     }
   }

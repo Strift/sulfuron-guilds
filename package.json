@@ -26,6 +26,7 @@
     "epic-spinners": "^1.1.0",
     "firebase": "^8.2.1",
     "fuse.js": "^6.4.3",
+    "lodash": "^4.17.20",
     "nuxt": "^2.14.0",
     "vuexfire": "^3.2.5"
   },

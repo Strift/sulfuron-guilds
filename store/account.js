@@ -1,9 +1,23 @@
+import { firestoreAction } from 'vuexfire'
+
 export const state = () => ({
   loading: false,
   error: null,
   user: null,
   guild: null
 })
+
+export const getters = {
+  username (state) {
+    return state.user?.name
+  },
+  isLoggedIn (state) {
+    return state.user !== null
+  },
+  ownsUnpublishedGuild (state) {
+    return state.guild && state.guild.published === false
+  }
+}
 
 export const mutations = {
   setLoading (state, loading) {
@@ -54,23 +68,21 @@ export const actions = {
       commit('setError', error)
     }
   },
-  async fetchGuild ({ commit }) {
-    try {
-      const querySnapshot = await this.$fire.firestore.collection('guilds')
-        .where('ownerUID', '==', this.$fire.auth.currentUser.uid)
-        .get()
-      querySnapshot.forEach(doc => commit('setGuild', doc.data()))
-    } catch (error) {
-      commit('setError', error)
-    }
-  }
-}
-
-export const getters = {
-  isLoggedIn (state) {
-    return state.user !== null
-  },
-  ownsUnpublishedGuild (state) {
-    return state.guild && state.guild.published === false
-  }
+  enableGuildSync: firestoreAction(async function ({ bindFirestoreRef }) {
+    const query = await this.$fire.firestore
+      .collection('guilds')
+      .where('ownerUid', '==', this.$fire.auth.currentUser.uid)
+      .get()
+    return bindFirestoreRef('guild', query.docs[0].ref, { wait: true })
+  }),
+  disableGuildSync: firestoreAction(function ({ unbindFirestoreRef }) {
+    unbindFirestoreRef('guild', false)
+  }),
+  updateGuild: firestoreAction(async function (ctx, payload) {
+    const query = await this.$fire.firestore
+      .collection('guilds')
+      .where('ownerUid', '==', this.$fire.auth.currentUser.uid)
+      .get()
+    query.docs[0].ref.set(payload, { merge: true })
+  })
 }

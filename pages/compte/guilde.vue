@@ -1,5 +1,8 @@
 <template>
   <div class="space-y-10">
+    <button class="bg-red-100" @click="test">
+      test
+    </button>
     <AccountPageTitle>
       Général
     </AccountPageTitle>
@@ -80,6 +83,8 @@
 </template>
 
 <script>
+import { debounce } from 'lodash'
+import { mapState } from 'vuex'
 import FormInput from '~/components/ui/FormInput.vue'
 import FormCheckboxList from '~/components/ui/FormCheckboxList.vue'
 import AccountPageTitle from '~/components/ui/AccountPageTitle.vue'
@@ -97,10 +102,23 @@ export default {
     selectClasses: [false, false, false, false, false, false, false, false, false],
     days: ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'],
     classes: ['Druide', 'Hunter', 'Mage', 'Paladin', 'Priest', 'Rogue', 'Warlock', 'Warrior']
-  })
+  }),
+  computed: {
+    ...mapState('account', [
+      'guild'
+    ])
+  },
+  watch: {
+    guild: debounce(
+      function (newGuild) {
+        this.$store.commit('addNotification', { type: 'auto-saved' })
+      },
+      500)
+  },
+  methods: {
+    test () {
+      this.$store.dispatch('account/updateGuild', { test: !this.guild.test })
+    }
+  }
 }
 </script>
-
-<style>
-
-</style>

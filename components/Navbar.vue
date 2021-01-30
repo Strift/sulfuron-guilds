@@ -47,10 +47,10 @@ export default {
     NavbarLink
   },
   computed: {
-    ...mapState('auth', {
+    ...mapState('account', {
       isAuthenticating: state => state.loading
     }),
-    ...mapGetters('auth', ['isLoggedIn', 'ownsUnpublishedGuild']),
+    ...mapGetters('account', ['isLoggedIn', 'ownsUnpublishedGuild']),
     accountLinkTitle () {
       return 'Mon compte' + (this.ownsUnpublishedGuild ? ' - 1 notification' : '')
     },

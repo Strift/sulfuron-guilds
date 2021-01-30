@@ -45,7 +45,7 @@ export default {
     LoginCard
   },
   computed: {
-    ...mapState('auth', {
+    ...mapState('account', {
       isAuthenticating: state => state.loading
     })
   }

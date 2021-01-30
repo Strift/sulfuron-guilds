@@ -34,6 +34,12 @@ export default {
   components: {
     FactionLayout,
     AccountNavItem
+  },
+  mounted () {
+    this.$store.dispatch('account/enableGuildSync')
+  },
+  beforeDestroy () {
+    this.$store.dispatch('account/disableGuildSync')
   }
 }
 </script>

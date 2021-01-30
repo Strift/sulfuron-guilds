@@ -39,7 +39,6 @@ export default {
   },
   async mounted () {
     await this.handleLogin()
-    this.$store.dispatch('auth/fetchGuild')
   },
   methods: {
     async handleLogin () {
@@ -48,7 +47,7 @@ export default {
         return
       }
 
-      await this.$store.dispatch('auth/login', token)
+      await this.$store.dispatch('account/login', token)
       this.$router.push('/')
     }
   }

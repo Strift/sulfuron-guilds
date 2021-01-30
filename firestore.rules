@@ -2,8 +2,13 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
+    function isGuildOwner () {
+      return request.auth != null && resource.data.ownerUid == request.auth.uid
+    }
+
     match /guilds/{guild} {
       allow read;
+      allow update: if isGuildOwner();
     }
   }
 }
