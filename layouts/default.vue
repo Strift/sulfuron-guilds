@@ -8,6 +8,7 @@
 import FactionLayout from '~/components/FactionLayout.vue'
 
 export default {
+  name: 'DefaultLayout',
   components: {
     FactionLayout
   }

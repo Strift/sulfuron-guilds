@@ -1,32 +1,19 @@
 import { firestoreAction } from 'vuexfire'
 
-export const AUTH_STATE_GUEST = 'guest'
-export const AUTH_STATE_LOADING = 'loading'
-export const AUTH_STATE_AUTHENTICATED = 'authenticated'
-export const AUTH_STATE_ERROR = 'error'
+const AUTH_STATE_GUEST = 'guest'
+const AUTH_STATE_LOADING = 'loading'
+const AUTH_STATE_AUTHENTICATED = 'authenticated'
+const AUTH_STATE_ERROR = 'error'
 
 export const state = () => ({
   // AuthState is finite state machine
   authState: AUTH_STATE_GUEST,
-  loading: false,
-  error: null,
   user: null,
-  guild: null
+  guild: null,
+  error: null
 })
 
 export const mutations = {
-  startAuthLoading (state) {
-    state.authState = AUTH_STATE_LOADING
-  },
-  setAuthState (state, authState) {
-    state.authState = authState
-  },
-  setError (state, error) {
-    state.error = error
-  },
-  setUser (state, user) {
-    state.user = user
-  },
   onFirebaseAuthStateChanged (state, { authUser }) {
     if (authUser) {
       state.user = {
@@ -36,8 +23,20 @@ export const mutations = {
       state.user = null
     }
   },
-  setGuild (state, guild) {
-    state.guild = guild
+  startAuthLoading (state) {
+    state.authState = AUTH_STATE_LOADING
+  },
+  setAuthState (state, authState) {
+    state.authState = authState
+  },
+  setUser (state, user) {
+    state.user = user
+  },
+  setOwnerState (state, ownerState) {
+    state.ownerState = ownerState
+  },
+  setError (state, error) {
+    state.error = error
   }
 }
 
@@ -68,9 +67,22 @@ export const actions = {
       commit('setAuthState', AUTH_STATE_ERROR)
     }
   },
+  async fetchGuild ({ commit, dispatch }) {
+    const querySnapshot = await this.$fire.firestore
+      .collection('guilds')
+      .where('ownerUid', '==', this.$fire.auth.currentUser.uid)
+      .get()
+
+    if (querySnapshot.empty) {
+      commit('setGuild', null)
+      return
+    }
+    await dispatch('enableGuildSync', querySnapshot.docs[0].ref) // There should be only one query result
+  },
   enableGuildSync: firestoreAction(function ({ bindFirestoreRef }, documentRef) {
-    return bindFirestoreRef('guild', documentRef, { wait: true, reset: false })
+    return bindFirestoreRef('guild', documentRef, { reset: true })
   }),
+  // Action to be called when leaving the account layout
   disableGuildSync: firestoreAction(function ({ unbindFirestoreRef }) {
     return unbindFirestoreRef('guild', false)
   }),
@@ -88,12 +100,12 @@ export const getters = {
     return state.authState === AUTH_STATE_GUEST
   },
   isAuthenticated (state) {
-    return state.authState === AUTH_STATE_AUTHENTICATED
+    return state.user !== null
   },
   username (state) {
     return state.user?.name
   },
-  ownsGuild (state) {
+  isAGuildOwner (state) {
     return state.guild !== null
   },
   ownsUnpublishedGuild (state) {

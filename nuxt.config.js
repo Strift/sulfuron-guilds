@@ -107,7 +107,7 @@ export default {
         }
       },
       firestore: {
-        // emulatorPort: process.env.NODE_ENV === 'development' ? 8080 : undefined
+        emulatorPort: process.env.NODE_ENV === 'development' ? 8080 : undefined
       }
     }
   }

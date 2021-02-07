@@ -17,7 +17,7 @@
     </div>
 
     <div class="grid grid-flow-row grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 mb-12">
-      <GuildCard
+      <!-- <GuildCard
         v-for="(guild, index) in filteredSearchResults"
         :key="index"
         :name="guild.name"
@@ -31,7 +31,7 @@
         :activity="guild.activity"
         :supports="guild.supports"
         class="shadow-md"
-      />
+      /> -->
     </div>
 
     <div class="text-center mt-auto text-gray-300">

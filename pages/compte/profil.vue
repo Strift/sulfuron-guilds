@@ -1,5 +1,16 @@
 <template>
   <div class="space-y-10">
+    <div
+      v-if="!isAGuildOwner"
+      class="bg-blue-900 bg-opacity-50 text-gray-500 rounded px-6 py-4 shadow flex items-center space-x-4"
+    >
+      <div>
+        ℹ️
+      </div>
+      <p>
+        Pour créer une <span class="font-semibold">page de guilde</span>, effectuez une demande aux modérateurs du <span class="font-semibold">Discord Sulfuron</span>.
+      </p>
+    </div>
     <AccountPageTitle>
       Battle.net
     </AccountPageTitle>
@@ -35,7 +46,8 @@ export default {
   },
   computed: {
     ...mapGetters('account', [
-      'username'
+      'username',
+      'isAGuildOwner'
     ])
   },
   methods: {

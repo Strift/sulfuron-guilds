@@ -7,11 +7,11 @@
       <aside class="w-1/4">
         <nav class="rounded-md overflow-hidden shadow-md">
           <ul>
-            <AccountNavItem to="/compte/profil/">
-              Profil
-            </AccountNavItem>
-            <AccountNavItem to="/compte/guilde/">
+            <AccountNavItem v-if="isAGuildOwner" to="/compte/guilde/">
               Guilde
+            </AccountNavItem>
+            <AccountNavItem to="/compte/profil/">
+              Paramètres
             </AccountNavItem>
             <AccountNavItem class="items-baseline">
               Pick Up <span class="text-xs uppercase tracking-wider border border-gray-700 h-6 w-16 rounded inline-flex items-center justify-center ml-auto">Soon&trade;</span>
@@ -27,10 +27,14 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   middleware: ['auth', 'guild'],
-  beforeDestroy () {
-    this.$store.dispatch('account/disableGuildSync')
+  computed: {
+    ...mapGetters('account', [
+      'isAGuildOwner'
+    ])
   }
 }
 </script>

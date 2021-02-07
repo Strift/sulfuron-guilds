@@ -19,7 +19,7 @@
         </NavbarLink>
         <NavbarLink
           v-show="showAccountButton"
-          :to="isGuest ? '/connexion/' : '/compte/profil/'"
+          :to="accountLinkUrl"
         >
           <span class="space-x-2 flex items-center justify-center bg-blue-900 bg-opacity-25 hover:bg-opacity-75 border border-blue-300 px-4 py-2 rounded-full shadow">
             <UserIcon />
@@ -39,16 +39,20 @@ export default {
   computed: {
     ...mapGetters('account', [
       'isGuest',
-      'ownsUnpublishedGuild'
+      'isAGuildOwner'
     ]),
-    accountLinkTitle () {
-      return 'Mon compte' + (this.ownsUnpublishedGuild ? ' - 1 notification' : '')
-    },
     showBackButton () {
       return this.$route.path !== '/'
     },
     showAccountButton () {
       return !(this.pathStartsWith('/compte/') || this.pathStartsWith('/connexion/'))
+    },
+    accountLinkUrl () {
+      if (this.isGuest) { return '/connexion/' }
+
+      if (this.isAGuildOwner) { return '/compte/guilde/' }
+
+      return '/compte/profil/'
     }
   },
   methods: {
