@@ -21,9 +21,6 @@ export const mutations = {
   setAuthState (state, authState) {
     state.authState = authState
   },
-  setLoading (state, loading) {
-    state.loading = loading
-  },
   setError (state, error) {
     state.error = error
   },
@@ -45,13 +42,13 @@ export const mutations = {
 }
 
 export const actions = {
-  async login ({ commit, state }, token) {
+  async login ({ commit, state }, authToken) {
     try {
       if (state.authState !== AUTH_STATE_LOADING) {
         commit('setAuthState', AUTH_STATE_LOADING)
       }
 
-      const { user } = await this.$fire.auth.signInWithCustomToken(token)
+      const { user } = await this.$fire.auth.signInWithCustomToken(authToken)
       commit('setUser', {
         name: user.uid
       })
@@ -65,7 +62,7 @@ export const actions = {
     try {
       this.$fire.auth.signOut()
       commit('setAuthState', AUTH_STATE_GUEST)
-      // state update is handled by onAuthStateChanged
+      // user state update is managed by onFirebaseAuthStateChanged
     } catch (error) {
       commit('setError', error)
       commit('setAuthState', AUTH_STATE_ERROR)
@@ -90,11 +87,11 @@ export const getters = {
   isGuest (state) {
     return state.authState === AUTH_STATE_GUEST
   },
+  isAuthenticated (state) {
+    return state.authState === AUTH_STATE_AUTHENTICATED
+  },
   username (state) {
     return state.user?.name
-  },
-  isLoggedIn (state) {
-    return state.user !== null
   },
   ownsGuild (state) {
     return state.guild !== null

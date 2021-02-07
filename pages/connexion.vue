@@ -58,7 +58,7 @@ export default {
   methods: {
     async handleAuthRedirect () {
       await this.$store.dispatch('account/login', this.authToken)
-      this.$router.push('/compte/profil/')
+      this.$router.push('/')
     }
   }
 }
