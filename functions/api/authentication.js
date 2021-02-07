@@ -4,8 +4,7 @@ const logger = require('../services/logger')
 const admin = require('../services/admin')
 const passport = require('../middlewares/passport')
 
-const APP_HOST = config.hosting.app
-const AUTH_PAGE_URL = 'connexion'
+const AUTH_PAGE_URL = `${config.hosting.app}/connexion/`
 
 const server = express()
 
@@ -23,7 +22,7 @@ server.get('/auth/battlenet/callback',
     admin.auth().createCustomToken(uid)
       .then((token) => {
         logger.debug(`Successful token creation for ${uid}: ${token}`)
-        res.redirect(`${APP_HOST}/${AUTH_PAGE_URL}?auth_token=${token}`)
+        res.redirect(`${AUTH_PAGE_URL}?auth_token=${token}`)
       })
       .catch((error) => {
         logger.debug(`Failed to create token for ${uid}`, error)

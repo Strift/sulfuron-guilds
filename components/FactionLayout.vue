@@ -23,8 +23,6 @@ import Navbar from '~/components/Navbar.vue'
 import Footer from '~/components/Footer.vue'
 import NotificationList from '~/components/NotificationList.vue'
 
-const AUTH_TOKEN_QUERY = 'auth_token'
-
 export default {
   components: {
     Navbar,
@@ -36,20 +34,6 @@ export default {
       'isAlliance',
       'isHorde'
     ])
-  },
-  async mounted () {
-    await this.handleLogin()
-  },
-  methods: {
-    async handleLogin () {
-      const token = this.$router.currentRoute.query[AUTH_TOKEN_QUERY]
-      if (!token) {
-        return
-      }
-
-      await this.$store.dispatch('account/login', token)
-      this.$router.push('/')
-    }
   }
 }
 </script>

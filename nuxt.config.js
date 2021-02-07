@@ -43,7 +43,7 @@ export default {
   ** Auto import components
   ** See https://nuxtjs.org/api/configuration-components
   */
-  components: false,
+  components: true,
   /*
   ** Nuxt.js dev-modules
   */
@@ -103,11 +103,11 @@ export default {
     services: {
       auth: {
         initialize: {
-          onAuthStateChangedMutation: 'account/onAuthStateChanged'
+          onAuthStateChangedMutation: 'account/onFirebaseAuthStateChanged'
         }
       },
       firestore: {
-        emulatorPort: process.env.NODE_ENV === 'development' ? 8080 : undefined
+        // emulatorPort: process.env.NODE_ENV === 'development' ? 8080 : undefined
       }
     }
   }

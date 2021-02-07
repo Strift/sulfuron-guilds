@@ -27,17 +27,8 @@
 </template>
 
 <script>
-import AccountNavItem from '~/components/AccountNavItem.vue'
-import FactionLayout from '~/components/FactionLayout.vue'
-
 export default {
-  components: {
-    FactionLayout,
-    AccountNavItem
-  },
-  mounted () {
-    this.$store.dispatch('account/enableGuildSync')
-  },
+  middleware: ['auth', 'guild'],
   beforeDestroy () {
     this.$store.dispatch('account/disableGuildSync')
   }

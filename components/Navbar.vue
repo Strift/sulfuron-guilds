@@ -17,40 +17,30 @@
             </span>
           </span>
         </NavbarLink>
-        <client-only>
-          <NavbarLink
-            v-if="showAccountButton"
-            :to="(isLoggedIn || isAuthenticating) ? '/compte/profil/' : '/connexion/'"
-          >
-            <span class="space-x-2 flex items-center justify-center bg-blue-900 bg-opacity-25 hover:bg-opacity-75 border border-blue-300 px-4 py-2 rounded-full shadow">
-              <UserIcon />
-              <span v-if="isLoggedIn || isAuthenticating">Mon compte</span>
-              <span v-else>Connexion</span>
-            </span>
-          </NavbarLink>
-        </client-only>
+        <NavbarLink
+          v-show="showAccountButton"
+          :to="isGuest ? '/connexion/' : '/compte/profil/'"
+        >
+          <span class="space-x-2 flex items-center justify-center bg-blue-900 bg-opacity-25 hover:bg-opacity-75 border border-blue-300 px-4 py-2 rounded-full shadow">
+            <UserIcon />
+            <span v-if="isGuest">Connexion</span>
+            <span v-else>Mon compte</span>
+          </span>
+        </NavbarLink>
       </ul>
     </nav>
   </header>
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex'
-import ArrowLeftIcon from './icons/ArrowLeftIcon.vue'
-import UserIcon from './icons/UserIcon.vue'
-import NavbarLink from './NavbarLink.vue'
+import { mapGetters } from 'vuex'
 
 export default {
-  components: {
-    ArrowLeftIcon,
-    UserIcon,
-    NavbarLink
-  },
   computed: {
-    ...mapState('account', {
-      isAuthenticating: state => state.loading
-    }),
-    ...mapGetters('account', ['isLoggedIn', 'ownsUnpublishedGuild']),
+    ...mapGetters('account', [
+      'isGuest',
+      'ownsUnpublishedGuild'
+    ]),
     accountLinkTitle () {
       return 'Mon compte' + (this.ownsUnpublishedGuild ? ' - 1 notification' : '')
     },
@@ -58,7 +48,7 @@ export default {
       return this.$route.path !== '/'
     },
     showAccountButton () {
-      return !this.pathStartsWith('/compte/') && !this.pathStartsWith('/connexion/')
+      return !(this.pathStartsWith('/compte/') || this.pathStartsWith('/connexion/'))
     }
   },
   methods: {

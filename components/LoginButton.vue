@@ -1,5 +1,9 @@
 <template>
-  <a class="inline-flex items-center py-2 px-4 border space-x-4 text-gray-200" :href="`${$config.baseURL}/auth/battlenet`">
+  <a
+    class="inline-flex items-center py-2 px-4 border space-x-4 text-gray-200"
+    :href="`${$config.baseURL}/auth/battlenet`"
+    @click="startLoading"
+  >
     <BattleNetIcon class="h-8 w-8" />
     <div>Connexion</div>
   </a>
@@ -11,6 +15,11 @@ import BattleNetIcon from '~/components/icons/BattleNetIcon.vue'
 export default {
   components: {
     BattleNetIcon
+  },
+  methods: {
+    startLoading () {
+      this.$store.commit('account/startAuthLoading')
+    }
   }
 }
 </script>
