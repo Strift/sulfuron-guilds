@@ -2,7 +2,7 @@
   <div class="space-y-10">
     <div
       v-if="!isAGuildOwner"
-      class="bg-blue-900 bg-opacity-50 text-gray-500 rounded px-6 py-4 shadow flex items-center space-x-4"
+      class=" text-gray-500 border-gray-500 border border-opacity-25 bg-gray-900 bg-opacity-75 rounded px-6 py-4 shadow flex items-center space-x-4"
     >
       <div>
         ℹ️
