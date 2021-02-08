@@ -3,15 +3,14 @@
     <label :for="name" class="font-semibold text-blue-400 block leading-none text-shadow-sm mb-4">
       {{ label }}
     </label>
-    <div class="group relative inline-block shadow-md">
+    <div class="group relative shadow-md">
       <input
         :id="name"
-        :class="{ 'focus:border-blue-300 focus:text-gray-400 focus:shadow': !disabled, 'focus:border-gray-600': disabled }"
         :name="name"
         :readonly="disabled === true"
         :value="value"
         type="text"
-        class="bg-blue-900 bg-opacity-25 border border-gray-700 text-gray-500 h-10 rounded px-3 outline-none shadow-sm"
+        class="focus:border-blue-300 focus:border-opacity-75 focus:text-gray-400 focus:shadow bg-blue-900 bg-opacity-25 border border-gray-700 text-gray-500 h-10 rounded px-3 outline-none shadow-sm block w-full"
       >
       <LockIcon v-if="disabled" class="inline absolute right-0 bottom-0 top-0 my-auto mr-3 text-gray-700 group-focus:text-gray-600" />
     </div>

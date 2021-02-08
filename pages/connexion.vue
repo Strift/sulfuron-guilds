@@ -58,6 +58,7 @@ export default {
   methods: {
     async handleAuthRedirect () {
       await this.$store.dispatch('account/login', this.authToken)
+      await this.$store.dispatch('account/fetchGuild')
       this.$router.push('/')
     }
   }

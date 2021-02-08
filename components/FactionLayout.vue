@@ -19,16 +19,8 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import Navbar from '~/components/Navbar.vue'
-import Footer from '~/components/Footer.vue'
-import NotificationList from '~/components/NotificationList.vue'
 
 export default {
-  components: {
-    Navbar,
-    Footer,
-    NotificationList
-  },
   computed: {
     ...mapGetters([
       'isAlliance',

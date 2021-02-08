@@ -32,8 +32,8 @@ export const mutations = {
   setUser (state, user) {
     state.user = user
   },
-  setOwnerState (state, ownerState) {
-    state.ownerState = ownerState
+  resetGuild (state) {
+    state.guild = null
   },
   setError (state, error) {
     state.error = error
@@ -60,6 +60,7 @@ export const actions = {
   logout ({ commit }) {
     try {
       this.$fire.auth.signOut()
+      commit('resetGuild')
       commit('setAuthState', AUTH_STATE_GUEST)
       // user state update is managed by onFirebaseAuthStateChanged
     } catch (error) {
@@ -74,7 +75,6 @@ export const actions = {
       .get()
 
     if (querySnapshot.empty) {
-      commit('setGuild', null)
       return
     }
     await dispatch('enableGuildSync', querySnapshot.docs[0].ref) // There should be only one query result
@@ -108,7 +108,7 @@ export const getters = {
   isAGuildOwner (state) {
     return state.guild !== null
   },
-  ownsUnpublishedGuild (state) {
-    return state.guild && state.guild.published === false
+  hasDraftGuild (state) {
+    return state.guild?.published === false
   }
 }

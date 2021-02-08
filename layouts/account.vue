@@ -1,8 +1,8 @@
 <template>
   <FactionLayout>
-    <h1 class="font-bold text-4xl text-blue-100 mb-12">
+    <PageTitle>
       Mon compte
-    </h1>
+    </PageTitle>
     <div class="flex space-x-24">
       <aside class="w-1/4">
         <nav class="rounded-md overflow-hidden shadow-md">
@@ -10,7 +10,7 @@
             <AccountNavItem v-if="isAGuildOwner" to="/compte/guilde/">
               Guilde
             </AccountNavItem>
-            <AccountNavItem to="/compte/profil/">
+            <AccountNavItem to="/compte/parametres/">
               Paramètres
             </AccountNavItem>
             <AccountNavItem class="items-baseline">

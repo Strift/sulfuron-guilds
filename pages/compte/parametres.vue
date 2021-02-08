@@ -1,16 +1,12 @@
 <template>
   <div class="space-y-10">
-    <div
+    <InformationCard
       v-if="!isAGuildOwner"
-      class=" text-gray-500 border-gray-500 border border-opacity-25 bg-gray-900 bg-opacity-75 rounded px-6 py-4 shadow flex items-center space-x-4"
+      class="flex items-center space-x-4"
     >
-      <div>
-        ℹ️
-      </div>
-      <p>
-        Pour créer une <span class="font-semibold">page de guilde</span>, effectuez une demande aux modérateurs du <span class="font-semibold">Discord Sulfuron</span>.
-      </p>
-    </div>
+      <div>ℹ️</div>
+      <p>Pour créer une <span class="font-semibold">page de guilde</span>, effectuez une demande aux modérateurs du <span class="font-semibold">Discord Sulfuron</span>.</p>
+    </InformationCard>
     <AccountPageTitle>
       Battle.net
     </AccountPageTitle>
@@ -32,18 +28,10 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import AccountPageTitle from '~/components/ui/AccountPageTitle.vue'
-import DangerButton from '~/components/ui/DangerButton.vue'
-import BattleNetIcon from '~/components/icons/BattleNetIcon.vue'
 
 export default {
-  name: 'Profile',
+  name: 'Settings',
   layout: 'account',
-  components: {
-    AccountPageTitle,
-    DangerButton,
-    BattleNetIcon
-  },
   computed: {
     ...mapGetters('account', [
       'username',

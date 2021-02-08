@@ -1,13 +1,23 @@
 <template>
   <div class="space-y-10">
-    <button class="bg-red-100" @click="test">
-      test
-    </button>
+    <div
+      v-if="hasDraftGuild"
+      class="flex items-baseline justify-between"
+    >
+      <InformationCard>
+        <p>
+          Une fois les informations de votre guilde renseignées, n'oubliez pas de cliquer sur publier.
+        </p>
+      </InformationCard>
+      <PrimaryButton @click="publish">
+        Publier
+      </PrimaryButton>
+    </div>
     <AccountPageTitle>
       Général
     </AccountPageTitle>
     <div class="flex justify-between">
-      <div class="space-y-10">
+      <div class="space-y-10 max-w-sm w-full">
         <FormInput
           name="name"
           label="Nom"
@@ -37,25 +47,25 @@
     <AccountPageTitle>
       Horaires
     </AccountPageTitle>
-    <div class="flex">
+    <div class="flex justify-between">
       <FormInput
         name="start-hour"
         label="Heure de début"
         value="20h30"
-        class="w-1/2"
+        class="max-w-sm w-full"
       />
       <FormInput
         name="end-hour"
         label="Heure de fin"
         value="00h00"
-        class="w-1/2"
+        class="max-w-sm w-full"
       />
     </div>
     <FormCheckboxList
       v-model="selectDays"
       :checkbox-labels="days"
       name="days"
-      label="Jours"
+      label="Jours de raid"
     />
     <AccountPageTitle>
       Recrutement
@@ -64,39 +74,33 @@
       v-model="selectClasses"
       :checkbox-labels="classes"
       name="classes"
-      label="Classes"
+      label="Classes recherchées"
     />
     <AccountPageTitle>
       Contact
     </AccountPageTitle>
     <FormInput
       name="website-url"
-      label="Site"
+      label="Lien du site"
       value="https://astral.gg"
+      class="max-w-sm w-full"
     />
     <FormInput
       name="contact-url"
-      label="Contact"
+      label="Lien de contact"
       value="https://discord.gg/KFKJJdr"
+      class="max-w-sm w-full"
     />
   </div>
 </template>
 
 <script>
 import { debounce } from 'lodash'
-import { mapState } from 'vuex'
-import FormInput from '~/components/ui/FormInput.vue'
-import FormCheckboxList from '~/components/ui/FormCheckboxList.vue'
-import AccountPageTitle from '~/components/ui/AccountPageTitle.vue'
+import { mapState, mapGetters } from 'vuex'
 
 export default {
   name: 'Guild',
   layout: 'account',
-  components: {
-    FormInput,
-    FormCheckboxList,
-    AccountPageTitle
-  },
   data: () => ({
     selectDays: [false, false, false, false, false, false, false],
     selectClasses: [false, false, false, false, false, false, false, false, false],
@@ -106,6 +110,9 @@ export default {
   computed: {
     ...mapState('account', [
       'guild'
+    ]),
+    ...mapGetters('account', [
+      'hasDraftGuild'
     ])
   },
   watch: {
@@ -116,8 +123,8 @@ export default {
       500)
   },
   methods: {
-    test () {
-      this.$store.dispatch('account/updateGuild', { test: !this.guild.test })
+    publish () {
+      this.$store.dispatch('account/updateGuild', { published: true })
     }
   }
 }
