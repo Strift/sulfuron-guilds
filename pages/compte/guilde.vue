@@ -20,16 +20,17 @@
       <div class="space-y-10 max-w-sm w-full">
         <FormInput
           name="name"
-          label="Nom"
+          label="Nom de guilde"
           disabled
-          value="Les Croisés de Pandragon"
+          :value="name"
         />
         <FormInput
+          v-model="logoUrl"
           name="logo-url"
           label="Lien du logo"
-          value="https://astral.gg/logo.svg"
         />
         <FormInput
+          v-model="type"
           name="type"
           label="Type de structure"
           value="Classique (JcE)"
@@ -96,7 +97,7 @@
 
 <script>
 import { debounce } from 'lodash'
-import { mapState, mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'Guild',
@@ -108,9 +109,25 @@ export default {
     classes: ['Druide', 'Hunter', 'Mage', 'Paladin', 'Priest', 'Rogue', 'Warlock', 'Warrior']
   }),
   computed: {
-    ...mapState('account', [
-      'guild'
-    ]),
+    name () {
+      return this.$store.state.account.guild.name
+    },
+    logoUrl: {
+      get () {
+        return this.$store.state.account.guild.logoUrl
+      },
+      set (value) {
+        this.$store.dispatch('account/updateGuild', { logoUrl: value })
+      }
+    },
+    type: {
+      get () {
+        return this.$store.state.account.guild.type
+      },
+      set (value) {
+        this.$store.dispatch('account/updateGuild', { type: value })
+      }
+    },
     ...mapGetters('account', [
       'hasDraftGuild'
     ])
@@ -125,6 +142,9 @@ export default {
   methods: {
     publish () {
       this.$store.dispatch('account/updateGuild', { published: true })
+    },
+    handle (value) {
+      console.log(value)
     }
   }
 }
