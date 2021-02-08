@@ -29,11 +29,11 @@
           name="logo-url"
           label="Lien du logo"
         />
-        <FormInput
+        <FormSelect
           v-model="type"
           name="type"
           label="Type de structure"
-          value="Classique (JcE)"
+          :options="typeOptions"
         />
       </div>
       <div>
@@ -97,24 +97,29 @@
 
 <script>
 import { debounce } from 'lodash'
-import { mapGetters } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 
 export default {
   name: 'Guild',
   layout: 'account',
   data: () => ({
+    typeOptions: [
+      { value: 'Classique', label: 'Classique (JcE)' },
+      { value: 'Speedrun', label: 'Speedrun' }
+    ],
     selectDays: [false, false, false, false, false, false, false],
     selectClasses: [false, false, false, false, false, false, false, false, false],
     days: ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'],
     classes: ['Druide', 'Hunter', 'Mage', 'Paladin', 'Priest', 'Rogue', 'Warlock', 'Warrior']
   }),
   computed: {
+    ...mapState('account', ['guild']),
     name () {
-      return this.$store.state.account.guild.name
+      return this.guild.name
     },
     logoUrl: {
       get () {
-        return this.$store.state.account.guild.logoUrl
+        return this.guild.logoUrl
       },
       set (value) {
         this.$store.dispatch('account/updateGuild', { logoUrl: value })
@@ -122,7 +127,7 @@ export default {
     },
     type: {
       get () {
-        return this.$store.state.account.guild.type
+        return this.guild.type
       },
       set (value) {
         this.$store.dispatch('account/updateGuild', { type: value })

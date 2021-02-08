@@ -2,7 +2,7 @@
   <div class="flex">
     <div
       v-if="autoSaved"
-      class="flex bg-green-500 bg-opacity-75 text-green-100 rounded mx-auto space-x-4 py-2 px-5 mb-8 shadow-md"
+      class="flex bg-green-500 bg-opacity-75 text-green-100 rounded mx-auto space-x-4 py-2 px-5 mb-8 shadow-lg"
     >
       <div>💾</div>
       <div>Modifications sauvegardées.</div>
