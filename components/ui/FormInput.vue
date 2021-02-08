@@ -7,9 +7,9 @@
       <input
         :id="name"
         :name="name"
+        :type="type"
         :readonly="disabled === true"
         :value="value"
-        type="text"
         class="focus:border-blue-300 focus:border-opacity-75 focus:text-gray-400 focus:shadow bg-blue-900 bg-opacity-25 border border-gray-700 text-gray-500 h-10 rounded px-3 outline-none shadow-sm block w-full"
         @input="$emit('input', $event.target.value)"
       >
@@ -24,6 +24,10 @@ export default {
     name: {
       type: String,
       required: true
+    },
+    type: {
+      type: String,
+      default: 'text'
     },
     label: {
       type: String,
@@ -44,5 +48,9 @@ export default {
 <style>
 input:focus + svg {
   @apply text-gray-500;
+}
+
+::calendar-picker-indicator {
+  filter: invert()
 }
 </style>

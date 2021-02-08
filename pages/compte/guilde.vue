@@ -5,9 +5,7 @@
       class="flex items-baseline justify-between"
     >
       <InformationCard>
-        <p>
-          Une fois les informations de votre guilde renseignées, n'oubliez pas de cliquer sur publier.
-        </p>
+        Une fois les informations de votre guilde renseignées, n'oubliez pas de cliquer sur publier.
       </InformationCard>
       <PrimaryButton @click="publish">
         Publier
@@ -25,7 +23,7 @@
           :value="name"
         />
         <FormInput
-          v-model="logoUrl"
+          v-model.trim="logoUrl"
           name="logo-url"
           label="Lien du logo"
         />
@@ -50,15 +48,17 @@
     </AccountPageTitle>
     <div class="flex justify-between">
       <FormInput
+        v-model="startHour"
         name="start-hour"
+        type="time"
         label="Heure de début"
-        value="20h30"
         class="max-w-sm w-full"
       />
       <FormInput
+        v-model="endHour"
         name="end-hour"
+        type="time"
         label="Heure de fin"
-        value="00h00"
         class="max-w-sm w-full"
       />
     </div>
@@ -113,6 +113,9 @@ export default {
     classes: ['Druide', 'Hunter', 'Mage', 'Paladin', 'Priest', 'Rogue', 'Warlock', 'Warrior']
   }),
   computed: {
+    ...mapGetters('account', [
+      'hasDraftGuild'
+    ]),
     ...mapState('account', ['guild']),
     name () {
       return this.guild.name
@@ -133,13 +136,26 @@ export default {
         this.$store.dispatch('account/updateGuild', { type: value })
       }
     },
-    ...mapGetters('account', [
-      'hasDraftGuild'
-    ])
+    startHour: {
+      get () {
+        return this.guild.startHour
+      },
+      set (value) {
+        this.$store.dispatch('account/updateGuild', { startHour: value })
+      }
+    },
+    endHour: {
+      get () {
+        return this.guild.endHour
+      },
+      set (value) {
+        this.$store.dispatch('account/updateGuild', { endHour: value })
+      }
+    }
   },
   watch: {
     guild: debounce(
-      function (newGuild) {
+      function () {
         this.$store.commit('addNotification', { type: 'auto-saved' })
       },
       500)
@@ -147,9 +163,6 @@ export default {
   methods: {
     publish () {
       this.$store.dispatch('account/updateGuild', { published: true })
-    },
-    handle (value) {
-      console.log(value)
     }
   }
 }
