@@ -4,6 +4,14 @@
       Admin zone 👀
     </PageTitle>
     <div class="space-y-10">
+      <InformationCard class="space-y-2">
+        <p class="font-semibold">
+          Cette page est en construction. 🛠️
+        </p>
+        <p>
+          Attention, il n'y a aucune vérification de l'existence des comptes !
+        </p>
+      </InformationCard>
       <PageSectionTitle>Créer une guilde</PageSectionTitle>
       <div class="max-w-sm space-y-10">
         <FormInput

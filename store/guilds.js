@@ -2,11 +2,7 @@ import { firestoreAction } from 'vuexfire'
 
 // Vuex mutations setup in root store
 
-const SYNC_STATE_DISABLED = 'disabled'
-const SYNC_STATE_ENABLED = 'enabled'
-
 export const state = () => ({
-  syncState: SYNC_STATE_DISABLED,
   list: []
 })
 
