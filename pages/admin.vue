@@ -84,6 +84,8 @@ export default {
           .add({
             name: this.guild,
             ownerUid: this.account,
+            raidDays: [],
+            recruitment: [],
             published: false
           })
         this.guild = ''
