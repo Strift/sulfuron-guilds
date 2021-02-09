@@ -26,6 +26,7 @@ module.exports = {
   },
   variants: {
     borderColor: ({ after }) => after(['focus-within']),
+    borderOpacity: ({ after }) => after(['focus-within']),
     textColor: ['responsive', 'hover', 'focus', 'group-focus']
   },
   plugins: [],
