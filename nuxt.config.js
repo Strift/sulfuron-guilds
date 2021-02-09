@@ -103,7 +103,7 @@ export default {
     services: {
       auth: {
         initialize: {
-          onAuthStateChangedMutation: 'account/onFirebaseAuthStateChanged'
+          onAuthStateChangedAction: 'account/onFirebaseAuthStateChanged'
         }
       },
       firestore: {

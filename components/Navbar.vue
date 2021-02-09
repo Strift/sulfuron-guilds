@@ -22,6 +22,13 @@
           </span>
         </NavbarLink>
         <NavbarLink
+          v-show="showAdminButton && isAdmin"
+          to="/admin/"
+          title="Administration"
+        >
+          Administration
+        </NavbarLink>
+        <NavbarLink
           v-show="showAccountButton && hasDraftGuild"
           to="/compte/guilde/"
           title="Votre page de guilde est activée !"
@@ -53,6 +60,7 @@ export default {
   computed: {
     ...mapGetters('account', [
       'isGuest',
+      'isAdmin',
       'isAGuildOwner',
       'hasDraftGuild'
     ]),
@@ -61,6 +69,9 @@ export default {
     },
     showAccountButton () {
       return !(this.pathStartsWith('/compte/') || this.pathStartsWith('/connexion/'))
+    },
+    showAdminButton () {
+      return !this.pathStartsWith('/admin/')
     },
     accountLinkUrl () {
       if (this.isGuest) { return '/connexion/' }

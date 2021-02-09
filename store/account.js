@@ -9,20 +9,12 @@ export const state = () => ({
   // AuthState is finite state machine
   authState: AUTH_STATE_GUEST,
   user: null,
+  admin: false,
   guild: null,
   error: null
 })
 
 export const mutations = {
-  onFirebaseAuthStateChanged (state, { authUser }) {
-    if (authUser) {
-      state.user = {
-        name: authUser.uid
-      }
-    } else {
-      state.user = null
-    }
-  },
   startAuthLoading (state) {
     state.authState = AUTH_STATE_LOADING
   },
@@ -32,8 +24,8 @@ export const mutations = {
   setUser (state, user) {
     state.user = user
   },
-  resetGuild (state) {
-    state.guild = null
+  setAdmin (state, admin) {
+    state.admin = admin
   },
   setError (state, error) {
     state.error = error
@@ -41,6 +33,19 @@ export const mutations = {
 }
 
 export const actions = {
+  onFirebaseAuthStateChanged ({ commit, dispatch }, { authUser }) {
+    if (authUser) {
+      commit('setUser', {
+        name: authUser.uid
+      })
+      commit('setAuthState', AUTH_STATE_AUTHENTICATED)
+      dispatch('fetchAdmin')
+      dispatch('fetchGuild')
+    } else {
+      commit('setUser', null)
+      commit('setAuthState', AUTH_STATE_GUEST)
+    }
+  },
   async login ({ commit, state }, authToken) {
     try {
       if (state.authState !== AUTH_STATE_LOADING) {
@@ -57,15 +62,26 @@ export const actions = {
       commit('setAuthState', AUTH_STATE_ERROR)
     }
   },
-  logout ({ commit }) {
+  logout ({ commit, dispatch }) {
     try {
       this.$fire.auth.signOut()
-      commit('resetGuild')
       commit('setAuthState', AUTH_STATE_GUEST)
+      commit('setAdmin', false)
+      dispatch('disableGuildSync')
       // user state update is managed by onFirebaseAuthStateChanged
     } catch (error) {
       commit('setError', error)
       commit('setAuthState', AUTH_STATE_ERROR)
+    }
+  },
+  async fetchAdmin ({ commit }) {
+    const userRef = await this.$fire.firestore
+      .collection('users')
+      .doc(this.$fire.auth.currentUser.uid)
+      .get()
+
+    if (userRef.exists) {
+      commit('setAdmin', userRef.data().admin)
     }
   },
   async fetchGuild ({ commit, dispatch }) {
@@ -110,5 +126,8 @@ export const getters = {
   },
   hasDraftGuild (state) {
     return state.guild?.published === false
+  },
+  isAdmin (state) {
+    return state.admin
   }
 }
