@@ -2,13 +2,26 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
+    function isAuthenticated () {
+      return request.auth != null
+    }
+
     function isGuildOwner () {
-      return request.auth != null && resource.data.ownerUid == request.auth.uid
+      return isAuthenticated() && resource.data.ownerUid == request.auth.uid
+    }
+
+    function isAdmin () {
+      return isAuthenticated() && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.admin == true
     }
 
     match /guilds/{guild} {
+      allow create: if isAdmin();
       allow read;
       allow update: if isGuildOwner();
+    }
+
+    match /users/{userId} {
+      allow read: if isAuthenticated() && request.auth.uid == userId;
     }
   }
 }

@@ -11,9 +11,9 @@
         Publier
       </PrimaryButton>
     </div>
-    <AccountPageTitle>
+    <PageSectionTitle>
       Général
-    </AccountPageTitle>
+    </PageSectionTitle>
     <div class="flex justify-between">
       <div class="space-y-10 max-w-sm w-full">
         <FormInput
@@ -43,9 +43,9 @@
         </div>
       </div>
     </div>
-    <AccountPageTitle>
+    <PageSectionTitle>
       Horaires
-    </AccountPageTitle>
+    </PageSectionTitle>
     <div class="flex justify-between">
       <FormInput
         v-model="startHour"
@@ -68,18 +68,18 @@
       name="days"
       label="Jours de raid"
     />
-    <AccountPageTitle>
+    <PageSectionTitle>
       Recrutement
-    </AccountPageTitle>
+    </PageSectionTitle>
     <FormCheckList
       v-model="recruitment"
       :options="classesOptions"
       name="classes"
       label="Classes recherchées"
     />
-    <AccountPageTitle>
+    <PageSectionTitle>
       Contact
-    </AccountPageTitle>
+    </PageSectionTitle>
     <FormInput
       v-model="websiteUrl"
       name="website-url"

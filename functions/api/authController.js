@@ -1,7 +1,7 @@
 const express = require('express')
 const config = require('../config')
 const logger = require('../services/logger')
-const admin = require('../services/admin')
+const firebase = require('../services/firebase')
 const passport = require('../middlewares/passport')
 
 const AUTH_PAGE_URL = `${config.hosting.app}/connexion/`
@@ -17,11 +17,9 @@ server.get('/auth/battlenet/callback',
   (req, res) => {
     const uid = req.account.battletag
     logger.debug(`Successful battlenet authentication with account ${uid}`)
-
-    logger.debug(`Creating custom auth token for ${uid}`)
-    admin.auth().createCustomToken(uid)
+    firebase.auth().createCustomToken(uid)
       .then((token) => {
-        logger.debug(`Successful token creation for ${uid}: ${token}`)
+        logger.debug(`Successful token creation for ${uid}`)
         res.redirect(`${AUTH_PAGE_URL}?auth_token=${token}`)
       })
       .catch((error) => {

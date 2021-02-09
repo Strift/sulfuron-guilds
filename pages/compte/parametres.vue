@@ -7,9 +7,9 @@
       <div>ℹ️</div>
       <p>Pour créer une <span class="font-semibold">page de guilde</span>, effectuez une demande aux modérateurs du <span class="font-semibold">Discord Sulfuron</span>.</p>
     </InformationCard>
-    <AccountPageTitle>
+    <PageSectionTitle>
       Battle.net
-    </AccountPageTitle>
+    </PageSectionTitle>
     <div class="flex shadow-md">
       <div class="w-20 h-20 bg-gray-900 rounded-l flex items-center">
         <BattleNetIcon class="h-10" />
