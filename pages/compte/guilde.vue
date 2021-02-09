@@ -39,7 +39,7 @@
           Logo
         </div>
         <div class="h-32 w-32 p-4 bg-gray-900 rounded-lg items-center justify-center flex shadow">
-          <img src="~assets/images/astral.svg" alt="">
+          <img :src="logoUrl" :alt="`Logo de votre guilde`">
         </div>
       </div>
     </div>
@@ -81,15 +81,15 @@
       Contact
     </AccountPageTitle>
     <FormInput
+      v-model="websiteUrl"
       name="website-url"
       label="Lien du site"
-      value="https://astral.gg"
       class="max-w-sm w-full"
     />
     <FormInput
+      v-model="contactUrl"
       name="contact-url"
       label="Lien de contact"
-      value="https://discord.gg/KFKJJdr"
       class="max-w-sm w-full"
     />
   </div>
@@ -169,6 +169,22 @@ export default {
       set (value) {
         const recruitment = this.classesOptions.map((className, index) => ({ class: className, open: value[index] }))
         this.$store.dispatch('account/updateGuild', { recruitment })
+      }
+    },
+    websiteUrl: {
+      get () {
+        return this.guild.websiteUrl
+      },
+      set (value) {
+        return this.$store.dispatch('account/updateGuild', { websiteUrl: value })
+      }
+    },
+    contactUrl: {
+      get () {
+        return this.guild.contactUrl
+      },
+      set (value) {
+        return this.$store.dispatch('account/updateGuild', { contactUrl: value })
       }
     }
   },
