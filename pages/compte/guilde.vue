@@ -62,21 +62,21 @@
         class="max-w-sm w-full"
       />
     </div>
-    <FormCheckboxList
-      v-model="selectDays"
-      :checkbox-labels="days"
+    <FormCheckList
+      v-model="raidDays"
+      :options="daysOptions"
       name="days"
       label="Jours de raid"
     />
     <AccountPageTitle>
       Recrutement
     </AccountPageTitle>
-    <FormCheckboxList
+    <!-- <FormCheckList
       v-model="selectClasses"
-      :checkbox-labels="classes"
+      :options="classes"
       name="classes"
       label="Classes recherchées"
-    />
+    /> -->
     <AccountPageTitle>
       Contact
     </AccountPageTitle>
@@ -99,6 +99,8 @@
 import { debounce } from 'lodash'
 import { mapState, mapGetters } from 'vuex'
 
+const DAYS_OF_THE_WEEK = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche']
+
 export default {
   name: 'Guild',
   layout: 'account',
@@ -107,15 +109,12 @@ export default {
       { value: 'Classique', label: 'Classique (JcE)' },
       { value: 'Speedrun', label: 'Speedrun' }
     ],
-    selectDays: [false, false, false, false, false, false, false],
+    daysOptions: DAYS_OF_THE_WEEK,
     selectClasses: [false, false, false, false, false, false, false, false, false],
-    days: ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'],
     classes: ['Druide', 'Hunter', 'Mage', 'Paladin', 'Priest', 'Rogue', 'Warlock', 'Warrior']
   }),
   computed: {
-    ...mapGetters('account', [
-      'hasDraftGuild'
-    ]),
+    ...mapGetters('account', ['hasDraftGuild']),
     ...mapState('account', ['guild']),
     name () {
       return this.guild.name
@@ -150,6 +149,16 @@ export default {
       },
       set (value) {
         this.$store.dispatch('account/updateGuild', { endHour: value })
+      }
+    },
+    raidDays: {
+      // Checking for strict equality so that undefined (newly created) will mean playing=false
+      get () {
+        return this.guild.raidDays.map(({ playing }) => playing === true)
+      },
+      set (value) {
+        const raidDays = this.daysOptions.map((day, index) => ({ day, playing: value[index] === true }))
+        this.$store.dispatch('account/updateGuild', { raidDays })
       }
     }
   },

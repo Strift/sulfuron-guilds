@@ -5,29 +5,28 @@
     </div>
     <div class="grid grid-flow-cols grid-cols-5 gap-x-6 gap-y-4">
       <label
-        v-for="(inputLabel, i) in checkboxLabels"
-        :key="inputId(inputLabel)"
-        :for="inputId(inputLabel)"
+        v-for="(option, optionIndex) in options"
+        :key="inputId(option)"
+        :for="inputId(option)"
         class="group flex space-x-2 items-center border border-gray-700 rounded px-3 h-10 shadow-sm focus-within:border-blue-300 focus-within:text-gray-400 focus-within:shadow min-w-0"
-        :class="{ 'bg-blue-900 bg-opacity-25': value[i] }"
+        :class="{ 'bg-blue-900 bg-opacity-25': value[optionIndex] }"
       >
         <CheckIcon
-          :class="{ 'text-gray-500': value[i], 'text-gray-700': !value[i] }"
+          :class="{ 'text-gray-500': value[optionIndex], 'text-gray-700': !value[optionIndex] }"
           class="not-sr-only"
         />
         <input
-          :id="inputId(inputLabel)"
-          v-model="value[i]"
-          :name="inputId(inputLabel)"
-          :value="value[i]"
+          :id="inputId(option)"
+          :name="inputId(option)"
+          :value="value[optionIndex]"
           type="checkbox"
           class="sr-only"
-          @change="updateValue"
+          @change="onChange($event.target.checked, optionIndex)"
         >
         <span
           class="text-gray-500 text-shadow-sm"
-          :class="{ 'text-gray-500': value[i], 'text-gray-600': !value[i] }"
-        >{{ inputLabel }}</span>
+          :class="{ 'text-gray-500': value[optionIndex], 'text-gray-600': !value[optionIndex] }"
+        >{{ option }}</span>
       </label>
     </div>
   </div>
@@ -49,26 +48,24 @@ export default {
       type: String,
       required: true
     },
-    checkboxLabels: {
+    value: {
       type: Array,
       required: true
     },
-    value: {
+    options: {
       type: Array,
       required: true
     }
   },
   methods: {
-    inputId (label) {
-      return `${this.name}-${label}`
+    inputId (option) {
+      return `${this.name}-${option}`
     },
-    updateValue (event) {
-      this.$emit('change', event.target.checked)
+    onChange (checked, optionIndex) {
+      const updatedCheckStates = this.value
+      updatedCheckStates[optionIndex] = checked
+      this.$emit('input', updatedCheckStates)
     }
   }
 }
 </script>
-
-<style>
-
-</style>
