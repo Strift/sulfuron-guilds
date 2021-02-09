@@ -71,12 +71,12 @@
     <AccountPageTitle>
       Recrutement
     </AccountPageTitle>
-    <!-- <FormCheckList
-      v-model="selectClasses"
-      :options="classes"
+    <FormCheckList
+      v-model="recruitment"
+      :options="classesOptions"
       name="classes"
       label="Classes recherchées"
-    /> -->
+    />
     <AccountPageTitle>
       Contact
     </AccountPageTitle>
@@ -100,6 +100,7 @@ import { debounce } from 'lodash'
 import { mapState, mapGetters } from 'vuex'
 
 const DAYS_OF_THE_WEEK = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche']
+const WOW_CLASSES = ['Druide', 'Hunter', 'Mage', 'Paladin', 'Priest', 'Rogue', 'Warlock', 'Warrior']
 
 export default {
   name: 'Guild',
@@ -110,8 +111,7 @@ export default {
       { value: 'Speedrun', label: 'Speedrun' }
     ],
     daysOptions: DAYS_OF_THE_WEEK,
-    selectClasses: [false, false, false, false, false, false, false, false, false],
-    classes: ['Druide', 'Hunter', 'Mage', 'Paladin', 'Priest', 'Rogue', 'Warlock', 'Warrior']
+    classesOptions: WOW_CLASSES
   }),
   computed: {
     ...mapGetters('account', ['hasDraftGuild']),
@@ -152,13 +152,23 @@ export default {
       }
     },
     raidDays: {
-      // Checking for strict equality so that undefined (newly created) will mean playing=false
       get () {
+        // Checking for strict equality so that undefined (newly created) will mean playing=false
         return this.guild.raidDays.map(({ playing }) => playing === true)
       },
       set (value) {
-        const raidDays = this.daysOptions.map((day, index) => ({ day, playing: value[index] === true }))
+        const raidDays = this.daysOptions.map((day, index) => ({ day, playing: value[index] }))
         this.$store.dispatch('account/updateGuild', { raidDays })
+      }
+    },
+    recruitment: {
+      get () {
+        // Checking for strict equality so that undefined (newly created) will mean playing=false
+        return this.guild.recruitment.map(({ open }) => open === true)
+      },
+      set (value) {
+        const recruitment = this.classesOptions.map((className, index) => ({ class: className, open: value[index] }))
+        this.$store.dispatch('account/updateGuild', { recruitment })
       }
     }
   },
