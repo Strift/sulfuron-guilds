@@ -17,21 +17,19 @@
     </div>
 
     <div class="grid grid-flow-row grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 mb-12">
-      <!-- <GuildCard
+      <GuildCard
         v-for="(guild, index) in filteredSearchResults"
         :key="index"
         :name="guild.name"
         :type="guild.type"
-        :days="guild.days"
-        :time-range="guild.timeRange"
-        :recruitment="guild.recruitment"
-        :image-url="guild.imageUrl"
+        :raid-days="raidDays(guild)"
+        :time-range="timeRange(guild)"
+        :recruitment="recruitmentClasses(guild)"
+        :logo-url="guild.logoUrl"
         :website-url="guild.websiteUrl"
         :contact-url="guild.contactUrl"
-        :activity="guild.activity"
-        :supports="guild.supports"
         class="shadow-md"
-      /> -->
+      />
     </div>
 
     <div class="text-center mt-auto text-gray-300">
@@ -41,19 +39,11 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapGetters } from 'vuex'
 import Fuse from 'fuse.js'
-import FactionButton from '~/components/FactionButton.vue'
-import ClassIcon from '~/components/icons/ClassIcon.vue'
-import GuildCard from '~/components/GuildCard.vue'
 
 export default {
   name: 'Index',
-  components: {
-    FactionButton,
-    ClassIcon,
-    GuildCard
-  },
   data: () => ({
     wowClasses: ['Druid', 'Hunter', 'Mage', 'Paladin', 'Priest', 'Rogue', 'Shaman', 'Warlock', 'Warrior'],
     fuse: null,
@@ -61,8 +51,8 @@ export default {
     classQuery: []
   }),
   computed: {
-    ...mapState({
-      guilds: state => state.guilds.list
+    ...mapGetters('guilds', {
+      guilds: 'publishedGuilds'
     }),
     fuzzySearchResults () {
       if (this.fuse == null || this.textQuery.length === 0) {
@@ -75,7 +65,7 @@ export default {
         return this.fuzzySearchResults
       }
       return this.fuzzySearchResults.filter((guild) => {
-        return guild.recruitment.some(wowClass => this.classQuery.includes(wowClass))
+        return guild.recruitment.some(recruitmentState => recruitmentState.open && this.classQuery.includes(recruitmentState.class))
       })
     }
   },
@@ -83,7 +73,7 @@ export default {
     // Performing data fetching in mounted hook because of NuxtFirebase issues with SSR
     await this.$store.dispatch('guilds/enableSync')
     this.fuse = new Fuse(this.guilds, {
-      keys: ['name', 'type', 'days', 'recruitment']
+      keys: ['name', 'type', 'raidDays.day', 'recruitment.class']
     })
   },
   async beforeDestroy () {
@@ -91,7 +81,20 @@ export default {
   },
   methods: {
     resultText (count) {
-      return count > 1 ? 'résultats' : 'résultat'
+      return count > 1 ? 'guildes' : 'guilde'
+    },
+    timeRange ({ startHour, endHour }) {
+      return startHour + '–' + endHour
+    },
+    raidDays ({ raidDays }) {
+      return raidDays
+        .filter(({ playing }) => playing)
+        .map(({ day }) => day)
+    },
+    recruitmentClasses ({ recruitment }) {
+      return recruitment
+        .filter(({ open }) => open)
+        .map(recruitmentState => recruitmentState.class)
     }
   }
 }

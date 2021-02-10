@@ -21,3 +21,9 @@ export const actions = {
     return ref.set(guild)
   })
 }
+
+export const getters = {
+  publishedGuilds (state) {
+    return state.list.filter(({ published }) => published)
+  }
+}

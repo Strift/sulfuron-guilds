@@ -10,6 +10,13 @@
     <nav class="">
       <ul class="flex items-center space-x-12 list-none">
         <NavbarLink
+          v-show="showAccountButton && hasDraftGuild"
+          to="/compte/guilde/"
+          title="Votre page de guilde est activée !"
+        >
+          <BellIcon class="text-red-500" style="height: 24px; width: 24px" />
+        </NavbarLink>
+        <NavbarLink
           v-show="showBackButton"
           to="/"
           title="Accueil"
@@ -27,13 +34,6 @@
           title="Administration"
         >
           Administration
-        </NavbarLink>
-        <NavbarLink
-          v-show="showAccountButton && hasDraftGuild"
-          to="/compte/guilde/"
-          title="Votre page de guilde est activée !"
-        >
-          <BellIcon class="text-red-500" style="height: 24px; width: 24px" />
         </NavbarLink>
         <NavbarLink
           v-show="showAccountButton"

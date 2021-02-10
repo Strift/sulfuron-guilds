@@ -43,6 +43,9 @@
 <script>
 import { mapState } from 'vuex'
 
+const DAYS_OF_THE_WEEK = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche']
+const WOW_CLASSES = ['Druid', 'Hunter', 'Mage', 'Paladin', 'Priest', 'Rogue', 'Warlock', 'Warrior']
+
 export default {
   middleware: ['auth', 'admin'],
   data: () => ({
@@ -82,11 +85,17 @@ export default {
         await this.$fire.firestore
           .collection('guilds')
           .add({
-            name: this.guild,
             ownerUid: this.account,
-            raidDays: [],
-            recruitment: [],
-            published: false
+            name: this.guild,
+            published: false,
+            type: '',
+            logoUrl: '',
+            startHour: '',
+            endHour: '',
+            raidDays: DAYS_OF_THE_WEEK.map(day => ({ day, playing: false })),
+            recruitment: WOW_CLASSES.map(className => ({ class: className, open: false })),
+            websiteUrl: '',
+            contactUrl: ''
           })
         this.guild = ''
         this.account = ''

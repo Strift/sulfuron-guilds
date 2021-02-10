@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="bg-gray-900 p-5 flex items-center rounded-t-lg">
-      <img :src="imageUrl" alt="" class="h-12 mr-5">
+      <img :src="logoUrl" alt="" class="h-12 mr-5">
       <div class="text-gray-500 font-semibold text-lg leading-6">
         {{ name }}
       </div>
@@ -57,18 +57,18 @@ export default {
   props: {
     name: { type: String, required: true },
     type: { type: String, required: true },
-    days: { type: Array, required: true },
+    raidDays: { type: Array, required: true },
     timeRange: { type: String, required: true },
     recruitment: { type: Array, required: true },
-    imageUrl: { type: String, required: true },
+    logoUrl: { type: String, required: true },
     websiteUrl: { type: String, required: true },
-    contactUrl: { type: String, required: true },
-    activity: { type: Number, required: true },
-    supports: { type: Number, required: true }
+    contactUrl: { type: String, required: true }
+    // activity: { type: Number, required: true },
+    // supports: { type: Number, required: true }
   },
   computed: {
     readableDays () {
-      return this.days.map(day => day.slice(0, 3)).join(', ')
+      return this.raidDays.map(day => day.slice(0, 3)).join(', ')
     },
     readableWebsiteUrl () {
       let hostname

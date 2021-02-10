@@ -153,8 +153,7 @@ export default {
     },
     raidDays: {
       get () {
-        // Checking for strict equality so that undefined (newly created) will mean playing=false
-        return this.guild.raidDays.map(({ playing }) => playing === true)
+        return this.guild.raidDays.map(({ playing }) => playing)
       },
       set (value) {
         const raidDays = this.daysOptions.map((day, index) => ({ day, playing: value[index] }))
@@ -163,8 +162,7 @@ export default {
     },
     recruitment: {
       get () {
-        // Checking for strict equality so that undefined (newly created) will mean playing=false
-        return this.guild.recruitment.map(({ open }) => open === true)
+        return this.guild.recruitment.map(({ open }) => open)
       },
       set (value) {
         const recruitment = this.classesOptions.map((className, index) => ({ class: className, open: value[index] }))
