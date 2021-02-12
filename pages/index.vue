@@ -10,9 +10,9 @@
       >
     </div>
     <div class="hidden md:flex text-white mb-12 opacity-75 justify-end space-x-4">
-      <label v-for="(wowClass) in wowClasses" :key="wowClass" class="flex items-center space-x-1">
-        <input :id="wowClass" v-model="classQuery" type="checkbox" :name="wowClass" :value="wowClass">
-        <ClassIcon :wow-class="wowClass" class="h-5" />
+      <label v-for="(wowClass) in wowClasses" :key="wowClass.value" class="flex items-center space-x-1">
+        <input :id="wowClass.value" v-model="classQuery" type="checkbox" :name="wowClass.name" :value="wowClass.value">
+        <ClassIcon :wow-class="wowClass.value" class="h-5" />
       </label>
     </div>
 
@@ -42,10 +42,12 @@
 import { mapGetters } from 'vuex'
 import Fuse from 'fuse.js'
 
+import WOW_CLASSES from '~/data/classes.json'
+
 export default {
   name: 'Index',
   data: () => ({
-    wowClasses: ['Druid', 'Hunter', 'Mage', 'Paladin', 'Priest', 'Rogue', 'Shaman', 'Warlock', 'Warrior'],
+    wowClasses: WOW_CLASSES,
     fuse: null,
     textQuery: '',
     classQuery: []

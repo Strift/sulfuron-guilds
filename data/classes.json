@@ -1,0 +1,38 @@
+[
+  {
+    "value": "druid",
+    "name": "Druide"
+  },
+  {
+    "value": "hunter",
+    "name": "Chasseur"
+  },
+  {
+    "value": "mage",
+    "name": "Mage"
+  },
+  {
+    "value": "paladin",
+    "name": "Paladin"
+  },
+  {
+    "value": "priest",
+    "name": "Prêtre"
+  },
+  {
+    "value": "rogue",
+    "name": "Voleur"
+  },
+  {
+    "value": "shaman",
+    "name": "Chaman"
+  },
+  {
+    "value": "warlock",
+    "name": "Démoniste"
+  },
+  {
+    "value": "warrior",
+    "name": "Guerrier"
+  }
+]

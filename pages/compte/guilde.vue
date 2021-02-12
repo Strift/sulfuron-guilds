@@ -73,7 +73,7 @@
     </PageSectionTitle>
     <FormCheckList
       v-model="recruitment"
-      :options="classesOptions"
+      :options="wowClasses.map(option => option.name)"
       name="classes"
       label="Classes recherchées"
     />
@@ -99,8 +99,9 @@
 import { debounce } from 'lodash'
 import { mapState, mapGetters } from 'vuex'
 
+import WOW_CLASSES from '~/data/classes.json'
+
 const DAYS_OF_THE_WEEK = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche']
-const WOW_CLASSES = ['Druid', 'Hunter', 'Mage', 'Paladin', 'Priest', 'Rogue', 'Warlock', 'Warrior']
 
 export default {
   name: 'Guild',
@@ -111,7 +112,8 @@ export default {
       { value: 'Speedrun', label: 'Speedrun' }
     ],
     daysOptions: DAYS_OF_THE_WEEK,
-    classesOptions: WOW_CLASSES
+    wowClasses: WOW_CLASSES.sort((classA, classB) => (classA.name > classB.name) ? 1 : -1)
+    // wowClasses: WOW_CLASSES
   }),
   computed: {
     ...mapGetters('account', ['hasDraftGuild']),
@@ -164,9 +166,9 @@ export default {
       get () {
         return this.guild.recruitment.map(({ open }) => open)
       },
-      set (value) {
-        const recruitment = this.classesOptions.map((className, index) => ({ class: className, open: value[index] }))
-        this.$store.dispatch('account/updateGuild', { recruitment })
+      set (checkedValues) {
+        const recruitmentState = this.recruitmentState(checkedValues)
+        this.$store.dispatch('account/updateGuild', { recruitment: recruitmentState })
       }
     },
     websiteUrl: {
@@ -196,6 +198,14 @@ export default {
   methods: {
     publish () {
       this.$store.dispatch('account/updateGuild', { published: true })
+    },
+    recruitmentState (checkedValues) {
+      return this.wowClasses.map(({ value }, index) => {
+        return {
+          class: value,
+          open: checkedValues[index]
+        }
+      })
     }
   }
 }

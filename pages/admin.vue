@@ -43,8 +43,9 @@
 <script>
 import { mapState } from 'vuex'
 
+import WOW_CLASSES from '~/data/classes.json'
+
 const DAYS_OF_THE_WEEK = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche']
-const WOW_CLASSES = ['Druid', 'Hunter', 'Mage', 'Paladin', 'Priest', 'Rogue', 'Warlock', 'Warrior']
 
 export default {
   middleware: ['auth', 'admin'],
@@ -93,7 +94,7 @@ export default {
             startHour: '',
             endHour: '',
             raidDays: DAYS_OF_THE_WEEK.map(day => ({ day, playing: false })),
-            recruitment: WOW_CLASSES.map(className => ({ class: className, open: false })),
+            recruitment: WOW_CLASSES.map(classObj => ({ class: classObj.value, open: false })),
             websiteUrl: '',
             contactUrl: ''
           })
