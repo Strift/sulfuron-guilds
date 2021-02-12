@@ -17,7 +17,7 @@ service cloud.firestore {
     match /guilds/{guild} {
       allow create: if isAdmin();
       allow read;
-      allow update: if isGuildOwner();
+      allow update: if isGuildOwner() || isAdmin();
     }
 
     match /users/{userId} {
