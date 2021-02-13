@@ -107,10 +107,14 @@ export default {
         }
       },
       firestore: {
-        emulatorPort: process.env.FIREBASE_EMULATOR_FIRESTORE === true ? 8080 : undefined
+        emulatorPort: (process.env.NODE_ENV === 'development' && process.env.FIREBASE_EMULATOR_FIRESTORE !== 'false')
+          ? 8080
+          : undefined
       },
       functions: {
-        emulatorPort: process.env.FIREBASE_EMULATOR_FUNCTIONS === true ? 5001 : undefined
+        emulatorPort: (process.env.NODE_ENV === 'development' && process.env.FIREBASE_EMULATOR_FUNCTIONS !== 'false')
+          ? 5001
+          : undefined
       }
     }
   }

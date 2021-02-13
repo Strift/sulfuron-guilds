@@ -131,6 +131,7 @@ export default {
     },
     type: {
       get () {
+        console.log(this.guild.type)
         return this.guild.type
       },
       set (value) {

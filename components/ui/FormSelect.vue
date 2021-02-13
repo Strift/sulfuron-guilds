@@ -15,6 +15,7 @@
           v-for="option in options"
           :key="option.value"
           :value="option.value"
+          :selected="option.value === value"
           class="bg-gray-300 text-gray-800"
         >
           {{ option.label }}
