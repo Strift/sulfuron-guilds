@@ -108,7 +108,8 @@ export default {
   layout: 'account',
   data: () => ({
     typeOptions: [
-      { value: 'Classique', label: 'Classique (JcE)' },
+      { value: 'Classique', label: 'Classique (PvE)' },
+      { value: 'PvP', label: 'PvP' },
       { value: 'Speedrun', label: 'Speedrun' }
     ],
     daysOptions: DAYS_OF_THE_WEEK,
