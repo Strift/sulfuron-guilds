@@ -44,11 +44,16 @@ import Fuse from 'fuse.js'
 
 import WOW_CLASSES from '~/data/classes.json'
 
+const FUSE_OPTIONS = {
+  threshold: 0.2,
+  keys: ['name', 'type']
+}
+
 export default {
   name: 'Index',
   data: () => ({
     wowClasses: WOW_CLASSES,
-    fuse: null,
+    fuse: new Fuse([], FUSE_OPTIONS),
     textQuery: '',
     classQuery: []
   }),
@@ -71,12 +76,14 @@ export default {
       })
     }
   },
+  watch: {
+    guilds (updatedGuilds) {
+      this.fuse.setCollection(updatedGuilds)
+    }
+  },
   async mounted () {
     // Performing data fetching in mounted hook because of NuxtFirebase issues with SSR
     await this.$store.dispatch('guilds/enableSync')
-    this.fuse = new Fuse(this.guilds, {
-      keys: ['name', 'type', 'raidDays.day', 'recruitment.class']
-    })
   },
   async beforeDestroy () {
     await this.$store.dispatch('guilds/disableSync')
