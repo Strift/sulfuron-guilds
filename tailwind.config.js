@@ -21,6 +21,9 @@ module.exports = {
       },
       transitionProperty: {
         background: 'background'
+      },
+      opacity: {
+        90: '0.9' // Apparently this overrides background opacity too
       }
     }
   },
@@ -39,9 +42,6 @@ module.exports = {
       'pages/**/*.vue',
       'plugins/**/*.js',
       'nuxt.config.js'
-    ],
-    options: {
-      whitelist: ['bg-red-900', 'border-red-500', 'text-red-500', 'hover:text-red-400']
-    }
+    ]
   }
 }
