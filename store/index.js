@@ -8,6 +8,10 @@ export const state = () => ({
 export const mutations = {
   ...vuexfireMutations,
 
+  setFaction (state, faction) {
+    state.faction = faction
+  },
+
   toggleFaction (state) {
     if (state.faction === 'Alliance') {
       state.faction = 'Horde'

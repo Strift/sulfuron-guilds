@@ -28,6 +28,13 @@
           label="Lien du logo"
         />
         <FormSelect
+          v-model="faction"
+          name="faction"
+          label="Faction"
+          placeholder="Sélectionnez votre faction"
+          :options="factionOptions"
+        />
+        <FormSelect
           v-model="type"
           name="type"
           label="Type de structure"
@@ -107,6 +114,10 @@ export default {
   name: 'Guild',
   layout: 'account',
   data: () => ({
+    factionOptions: [
+      { value: 'Alliance', label: 'Alliance' },
+      { value: 'Horde', label: 'Horde' }
+    ],
     typeOptions: [
       { value: 'Classique', label: 'Classique (PvE)' },
       { value: 'PvP', label: 'PvP' },
@@ -114,7 +125,6 @@ export default {
     ],
     daysOptions: DAYS_OF_THE_WEEK,
     wowClasses: WOW_CLASSES.sort((classA, classB) => (classA.name > classB.name) ? 1 : -1)
-    // wowClasses: WOW_CLASSES
   }),
   computed: {
     ...mapGetters('account', ['hasDraftGuild']),
@@ -130,9 +140,16 @@ export default {
         this.$store.dispatch('account/updateGuild', { logoUrl: value })
       }
     },
+    faction: {
+      get () {
+        return this.guild.faction
+      },
+      set (value) {
+        this.$store.dispatch('account/updateGuild', { faction: value })
+      }
+    },
     type: {
       get () {
-        console.log(this.guild.type)
         return this.guild.type
       },
       set (value) {

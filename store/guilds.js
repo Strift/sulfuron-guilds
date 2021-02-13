@@ -10,6 +10,7 @@ export const actions = {
   enableSync: firestoreAction(function ({ bindFirestoreRef }) {
     const ref = this.$fire.firestore
       .collection('guilds')
+      .where('published', '==', true)
 
     return bindFirestoreRef('list', ref, { wait: true })
   }),
@@ -23,7 +24,7 @@ export const actions = {
 }
 
 export const getters = {
-  publishedGuilds (state) {
-    return state.list.filter(({ published }) => published)
+  currentFactionGuilds (state, getters, rootState) {
+    return state.list.filter(guild => guild.faction === rootState.faction)
   }
 }

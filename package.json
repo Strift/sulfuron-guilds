@@ -28,6 +28,7 @@
     "fuse.js": "^6.4.3",
     "lodash": "^4.17.20",
     "nuxt": "^2.14.0",
+    "vue-cookies": "^1.7.4",
     "vuexfire": "^3.2.5"
   },
   "devDependencies": {

@@ -59,7 +59,7 @@ export default {
   }),
   computed: {
     ...mapGetters('guilds', {
-      guilds: 'publishedGuilds'
+      guilds: 'currentFactionGuilds'
     }),
     fuzzySearchResults () {
       if (this.fuse == null || this.textQuery.length === 0) {
@@ -93,7 +93,7 @@ export default {
       return count > 1 ? 'guildes' : 'guilde'
     },
     timeRange ({ startHour, endHour }) {
-      return startHour + '–' + endHour
+      return startHour + ' – ' + endHour
     },
     raidDays ({ raidDays }) {
       return raidDays
