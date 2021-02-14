@@ -1,11 +1,11 @@
 <template>
   <div>
-    <div class="flex flex-col md:flex-row items-start md:items-center md:justify-between space-y-5 md:space-y-0 text-gray-200 border-b border-gray-500 border-opacity-25 pb-6 mb-6">
+    <div class="flex flex-col md:flex-row items-start md:items-center md:justify-between space-y-5 md:space-y-0 text-gray-200 border-b border-gray-700 pb-6 mb-6">
       <FactionButton />
       <input
         v-model="textQuery"
         type="text"
-        class="px-4 py-2 max-w-xs rounded-full text-gray-300 bg-gray-700 focus:bg-gray-600 bg-opacity-50 focus:bg-opacity-50 border border-gray-500 border-opacity-25 outline-none"
+        class="px-3 max-w-xs rounded-full focus:border-blue-300 focus:border-opacity-75 focus:text-gray-400 focus:shadow bg-blue-900 bg-opacity-25 border border-gray-700 text-gray-500 placeholder-gray-700 h-10 outline-none shadow-sm block w-full"
         placeholder="🔍 Nyk Trib..."
       >
     </div>
