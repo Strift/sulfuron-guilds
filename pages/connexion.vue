@@ -61,6 +61,11 @@ export default {
       await this.$store.dispatch('account/login', this.authToken)
       this.$router.push('/')
     }
+  },
+  head () {
+    return {
+      title: 'Connexion'
+    }
   }
 }
 </script>
