@@ -10,16 +10,7 @@
           :alt="`Logo ${name}`"
           class="w-full"
         >
-        <svg
-          v-else
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          class="text-gray-800"
-        >
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
+        <EmptyGuildLogo v-else class="text-gray-800" />
       </div>
       <div class="text-gray-500 font-semibold text-lg leading-6">
         {{ name }}
@@ -63,16 +54,7 @@
 </template>
 
 <script>
-import ClassIcon from '~/components/icons/ClassIcon.vue'
-import ClockIcon from '~/components/icons/ClockIcon.vue'
-import CalendarIcon from '~/components/icons/CalendarIcon.vue'
-
 export default {
-  components: {
-    ClassIcon,
-    ClockIcon,
-    CalendarIcon
-  },
   props: {
     name: { type: String, required: true },
     type: { type: String, required: true },
@@ -87,7 +69,7 @@ export default {
   },
   computed: {
     hasLogo () {
-      return this.logoUrl !== null
+      return this.logoUrl !== '' && this.logoUrl != null
     },
     readableDays () {
       return this.raidDays.map(day => day.slice(0, 3)).join(', ')
@@ -105,7 +87,3 @@ export default {
   }
 }
 </script>
-
-<style>
-
-</style>

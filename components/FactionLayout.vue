@@ -18,14 +18,30 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
+
+const DEFAULT_FACTION_COOKIE = 'default_faction'
 
 export default {
   computed: {
+    ...mapState(['faction']),
     ...mapGetters([
       'isAlliance',
       'isHorde'
     ])
+  },
+  watch: {
+    faction (newFaction) {
+      this.$cookies.set(DEFAULT_FACTION_COOKIE, newFaction)
+    }
+  },
+  mounted () {
+    const faction = this.$cookies.get(DEFAULT_FACTION_COOKIE)
+    if (faction === null) {
+      this.$cookies.set(DEFAULT_FACTION_COOKIE, this.faction)
+    } else {
+      this.$store.commit('setFaction', faction)
+    }
   }
 }
 </script>

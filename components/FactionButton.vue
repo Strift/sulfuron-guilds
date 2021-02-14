@@ -16,31 +16,11 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapMutations } from 'vuex'
-import SwitchIcon from '~/components/icons/SwitchIcon.vue'
-
-const DEFAULT_FACTION_COOKIE = 'default_faction'
+import { mapGetters, mapMutations } from 'vuex'
 
 export default {
-  components: {
-    SwitchIcon
-  },
   computed: {
-    ...mapState(['faction']),
     ...mapGetters(['isAlliance'])
-  },
-  watch: {
-    faction (newFaction) {
-      this.$cookies.set(DEFAULT_FACTION_COOKIE, newFaction)
-    }
-  },
-  mounted () {
-    const faction = this.$cookies.get(DEFAULT_FACTION_COOKIE)
-    if (faction === null) {
-      this.$cookies.set(DEFAULT_FACTION_COOKIE, this.faction)
-    } else {
-      this.$store.commit('setFaction', faction)
-    }
   },
   methods: {
     ...mapMutations(['toggleFaction'])

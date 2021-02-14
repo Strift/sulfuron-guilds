@@ -11,100 +11,42 @@
         Publier
       </PrimaryButton>
     </div>
-    <PageSectionTitle>
-      Général
-    </PageSectionTitle>
+    <PageSectionTitle>Général</PageSectionTitle>
     <div class="flex justify-between">
       <div class="space-y-10 max-w-sm w-full">
-        <FormInput
-          name="name"
-          label="Nom de guilde"
-          disabled
-          :value="name"
-        />
-        <FormInput
-          v-model.trim="logoUrl"
-          name="logo-url"
-          label="Lien du logo"
-        />
-        <FormSelect
-          v-model="faction"
-          name="faction"
-          label="Faction"
-          placeholder="Sélectionnez votre faction"
-          :options="factionOptions"
-        />
-        <FormSelect
-          v-model="type"
-          name="type"
-          label="Type de structure"
-          :options="typeOptions"
-        />
+        <FormInput :value="name" name="name" label="Nom de guilde" disabled />
+        <FormInput v-model.trim="logoUrl" name="logo-url" label="Lien du logo" placeholder="https://exemple.com/logo.png" />
+        <FormSelect v-model="faction" :options="factionOptions" name="faction" label="Faction" placeholder="Sélectionnez votre faction" />
+        <FormSelect v-model="type" :options="typeOptions" name="type" label="Type de structure" placeholder="Sélectionnez le type de guilde" />
       </div>
       <div>
         <div class="font-semibold text-blue-400 block mb-4 leading-none text-shadow-sm">
           Logo
         </div>
         <div class="h-32 w-32 p-4 bg-gray-900 rounded-lg items-center justify-center flex shadow">
-          <img :src="logoUrl" :alt="`Logo de votre guilde`">
+          <img v-if="logoUrl" :src="logoUrl" alt="Votre logo" class="text-gray-700">
+          <EmptyGuildLogo v-else class="text-gray-800" />
         </div>
       </div>
     </div>
-    <PageSectionTitle>
-      Horaires
-    </PageSectionTitle>
+    <PageSectionTitle>Horaires</PageSectionTitle>
     <div class="flex justify-between">
-      <FormInput
-        v-model="startHour"
-        name="start-hour"
-        type="time"
-        label="Heure de début"
-        class="max-w-sm w-full"
-      />
-      <FormInput
-        v-model="endHour"
-        name="end-hour"
-        type="time"
-        label="Heure de fin"
-        class="max-w-sm w-full"
-      />
+      <FormInput v-model="startHour" name="start-hour" type="time" label="Heure de début" class="max-w-sm w-full" />
+      <FormInput v-model="endHour" name="end-hour" type="time" label="Heure de fin" class="max-w-sm w-full" />
     </div>
-    <FormCheckList
-      v-model="raidDays"
-      :options="daysOptions"
-      name="days"
-      label="Jours de raid"
-    />
-    <PageSectionTitle>
-      Recrutement
-    </PageSectionTitle>
-    <FormCheckList
-      v-model="recruitment"
-      :options="wowClasses.map(option => option.name)"
-      name="classes"
-      label="Classes recherchées"
-    />
-    <PageSectionTitle>
-      Contact
-    </PageSectionTitle>
-    <FormInput
-      v-model="websiteUrl"
-      name="website-url"
-      label="Lien du site"
-      class="max-w-sm w-full"
-    />
-    <FormInput
-      v-model="contactUrl"
-      name="contact-url"
-      label="Lien de contact"
-      class="max-w-sm w-full"
-    />
+    <FormCheckList v-model="raidDays" :options="daysOptions" name="days" label="Jours de raid" />
+    <PageSectionTitle>Recrutement</PageSectionTitle>
+    <FormCheckList v-model="recruitment" :options="wowClasses.map(option => option.name)" name="classes" label="Classes recherchées" />
+    <PageSectionTitle>Contact</PageSectionTitle>
+    <FormInput v-model="websiteUrl" name="website-url" label="Lien du site" placeholder="https://exemple.com/" class="max-w-sm w-full" />
+    <FormInput v-model="contactUrl" name="contact-url" label="Lien de contact" placeholder="https://discord.gg/XXXXXXX" class="max-w-sm w-full" />
   </div>
 </template>
 
 <script>
 import { debounce } from 'lodash'
 import { mapState, mapGetters } from 'vuex'
+import isUrl from 'is-url'
 
 import WOW_CLASSES from '~/data/classes.json'
 
@@ -225,6 +167,9 @@ export default {
           open: checkedValues[index]
         }
       })
+    },
+    isUrl (value) {
+      return isUrl(value)
     }
   }
 }
