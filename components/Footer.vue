@@ -10,7 +10,7 @@
             Sulfuron
           </div>
           <ul class="space-y-5 text-gray-500">
-            <li><a href="http://sulfuron.eu" class="hover:text-blue-300">Actualités</a></li>
+            <li><a href="http://sulfuron.eu" target="_blank" class="hover:text-blue-300">Actualités</a></li>
           </ul>
         </div>
         <div>
@@ -18,9 +18,9 @@
             Contact
           </div>
           <ul class="space-y-5 text-gray-500">
-            <li><a href="https://discord.gg/M5Dxe4dMsK" class="hover:text-blue-300">Discord</a></li>
-            <li><a href="https://twitter.com/EuSulfuron" class="hover:text-blue-300">Twitter</a></li>
-            <li><a href="mailto:contact@sulfuron.eu" class="hover:text-blue-300">Contact</a></li>
+            <li><a href="https://discord.gg/M5Dxe4dMsK" target="_blank" class="hover:text-blue-300">Discord</a></li>
+            <li><a href="https://twitter.com/EuSulfuron" target="_blank" class="hover:text-blue-300">Twitter</a></li>
+            <li><a href="mailto:contact@sulfuron.eu" target="_blank" class="hover:text-blue-300">E-mail</a></li>
           </ul>
         </div>
       </div>

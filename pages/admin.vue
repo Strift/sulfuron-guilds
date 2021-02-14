@@ -103,6 +103,16 @@ export default {
       } catch (err) {
         this.error = err
       }
+    },
+    head () {
+      return {
+        title: 'Administration'
+      }
+    }
+  },
+  head () {
+    return {
+      title: 'Administration'
     }
   }
 }

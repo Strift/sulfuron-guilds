@@ -43,6 +43,11 @@ export default {
       await this.$store.dispatch('account/logout')
       this.$router.push('/connexion/')
     }
+  },
+  head () {
+    return {
+      title: 'Paramètres'
+    }
   }
 }
 </script>

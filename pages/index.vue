@@ -105,6 +105,11 @@ export default {
         .filter(({ open }) => open)
         .map(recruitmentState => recruitmentState.class)
     }
+  },
+  head () {
+    return {
+      title: 'Portail des guildes'
+    }
   }
 }
 </script>

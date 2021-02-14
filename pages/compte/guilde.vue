@@ -188,6 +188,11 @@ export default {
       }
       return 'Ce lien n\'est pas valide.'
     }
+  },
+  head () {
+    return {
+      title: this.name
+    }
   }
 }
 </script>
