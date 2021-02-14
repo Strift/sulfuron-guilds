@@ -36,13 +36,18 @@
       {{ filteredSearchResults.length }} {{ resultText(filteredSearchResults.length) }} trouvées.
     </div>
 
-    <div v-if="isGuest" class="space-y-10 mt-20">
+    <div v-show="isGuest" class="space-y-10 mt-20">
       <p class="text-center text-gray-300 text-lg">
-        Votre guilde n'y est pas ? Connectez-vous pour lui créer un profil !
+        Votre guilde n'y est pas ? Créez un compte pour pouvoir gérer votre guilde.
       </p>
       <nuxt-link to="/connexion/" class="bg-blue-900 bg-opacity-25 hover:bg-opacity-75 border border-blue-300 text-blue-300 hover:text-blue-200 text-shadow-sm text-lg px-4 py-2 rounded-full shadow block max-w-xs mx-auto text-center">
         Connexion
       </nuxt-link>
+    </div>
+    <div v-show="isAuthenticated" class="space-y-10 mt-20">
+      <p class="text-center text-gray-300 text-lg">
+        Votre guilde n'y est pas ? Contactez un modérateur du Discord pour créer celle-ci.
+      </p>
     </div>
   </div>
 </template>
@@ -71,7 +76,8 @@ export default {
       guilds: 'currentFactionGuilds'
     }),
     ...mapGetters('account', [
-      'isGuest'
+      'isGuest',
+      'isAuthenticated'
     ]),
     fuzzySearchResults () {
       if (this.fuse == null || this.textQuery.length === 0) {

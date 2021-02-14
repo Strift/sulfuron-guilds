@@ -43,8 +43,8 @@
         >
           <span class="space-x-2 flex items-center justify-center bg-blue-900 bg-opacity-25 hover:bg-opacity-75 border border-blue-300 px-4 py-2 rounded-full shadow">
             <UserIcon />
-            <span v-if="isGuest">Connexion</span>
-            <span v-else>
+            <span v-show="isGuest">Connexion</span>
+            <span v-show="isAuthenticated">
               <span class="hidden md:inline">Mon compte</span>
               <span class="md:hidden">Compte</span>
             </span>
@@ -64,6 +64,7 @@ export default {
   computed: {
     ...mapGetters('account', [
       'isGuest',
+      'isAuthenticated',
       'isAdmin',
       'isAGuildOwner',
       'hasDraftGuild'
