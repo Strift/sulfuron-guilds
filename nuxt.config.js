@@ -118,6 +118,9 @@ export default {
         emulatorPort: (process.env.NODE_ENV === 'development' && process.env.FIREBASE_EMULATOR_FUNCTIONS !== 'false')
           ? 5001
           : undefined
+      },
+      analytics: {
+        collectionEnabled: process.env.NODE_ENV === 'production'
       }
     }
   }
