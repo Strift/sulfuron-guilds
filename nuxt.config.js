@@ -52,7 +52,11 @@ export default {
     // Doc: https://github.com/nuxt-community/eslint-module
     '@nuxtjs/eslint-module',
     // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
-    '@nuxtjs/tailwindcss'
+    '@nuxtjs/tailwindcss',
+    // Doc: https://google-analytics.nuxtjs.org/
+    ['@nuxtjs/google-analytics', {
+      id: 'UA-262295149'
+    }]
   ],
   /*
   ** Nuxt.js modules
@@ -68,6 +72,8 @@ export default {
   ** See https://nuxtjs.org/api/configuration-build/
   */
   build: {
+    // Enabled to fix the following issue
+    // https://github.com/nuxt/nuxt.js/issues/5800#issuecomment-549404405
     html: {
       minify: {
         collapseWhitespace: true
@@ -125,7 +131,7 @@ export default {
           : undefined
       },
       analytics: {
-        collectionEnabled: process.env.NODE_ENV === 'production'
+        collectionEnabled: false // process.env.NODE_ENV === 'production'
       }
     }
   }
