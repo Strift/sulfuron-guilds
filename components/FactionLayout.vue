@@ -9,7 +9,7 @@
           <Navbar class="mb-6 md:mb-16" />
           <slot name="default" />
         </div>
-        <div class="mt-12 h-24 flex-none" style="background-image: linear-gradient(180deg, rgba(26,32,44,0), rgb(26,32,44))" />
+        <div class="mt-6 lg:mt-12 h-12 lg:h-24 flex-none" style="background-image: linear-gradient(180deg, rgba(26,32,44,0), rgb(26,32,44))" />
         <Footer />
       </div>
     </div>

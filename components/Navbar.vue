@@ -5,10 +5,10 @@
       title="Accueil"
       class="md:ml-0 md:mr-auto"
     >
-      <img src="~/assets/images/logo.png" alt="sulfuron.eu" class="mx-auto h-10">
+      <img src="~/assets/images/logo.png" alt="sulfuron.eu" class="mx-auto h-8 md:h-10">
     </nuxt-link>
-    <nav class="">
-      <ul class="flex items-center space-x-12 list-none">
+    <nav>
+      <ul class="flex items-center space-x-5 md:space-x-12 list-none">
         <NavbarLink
           v-show="showAccountButton && hasDraftGuild"
           to="/compte/guilde/"
@@ -20,6 +20,7 @@
           v-show="showBackButton"
           to="/"
           title="Accueil"
+          class="hidden md:inline-flex"
         >
           <span class="space-x-2 flex items-center">
             <ArrowLeftIcon />
@@ -33,7 +34,7 @@
           to="/admin/"
           title="Administration"
         >
-          Administration
+          Admin
         </NavbarLink>
         <NavbarLink
           v-show="showAccountButton"
@@ -43,7 +44,10 @@
           <span class="space-x-2 flex items-center justify-center bg-blue-900 bg-opacity-25 hover:bg-opacity-75 border border-blue-300 px-4 py-2 rounded-full shadow">
             <UserIcon />
             <span v-if="isGuest">Connexion</span>
-            <span v-else>Mon compte</span>
+            <span v-else>
+              <span class="hidden md:inline">Mon compte</span>
+              <span class="md:hidden">Compte</span>
+            </span>
           </span>
         </NavbarLink>
       </ul>
