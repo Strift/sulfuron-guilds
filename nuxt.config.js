@@ -68,6 +68,11 @@ export default {
   ** See https://nuxtjs.org/api/configuration-build/
   */
   build: {
+    html: {
+      minify: {
+        collapseWhitespace: true
+      }
+    }
   },
   /*
   ** Generate configuration
