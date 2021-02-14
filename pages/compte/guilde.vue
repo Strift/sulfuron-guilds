@@ -12,14 +12,14 @@
       </PrimaryButton>
     </div>
     <PageSectionTitle>Général</PageSectionTitle>
-    <div class="flex justify-between">
+    <div class="flex flex-col-reverse lg:flex-row justify-between">
       <div class="space-y-10 max-w-sm w-full">
         <FormInput :value="name" name="name" label="Nom de guilde" disabled />
         <FormInput v-model.trim="logoUrl" :error-message="errorMessage(logoUrl)" name="logo-url" label="Lien du logo" placeholder="https://exemple.com/logo.png" />
         <FormSelect v-model="faction" :options="factionOptions" name="faction" label="Faction" placeholder="Sélectionnez votre faction" />
         <FormSelect v-model="type" :options="typeOptions" name="type" label="Type de structure" placeholder="Sélectionnez le type de guilde" />
       </div>
-      <div>
+      <div class="mb-10">
         <div class="font-semibold text-blue-400 block mb-4 leading-none text-shadow-sm">
           Logo
         </div>
@@ -30,7 +30,7 @@
       </div>
     </div>
     <PageSectionTitle>Horaires</PageSectionTitle>
-    <div class="flex justify-between">
+    <div class="space-y-10 lg:space-y-0 lg:flex lg:space-x-12 xl:justify-between">
       <FormInput v-model="startHour" name="start-hour" type="time" label="Heure de début" class="max-w-sm w-full" />
       <FormInput v-model="endHour" name="end-hour" type="time" label="Heure de fin" class="max-w-sm w-full" />
     </div>

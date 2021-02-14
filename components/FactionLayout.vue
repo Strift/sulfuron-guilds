@@ -5,7 +5,7 @@
       class="bg-faction relative flex-1 flex flex-col"
     >
       <div class="bg-gray-900 bg-opacity-90 relative flex-1 max-h-screen overflow-y-scroll flex flex-col">
-        <div class="container mx-auto font-sans px-3 md:px-0 flex-1">
+        <div class="container mx-auto font-sans px-5 xl:px-0 flex-1">
           <Navbar class="mb-6 md:mb-16" />
           <slot name="default" />
         </div>

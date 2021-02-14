@@ -3,23 +3,11 @@
     <PageTitle>
       Mon compte
     </PageTitle>
-    <div class="flex space-x-24">
-      <aside class="w-1/4">
-        <nav class="rounded-md overflow-hidden shadow-md">
-          <ul>
-            <AccountNavItem v-if="isAGuildOwner" to="/compte/guilde/">
-              Guilde
-            </AccountNavItem>
-            <AccountNavItem to="/compte/parametres/">
-              Paramètres
-            </AccountNavItem>
-            <AccountNavItem class="items-baseline">
-              Pick Up <span class="text-xs uppercase tracking-wider border border-gray-700 h-6 w-16 rounded inline-flex items-center justify-center ml-auto">Soon&trade;</span>
-            </AccountNavItem>
-          </ul>
-        </nav>
+    <div class="md:flex md:space-x-16 lg:space-x-24 space-y-16 md:space-y-0">
+      <aside class="md:w-1/4">
+        <AccountNav />
       </aside>
-      <div class="w-3/4">
+      <div class="md:w-3/4">
         <Nuxt />
       </div>
     </div>
@@ -27,14 +15,9 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-
+import AccountNav from '~/components/AccountNav.vue'
 export default {
-  middleware: ['auth', 'guild'],
-  computed: {
-    ...mapGetters('account', [
-      'isAGuildOwner'
-    ])
-  }
+  components: { AccountNav },
+  middleware: ['auth', 'guild']
 }
 </script>

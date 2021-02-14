@@ -3,7 +3,7 @@
     <div :for="name" class="font-semibold text-blue-400 block leading-none text-shadow-sm mb-4">
       {{ label }}
     </div>
-    <div class="grid grid-flow-cols grid-cols-5 gap-x-6 gap-y-4">
+    <div class="grid grid-flow-cols grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-6 gap-y-4">
       <label
         v-for="(option, optionIndex) in options"
         :key="inputId(option)"
