@@ -5,7 +5,7 @@
       <input
         v-model="textQuery"
         type="text"
-        class="px-3 max-w-xs rounded-full focus:border-blue-300 focus:border-opacity-75 focus:text-gray-400 focus:shadow bg-blue-900 bg-opacity-25 border border-gray-700 text-gray-500 placeholder-gray-700 h-10 outline-none shadow-sm block w-full"
+        class="px-5 max-w-xs rounded-full focus:border-blue-300 focus:border-opacity-75 focus:text-gray-400 focus:shadow bg-blue-900 bg-opacity-25 border border-gray-700 text-gray-500 placeholder-gray-700 h-10 outline-none shadow-sm block w-full"
         placeholder="🔍 Nyk Trib..."
       >
     </div>
@@ -16,10 +16,10 @@
       </label>
     </div>
 
-    <div class="grid grid-flow-row grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 mb-12">
+    <transition-group :duration="500" name="fade" tag="div" class="grid grid-flow-row grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 mb-12">
       <GuildCard
-        v-for="(guild, index) in filteredSearchResults"
-        :key="index"
+        v-for="guild in filteredSearchResults"
+        :key="guild.name"
         :name="guild.name"
         :type="guild.type"
         :raid-days="raidDays(guild)"
@@ -30,7 +30,7 @@
         :contact-url="guild.contactUrl"
         class="shadow-md"
       />
-    </div>
+    </transition-group>
 
     <div class="text-center mt-12 text-gray-500">
       {{ filteredSearchResults.length }} {{ resultText(filteredSearchResults.length) }} trouvées.

@@ -1,3 +1,5 @@
+@import 'vue2-animate/dist/vue2-animate.min.css';
+
 .slide-enter {
   transform: translateY(-1rem);
   opacity: 0;
