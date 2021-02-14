@@ -9,7 +9,7 @@ export default {
   ** Runtime config
   */
   publicRuntimeConfig: {
-    baseURL: process.env.BASE_URL || 'https://sulfuron-guilds.web.app'
+    baseURL: process.env.BASE_URL || 'https://guildes.sulfuron.eu'
   },
   /*
   ** Headers of the page
