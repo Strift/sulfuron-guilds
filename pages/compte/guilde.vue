@@ -15,7 +15,7 @@
     <div class="flex justify-between">
       <div class="space-y-10 max-w-sm w-full">
         <FormInput :value="name" name="name" label="Nom de guilde" disabled />
-        <FormInput v-model.trim="logoUrl" name="logo-url" label="Lien du logo" placeholder="https://exemple.com/logo.png" />
+        <FormInput v-model.trim="logoUrl" :error-message="errorMessage(logoUrl)" name="logo-url" label="Lien du logo" placeholder="https://exemple.com/logo.png" />
         <FormSelect v-model="faction" :options="factionOptions" name="faction" label="Faction" placeholder="Sélectionnez votre faction" />
         <FormSelect v-model="type" :options="typeOptions" name="type" label="Type de structure" placeholder="Sélectionnez le type de guilde" />
       </div>
@@ -38,8 +38,22 @@
     <PageSectionTitle>Recrutement</PageSectionTitle>
     <FormCheckList v-model="recruitment" :options="wowClasses.map(option => option.name)" name="classes" label="Classes recherchées" />
     <PageSectionTitle>Contact</PageSectionTitle>
-    <FormInput v-model="websiteUrl" name="website-url" label="Lien du site" placeholder="https://exemple.com/" class="max-w-sm w-full" />
-    <FormInput v-model="contactUrl" name="contact-url" label="Lien de contact" placeholder="https://discord.gg/XXXXXXX" class="max-w-sm w-full" />
+    <FormInput
+      v-model="websiteUrl"
+      :error-message="errorMessage(websiteUrl)"
+      name="website-url"
+      label="Lien du site"
+      placeholder="https://exemple.com/"
+      class="max-w-sm w-full"
+    />
+    <FormInput
+      v-model="contactUrl"
+      :error-message="errorMessage(contactUrl)"
+      name="contact-url"
+      label="Lien de contact"
+      placeholder="https://discord.gg/XXXXXXX"
+      class="max-w-sm w-full"
+    />
   </div>
 </template>
 
@@ -168,8 +182,11 @@ export default {
         }
       })
     },
-    isUrl (value) {
-      return isUrl(value)
+    errorMessage (value) {
+      if (isUrl(value)) {
+        return null // no errors
+      }
+      return 'Ce lien n\'est pas valide.'
     }
   }
 }

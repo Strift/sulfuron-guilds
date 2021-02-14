@@ -16,6 +16,9 @@
       >
       <LockIcon v-if="disabled" class="inline absolute right-0 bottom-0 top-0 my-auto mr-3 text-gray-700 group-focus:text-gray-600" />
     </div>
+    <div v-if="errorMessage" class="mt-2 text-red-500 text-sm">
+      {{ errorMessage }}
+    </div>
   </div>
 </template>
 
@@ -43,6 +46,10 @@ export default {
       default: ''
     },
     placeholder: {
+      type: String,
+      default: null
+    },
+    errorMessage: {
       type: String,
       default: null
     }
