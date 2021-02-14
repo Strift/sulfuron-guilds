@@ -10,6 +10,11 @@
             Sulfuron
           </div>
           <ul class="space-y-5 text-gray-500">
+            <li>
+              <nuxt-link to="/" class="hover:text-blue-300">
+                Guildes
+              </nuxt-link>
+            </li>
             <li><a href="http://sulfuron.eu" target="_blank" class="hover:text-blue-300">Actualités</a></li>
           </ul>
         </div>

@@ -42,6 +42,7 @@ export default {
   components: {
     OrbitSpinner
   },
+  scrollToTop: true,
   computed: {
     ...mapGetters('account', [
       'isGuest'

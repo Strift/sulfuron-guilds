@@ -59,7 +59,9 @@ export default {
   */
   modules: [
     // Doc: https://firebase.nuxtjs.org/
-    '@nuxtjs/firebase'
+    '@nuxtjs/firebase',
+    // Doc: https://www.npmjs.com/package/vue-scrollto
+    'vue-scrollto/nuxt'
   ],
   /*
   ** Build configuration
