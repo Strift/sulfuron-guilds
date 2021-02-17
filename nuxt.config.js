@@ -9,7 +9,7 @@ export default {
   ** Runtime config
   */
   publicRuntimeConfig: {
-    baseURL: process.env.BASE_URL || 'https://guildes.sulfuron.eu'
+    baseURL: process.env.NODE_ENV === 'production' ? 'https://guildes.sulfuron.eu' : process.env.BASE_URL
   },
   /*
   ** Headers of the page
