@@ -1,5 +1,5 @@
 <template>
-  <BaseLayout>
+  <FullPage>
     <PageTitle>
       Mon compte
     </PageTitle>
@@ -11,7 +11,7 @@
         <Nuxt />
       </div>
     </div>
-  </BaseLayout>
+  </FullPage>
 </template>
 
 <script>

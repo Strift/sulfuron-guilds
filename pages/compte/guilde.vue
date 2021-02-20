@@ -5,7 +5,7 @@
       class="flex items-baseline justify-between"
     >
       <InformationCard>
-        Une fois les informations de votre guilde renseignées, n'oubliez pas de cliquer sur publier.
+        N'oubliez pas de cliquer sur publier une fois les informations de votre guilde renseignées.
       </InformationCard>
       <PrimaryButton @click="publish">
         Publier
@@ -15,7 +15,13 @@
     <div class="flex flex-col-reverse lg:flex-row justify-between">
       <div class="space-y-10 max-w-sm w-full">
         <FormInput :value="name" name="name" label="Nom de guilde" disabled />
-        <FormInput v-model.trim="logoUrl" :error-message="errorMessage(logoUrl)" name="logo-url" label="Lien du logo" placeholder="https://exemple.com/logo.png" />
+        <div>
+          <FormInput v-model.trim="logoUrl" :error-message="errorMessage(logoUrl)" name="logo-url" label="Lien du logo" placeholder="https://exemple.com/logo.png" />
+          <div slot="hint" class="mt-3 text-gray-500 flex space-x-2 items-baseline">
+            <div>ℹ️</div>
+            <div>Utilisez un hébergeur comme <a href="https://imgur.com/" target="_blank" class="hover:underline text-blue-300">imgur</a>.</div>
+          </div>
+        </div>
         <FormSelect v-model="faction" :options="factionOptions" name="faction" label="Faction" placeholder="Sélectionnez votre faction" />
         <FormSelect v-model="type" :options="typeOptions" name="type" label="Type de structure" placeholder="Sélectionnez le type de guilde" />
       </div>
