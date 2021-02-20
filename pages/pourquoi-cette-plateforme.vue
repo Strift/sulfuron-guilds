@@ -34,7 +34,7 @@
       </div>
       <div class="flex justify-center space-x-16">
         <nuxt-link
-          to="/connexion/"
+          :to="accountLinkUrl"
           class="bg-blue-900 bg-opacity-25 hover:bg-opacity-75 border border-blue-300 text-blue-300 hover:text-blue-200 text-shadow-sm px-4 py-2 rounded-full shadow-lg w-64 text-center uppercase font-semibold tracking-widest"
         >
           <span v-show="isGuest">Connexion</span>
@@ -60,8 +60,16 @@ export default {
   computed: {
     ...mapGetters('account', [
       'isGuest',
-      'isAuthenticated'
-    ])
+      'isAuthenticated',
+      'isAGuildOwner'
+    ]),
+    accountLinkUrl () {
+      if (this.isGuest) { return '/connexion/' }
+
+      if (this.isAGuildOwner) { return '/compte/guilde/' }
+
+      return '/compte/parametres/'
+    }
   },
   head () {
     return {
@@ -70,7 +78,3 @@ export default {
   }
 }
 </script>
-
-<style>
-
-</style>
