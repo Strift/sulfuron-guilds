@@ -49,7 +49,7 @@
       :error-message="errorMessage(websiteUrl)"
       name="website-url"
       label="Lien du site"
-      placeholder="https://exemple.com/"
+      placeholder="https://maguilde.fr/"
       class="max-w-sm w-full"
     />
     <FormInput
