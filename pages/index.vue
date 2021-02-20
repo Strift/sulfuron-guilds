@@ -1,5 +1,16 @@
 <template>
   <div>
+    <div class="mb-20">
+      <h1 class="text-4xl text-blue-100 font-semibold mb-3 text-shadow-lg leading-none mb-4">
+        Portail des guildes
+      </h1>
+      <p class="text-gray-400 text-lg text-shadow-md">
+        Votre nouvelle plateforme dédiée au recrutement sur Sulfuron.
+        <nuxt-link to="/pourquoi-cette-plateforme/" class="text-blue-300 hover:text-blue-400 font-semibold">
+          En savoir plus.
+        </nuxt-link>
+      </p>
+    </div>
     <div class="flex flex-col md:flex-row items-start md:items-center md:justify-between space-y-5 md:space-y-0 text-gray-200 border-b border-gray-700 pb-6 mb-6">
       <FactionButton />
       <input
