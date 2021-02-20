@@ -30,6 +30,7 @@ export default {
   ** Global CSS
   */
   css: [
+    '~/assets/css/base.css',
     '~/assets/css/animations.css',
     '~/assets/css/fonts.css'
   ],

@@ -1,11 +1,11 @@
 <template>
-  <BaseLayout>
+  <BaseLayout background="sunwell">
     <Nuxt />
   </BaseLayout>
 </template>
 
 <script>
 export default {
-  name: 'DefaultLayout'
+  name: 'PromoLayout'
 }
 </script>

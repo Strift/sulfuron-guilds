@@ -41,7 +41,7 @@
           :to="accountLinkUrl"
           title="Mon compte"
         >
-          <span class="space-x-2 flex items-center justify-center bg-blue-900 bg-opacity-25 hover:bg-opacity-75 border border-blue-300 px-4 py-2 rounded-full shadow">
+          <span class="space-x-2 flex items-center justify-center bg-blue-900 bg-opacity-25 hover:bg-opacity-75 border border-blue-300 px-4 py-2 rounded-full shadow-md">
             <UserIcon />
             <span v-show="isGuest">Connexion</span>
             <span v-show="isAuthenticated">

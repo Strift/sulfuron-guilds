@@ -1,5 +1,5 @@
 <template>
-  <FactionLayout>
+  <BaseLayout>
     <PageTitle>
       Mon compte
     </PageTitle>
@@ -11,7 +11,7 @@
         <Nuxt />
       </div>
     </div>
-  </FactionLayout>
+  </BaseLayout>
 </template>
 
 <script>
