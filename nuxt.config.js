@@ -20,7 +20,7 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'Retrouvez toutes les guildes du serveur WoW Classic Sulfuron' }
+      { hid: 'description', name: 'description', content: 'Votre nouvelle plateforme dédiée au recrutement des guildes sur le serveur WoW Classic Sulfuron' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
