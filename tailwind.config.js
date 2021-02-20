@@ -20,7 +20,7 @@ module.exports = {
         ]
       },
       transitionProperty: {
-        background: 'background'
+        background: 'background background-opacity'
       },
       opacity: {
         90: '0.9' // Apparently this overrides background opacity too

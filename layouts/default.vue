@@ -1,11 +1,16 @@
 <template>
-  <BaseLayout>
+  <FullPage :background="background">
     <Nuxt />
-  </BaseLayout>
+  </FullPage>
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
-  name: 'DefaultLayout'
+  name: 'DefaultLayout',
+  computed: {
+    ...mapState(['background'])
+  }
 }
 </script>

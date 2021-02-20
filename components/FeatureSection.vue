@@ -4,10 +4,10 @@
       <CheckCircleIcon class="text-blue-300" />
     </div>
     <div>
-      <div class="text-blue-300 text-2xl font-semibold h-12 items-center flex text-shadow-md">
+      <div class="text-blue-300 text-2xl font-semibold h-12 items-center flex text-shadow-md mb-1">
         <slot name="title" />
       </div>
-      <div class="text-gray-300 text-lg text-shadow-sm">
+      <div class="text-gray-300 text-lg text-shadow-sm leading-relaxed">
         <slot name="default" />
       </div>
     </div>

@@ -100,6 +100,7 @@ export default {
     }
   },
   async mounted () {
+    this.$store.commit('setFactionBackground')
     // Performing data fetching in mounted hook because of NuxtFirebase issues with SSR
     await this.$store.dispatch('guilds/enableSync')
   },

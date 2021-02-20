@@ -1,12 +1,24 @@
 import { vuexfireMutations } from 'vuexfire'
 
+const BACKGROUND_STATE_FACTION = 'faction'
+const BACKGROUND_STATE_PROMO = 'sunwell'
+
 export const state = () => ({
   faction: 'Horde',
+  background: BACKGROUND_STATE_FACTION,
   notifications: []
 })
 
 export const mutations = {
   ...vuexfireMutations,
+
+  setFactionBackground (state) {
+    state.background = BACKGROUND_STATE_FACTION
+  },
+
+  setPromoBackground (state) {
+    state.background = BACKGROUND_STATE_PROMO
+  },
 
   setFaction (state, faction) {
     state.faction = faction

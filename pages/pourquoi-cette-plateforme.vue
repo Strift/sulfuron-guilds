@@ -2,7 +2,7 @@
   <div class="flex space-x-20">
     <img src="~/assets/images/iphone-mockup.png" alt="Site sur mobile" style="height: 700px" class="my-auto">
     <div class="space-y-24">
-      <h1 class="text-blue-100 text-4xl text-center font-bold text-shadow-lg">
+      <h1 class="text-blue-100 text-4xl text-center font-bold text-shadow-lg leading-snug">
         Le recrutement des guildes<br> de Sulfuron <em class="italic">à jour</em>
       </h1>
       <div class="flex flex-col justify-center space-y-12">
@@ -56,7 +56,6 @@
 import { mapGetters } from 'vuex'
 
 export default {
-  layout: 'promo',
   computed: {
     ...mapGetters('account', [
       'isGuest',
@@ -70,6 +69,9 @@ export default {
 
       return '/compte/parametres/'
     }
+  },
+  mounted () {
+    this.$store.commit('setPromoBackground')
   },
   head () {
     return {
