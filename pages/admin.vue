@@ -27,10 +27,13 @@
           label="Nom de la guilde"
           name="guild-name"
         />
-        <FormInput
+        <FormSelect
           v-model="account"
+          :options="users"
           label="Compte Battle.net du GM"
+          :placeholder="accountPlaceholder"
           name="bnet-account"
+          @focus="fetchUsers"
         />
         <PrimaryButton @click="createGuild">
           Valider
@@ -65,9 +68,16 @@ import WOW_CLASSES from '~/data/classes.json'
 
 const DAYS_OF_THE_WEEK = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche']
 
+const USERS_STATE_EMPTY = 'empty'
+const USERS_STATE_LOADING = 'loading'
+const USERS_STATE_LOADED = 'loaded'
+const USERS_STATE_ERROR = 'error'
+
 export default {
   middleware: ['auth', 'admin'],
   data: () => ({
+    usersState: USERS_STATE_EMPTY,
+    users: [],
     guild: '',
     account: '',
     error: null
@@ -76,7 +86,16 @@ export default {
     ...mapGetters('guilds', [
       'draftGuilds',
       'publishedGuilds'
-    ])
+    ]),
+    accountPlaceholder () {
+      if (this.usersState === USERS_STATE_EMPTY) { return 'Cliquez pour charger...' }
+
+      if (this.usersState === USERS_STATE_LOADING) { return 'Chargement...' }
+
+      if (this.usersState === USERS_STATE_LOADED) { return 'Sélectionnez le compte' }
+
+      return 'Erreur'
+    }
   },
   async mounted () {
     // Performing data fetching in mounted hook because of NuxtFirebase issues with SSR
@@ -86,6 +105,17 @@ export default {
     await this.$store.dispatch('guilds/disableSync')
   },
   methods: {
+    async fetchUsers () {
+      this.usersState = USERS_STATE_LOADING
+      try {
+        const listUsers = this.$fire.functions.httpsCallable('listUsers')
+        const { data } = await listUsers()
+        this.users = data.users.map(userId => ({ label: userId, value: userId }))
+        this.usersState = USERS_STATE_LOADED
+      } catch (err) {
+        this.usersState = USERS_STATE_ERROR
+      }
+    },
     async createGuild () {
       try {
         await this.$fire.firestore
