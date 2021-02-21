@@ -6,7 +6,7 @@
       </h1>
       <p class="text-gray-400 text-lg text-shadow-md">
         Votre nouvelle plateforme dédiée au recrutement sur Sulfuron.
-        <nuxt-link to="/pourquoi-cette-plateforme/" class="text-blue-300 hover:text-blue-400 font-semibold">
+        <nuxt-link to="/en-savoir-plus/" class="text-blue-300 hover:text-blue-400 font-semibold">
           En savoir plus.
         </nuxt-link>
       </p>

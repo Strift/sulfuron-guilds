@@ -45,8 +45,8 @@
             <UserIcon />
             <span v-show="isGuest">Connexion</span>
             <span v-show="isAuthenticated">
-              <span class="hidden md:inline">Mon compte</span>
-              <span class="md:hidden">Compte</span>
+              <span class="hidden lg:inline">Mon compte</span>
+              <span class="lg:hidden">Compte</span>
             </span>
           </span>
         </NavbarLink>

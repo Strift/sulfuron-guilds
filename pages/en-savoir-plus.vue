@@ -1,6 +1,10 @@
 <template>
-  <div class="flex space-x-20">
-    <img src="~/assets/images/iphone-mockup.png" alt="Site sur mobile" style="height: 700px" class="my-auto">
+  <div class="lg:flex lg:space-x-8 xl:space-x-20">
+    <img
+      src="~/assets/images/iphone-mockup.png"
+      alt="Site sur mobile"
+      class="hidden lg:inline-flex my-auto lg:h-phone-lg xl:h-phone-xl"
+    >
     <div class="space-y-24">
       <h1 class="text-blue-100 text-4xl text-center font-bold text-shadow-lg leading-snug">
         Le recrutement des guildes<br> de Sulfuron <em class="italic">à jour</em>
@@ -32,10 +36,10 @@
           </p>
         </FeatureSection>
       </div>
-      <div class="flex justify-center space-x-16">
+      <div class="flex flex-col md:flex-row md:justify-center md:space-x-16 space-y-10 md:space-y-0">
         <nuxt-link
           :to="accountLinkUrl"
-          class="bg-blue-900 bg-opacity-25 hover:bg-opacity-75 border border-blue-300 text-blue-300 hover:text-blue-200 text-shadow-sm px-4 py-2 rounded-full shadow-lg w-64 text-center uppercase font-semibold tracking-widest"
+          class="bg-blue-900 bg-opacity-25 hover:bg-opacity-75 border border-blue-300 text-blue-300 hover:text-blue-200 text-shadow-sm px-4 py-2 rounded-full shadow-lg w-64 text-center uppercase font-semibold tracking-widest mx-auto md:mx-0"
         >
           <span v-show="isGuest">Connexion</span>
           <span v-show="isAuthenticated">Mon compte</span>
@@ -43,7 +47,7 @@
         <nuxt-link
           to="/"
           title="Accueil"
-          class="bg-gray-700 bg-opacity-25 hover:bg-opacity-75 border border-gray-400 text-gray-400 hover:text-gray-200 text-shadow-sm px-4 py-2 rounded-full shadow-lg w-64 text-center uppercase font-semibold tracking-widest"
+          class="bg-gray-700 bg-opacity-25 hover:bg-opacity-75 border border-gray-400 text-gray-400 hover:text-gray-200 text-shadow-sm px-4 py-2 rounded-full shadow-lg w-64 text-center uppercase font-semibold tracking-widest mx-auto md:mx-0"
         >
           Voir les guildes
         </nuxt-link>
@@ -80,3 +84,15 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+@variants responsive {
+  .h-phone-xl {
+    height: 700px;
+  }
+
+  .h-phone-lg {
+    height: 600px;
+  }
+}
+</style>

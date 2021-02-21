@@ -16,8 +16,8 @@
               </nuxt-link>
             </li>
             <li>
-              <nuxt-link to="/pourquoi-cette-plateforme/" class="hover:text-blue-300">
-                À propos de ce site
+              <nuxt-link to="/en-savoir-plus/" class="hover:text-blue-300">
+                En savoir plus
               </nuxt-link>
             </li>
             <li><a href="http://sulfuron.eu" target="_blank" class="hover:text-blue-300">Actualités</a></li>
