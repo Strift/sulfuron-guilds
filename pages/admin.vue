@@ -15,9 +15,6 @@
           ⚠ Attention
         </p>
         <p>
-          Il n'y a pas de vérification de l'existence des comptes Battle.net, faites attention aux minuscules et majuscules.
-        </p>
-        <p>
           Les GMs ne peuvent pas modifier le nom de leur guilde, faites bien attention à l'orthographe.
         </p>
       </InformationCard>
@@ -35,10 +32,13 @@
           name="bnet-account"
           @focus="fetchUsers"
         />
-        <PrimaryButton @click="createGuild">
-          Valider
-        </PrimaryButton>
       </div>
+      <InformationCard>
+        🛠️ La liste déroulante bug un peu, n'hésitez pas à re-cliquer lorsque nécessaire.
+      </InformationCard>
+      <PrimaryButton @click="createGuild">
+        Valider
+      </PrimaryButton>
       <PageSectionTitle>📝 Guildes non publiées</PageSectionTitle>
       <div v-if="draftGuilds.length" class="bg-gray-300 text-gray-800 p-6 rounded shadow">
         <ul class="list-disc list-inside">
