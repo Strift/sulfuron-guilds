@@ -35,11 +35,11 @@
     </div>
     <div class="px-6 bg-gray-900 text-gray-700 rounded-b-lg ">
       <div class="border-t py-2 border-gray-800 text-sm flex font-semibold space-x-2 justify-end">
-        <a v-if="websiteUrl && websiteUrl !== contactUrl" :href="websiteUrl" target="_blank" class="hover:text-blue-300">
+        <a v-if="websiteUrl && websiteUrl !== contactUrl" :href="websiteUrl" rel="noopener" target="_blank" class="hover:text-blue-300">
           {{ readableWebsiteUrl }}
         </a>
         <span v-if="contactUrl && websiteUrl && websiteUrl !== contactUrl">&bull;</span>
-        <a v-if="contactUrl" :href="contactUrl" target="_blank" class="hover:text-blue-300">
+        <a v-if="contactUrl" :href="contactUrl" target="_blank" rel="noopener" class="hover:text-blue-300">
           Contact
         </a>
       </div>
