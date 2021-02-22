@@ -64,8 +64,6 @@ export default {
   modules: [
     // Doc: https://firebase.nuxtjs.org/
     '@nuxtjs/firebase',
-    // Doc: https://www.npmjs.com/package/vue-scrollto
-    'vue-scrollto/nuxt',
     // Doc: https://github.com/nuxt-community/robots-module
     '@nuxtjs/robots'
   ],
