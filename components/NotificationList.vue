@@ -1,5 +1,5 @@
 <template>
-  <div class="flex">
+  <div class="flex px-5">
     <div
       v-if="autoSaved"
       class="flex bg-green-500 bg-opacity-75 text-green-100 rounded mx-auto space-x-4 py-2 px-5 mb-8 shadow-lg"
@@ -7,16 +7,7 @@
       <div>💾</div>
       <div>Modifications sauvegardées.</div>
     </div>
-    <div
-      v-if="showCookiesBanner"
-      class="flex bg-gray-300 text-gray-800 rounded mx-auto space-x-4 py-3 px-5 mb-8 shadow-lg items-baseline"
-    >
-      <div>🍪</div>
-      <div>En navigant sur ce site, vous acceptez l'utilisation des cookies que nous utilisons pour améliorer votre expérience.</div>
-      <button class="font-semibold text-gray-800 rounded-full border border-gray-800 w-12 leading-relaxed uppercase tracking-wider text-xs hover:bg-gray-800 hover:text-gray-300 shadow-md" @click="closeCookieBanner">
-        Ok
-      </button>
-    </div>
+    <CookieNotification v-if="showCookiesBanner" class="mb-8 mx-auto" @close="closeCookieBanner" />
   </div>
 </template>
 
