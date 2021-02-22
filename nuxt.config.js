@@ -16,6 +16,9 @@ export default {
   ** See https://nuxtjs.org/api/configuration-head
   */
   head: {
+    htmlAttrs: {
+      lang: 'fr'
+    },
     titleTemplate: '%s - Sulfuron.eu',
     meta: [
       { charset: 'utf-8' },
