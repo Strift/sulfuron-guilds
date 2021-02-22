@@ -15,8 +15,8 @@
             Pas de fakes, pas de guildes fantômes
           </h2>
           <p>
-            Notre algorithme privilégie les annonces qui sont tenues à jour et pas uniquement les plus récentes.<br>
-            Les modérateurs du Discord se chargent de vérifier l’identité des guildes.
+            Notre algorithme privilégie les annonces qui sont tenues à jour 📈 au détriment de celles qui sont laissées à l'abandon. 📉<br>
+            Les modérateurs du Discord se chargent quant à eux de vérifier l’identité des guildes.
           </p>
         </FeatureSection>
         <FeatureSection>
@@ -24,7 +24,8 @@
             Fini le flood
           </h2>
           <p>
-            Côté officier, plus besoin de re-poster votre annonce sur Discord toutes les 6 heures. Côté apply, fini de scroller des centaines d’annonces — utilisez les filtres de recherche.
+            Fini de scroller des centaines d’annonces pour trouver la guilde qui vous convient — utilisez simplement les filtres de recherche. 🕵️<br>
+            Côté officier, plus besoin de re-poster votre annonce sur Discord toutes les 6 heures.
           </p>
         </FeatureSection>
         <FeatureSection>
