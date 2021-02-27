@@ -7,6 +7,7 @@
 - Hosting, Functions, Auth, and Firestore from [Firebase](https://firebase.google.com/)
 - CSS utilities from [TailwindCSS v1](https://v1.tailwindcss.com/)
 - SVG icons from [heroicons](https://heroicons.com/)
+- Testing with [Vue Test Utils](https://vue-test-utils.vuejs.org/) (and [Jest](https://jestjs.io/en/) + [Babel](https://babeljs.io/))
 
 **Node versions**
 
@@ -38,6 +39,16 @@ yarn dev
 # Run the Firebase emulators
 yarn serve --only  hosting,functions,database
 ```
+
+## Testing
+
+Run the tests using the following command:
+
+```bash
+yarn test
+```
+
+> This commands just runs Jest, so you can use any Jest-recognized flags like `--watch`. 
 
 ## Production
 
