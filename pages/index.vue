@@ -1,61 +1,145 @@
 <template>
-  <FactionLayout :alliance="false">
-    <div class="container mx-auto font-sans">
-      <Navbar class="py-12 mb-6" />
+  <div>
+    <div class="mb-20">
+      <h1 class="text-4xl text-blue-100 font-semibold mb-3 text-shadow-lg leading-none mb-4">
+        Portail des guildes
+      </h1>
+      <p class="text-gray-400 text-lg text-shadow-md">
+        Votre nouvelle plateforme dédiée au recrutement sur Sulfuron.
+        <nuxt-link to="/en-savoir-plus/" class="text-blue-300 hover:text-blue-400 font-semibold">
+          En savoir plus.
+        </nuxt-link>
+      </p>
+    </div>
+    <div class="flex flex-col md:flex-row items-start md:items-center md:justify-between space-y-5 md:space-y-0 text-gray-200 border-b border-gray-700 pb-6 mb-6">
+      <FactionButton />
+      <input
+        v-model="textQuery"
+        type="text"
+        class="px-5 max-w-xs rounded-full focus:border-blue-300 focus:border-opacity-75 focus:text-gray-400 focus:shadow bg-blue-900 bg-opacity-25 border border-gray-700 text-gray-500 placeholder-gray-700 h-10 outline-none shadow-sm block w-full"
+        placeholder="🔍 Nyk Trib..."
+      >
+    </div>
+    <div class="hidden md:flex text-white mb-16 opacity-75 justify-end space-x-4">
+      <label v-for="(wowClass) in wowClasses" :key="wowClass.value" class="flex items-center space-x-1">
+        <input :id="wowClass.value" v-model="classQuery" type="checkbox" :name="wowClass.name" :value="wowClass.value">
+        <ClassIcon :wow-class="wowClass.value" class="h-5" />
+      </label>
+    </div>
 
-      <div class="mb-20 flex justify-center space-x-24">
-        <div class="bg-gray-100 rounded-lg overflow-hidden flex shadow-md">
-          <img src="https://astral.gg/images/astral-socials.png" alt="Astral logo" class="h-32">
-          <div class="p-4 flex flex-col w-64">
-            <div class="font-semibold text-2xl">
-              Astral
-            </div>
-            <div class="text-gray-600 italic">
-              Guilde la plus recommandée
-            </div>
-            <a href="#" class="text-blue-500 mt-auto">Discord</a>
-          </div>
-        </div>
-      </div>
-
-      <TableHeader :alliance="false" />
-      <TableRow
-        v-for="(guild, i) in guilds"
-        :key="i"
+    <transition-group :duration="500" name="fade" tag="div" class="grid grid-flow-row grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 mb-12">
+      <GuildCard
+        v-for="guild in filteredSearchResults"
+        :key="guild.name"
         :name="guild.name"
         :type="guild.type"
-        :playtime="guild.playtime"
-        :recruitment="guild.recruitment"
-        :activity="guild.activity"
-        :support="guild.support"
-        :class="{ 'border-t border-gray-700': i > 0 }"
+        :raid-days="raidDays(guild)"
+        :time-range="timeRange(guild)"
+        :recruitment="recruitmentClasses(guild)"
+        :logo-url="guild.logoUrl"
+        :website-url="guild.websiteUrl"
+        :contact-url="guild.contactUrl"
+        class="shadow-md"
       />
+    </transition-group>
+
+    <div class="text-center mt-12 text-gray-500">
+      {{ filteredSearchResults.length }} {{ resultText(filteredSearchResults.length) }} trouvées.
     </div>
-  </FactionLayout>
+
+    <div v-show="isGuest" class="space-y-10 mt-20">
+      <p class="text-center text-gray-300 text-lg">
+        Votre guilde n'y est pas ? Créez un compte pour pouvoir gérer votre guilde.
+      </p>
+      <nuxt-link to="/connexion/" class="bg-blue-900 bg-opacity-25 hover:bg-opacity-75 border border-blue-300 text-blue-300 hover:text-blue-200 text-shadow-sm text-lg px-4 py-2 rounded-full shadow block max-w-xs mx-auto text-center">
+        Connexion
+      </nuxt-link>
+    </div>
+    <div v-show="isAuthenticated" class="space-y-10 mt-20">
+      <p class="text-center text-gray-300 text-lg">
+        Votre guilde n'y est pas ? Contactez un modérateur du Discord pour créer celle-ci.
+      </p>
+    </div>
+  </div>
 </template>
 
 <script>
-import FactionLayout from '~/layouts/FactionLayout.vue'
-import Navbar from '~/components/Navbar.vue'
-import TableHeader from '~/components/TableHeader.vue'
-import TableRow from '~/components/TableRow.vue'
+import { mapGetters } from 'vuex'
+import Fuse from 'fuse.js'
+
+import WOW_CLASSES from '~/data/classes.json'
+
+const FUSE_OPTIONS = {
+  threshold: 0.2,
+  keys: ['name', 'type']
+}
 
 export default {
-  components: {
-    FactionLayout,
-    Navbar,
-    TableHeader,
-    TableRow
-  },
+  name: 'Index',
   data: () => ({
-    guilds: [{
-      name: 'Astral',
-      type: 'Classique',
-      playtime: 'Mer, Jeu',
-      recruitment: ['Rogue', 'Druid', 'Shaman'],
-      activity: 30,
-      support: 50
-    }]
-  })
+    wowClasses: WOW_CLASSES,
+    fuse: new Fuse([], FUSE_OPTIONS),
+    textQuery: '',
+    classQuery: []
+  }),
+  computed: {
+    ...mapGetters('guilds', {
+      guilds: 'currentFactionGuilds'
+    }),
+    ...mapGetters('account', [
+      'isGuest',
+      'isAuthenticated'
+    ]),
+    fuzzySearchResults () {
+      if (this.fuse == null || this.textQuery.length === 0) {
+        return this.guilds
+      }
+      return this.fuse.search(this.textQuery).map(result => result.item)
+    },
+    filteredSearchResults () {
+      if (this.classQuery.length === 0) {
+        return this.fuzzySearchResults
+      }
+      return this.fuzzySearchResults.filter((guild) => {
+        return guild.recruitment.some(recruitmentState => recruitmentState.open && this.classQuery.includes(recruitmentState.class))
+      })
+    }
+  },
+  watch: {
+    guilds (updatedGuilds) {
+      this.fuse.setCollection(updatedGuilds)
+    }
+  },
+  async mounted () {
+    this.$store.commit('setFactionBackground')
+    // Performing data fetching in mounted hook because of NuxtFirebase issues with SSR
+    await this.$store.dispatch('guilds/enableSync')
+  },
+  async beforeDestroy () {
+    await this.$store.dispatch('guilds/disableSync')
+  },
+  methods: {
+    resultText (count) {
+      return count > 1 ? 'guildes' : 'guilde'
+    },
+    timeRange ({ startHour, endHour }) {
+      return startHour + ' – ' + endHour
+    },
+    raidDays ({ raidDays }) {
+      return raidDays
+        .filter(({ playing }) => playing)
+        .map(({ day }) => day)
+    },
+    recruitmentClasses ({ recruitment }) {
+      return recruitment
+        .filter(({ open }) => open)
+        .map(recruitmentState => recruitmentState.class)
+    }
+  },
+  head () {
+    return {
+      title: 'Portail des guildes'
+    }
+  }
 }
 </script>

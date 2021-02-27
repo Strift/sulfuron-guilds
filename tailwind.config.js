@@ -8,7 +8,8 @@ const defaultTheme = require('tailwindcss/defaultTheme')
 
 module.exports = {
   future: {
-    removeDeprecatedGapUtilities: true
+    removeDeprecatedGapUtilities: true,
+    purgeLayersByDefault: true
   },
   theme: {
     extend: {
@@ -17,10 +18,20 @@ module.exports = {
           'Open Sans',
           ...defaultTheme.fontFamily.sans
         ]
+      },
+      transitionProperty: {
+        background: 'background background-opacity'
+      },
+      opacity: {
+        90: '0.9' // Apparently this overrides background opacity too
       }
     }
   },
-  variants: {},
+  variants: {
+    borderColor: ({ after }) => after(['focus-within']),
+    borderOpacity: ({ after }) => after(['focus-within']),
+    textColor: ['responsive', 'hover', 'focus', 'group-focus']
+  },
   plugins: [],
   purge: {
     // Learn more on https://tailwindcss.com/docs/controlling-file-size/#removing-unused-css

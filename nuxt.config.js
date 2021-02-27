@@ -1,25 +1,29 @@
 
 export default {
   /*
-  ** Nuxt rendering mode
-  ** See https://nuxtjs.org/api/configuration-mode
-  */
-  mode: 'universal',
-  /*
   ** Nuxt target
   ** See https://nuxtjs.org/api/configuration-target
   */
   target: 'static',
   /*
+  ** Runtime config
+  */
+  publicRuntimeConfig: {
+    baseURL: process.env.NODE_ENV === 'production' ? 'https://guildes.sulfuron.eu' : process.env.BASE_URL
+  },
+  /*
   ** Headers of the page
   ** See https://nuxtjs.org/api/configuration-head
   */
   head: {
-    title: process.env.npm_package_name || '',
+    htmlAttrs: {
+      lang: 'fr'
+    },
+    titleTemplate: '%s - Sulfuron.eu',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
+      { hid: 'description', name: 'description', content: 'Votre nouvelle plateforme dédiée au recrutement des guildes sur le serveur WoW Classic Sulfuron' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
@@ -29,6 +33,8 @@ export default {
   ** Global CSS
   */
   css: [
+    '~/assets/css/base.css',
+    '~/assets/css/animations.css',
     '~/assets/css/fonts.css'
   ],
   /*
@@ -36,6 +42,7 @@ export default {
   ** https://nuxtjs.org/guide/plugins
   */
   plugins: [
+    '~/plugins/vue-cookies.client.js'
   ],
   /*
   ** Auto import components
@@ -55,11 +62,77 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
+    // Doc: https://firebase.nuxtjs.org/
+    '@nuxtjs/firebase',
+    // Doc: https://github.com/nuxt-community/robots-module
+    '@nuxtjs/robots'
   ],
   /*
   ** Build configuration
   ** See https://nuxtjs.org/api/configuration-build/
   */
   build: {
+    // Enabled to fix the following issue
+    // https://github.com/nuxt/nuxt.js/issues/5800#issuecomment-549404405
+    html: {
+      minify: {
+        collapseWhitespace: true
+      }
+    }
+  },
+  /*
+  ** Generate configuration
+  ** See https://nuxtjs.org/docs/2.x/configuration-glossary/configuration-generate
+  */
+  generate: {
+    /*
+     * Do not re-generate when changes happen in these files or folders
+     */
+    cache: {
+      ignore: [
+        'functions',
+        '*.log'
+      ]
+    },
+    /*
+     * Do not generate page for these routes, as they will be handled by Firebase hosting
+     */
+    exclude: [
+      '/auth/battlenet'
+    ]
+  },
+  /*
+  ** Firebase module configuration
+  */
+  firebase: {
+    config: {
+      apiKey: 'AIzaSyDgCfIFFy-5Lw8rQ-HF3M--T-oT270LdpE',
+      authDomain: 'sulfuron-guilds.firebaseapp.com',
+      databaseURL: 'https://sulfuron-guilds.firebaseio.com',
+      projectId: 'sulfuron-guilds',
+      storageBucket: 'sulfuron-guilds.appspot.com',
+      messagingSenderId: '229682010576',
+      appId: '1:229682010576:web:db892c4df7f3ba3b1281d5'
+    },
+    services: {
+      auth: {
+        initialize: {
+          onAuthStateChangedAction: 'account/onFirebaseAuthStateChanged'
+        }
+      },
+      firestore: {
+        emulatorPort: (process.env.NODE_ENV === 'development' && process.env.FIREBASE_EMULATOR_FIRESTORE === 'true')
+          ? 8080
+          : undefined
+      },
+      functions: {
+        emulatorPort: (process.env.NODE_ENV === 'development' && process.env.FIREBASE_EMULATOR_FUNCTIONS === 'true')
+          ? 5001
+          : undefined
+      },
+      analytics: {
+        collectionEnabled: process.env.NODE_ENV === 'production'
+      }
+    }
   }
 }
