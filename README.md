@@ -1,6 +1,8 @@
-# sulfuron-guilds
+# Sulfuron guilds portal
 
-## Stack
+🔗 [https://guildes.sulfuron.eu/](https://guildes.sulfuron.eu/)
+
+## 🧰 Stack
 
 - Dependencies management with [Yarn](https://yarnpkg.com/)
 - Static site using [Nuxt](https://nuxtjs.org/)
@@ -14,7 +16,7 @@
 - Front-end website is built with Node.js v12.x (cf. [.nvmrc](.nvmrc))
 - Firebase functions running on Node.js v12.x (cf. `engines.node` in [functions/package.json](functions/package.json))
 
-## Development setup
+## 🚧 Development setup
 
 **Setting up the environment**
 
@@ -40,7 +42,7 @@ yarn dev
 yarn serve --only  hosting,functions,database
 ```
 
-## Testing
+## 🧪 Testing
 
 Run the tests using the following command:
 
@@ -50,7 +52,7 @@ yarn test
 
 > This commands just runs Jest, so you can use any Jest-recognized flags like `--watch`. 
 
-## Production
+## 🚀 Production
 
 ### Build
 
