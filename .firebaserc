@@ -1,5 +1,17 @@
 {
   "projects": {
     "default": "sulfuron-guilds"
+  },
+  "targets": {
+    "sulfuron-guilds": {
+      "hosting": {
+        "production": [
+          "sulfuron-guilds"
+        ],
+        "dev": [
+          "sulfuron-guilds-dev"
+        ]
+      }
+    }
   }
 }

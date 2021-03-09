@@ -3,26 +3,48 @@
     "rules": "firestore.rules",
     "indexes": "firestore.indexes.json"
   },
-  "hosting": {
-    "site": "sulfuron-guilds",
-    "public": "dist",
-    "trailingSlash": true,
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
-    "rewrites": [
-      {
-        "source": "/auth{,/**}",
-        "function": "auth"
-      },
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
-    ]
-  },
+  "hosting": [
+    {
+			"target": "production",
+			"public": "dist",
+			"trailingSlash": true,
+			"ignore": [
+				"firebase.json",
+				"**/.*",
+				"**/node_modules/**"
+			],
+			"rewrites": [
+				{
+					"source": "/auth{,/**}",
+					"function": "auth"
+				},
+				{
+					"source": "**",
+					"destination": "/index.html"
+				}
+			]
+    },
+    {
+			"target": "dev",
+			"public": "dist",
+			"trailingSlash": true,
+			"ignore": [
+			"firebase.json",
+			"**/.*",
+			"**/node_modules/**"
+			],
+			"rewrites": [
+			{
+				"source": "/auth{,/**}",
+				"function": "auth"
+			},
+			{
+				"source": "**",
+				"destination": "/index.html"
+			}
+			]
+ 	 	}
+	],
   "emulators": {
     "functions": {
       "port": 5001

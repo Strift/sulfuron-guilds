@@ -11,7 +11,8 @@
     "lint:js": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "lint": "yarn lint:js",
     "test": "jest",
-    "deploy": "firebase deploy"
+    "deploy": "firebase deploy",
+    "deploy:dev": "firebase deploy --only hosting:dev"
   },
   "lint-staged": {
     "*.{js,vue}": "eslint"
