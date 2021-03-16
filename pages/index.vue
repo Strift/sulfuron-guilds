@@ -13,12 +13,10 @@
     </div>
     <div class="flex flex-col md:flex-row items-start md:items-center md:justify-between space-y-5 md:space-y-0 text-gray-200 border-b border-gray-700 pb-6 mb-6">
       <FactionButton />
-      <input
-        v-model="textQuery"
-        type="text"
-        class="px-5 max-w-xs rounded-full focus:border-blue-300 focus:border-opacity-75 focus:text-gray-400 focus:shadow bg-blue-900 bg-opacity-25 border border-gray-700 text-gray-500 placeholder-gray-700 h-10 outline-none shadow-sm block w-full"
-        placeholder="🔍 Nyk Trib..."
-      >
+      <div class="flex space-x-5">
+        <SearchBar />
+        <SearchFiltersButton />
+      </div>
     </div>
     <div class="hidden md:flex text-white mb-16 opacity-75 justify-end space-x-4">
       <label v-for="(wowClass) in wowClasses" :key="wowClass.value" class="flex items-center space-x-1">
@@ -68,6 +66,7 @@ import { mapGetters } from 'vuex'
 import Fuse from 'fuse.js'
 
 import WOW_CLASSES from '~/data/classes.json'
+import SearchFiltersButton from '~/components/SearchFiltersButton.vue'
 
 const FUSE_OPTIONS = {
   threshold: 0.2,
@@ -76,6 +75,7 @@ const FUSE_OPTIONS = {
 
 export default {
   name: 'Index',
+  components: { SearchFiltersButton },
   data: () => ({
     wowClasses: WOW_CLASSES,
     fuse: new Fuse([], FUSE_OPTIONS),
