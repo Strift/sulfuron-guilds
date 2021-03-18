@@ -4,43 +4,26 @@
       {{ label }}
     </div>
     <div class="grid grid-flow-cols grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-6 gap-y-4">
-      <label
+      <FormCheckBox
         v-for="(option, optionIndex) in options"
+        :id="inputId(option)"
         :key="inputId(option)"
-        :for="inputId(option)"
-        class="group flex space-x-2 items-center border border-gray-700 rounded px-3 h-10 shadow-sm focus-within:border-blue-300 focus-within:border-opacity-75 focus-within:text-gray-400 focus-within:shadow min-w-0"
-        :class="{
-          'bg-blue-900 bg-opacity-25': isChecked(optionIndex),
-          'bg-gray-900 bg-opacity-25': !isChecked(optionIndex)
-        }"
+        :name="inputId(option)"
+        :checked="isChecked(optionIndex)"
+        @change="updateChecked($event, optionIndex)"
       >
-        <CheckIcon
-          :class="{ 'text-gray-500': isChecked(optionIndex), 'text-gray-700': !isChecked(optionIndex) }"
-          class="not-sr-only"
-        />
-        <input
-          :id="inputId(option)"
-          :name="inputId(option)"
-          :checked="isChecked(optionIndex)"
-          type="checkbox"
-          class="sr-only"
-          @change="onChange($event, optionIndex)"
-        >
-        <span
-          class="text-gray-500 text-shadow-sm"
-          :class="{ 'text-gray-500': isChecked(optionIndex), 'text-gray-600': !isChecked(optionIndex) }"
-        >{{ option }}</span>
-      </label>
+        {{ option }}
+      </FormCheckBox>
     </div>
   </div>
 </template>
 
 <script>
-import CheckIcon from '~/components/icons/CheckIcon.vue'
+import FormCheckBox from '~/components/ui/FormCheckBox.vue'
 
 export default {
   components: {
-    CheckIcon
+    FormCheckBox
   },
   props: {
     name: {
@@ -67,9 +50,9 @@ export default {
     isChecked (index) {
       return this.value[index]
     },
-    onChange (event, optionIndex) {
+    updateChecked (checked, optionIndex) {
       const updatedCheckStates = this.value
-      updatedCheckStates[optionIndex] = event.target.checked
+      updatedCheckStates[optionIndex] = checked
       this.$emit('input', updatedCheckStates)
     }
   }
