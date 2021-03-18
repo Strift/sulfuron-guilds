@@ -19,12 +19,12 @@
       class="sr-only"
       @change="$emit('change', $event.target.checked)"
     >
-    <span
+    <div
       class="text-gray-500 text-shadow-sm"
       :class="{ 'text-gray-500': checked, 'text-gray-600': !checked }"
     >
       <slot name="default" />
-    </span>
+    </div>
   </label>
 </template>
 

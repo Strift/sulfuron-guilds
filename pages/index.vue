@@ -11,12 +11,15 @@
         </nuxt-link>
       </p>
     </div>
-    <div class="flex flex-col md:flex-row items-start md:items-center md:justify-between space-y-5 md:space-y-0 text-gray-200 border-b border-gray-700 pb-6 mb-6">
-      <FactionButton />
+    <div class="space-y-6 mb-6">
+      <div class="border-b border-gray-700 pb-6">
+        <FactionButton class="text-gray-200" />
+      </div>
       <div class="flex space-x-5">
         <SearchBar />
-        <SearchFiltersButton />
+        <SearchFiltersButton ref="searchFiltersButton" />
       </div>
+      <SearchFiltersCard />
     </div>
     <div class="hidden md:flex text-white mb-16 opacity-75 justify-end space-x-4">
       <label v-for="(wowClass) in wowClasses" :key="wowClass.value" class="flex items-center space-x-1">
@@ -65,8 +68,10 @@
 import { mapGetters } from 'vuex'
 import Fuse from 'fuse.js'
 
-import WOW_CLASSES from '~/data/classes.json'
 import SearchFiltersButton from '~/components/SearchFiltersButton.vue'
+import SearchFiltersCard from '~/components/SearchFiltersCard.vue'
+
+import WOW_CLASSES from '~/data/classes.json'
 
 const FUSE_OPTIONS = {
   threshold: 0.2,
@@ -75,7 +80,10 @@ const FUSE_OPTIONS = {
 
 export default {
   name: 'Index',
-  components: { SearchFiltersButton },
+  components: {
+    SearchFiltersButton,
+    SearchFiltersCard
+  },
   data: () => ({
     wowClasses: WOW_CLASSES,
     fuse: new Fuse([], FUSE_OPTIONS),
