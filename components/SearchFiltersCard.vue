@@ -1,10 +1,27 @@
 <template>
-  <div class="border border-blue-300 bg-gray-900 bg-opacity-50 p-5 rounded-lg text-gray-500">
+  <div class="border border-blue-300 bg-gray-900 bg-opacity-50 p-6 rounded-lg text-gray-500">
     <div class="text-xs font-bold tracking-wider uppercase text-gray-300 mb-2">
       Classes
     </div>
-    <div class="space-y-2">
-      <div v-for="wowClass in wowClasses" :key="wowClass.value" class="space-y-2">
+    <div class="grid grid-cols-3 gap-4">
+      <FormCheckBox
+        v-for="classOrSpec in checkBoxes"
+        :id="inputName(classOrSpec)"
+        :key="inputName(classOrSpec)"
+        :name="inputName(classOrSpec)"
+        :checked="isSelected(classOrSpec)"
+        @change="updateSelectedClassesAndSpecs(classOrSpec, $event)"
+      >
+        <div v-if="classOrSpec.classValue" class="flex space-x-2 items-center">
+          <ClassIcon :wow-class="classOrSpec.classValue" class="h-5" />
+          <span>{{ classOrSpec.name }}</span>
+        </div>
+        <div v-else class="flex space-x-2 items-center">
+          <ClassIcon :wow-class="classOrSpec.value" class="h-5" />
+          <span class="font-semibold text-gray-700">{{ classOrSpec.name }}</span>
+        </div>
+      </FormCheckBox>
+      <!-- <div v-for="wowClass in wowClasses" :key="wowClass.value" class="space-y-2">
         <FormCheckBox
           v-show="!isClassSelected(wowClass.value)"
           :id="wowClass.value"
@@ -32,7 +49,7 @@
             <span>{{ spec.name }}</span>
           </div>
         </FormCheckBox>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -60,17 +77,45 @@ export default {
   },
   data: () => ({
     selectedClasses: [],
-    selectedSpecs: {},
-    wowClasses: WOW_CLASSES.sort(sortByName)
+    selectedSpecs: {}
   }),
+  computed: {
+    checkBoxes () {
+      return WOW_CLASSES
+        .sort(sortByName)
+        .map((wowClass) => {
+          return this.isClassSelected(wowClass.value)
+            ? wowClass.specs.map(spec => ({ ...spec, classValue: wowClass.value }))
+            : wowClass
+        })
+        .reduce((array, classOrSpecs) => {
+          // it's either an object (the class) or an array (the specs array)
+          return Array.isArray(classOrSpecs)
+            ? array.concat(classOrSpecs)
+            : [...array, classOrSpecs]
+        }, [])
+    }
+  },
   created () {
     WOW_CLASSES.forEach((wowClass) => {
       this.$set(this.selectedSpecs, wowClass.value, [])
     })
   },
   methods: {
-    inputName (wowClass, spec) {
-      return `${wowClass.value}-${spec.value}`
+    inputName (classOrSpec) {
+      return classOrSpec.classValue
+        ? `${classOrSpec.classValue}-${classOrSpec.value}`
+        : classOrSpec.value
+    },
+    isClass (classOrSpec) {
+      return classOrSpec.specs !== undefined
+    },
+    updateSelectedClassesAndSpecs (classOrSpec, checked) {
+      if (this.isClass(classOrSpec)) { // it's a class
+        this.updateSelectedClasses(classOrSpec.value, classOrSpec.specs, checked)
+      } else { // it's a spec
+        this.updateSelectedSpecs(classOrSpec.classValue, classOrSpec.value, checked)
+      }
     },
     updateSelectedClasses (classValue, classSpecs, checked) {
       if (checked) {
@@ -92,6 +137,11 @@ export default {
     removeSelectedClass (classValue) {
       const index = this.selectedClasses.indexOf(classValue)
       this.selectedClasses.splice(index, 1)
+    },
+    isSelected (classOrSpec) {
+      return this.isClass(classOrSpec)
+        ? this.isClassSelected(classOrSpec)
+        : this.isSpecSelected(classOrSpec.classValue, classOrSpec.value)
     },
     isClassSelected (classValue) {
       return this.selectedClasses.includes(classValue)
