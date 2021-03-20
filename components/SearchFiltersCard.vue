@@ -18,7 +18,6 @@ export default {
   },
   methods: {
     test (event) {
-      console.log(event)
     }
   }
 }

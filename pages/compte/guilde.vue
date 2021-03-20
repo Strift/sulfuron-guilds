@@ -42,12 +42,14 @@
     </div>
     <FormCheckList v-model="raidDays" :options="daysOptions" name="days" label="Jours de raid" />
     <PageSectionTitle>Recrutement</PageSectionTitle>
-    <FormCheckList
-      v-model="recruitment"
-      :options="wowClasses.map(option => option.name)"
-      name="classes"
-      label="Classes recherchées"
-    />
+    <div>
+      <div class="font-semibold text-blue-400 block leading-none text-shadow-sm mb-4">
+        Classes recherchées
+      </div>
+      <FormSpecsList
+        v-model="recruitment"
+      />
+    </div>
     <PageSectionTitle>Contact</PageSectionTitle>
     <FormInput
       v-model="websiteUrl"
@@ -74,26 +76,34 @@ import { mapState, mapGetters } from 'vuex'
 import isUrl from 'is-url'
 
 import WOW_CLASSES from '~/data/classes.json'
+import FormSpecsList from '~/components/ui/FormSpecsList.vue'
 
 const DAYS_OF_THE_WEEK = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche']
 
 const transformRecruitmentArray = (recruitment) => {
+  // Update from data format that doesn't handle specs to format that handles it
   if (recruitment[0].specs === undefined) {
     return recruitment.map((recruitmentState) => {
       const { specs } = WOW_CLASSES.find(wowClass => wowClass.value === recruitmentState.class)
       return {
         class: recruitmentState.class,
-        specs: specs.map(spec => ({ value: spec.value, open: recruitmentState.open }))
+        specs: specs.map(spec => ({ value: spec.value, checked: recruitmentState.open }))
       }
     })
-  } else {
-    return recruitment
   }
+  // The data here is in correct format
+  return recruitment.map(recruitmentState => ({
+    class: recruitmentState.class,
+    specs: recruitmentState.specs.map(spec => ({ value: spec.value, checked: spec.open }))
+  }))
 }
 
 export default {
   name: 'Guild',
   layout: 'account',
+  components: {
+    FormSpecsList
+  },
   data: () => ({
     factionOptions: [
       { value: 'Alliance', label: 'Alliance' },
@@ -162,17 +172,12 @@ export default {
         this.$store.dispatch('account/updateGuild', { raidDays })
       }
     },
-    recruitmentNew: {
-      get () {
-        return transformRecruitmentArray(this.guild.recruitment)
-      }
-    },
     recruitment: {
       get () {
-        return this.guild.recruitment.map(({ open }) => open)
+        return transformRecruitmentArray(this.guild.recruitment)
       },
-      set (checkedValues) {
-        const recruitmentState = this.recruitmentState(checkedValues)
+      set (checkedSpecs) {
+        const recruitmentState = this.recruitmentState(checkedSpecs)
         this.$store.dispatch('account/updateGuild', { recruitment: recruitmentState })
       }
     },
@@ -204,13 +209,11 @@ export default {
     publish () {
       this.$store.dispatch('account/updateGuild', { published: true })
     },
-    recruitmentState (checkedValues) {
-      return this.wowClasses.map(({ value }, index) => {
-        return {
-          class: value,
-          open: checkedValues[index]
-        }
-      })
+    recruitmentState (checkedSpecs) {
+      return checkedSpecs.map(wowClass => ({
+        class: wowClass.class,
+        specs: wowClass.specs.map(spec => ({ value: spec.value, open: spec.checked }))
+      }))
     },
     errorMessage (value) {
       if (isUrl(value)) {

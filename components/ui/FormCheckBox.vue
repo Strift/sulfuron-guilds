@@ -20,7 +20,7 @@
       @change="$emit('change', $event.target.checked)"
     >
     <div
-      class="text-gray-500 text-shadow-sm"
+      class="text-gray-500 text-shadow-sm truncate"
       :class="{ 'text-gray-500': checked, 'text-gray-600': !checked }"
     >
       <slot name="default" />
