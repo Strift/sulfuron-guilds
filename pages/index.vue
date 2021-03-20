@@ -17,9 +17,13 @@
       </div>
       <div class="flex space-x-5">
         <SearchBar />
-        <SearchFiltersButton ref="searchFiltersButton" />
+        <SearchFiltersButton
+          ref="searchFiltersButton"
+          :active="showFiltersCard"
+          @click="showFiltersCard = !showFiltersCard"
+        />
       </div>
-      <SearchFiltersCard />
+      <SearchFiltersCard v-show="showFiltersCard" />
     </div>
     <div class="hidden md:flex text-white mb-16 opacity-75 justify-end space-x-4">
       <label v-for="(wowClass) in wowClasses" :key="wowClass.value" class="flex items-center space-x-1">
@@ -88,7 +92,8 @@ export default {
     wowClasses: WOW_CLASSES,
     fuse: new Fuse([], FUSE_OPTIONS),
     textQuery: '',
-    classQuery: []
+    classQuery: [],
+    showFiltersCard: false
   }),
   computed: {
     ...mapGetters('guilds', {
