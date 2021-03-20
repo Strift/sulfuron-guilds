@@ -42,7 +42,12 @@
     </div>
     <FormCheckList v-model="raidDays" :options="daysOptions" name="days" label="Jours de raid" />
     <PageSectionTitle>Recrutement</PageSectionTitle>
-    <FormCheckList v-model="recruitment" :options="wowClasses.map(option => option.name)" name="classes" label="Classes recherchées" />
+    <FormCheckList
+      v-model="recruitment"
+      :options="wowClasses.map(option => option.name)"
+      name="classes"
+      label="Classes recherchées"
+    />
     <PageSectionTitle>Contact</PageSectionTitle>
     <FormInput
       v-model="websiteUrl"
@@ -71,6 +76,20 @@ import isUrl from 'is-url'
 import WOW_CLASSES from '~/data/classes.json'
 
 const DAYS_OF_THE_WEEK = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche']
+
+const transformRecruitmentArray = (recruitment) => {
+  if (recruitment[0].specs === undefined) {
+    return recruitment.map((recruitmentState) => {
+      const { specs } = WOW_CLASSES.find(wowClass => wowClass.value === recruitmentState.class)
+      return {
+        class: recruitmentState.class,
+        specs: specs.map(spec => ({ value: spec.value, open: recruitmentState.open }))
+      }
+    })
+  } else {
+    return recruitment
+  }
+}
 
 export default {
   name: 'Guild',
@@ -141,6 +160,11 @@ export default {
       set (value) {
         const raidDays = this.daysOptions.map((day, index) => ({ day, playing: value[index] }))
         this.$store.dispatch('account/updateGuild', { raidDays })
+      }
+    },
+    recruitmentNew: {
+      get () {
+        return transformRecruitmentArray(this.guild.recruitment)
       }
     },
     recruitment: {
