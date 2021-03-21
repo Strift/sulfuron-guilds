@@ -1,4 +1,5 @@
 import { firestoreAction } from 'vuexfire'
+import guildConverter from '~/converters/guildConverter'
 
 const AUTH_STATE_GUEST = 'guest'
 const AUTH_STATE_LOADING = 'loading'
@@ -87,6 +88,7 @@ export const actions = {
   async fetchGuild ({ commit, dispatch }) {
     const querySnapshot = await this.$fire.firestore
       .collection('guilds')
+      .withConverter(guildConverter)
       .where('ownerUid', '==', this.$fire.auth.currentUser.uid)
       .get()
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="grid grid-cols-3 gap-4">
+  <div>
     <FormCheckBox
       v-for="checkBox in checkBoxesToDisplay"
       :id="checkBox.id"

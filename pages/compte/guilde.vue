@@ -48,6 +48,7 @@
       </div>
       <FormSpecsList
         v-model="recruitment"
+        class="grid grid-flow-cols grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-6 gap-y-4"
       />
     </div>
     <PageSectionTitle>Contact</PageSectionTitle>
@@ -79,24 +80,6 @@ import FormSpecsList from '~/components/ui/FormSpecsList.vue'
 
 import WOW_CLASSES from '~/data/classes.json'
 const DAYS_OF_THE_WEEK = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche']
-
-const transformRecruitmentArray = (recruitment) => {
-  // Update from data format that doesn't handle specs to format that handles it
-  if (recruitment[0].specs === undefined) {
-    return recruitment.map((recruitmentState) => {
-      const { specs } = WOW_CLASSES.find(wowClass => wowClass.value === recruitmentState.class)
-      return {
-        class: recruitmentState.class,
-        specs: specs.map(spec => ({ value: spec.value, checked: recruitmentState.open }))
-      }
-    })
-  }
-  // The data here is in correct format
-  return recruitment.map(recruitmentState => ({
-    class: recruitmentState.class,
-    specs: recruitmentState.specs.map(spec => ({ value: spec.value, checked: spec.open }))
-  }))
-}
 
 export default {
   name: 'Guild',
@@ -174,10 +157,10 @@ export default {
     },
     recruitment: {
       get () {
-        return transformRecruitmentArray(this.guild.recruitment)
+        return this.getSpecsListPropsData(this.guild.recruitment)
       },
       set (checkedSpecs) {
-        const recruitmentState = this.recruitmentState(checkedSpecs)
+        const recruitmentState = this.getRecruitmentState(checkedSpecs)
         this.$store.dispatch('account/updateGuild', { recruitment: recruitmentState })
       }
     },
@@ -209,10 +192,16 @@ export default {
     publish () {
       this.$store.dispatch('account/updateGuild', { published: true })
     },
-    recruitmentState (checkedSpecs) {
-      return checkedSpecs.map(wowClass => ({
-        class: wowClass.class,
-        specs: wowClass.specs.map(spec => ({ value: spec.value, open: spec.checked }))
+    getSpecsListPropsData (recruitmentState) {
+      return recruitmentState.map(classRecruitment => ({
+        class: classRecruitment.class,
+        specs: classRecruitment.specs.map(spec => ({ value: spec.value, checked: spec.open }))
+      }))
+    },
+    getRecruitmentState (specsListData) {
+      return specsListData.map(classRecruitment => ({
+        class: classRecruitment.class,
+        specs: classRecruitment.specs.map(spec => ({ value: spec.value, open: spec.checked }))
       }))
     },
     errorMessage (value) {
