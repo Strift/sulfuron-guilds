@@ -1,5 +1,9 @@
 <template>
-  <div>
+  <transition-group
+    :duration="500"
+    name="fade"
+    tag="div"
+  >
     <FormCheckBox
       v-for="checkBox in checkBoxesToDisplay"
       :id="checkBox.id"
@@ -14,10 +18,12 @@
         <span v-else class="font-semibold text-gray-700">{{ checkBox.className }}</span>
       </div>
     </FormCheckBox>
-  </div>
+  </transition-group>
 </template>
 
 <script>
+import cloneDeep from 'lodash/cloneDeep'
+
 import FormCheckBox from '~/components/ui/FormCheckBox.vue'
 import ClassIcon from '~/components/icons/ClassIcon.vue'
 
@@ -74,7 +80,7 @@ export default {
   },
   methods: {
     onChange ({ classValue, specValue }, checked) {
-      const newState = this.value
+      const newState = cloneDeep(this.value)
 
       const classIndex = newState.findIndex(wowClass => wowClass.class === classValue)
 

@@ -16,7 +16,7 @@
         <FactionButton class="text-gray-200" />
       </div>
       <div class="flex space-x-5">
-        <SearchBar />
+        <SearchBar @input="updateTextQuery" />
         <SearchFiltersButton
           ref="searchFiltersButton"
           :active="showFiltersCard"
@@ -25,16 +25,10 @@
       </div>
       <SearchFiltersCard v-show="showFiltersCard" />
     </div>
-    <div class="hidden md:flex text-white mb-16 opacity-75 justify-end space-x-4">
-      <label v-for="(wowClass) in wowClasses" :key="wowClass.value" class="flex items-center space-x-1">
-        <input :id="wowClass.value" v-model="classQuery" type="checkbox" :name="wowClass.name" :value="wowClass.value">
-        <ClassIcon :wow-class="wowClass.value" class="h-5" />
-      </label>
-    </div>
 
     <transition-group :duration="500" name="fade" tag="div" class="grid grid-flow-row grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 mb-12">
       <GuildCard
-        v-for="guild in filteredSearchResults"
+        v-for="guild in guildsSearchResults"
         :key="guild.name"
         :name="guild.name"
         :type="guild.type"
@@ -49,7 +43,7 @@
     </transition-group>
 
     <div class="text-center mt-12 text-gray-500">
-      {{ filteredSearchResults.length }} {{ resultText(filteredSearchResults.length) }} trouvées.
+      {{ guildsSearchResults.length }} {{ resultsText }} trouvées.
     </div>
 
     <div v-show="isGuest" class="space-y-10 mt-20">
@@ -70,17 +64,9 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import Fuse from 'fuse.js'
 
 import SearchFiltersButton from '~/components/SearchFiltersButton.vue'
 import SearchFiltersCard from '~/components/SearchFiltersCard.vue'
-
-import WOW_CLASSES from '~/data/classes.json'
-
-const FUSE_OPTIONS = {
-  threshold: 0.2,
-  keys: ['name', 'type']
-}
 
 export default {
   name: 'Index',
@@ -89,38 +75,18 @@ export default {
     SearchFiltersCard
   },
   data: () => ({
-    wowClasses: WOW_CLASSES,
-    fuse: new Fuse([], FUSE_OPTIONS),
-    textQuery: '',
-    classQuery: [],
     showFiltersCard: false
   }),
   computed: {
     ...mapGetters('guilds', {
-      guilds: 'currentFactionGuilds'
+      guildsSearchResults: 'searchResults'
     }),
     ...mapGetters('account', [
       'isGuest',
       'isAuthenticated'
     ]),
-    fuzzySearchResults () {
-      if (this.fuse == null || this.textQuery.length === 0) {
-        return this.guilds
-      }
-      return this.fuse.search(this.textQuery).map(result => result.item)
-    },
-    filteredSearchResults () {
-      if (this.classQuery.length === 0) {
-        return this.fuzzySearchResults
-      }
-      return this.fuzzySearchResults.filter((guild) => {
-        return guild.recruitment.some(recruitmentState => recruitmentState.open && this.classQuery.includes(recruitmentState.class))
-      })
-    }
-  },
-  watch: {
-    guilds (updatedGuilds) {
-      this.fuse.setCollection(updatedGuilds)
+    resultsText () {
+      return this.guildsSearchResults.length > 1 ? 'guildes' : 'guilde'
     }
   },
   async mounted () {
@@ -132,8 +98,8 @@ export default {
     await this.$store.dispatch('guilds/disableSync')
   },
   methods: {
-    resultText (count) {
-      return count > 1 ? 'guildes' : 'guilde'
+    updateTextQuery (textQuery) {
+      this.$store.commit('guilds/setTextQuery', textQuery)
     },
     timeRange ({ startHour, endHour }) {
       return startHour + ' – ' + endHour
