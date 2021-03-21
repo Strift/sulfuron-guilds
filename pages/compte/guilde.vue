@@ -75,9 +75,9 @@ import { debounce } from 'lodash'
 import { mapState, mapGetters } from 'vuex'
 import isUrl from 'is-url'
 
-import WOW_CLASSES from '~/data/classes.json'
 import FormSpecsList from '~/components/ui/FormSpecsList.vue'
 
+import WOW_CLASSES from '~/data/classes.json'
 const DAYS_OF_THE_WEEK = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche']
 
 const transformRecruitmentArray = (recruitment) => {

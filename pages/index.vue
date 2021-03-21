@@ -40,7 +40,7 @@
         :type="guild.type"
         :raid-days="raidDays(guild)"
         :time-range="timeRange(guild)"
-        :recruitment="recruitmentClasses(guild)"
+        :recruitment="guild.recruitment"
         :logo-url="guild.logoUrl"
         :website-url="guild.websiteUrl"
         :contact-url="guild.contactUrl"

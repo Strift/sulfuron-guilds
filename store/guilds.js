@@ -1,6 +1,6 @@
 import { firestoreAction } from 'vuexfire'
 
-// Vuex mutations setup in root store
+import guildConverter from '~/converters/guildConverter.js'
 
 export const state = () => ({
   list: []
@@ -10,6 +10,7 @@ export const actions = {
   enableSync: firestoreAction(function ({ bindFirestoreRef }) {
     const ref = this.$fire.firestore
       .collection('guilds')
+      .withConverter(guildConverter)
       // .where('published', '==', true)
 
     return bindFirestoreRef('list', ref, { wait: true })

@@ -3,9 +3,9 @@
     <div class="text-xs font-bold tracking-wider uppercase text-gray-300 mb-2">
       Classes
     </div>
-    <FormSpecsList
+    <!-- <FormSpecsList
       @update="test"
-    />
+    /> -->
   </div>
 </template>
 
