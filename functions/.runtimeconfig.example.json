@@ -1,0 +1,11 @@
+{
+  "development": true,
+  "hosting": {
+    "app": "http://localhost:3000",
+    "auth_function": "http://localhost:5001/sulfuron-guilds/us-central1/auth"
+  },
+  "battlenet": {
+    "client_secret": "",
+    "client_id": ""
+  }
+}

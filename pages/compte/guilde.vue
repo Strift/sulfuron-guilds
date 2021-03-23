@@ -17,7 +17,7 @@
         <FormInput :value="name" name="name" label="Nom de guilde" disabled />
         <div>
           <FormInput v-model.trim="logoUrl" :error-message="errorMessage(logoUrl)" name="logo-url" label="Lien du logo" placeholder="https://exemple.com/logo.png" />
-          <div slot="hint" class="mt-3 text-gray-500 flex space-x-2 items-baseline">
+          <div class="mt-3 text-gray-500 flex space-x-2 items-baseline">
             <div>ℹ️</div>
             <div>Utilisez un hébergeur comme <a href="https://imgur.com/" target="_blank" class="hover:underline text-blue-300">imgur</a>, puis <br><em>copiez l'adresse de l'image</em> (clic droit).</div>
           </div>
@@ -42,7 +42,15 @@
     </div>
     <FormCheckList v-model="raidDays" :options="daysOptions" name="days" label="Jours de raid" />
     <PageSectionTitle>Recrutement</PageSectionTitle>
-    <FormCheckList v-model="recruitment" :options="wowClasses.map(option => option.name)" name="classes" label="Classes recherchées" />
+    <div>
+      <div class="font-semibold text-blue-400 block leading-none text-shadow-sm mb-4">
+        Classes recherchées
+      </div>
+      <FormSpecsList
+        v-model="recruitment"
+        class="grid grid-flow-cols grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-6 gap-y-4"
+      />
+    </div>
     <PageSectionTitle>Contact</PageSectionTitle>
     <FormInput
       v-model="websiteUrl"
@@ -52,14 +60,23 @@
       placeholder="https://maguilde.fr/"
       class="max-w-sm w-full"
     />
-    <FormInput
-      v-model="contactUrl"
-      :error-message="errorMessage(contactUrl)"
-      name="contact-url"
-      label="Lien de contact"
-      placeholder="https://discord.gg/XXXXXXX"
-      class="max-w-sm w-full"
-    />
+    <div>
+      <FormInput
+        v-model="contactUrl"
+        :error-message="errorMessage(contactUrl)"
+        name="contact-url"
+        label="Lien de contact"
+        placeholder="https://discord.gg/XXXXXXX"
+        class="max-w-sm w-full"
+      />
+      <div
+        v-if="contactUrl.length === 0"
+        class="mt-3 text-gray-500 flex space-x-2 items-baseline"
+      >
+        <div>⚠️</div>
+        <div>Lien de contact manquant. Votre guilde n'apparaîtra pas dans les résultats de recherche.</div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -68,13 +85,17 @@ import { debounce } from 'lodash'
 import { mapState, mapGetters } from 'vuex'
 import isUrl from 'is-url'
 
-import WOW_CLASSES from '~/data/classes.json'
+import FormSpecsList from '~/components/ui/FormSpecsList.vue'
 
+import WOW_CLASSES from '~/data/classes.json'
 const DAYS_OF_THE_WEEK = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche']
 
 export default {
   name: 'Guild',
   layout: 'account',
+  components: {
+    FormSpecsList
+  },
   data: () => ({
     factionOptions: [
       { value: 'Alliance', label: 'Alliance' },
@@ -145,10 +166,10 @@ export default {
     },
     recruitment: {
       get () {
-        return this.guild.recruitment.map(({ open }) => open)
+        return this.getSpecsListPropsData(this.guild.recruitment)
       },
-      set (checkedValues) {
-        const recruitmentState = this.recruitmentState(checkedValues)
+      set (checkedSpecs) {
+        const recruitmentState = this.getRecruitmentState(checkedSpecs)
         this.$store.dispatch('account/updateGuild', { recruitment: recruitmentState })
       }
     },
@@ -180,13 +201,17 @@ export default {
     publish () {
       this.$store.dispatch('account/updateGuild', { published: true })
     },
-    recruitmentState (checkedValues) {
-      return this.wowClasses.map(({ value }, index) => {
-        return {
-          class: value,
-          open: checkedValues[index]
-        }
-      })
+    getSpecsListPropsData (recruitmentState) {
+      return recruitmentState.map(classRecruitment => ({
+        class: classRecruitment.class,
+        specs: classRecruitment.specs.map(spec => ({ value: spec.value, checked: spec.open }))
+      }))
+    },
+    getRecruitmentState (specsListData) {
+      return specsListData.map(classRecruitment => ({
+        class: classRecruitment.class,
+        specs: classRecruitment.specs.map(spec => ({ value: spec.value, open: spec.checked }))
+      }))
     },
     errorMessage (value) {
       if (isUrl(value)) {

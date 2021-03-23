@@ -1,0 +1,14 @@
+[
+  {
+    "value": "Classique",
+    "label": "Classique (PvE)"
+  },
+  {
+    "value": "PvP",
+    "label": "PvP"
+  },
+  {
+    "value": "Speedrun",
+    "label": "Speedrun"
+  }
+]
