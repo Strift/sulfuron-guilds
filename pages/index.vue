@@ -11,7 +11,7 @@
         </nuxt-link>
       </p>
     </div>
-    <div class="space-y-6 mb-6">
+    <div class="space-y-6 mb-12">
       <div class="border-b border-gray-700 pb-6">
         <FactionButton class="text-gray-200" />
       </div>
@@ -23,23 +23,26 @@
           @click="showFiltersCard = !showFiltersCard"
         />
       </div>
-      <SearchFiltersCard v-show="showFiltersCard" />
+      <SearchFiltersCard v-show="showFiltersCard" class="shadow-xl" />
     </div>
 
     <transition-group :duration="500" name="fade" tag="div" class="grid grid-flow-row grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 mb-12">
-      <GuildCard
+      <div
         v-for="guild in guildsSearchResults"
         :key="guild.name"
-        :name="guild.name"
-        :type="guild.type"
-        :raid-days="raidDays(guild)"
-        :time-range="timeRange(guild)"
-        :recruitment="guild.recruitment"
-        :logo-url="guild.logoUrl"
-        :website-url="guild.websiteUrl"
-        :contact-url="guild.contactUrl"
-        class="shadow-md"
-      />
+      >
+        <GuildCard
+          :name="guild.name"
+          :type="guild.type"
+          :raid-days="raidDays(guild)"
+          :time-range="timeRange(guild)"
+          :recruitment="guild.recruitment"
+          :logo-url="guild.logoUrl"
+          :website-url="guild.websiteUrl"
+          :contact-url="guild.contactUrl"
+          class="shadow-md"
+        />
+      </div>
     </transition-group>
 
     <div class="text-center mt-12 text-gray-500">
