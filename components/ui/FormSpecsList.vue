@@ -1,9 +1,5 @@
 <template>
-  <transition-group
-    :duration="500"
-    name="fade"
-    tag="div"
-  >
+  <div>
     <FormCheckBox
       v-for="checkBox in checkBoxesToDisplay"
       :id="checkBox.id"
@@ -18,7 +14,7 @@
         <span v-else class="font-semibold text-gray-700">{{ checkBox.className }}</span>
       </div>
     </FormCheckBox>
-  </transition-group>
+  </div>
 </template>
 
 <script>
