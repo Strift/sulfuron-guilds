@@ -22,6 +22,12 @@ export const mutations = {
   },
   setTextQuery (state, textQuery) {
     state.textQuery = textQuery
+  },
+  removeClassFilter (state, { classValue, specValue }) {
+    const classIndex = state.classFilters.findIndex(classFilter => classFilter.class === classValue)
+    const specIndex = state.classFilters[classIndex].specs.findIndex(({ value }) => value === specValue)
+
+    state.classFilters[classIndex].specs[specIndex].checked = false
   }
 }
 
@@ -96,5 +102,18 @@ export const getters = {
         // Filter guilds if all searched specs are present in guild open specs
         return searchedSpecsIds.every(id => guildOpenSpecs.includes(id))
       })
+  },
+  classFilters (state) {
+    return state.classFilters
+      .map((classFilter) => {
+        return classFilter.specs
+          .filter(({ checked }) => checked)
+          .map(spec => ({
+            classValue: classFilter.class,
+            specValue: spec.value,
+            specName: spec.name
+          }))
+      })
+      .flat()
   }
 }

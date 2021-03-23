@@ -11,6 +11,8 @@
 </template>
 
 <script>
+import sortBy from 'lodash/sortBy'
+
 import FormSpecsList from '~/components/ui/FormSpecsList.vue'
 
 import WOW_CLASSES from '~/data/classes.json'
@@ -34,10 +36,11 @@ export default {
   },
   methods: {
     initSpecsFilters () {
-      this.classFilters = WOW_CLASSES.map(wowClass => ({
-        class: wowClass.value,
-        specs: wowClass.specs.map(spec => ({ ...spec, checked: false }))
-      }))
+      this.classFilters = sortBy(WOW_CLASSES, 'name')
+        .map(wowClass => ({
+          class: wowClass.value,
+          specs: wowClass.specs.map(spec => ({ ...spec, checked: false }))
+        }))
     }
   }
 }

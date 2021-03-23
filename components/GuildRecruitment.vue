@@ -19,7 +19,7 @@
       class="text-gray-600"
     >
       <div v-if="!isOpen" class="text-gray-700">
-        Fermé
+        Clos
       </div>
       <div
         v-for="classRecruitment in openRecruitment"

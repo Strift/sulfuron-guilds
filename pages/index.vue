@@ -11,22 +11,40 @@
         </nuxt-link>
       </p>
     </div>
-    <div class="space-y-6 mb-12">
-      <div class="border-b border-gray-700 pb-6">
+    <div class="sm:flex space-y-6 sm:space-y-0 sm:justify-between sm:border-b border-gray-700 sm:pb-6 mb-6">
+      <div class="border-b border-gray-700 pb-6 sm:border-0 sm:p-0">
         <FactionButton class="text-gray-200" />
       </div>
       <div class="flex space-x-5">
-        <SearchBar @input="updateTextQuery" />
+        <SearchBar class="w-full sm:w-auto" @input="updateTextQuery" />
         <SearchFiltersButton
           ref="searchFiltersButton"
           :active="showFiltersCard"
           @click="showFiltersCard = !showFiltersCard"
         />
       </div>
-      <SearchFiltersCard v-show="showFiltersCard" class="shadow-xl" />
     </div>
 
-    <transition-group :duration="500" name="fade" tag="div" class="grid grid-flow-row grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-12 mb-12">
+    <SearchFiltersCard v-show="showFiltersCard" class="shadow-xl" />
+
+    <div v-if="classFilters.length" v-show="!showFiltersCard">
+      <div class="font-semibold text-sm text-gray-500 uppercase tracking-wider mb-3">
+        Filtres
+      </div>
+      <transition-group :duration="250" name="fade" tag="div" class="flex flex-row flex-wrap space-x-4">
+        <ClassFilter
+          v-for="filter in classFilters"
+          :key="`${filter.classValue}/${filter.specName}`"
+          :wow-class="filter.classValue"
+          class="mb-4"
+          @remove="removeClassFilter(filter.classValue, filter.specValue)"
+        >
+          {{ filter.specName }}
+        </ClassFilter>
+      </transition-group>
+    </div>
+
+    <transition-group :duration="500" name="fade" tag="div" class="grid grid-flow-row grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-12 my-12">
       <div
         v-for="guild in guildsSearchResults"
         :key="guild.name"
@@ -67,6 +85,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import ClassFilter from '~/components/ClassFilter.vue'
 
 import SearchFiltersButton from '~/components/SearchFiltersButton.vue'
 import SearchFiltersCard from '~/components/SearchFiltersCard.vue'
@@ -75,14 +94,16 @@ export default {
   name: 'Index',
   components: {
     SearchFiltersButton,
-    SearchFiltersCard
+    SearchFiltersCard,
+    ClassFilter
   },
   data: () => ({
     showFiltersCard: false
   }),
   computed: {
     ...mapGetters('guilds', {
-      guildsSearchResults: 'searchResults'
+      guildsSearchResults: 'searchResults',
+      classFilters: 'classFilters'
     }),
     ...mapGetters('account', [
       'isGuest',
@@ -116,6 +137,9 @@ export default {
       return recruitment
         .filter(({ open }) => open)
         .map(recruitmentState => recruitmentState.class)
+    },
+    removeClassFilter (classValue, specValue) {
+      this.$store.commit('guilds/removeClassFilter', { classValue, specValue })
     }
   },
   head () {
