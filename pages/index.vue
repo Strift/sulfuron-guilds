@@ -26,7 +26,7 @@
       <SearchFiltersCard v-show="showFiltersCard" class="shadow-xl" />
     </div>
 
-    <transition-group :duration="500" name="fade" tag="div" class="grid grid-flow-row grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 mb-12">
+    <transition-group :duration="500" name="fade" tag="div" class="grid grid-flow-row grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-12 mb-12">
       <div
         v-for="guild in guildsSearchResults"
         :key="guild.name"

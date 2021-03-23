@@ -1,6 +1,7 @@
 <template>
   <button
-    class="w-full p-3 rounded hover:bg-gray-800 group focus:outline-none"
+    class="w-full p-3 rounded  group focus:outline-none"
+    :class="{ 'hover:bg-gray-800': isOpen }"
     @click="$emit('click')"
   >
     <div class="flex justify-between mb-3 text-gray-600 group-focus:text-blue-300">
@@ -8,6 +9,7 @@
         Recrutement
       </div>
       <ChevronDownIcon
+        v-if="isOpen"
         class="transform transition-transform duration-200"
         :class="{ 'rotate-180': expanded }"
       />
@@ -16,8 +18,12 @@
       :class="{ 'flex space-x-2': !expanded, 'space-y-2': expanded }"
       class="text-gray-600"
     >
+      <div v-if="!isOpen" class="text-gray-700">
+        Fermé
+      </div>
       <div
         v-for="classRecruitment in openRecruitment"
+        v-else
         :key="classRecruitment.class"
         class="flex space-x-2"
       >
@@ -81,6 +87,9 @@ export default {
             }))
           }
         })
+    },
+    isOpen () {
+      return this.openRecruitment.length > 0
     }
   },
   methods: {

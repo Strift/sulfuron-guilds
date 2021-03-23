@@ -80,6 +80,11 @@ export const getters = {
           return false
         }
 
+        // Filter guilds if they don't have contact URL
+        if (guild.contactUrl.length === 0) {
+          return false
+        }
+
         // Map/flatten array of class.specs[] to specIds[]
         const guildOpenSpecs = guild.recruitment
           .map((classRecruitment) => {
