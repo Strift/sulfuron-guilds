@@ -57,7 +57,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 input:focus + svg {
   @apply text-gray-500;
 }

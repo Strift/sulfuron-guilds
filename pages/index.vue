@@ -11,40 +11,60 @@
         </nuxt-link>
       </p>
     </div>
-    <div class="flex flex-col md:flex-row items-start md:items-center md:justify-between space-y-5 md:space-y-0 text-gray-200 border-b border-gray-700 pb-6 mb-6">
-      <FactionButton />
-      <input
-        v-model="textQuery"
-        type="text"
-        class="px-5 max-w-xs rounded-full focus:border-blue-300 focus:border-opacity-75 focus:text-gray-400 focus:shadow bg-blue-900 bg-opacity-25 border border-gray-700 text-gray-500 placeholder-gray-700 h-10 outline-none shadow-sm block w-full"
-        placeholder="🔍 Nyk Trib..."
-      >
-    </div>
-    <div class="hidden md:flex text-white mb-16 opacity-75 justify-end space-x-4">
-      <label v-for="(wowClass) in wowClasses" :key="wowClass.value" class="flex items-center space-x-1">
-        <input :id="wowClass.value" v-model="classQuery" type="checkbox" :name="wowClass.name" :value="wowClass.value">
-        <ClassIcon :wow-class="wowClass.value" class="h-5" />
-      </label>
+    <div class="sm:flex space-y-6 sm:space-y-0 sm:justify-between sm:border-b border-gray-700 sm:pb-6 mb-6">
+      <div class="border-b border-gray-700 pb-6 sm:border-0 sm:p-0">
+        <FactionButton class="text-gray-200" />
+      </div>
+      <div class="flex space-x-5">
+        <SearchBar class="w-full sm:w-auto" @input="updateTextQuery" />
+        <SearchFiltersButton
+          ref="searchFiltersButton"
+          :active="showFiltersCard"
+          @click="showFiltersCard = !showFiltersCard"
+        />
+      </div>
     </div>
 
-    <transition-group :duration="500" name="fade" tag="div" class="grid grid-flow-row grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 mb-12">
-      <GuildCard
-        v-for="guild in filteredSearchResults"
+    <SearchFiltersCard v-show="showFiltersCard" class="shadow-xl" />
+
+    <div v-if="classFilters.length" v-show="!showFiltersCard">
+      <div class="font-semibold text-sm text-gray-500 uppercase tracking-wider mb-3">
+        Filtres
+      </div>
+      <transition-group :duration="250" name="fade" tag="div" class="flex flex-row flex-wrap space-x-4">
+        <ClassFilter
+          v-for="filter in classFilters"
+          :key="`${filter.classValue}/${filter.specName}`"
+          :wow-class="filter.classValue"
+          class="mb-4"
+          @remove="removeClassFilter(filter.classValue, filter.specValue)"
+        >
+          {{ filter.specName }}
+        </ClassFilter>
+      </transition-group>
+    </div>
+
+    <transition-group :duration="500" name="fade" tag="div" class="grid grid-flow-row grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-12 my-12">
+      <div
+        v-for="guild in guildsSearchResults"
         :key="guild.name"
-        :name="guild.name"
-        :type="guild.type"
-        :raid-days="raidDays(guild)"
-        :time-range="timeRange(guild)"
-        :recruitment="recruitmentClasses(guild)"
-        :logo-url="guild.logoUrl"
-        :website-url="guild.websiteUrl"
-        :contact-url="guild.contactUrl"
-        class="shadow-md"
-      />
+      >
+        <GuildCard
+          :name="guild.name"
+          :type="guild.type"
+          :raid-days="raidDays(guild)"
+          :time-range="timeRange(guild)"
+          :recruitment="guild.recruitment"
+          :logo-url="guild.logoUrl"
+          :website-url="guild.websiteUrl"
+          :contact-url="guild.contactUrl"
+          class="shadow-md"
+        />
+      </div>
     </transition-group>
 
     <div class="text-center mt-12 text-gray-500">
-      {{ filteredSearchResults.length }} {{ resultText(filteredSearchResults.length) }} trouvées.
+      {{ guildsSearchResults.length }} {{ resultsText }} trouvées.
     </div>
 
     <div v-show="isGuest" class="space-y-10 mt-20">
@@ -65,49 +85,32 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import Fuse from 'fuse.js'
+import ClassFilter from '~/components/ClassFilter.vue'
 
-import WOW_CLASSES from '~/data/classes.json'
-
-const FUSE_OPTIONS = {
-  threshold: 0.2,
-  keys: ['name', 'type']
-}
+import SearchFiltersButton from '~/components/SearchFiltersButton.vue'
+import SearchFiltersCard from '~/components/SearchFiltersCard.vue'
 
 export default {
   name: 'Index',
+  components: {
+    SearchFiltersButton,
+    SearchFiltersCard,
+    ClassFilter
+  },
   data: () => ({
-    wowClasses: WOW_CLASSES,
-    fuse: new Fuse([], FUSE_OPTIONS),
-    textQuery: '',
-    classQuery: []
+    showFiltersCard: false
   }),
   computed: {
     ...mapGetters('guilds', {
-      guilds: 'currentFactionGuilds'
+      guildsSearchResults: 'searchResults',
+      classFilters: 'classFilters'
     }),
     ...mapGetters('account', [
       'isGuest',
       'isAuthenticated'
     ]),
-    fuzzySearchResults () {
-      if (this.fuse == null || this.textQuery.length === 0) {
-        return this.guilds
-      }
-      return this.fuse.search(this.textQuery).map(result => result.item)
-    },
-    filteredSearchResults () {
-      if (this.classQuery.length === 0) {
-        return this.fuzzySearchResults
-      }
-      return this.fuzzySearchResults.filter((guild) => {
-        return guild.recruitment.some(recruitmentState => recruitmentState.open && this.classQuery.includes(recruitmentState.class))
-      })
-    }
-  },
-  watch: {
-    guilds (updatedGuilds) {
-      this.fuse.setCollection(updatedGuilds)
+    resultsText () {
+      return this.guildsSearchResults.length > 1 ? 'guildes' : 'guilde'
     }
   },
   async mounted () {
@@ -119,8 +122,8 @@ export default {
     await this.$store.dispatch('guilds/disableSync')
   },
   methods: {
-    resultText (count) {
-      return count > 1 ? 'guildes' : 'guilde'
+    updateTextQuery (textQuery) {
+      this.$store.commit('guilds/setTextQuery', textQuery)
     },
     timeRange ({ startHour, endHour }) {
       return startHour + ' – ' + endHour
@@ -134,6 +137,9 @@ export default {
       return recruitment
         .filter(({ open }) => open)
         .map(recruitmentState => recruitmentState.class)
+    },
+    removeClassFilter (classValue, specValue) {
+      this.$store.commit('guilds/removeClassFilter', { classValue, specValue })
     }
   },
   head () {

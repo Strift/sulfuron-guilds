@@ -30,7 +30,7 @@
     "firebase": "^8.2.1",
     "fuse.js": "^6.4.3",
     "is-url": "^1.2.4",
-    "lodash": "^4.17.20",
+    "lodash": "^4.17.21",
     "nuxt": "^2.14.0",
     "vue-cookies": "^1.7.4",
     "vue2-animate": "^2.1.4",

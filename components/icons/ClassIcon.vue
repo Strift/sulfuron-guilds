@@ -1,8 +1,10 @@
 <template>
-  <img :src="src" :alt="alt" :title="wowClass">
+  <img :src="src" :alt="alt" :title="imageTitle">
 </template>
 
 <script>
+import WOW_CLASSES from '~/data/classes.json'
+
 export default {
   props: {
     wowClass: {
@@ -16,6 +18,10 @@ export default {
     },
     alt () {
       return `Icone de classe ${this.wowClass.toUpperCase()}`
+    },
+    imageTitle () {
+      const { name } = WOW_CLASSES.find(({ value }) => value === this.wowClass)
+      return name
     }
   }
 }

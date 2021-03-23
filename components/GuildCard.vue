@@ -18,26 +18,22 @@
         {{ type }}
       </div>
     </div>
-    <div class="bg-gray-900 text-gray-600 p-6">
+    <div class="bg-gray-900 text-gray-600 px-6 pt-6 pb-0">
       <div class="flex items-center space-x-4 mb-4">
         <CalendarIcon class="text-gray-700 flex-shrink-0" />
         <div>{{ readableDays }}</div>
       </div>
-      <div class="flex items-center space-x-4 mb-6">
+      <div class="flex items-center space-x-4">
         <ClockIcon class="text-gray-700 flex-shrink-0" />
         <div>{{ timeRange }}</div>
       </div>
-      <div class="font-semibold text-xs text-gray-600 uppercase tracking-widest mb-3">
-        Recrutement
-      </div>
-      <div class="flex space-x-2">
-        <ClassIcon
-          v-for="wowClass in recruitment"
-          :key="wowClass"
-          :wow-class="wowClass"
-          class="h-6 opacity-75"
-        />
-      </div>
+    </div>
+    <div class="bg-gray-900 p-3">
+      <GuildRecruitment
+        :recruitment="recruitment"
+        :expanded="expandGuildRecruitment"
+        @click="expandGuildRecruitment = !expandGuildRecruitment"
+      />
     </div>
     <div class="px-6 bg-gray-900 text-gray-700 rounded-b-lg ">
       <div class="border-t py-2 border-gray-800 text-sm flex font-semibold space-x-2 justify-end">
@@ -54,10 +50,10 @@
 </template>
 
 <script>
+import GuildRecruitment from './GuildRecruitment.vue'
 import MissingGuildLogo from '~/components/MissingGuildLogo.vue'
 import CalendarIcon from '~/components/icons/CalendarIcon.vue'
 import ClockIcon from '~/components/icons/ClockIcon.vue'
-import ClassIcon from '~/components/icons/ClassIcon.vue'
 
 export default {
   name: 'GuildCard',
@@ -65,7 +61,7 @@ export default {
     MissingGuildLogo,
     CalendarIcon,
     ClockIcon,
-    ClassIcon
+    GuildRecruitment
   },
   props: {
     name: { type: String, required: true },
@@ -80,7 +76,8 @@ export default {
     // supports: { type: Number, required: true }
   },
   data: () => ({
-    loadingError: false
+    loadingError: false,
+    expandGuildRecruitment: false
   }),
   computed: {
     hasLogo () {
