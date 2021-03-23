@@ -17,7 +17,7 @@
         <FormInput :value="name" name="name" label="Nom de guilde" disabled />
         <div>
           <FormInput v-model.trim="logoUrl" :error-message="errorMessage(logoUrl)" name="logo-url" label="Lien du logo" placeholder="https://exemple.com/logo.png" />
-          <div slot="hint" class="mt-3 text-gray-500 flex space-x-2 items-baseline">
+          <div class="mt-3 text-gray-500 flex space-x-2 items-baseline">
             <div>ℹ️</div>
             <div>Utilisez un hébergeur comme <a href="https://imgur.com/" target="_blank" class="hover:underline text-blue-300">imgur</a>, puis <br><em>copiez l'adresse de l'image</em> (clic droit).</div>
           </div>
@@ -60,14 +60,23 @@
       placeholder="https://maguilde.fr/"
       class="max-w-sm w-full"
     />
-    <FormInput
-      v-model="contactUrl"
-      :error-message="errorMessage(contactUrl)"
-      name="contact-url"
-      label="Lien de contact"
-      placeholder="https://discord.gg/XXXXXXX"
-      class="max-w-sm w-full"
-    />
+    <div>
+      <FormInput
+        v-model="contactUrl"
+        :error-message="errorMessage(contactUrl)"
+        name="contact-url"
+        label="Lien de contact"
+        placeholder="https://discord.gg/XXXXXXX"
+        class="max-w-sm w-full"
+      />
+      <div
+        v-if="contactUrl.length === 0"
+        class="mt-3 text-gray-500 flex space-x-2 items-baseline"
+      >
+        <div>⚠️</div>
+        <div>Lien de contact manquant. Votre guilde n'apparaîtra pas dans les résultats de recherche.</div>
+      </div>
+    </div>
   </div>
 </template>
 
