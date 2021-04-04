@@ -13,7 +13,8 @@ const getSpecId = (classValue, specValue) => `${classValue}/${specValue}`
 export const state = () => ({
   list: [],
   classFilters: [],
-  textQuery: ''
+  textQuery: '',
+  fuse: null
 })
 
 export const mutations = {
@@ -70,9 +71,14 @@ export const getters = {
       return state.list
     }
 
-    const fuse = new Fuse(state.list, FUSE_OPTIONS)
+    // Create Fuse if it does not exist
+    if (state.fuse === null) {
+      state.fuse = new Fuse(state.list, FUSE_OPTIONS)
+    } else {
+      state.fuse.setCollection(state.list)
+    }
 
-    return fuse.search(state.textQuery).map(result => result.item)
+    return state.fuse.search(state.textQuery).map(result => result.item)
   },
   searchResults (state, getters, rootState) {
     const guilds = getters.fuzzySearchResults
