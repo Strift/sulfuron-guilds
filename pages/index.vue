@@ -25,9 +25,9 @@
       </div>
     </div>
 
-    <SearchFiltersCard v-show="showFiltersCard" class="shadow-xl" />
+    <SearchFiltersCard v-show="showFiltersCard" class="shadow-xl mb-6" />
 
-    <div v-if="classFilters.length" v-show="!showFiltersCard">
+    <div v-if="classFilters.length" v-show="!showFiltersCard" class="mb-3">
       <div class="font-semibold text-sm text-gray-500 uppercase tracking-wider mb-3">
         Filtres
       </div>
