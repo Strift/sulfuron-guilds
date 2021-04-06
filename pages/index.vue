@@ -31,12 +31,12 @@
       <div class="font-semibold text-sm text-gray-500 uppercase tracking-wider mb-3">
         Filtres
       </div>
-      <transition-group :duration="250" name="fade" tag="div" class="flex flex-row flex-wrap space-x-4">
+      <transition-group :duration="250" name="fade" tag="div" class="flex flex-row flex-wrap">
         <ClassFilter
           v-for="filter in classFilters"
           :key="`${filter.classValue}/${filter.specName}`"
           :wow-class="filter.classValue"
-          class="mb-4"
+          class="mb-4 mr-4"
           @remove="removeClassFilter(filter.classValue, filter.specValue)"
         >
           {{ filter.specName }}
@@ -44,9 +44,14 @@
       </transition-group>
     </div>
 
+    <div class="text-gray-700 flex items-center space-x-2">
+      <SortAscendingIcon />
+      <div>Guildes triées par {{ sortingText }}.</div>
+    </div>
+
     <transition-group :duration="500" name="fade" tag="div" class="grid grid-flow-row grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-12 my-12">
       <div
-        v-for="guild in guildsSearchResults"
+        v-for="guild in orderedSearchResults"
         :key="guild.name"
       >
         <GuildCard
@@ -64,7 +69,7 @@
     </transition-group>
 
     <div class="text-center mt-12 text-gray-500">
-      {{ guildsSearchResults.length }} {{ resultsText }} trouvées.
+      {{ orderedSearchResults.length }} {{ resultsText }} trouvées.
     </div>
 
     <div v-show="isGuest" class="space-y-10 mt-20">
@@ -84,15 +89,18 @@
 </template>
 
 <script>
+import sortBy from 'lodash/sortBy'
 import { mapGetters } from 'vuex'
-import ClassFilter from '~/components/ClassFilter.vue'
 
+import SortAscendingIcon from '~/components/icons/solid/SortAscendingIcon.vue'
 import SearchFiltersButton from '~/components/SearchFiltersButton.vue'
 import SearchFiltersCard from '~/components/SearchFiltersCard.vue'
+import ClassFilter from '~/components/ClassFilter.vue'
 
 export default {
   name: 'Index',
   components: {
+    SortAscendingIcon,
     SearchFiltersButton,
     SearchFiltersCard,
     ClassFilter
@@ -102,15 +110,21 @@ export default {
   }),
   computed: {
     ...mapGetters('guilds', {
-      guildsSearchResults: 'searchResults',
+      searchResults: 'searchResults',
       classFilters: 'classFilters'
     }),
     ...mapGetters('account', [
       'isGuest',
       'isAuthenticated'
     ]),
+    orderedSearchResults () {
+      return sortBy(this.searchResults, ['name'])
+    },
     resultsText () {
-      return this.guildsSearchResults.length > 1 ? 'guildes' : 'guilde'
+      return this.searchResults.length > 1 ? 'guildes' : 'guilde'
+    },
+    sortingText () {
+      return 'ordre alphabétique'
     }
   },
   async mounted () {
