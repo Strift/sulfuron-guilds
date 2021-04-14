@@ -56,7 +56,9 @@ export default {
     // Doc: https://github.com/nuxt-community/eslint-module
     '@nuxtjs/eslint-module',
     // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
-    '@nuxtjs/tailwindcss'
+    '@nuxtjs/tailwindcss',
+    // Doc: https://sentry.nuxtjs.org/
+    '@nuxtjs/sentry'
   ],
   /*
   ** Nuxt.js modules
@@ -134,5 +136,12 @@ export default {
         collectionEnabled: process.env.NODE_ENV === 'production'
       }
     }
+  },
+  /*
+  ** Sentry module configuration
+  */
+  sentry: {
+    dsn: 'https://c641e9d80e684743befafefdbe54d3d9@o571625.ingest.sentry.io/5720079',
+    config: {}
   }
 }
