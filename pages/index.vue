@@ -55,6 +55,7 @@
         :key="guild.name"
       >
         <GuildCard
+          :id="guild.id"
           :name="guild.name"
           :type="guild.type"
           :raid-days="raidDays(guild)"

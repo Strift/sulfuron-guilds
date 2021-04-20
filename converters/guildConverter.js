@@ -7,6 +7,7 @@ export default {
   fromFirestore (snapshot, options) {
     const data = snapshot.data(options)
     return {
+      id: snapshot.id,
       ...data,
       recruitment: transformRecruitmentArray(data.recruitment)
     }

@@ -101,7 +101,8 @@ export default {
      */
     exclude: [
       '/auth/battlenet'
-    ]
+    ],
+    fallback: '404.html'
   },
   /*
   ** Firebase module configuration

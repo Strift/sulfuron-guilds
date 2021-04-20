@@ -37,11 +37,11 @@
     </div>
     <div class="px-6 bg-gray-900 text-gray-700 rounded-b-lg ">
       <div class="border-t py-2 border-gray-800 text-sm flex font-semibold space-x-2 justify-end">
-        <a v-if="websiteUrl && websiteUrl !== contactUrl" :href="websiteUrl" rel="noopener" target="_blank" class="hover:text-blue-300">
+        <a v-if="websiteUrl && websiteUrl !== contactUrl" :href="websiteRedirectUrl" rel="noopener" target="_blank" class="hover:text-blue-300">
           {{ readableWebsiteUrl }}
         </a>
         <span v-if="contactUrl && websiteUrl && websiteUrl !== contactUrl">&bull;</span>
-        <a v-if="contactUrl" :href="contactUrl" target="_blank" rel="noopener" class="hover:text-blue-300">
+        <a v-if="contactUrl" :href="contactRedirectUrl" target="_blank" rel="noopener" class="hover:text-blue-300">
           Contact
         </a>
       </div>
@@ -64,6 +64,7 @@ export default {
     GuildRecruitment
   },
   props: {
+    id: { type: String, required: true },
     name: { type: String, required: true },
     type: { type: String, required: true },
     raidDays: { type: Array, required: true },
@@ -96,6 +97,12 @@ export default {
         hostname = this.websiteUrl
       }
       return hostname
+    },
+    contactRedirectUrl () {
+      return `${this.$config.baseURL}/redirect/?type=contact&guild=${this.id}`
+    },
+    websiteRedirectUrl () {
+      return `${this.$config.baseURL}/redirect/?type=website&guild=${this.id}`
     }
   }
 }
