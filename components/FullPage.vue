@@ -24,16 +24,21 @@
         <Footer />
       </div>
     </div>
+    <!-- <GuildModal logo-url="https://astral.gg/_nuxt/img/41e90eb.svg" /> -->
     <NotificationList class="fixed bottom-0 w-full" />
   </div>
 </template>
 
 <script>
 import { mapState, mapGetters } from 'vuex'
+import GuildModal from '~/components/GuildModal.vue'
 
 const DEFAULT_FACTION_COOKIE = 'default_faction'
 
 export default {
+  components: {
+    GuildModal
+  },
   props: {
     background: {
       type: String,

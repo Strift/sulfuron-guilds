@@ -3,16 +3,11 @@
     class="w-full group shadow hover:shadow-md hover:float transition-transform duration-150 ease-in-out"
   >
     <div class="p-5 flex items-center rounded-t-lg bg-gray-900">
-      <div class="h-12 w-12 mr-6 items-center justify-center flex rounded overflow-hidden">
-        <img
-          v-if="hasLogo && !loadingError"
-          :src="logoUrl"
-          :alt="`Logo ${name}`"
-          class="w-full"
-          @error="loadingError = true"
-        >
-        <MissingGuildLogo v-else class="text-gray-700" />
-      </div>
+      <GuildLogo
+        :url="logoUrl"
+        :alt="`Logo ${name}`"
+        class="h-12 w-12 mr-6 rounded overflow-hidden"
+      />
       <div class="text-gray-400 group-hover:text-blue-300 font-semibold text-lg leading-6">
         {{ name }}
       </div>
@@ -56,8 +51,9 @@
 </template>
 
 <script>
+import GuildLogo from './ui/GuildLogo.vue'
 import GuildRecruitment from './GuildRecruitment.vue'
-import MissingGuildLogo from '~/components/MissingGuildLogo.vue'
+import MissingGuildLogo from '~/components/ui/MissingGuildLogo.vue'
 import ArrowNarrowRightIcon from '~/components/icons/solid/ArrowNarrowRightIcon.vue'
 import CalendarIcon from '~/components/icons/CalendarIcon.vue'
 import ClockIcon from '~/components/icons/ClockIcon.vue'
@@ -65,6 +61,7 @@ import ClockIcon from '~/components/icons/ClockIcon.vue'
 export default {
   name: 'GuildCard',
   components: {
+    GuildLogo,
     MissingGuildLogo,
     CalendarIcon,
     ClockIcon,
@@ -89,10 +86,6 @@ export default {
     expandGuildRecruitment: false
   }),
   computed: {
-    hasLogo () {
-      return this.logoUrl !== '' &&
-        this.logoUrl != null
-    },
     readableDays () {
       return this.raidDays.map(day => day.slice(0, 3)).join(', ')
     },
