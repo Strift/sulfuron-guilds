@@ -30,7 +30,10 @@ module.exports = {
   variants: {
     borderColor: ({ after }) => after(['focus-within']),
     borderOpacity: ({ after }) => after(['focus-within']),
-    textColor: ['responsive', 'hover', 'focus', 'group-focus']
+    backgroundColor: ({ after }) => after(['group-hover']),
+    backgroundOpacity: ({ after }) => after(['group-hover']),
+    textColor: ['responsive', 'hover', 'focus', 'group-focus', 'group-hover'],
+    height: ({ after }) => after(['group-hover'])
   },
   plugins: [],
   purge: {

@@ -1,0 +1,5 @@
+@variants hover {
+  .float {
+    transform: translateY(-8px)
+  }
+}

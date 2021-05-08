@@ -34,6 +34,7 @@ export default {
   */
   css: [
     '~/assets/css/base.css',
+    '~/assets/css/utilities.css',
     '~/assets/css/animations.css',
     '~/assets/css/fonts.css'
   ],
@@ -53,6 +54,8 @@ export default {
   ** Nuxt.js dev-modules
   */
   buildModules: [
+    // Doc: https://github.com/nuxt-community/dotenv-module
+    '@nuxtjs/dotenv',
     // Doc: https://github.com/nuxt-community/eslint-module
     '@nuxtjs/eslint-module',
     // Doc: https://github.com/nuxt-community/nuxt-tailwindcss

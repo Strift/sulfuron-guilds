@@ -1,22 +1,22 @@
 <template>
   <button
     class="w-full p-3 rounded  group focus:outline-none"
-    :class="{ 'hover:bg-gray-800': isOpen }"
-    @click="$emit('click')"
+    :class="{ 'hover:bg-gray-800': isOpen && expandable }"
+    @click="expandable && $emit('click')"
   >
-    <div class="flex justify-between mb-3 text-gray-600 group-focus:text-blue-300">
+    <div class="flex justify-between mb-3 " :class="{ 'group-focus:text-blue-300': expandable }">
       <div class="font-semibold text-xs uppercase tracking-widest">
         Recrutement
       </div>
       <ChevronDownIcon
-        v-if="isOpen"
+        v-if="isOpen && expandable"
         class="transform transition-transform duration-200"
         :class="{ 'rotate-180': expanded }"
       />
     </div>
     <div
       :class="{ 'flex space-x-2': !expanded, 'space-y-2': expanded }"
-      class="text-gray-600"
+      class=""
     >
       <div v-if="!isOpen" class="text-gray-700">
         Clos
@@ -69,6 +69,10 @@ export default {
     expanded: {
       type: Boolean,
       required: true
+    },
+    expandable: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {

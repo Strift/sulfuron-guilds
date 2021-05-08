@@ -64,7 +64,6 @@
           :logo-url="guild.logoUrl"
           :website-url="guild.websiteUrl"
           :contact-url="guild.contactUrl"
-          class="shadow-md"
         />
       </div>
     </transition-group>
