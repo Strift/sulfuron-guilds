@@ -1,6 +1,7 @@
 <template>
-  <button
-    class="w-full p-3 rounded  group focus:outline-none"
+  <component
+    :is="expandable ? 'button' : 'div'"
+    class="w-full rounded group focus:outline-none"
     :class="{ 'hover:bg-gray-800': isOpen && expandable }"
     @click="expandable && $emit('click')"
   >
@@ -41,7 +42,7 @@
         </div>
       </div>
     </div>
-  </button>
+  </component>
 </template>
 
 <script>

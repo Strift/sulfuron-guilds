@@ -33,6 +33,7 @@
     "is-url": "^1.2.4",
     "lodash": "^4.17.21",
     "nuxt": "^2.14.0",
+    "v-click-outside": "^3.1.2",
     "vue-cookies": "^1.7.4",
     "vue2-animate": "^2.1.4",
     "vuexfire": "^3.2.5"

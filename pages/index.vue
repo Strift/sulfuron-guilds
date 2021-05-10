@@ -64,6 +64,7 @@
           :logo-url="guild.logoUrl"
           :website-url="guild.websiteUrl"
           :contact-url="guild.contactUrl"
+          @click="openGuild(guild)"
         />
       </div>
     </transition-group>
@@ -154,6 +155,9 @@ export default {
     },
     removeClassFilter (classValue, specValue) {
       this.$store.commit('guilds/removeClassFilter', { classValue, specValue })
+    },
+    openGuild (guild) {
+      this.$store.commit('setOpenGuild', guild)
     }
   },
   head () {

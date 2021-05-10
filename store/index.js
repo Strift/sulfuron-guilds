@@ -6,6 +6,7 @@ const BACKGROUND_STATE_PROMO = 'sunwell'
 export const state = () => ({
   faction: 'Horde',
   background: BACKGROUND_STATE_FACTION,
+  openGuild: null,
   notifications: []
 })
 
@@ -30,6 +31,10 @@ export const mutations = {
     } else if (state.faction === 'Horde') {
       state.faction = 'Alliance'
     }
+  },
+
+  setOpenGuild (state, guild) {
+    state.openGuild = guild
   },
 
   addNotification (state, { type, message }) {

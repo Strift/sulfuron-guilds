@@ -57,10 +57,18 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import NavbarLink from './NavbarLink.vue'
+import NavbarLink from '~/components/ui/NavbarLink.vue'
+import BellIcon from '~/components/icons/outline/BellIcon.vue'
+import UserIcon from '~/components/icons/solid/UserIcon.vue'
+import ArrowLeftIcon from '~/components/icons/solid/ArrowLeftIcon.vue'
 
 export default {
-  components: { NavbarLink },
+  components: {
+    NavbarLink,
+    BellIcon,
+    UserIcon,
+    ArrowLeftIcon
+  },
   computed: {
     ...mapGetters('account', [
       'isGuest',

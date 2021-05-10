@@ -1,6 +1,7 @@
 <template>
   <button
     class="w-full group shadow hover:shadow-md hover:float transition-transform duration-150 ease-in-out"
+    @click="$emit('click')"
   >
     <div class="p-5 flex items-center rounded-t-lg bg-gray-900">
       <GuildLogo
@@ -29,6 +30,7 @@
       <GuildRecruitment
         :recruitment="recruitment"
         :expanded="expandGuildRecruitment"
+        class="p-3"
         @click="expandGuildRecruitment = !expandGuildRecruitment"
       />
     </div>
@@ -53,20 +55,16 @@
 <script>
 import GuildLogo from './ui/GuildLogo.vue'
 import GuildRecruitment from './GuildRecruitment.vue'
-import MissingGuildLogo from '~/components/ui/MissingGuildLogo.vue'
-import ArrowNarrowRightIcon from '~/components/icons/solid/ArrowNarrowRightIcon.vue'
-import CalendarIcon from '~/components/icons/CalendarIcon.vue'
-import ClockIcon from '~/components/icons/ClockIcon.vue'
+import CalendarIcon from '~/components/icons/solid/CalendarIcon.vue'
+import ClockIcon from '~/components/icons/solid/ClockIcon.vue'
 
 export default {
   name: 'GuildCard',
   components: {
     GuildLogo,
-    MissingGuildLogo,
-    CalendarIcon,
     ClockIcon,
-    GuildRecruitment,
-    ArrowNarrowRightIcon
+    CalendarIcon,
+    GuildRecruitment
   },
   props: {
     id: { type: String, required: true },
@@ -88,22 +86,6 @@ export default {
   computed: {
     readableDays () {
       return this.raidDays.map(day => day.slice(0, 3)).join(', ')
-    },
-    readableWebsiteUrl () {
-      let hostname
-      try {
-        const url = new URL(this.websiteUrl)
-        hostname = url.hostname
-      } catch (error) {
-        hostname = this.websiteUrl
-      }
-      return hostname
-    },
-    contactRedirectUrl () {
-      return `${this.$config.baseURL}/redirect/?type=contact&guild=${this.id}`
-    },
-    websiteRedirectUrl () {
-      return `${this.$config.baseURL}/redirect/?type=website&guild=${this.id}`
     }
   }
 }

@@ -24,6 +24,11 @@ module.exports = {
       },
       opacity: {
         90: '0.9' // Apparently this overrides background opacity too
+      },
+      width: {
+        72: '18rem',
+        84: '21rem',
+        96: '24rem'
       }
     }
   },

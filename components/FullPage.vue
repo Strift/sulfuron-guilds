@@ -11,8 +11,13 @@
       class="background relative flex-1 flex flex-col"
     >
       <div
-        :class="{ 'bg-opacity-90': showFactionBg, 'bg-opacity-75': showSunwellBg }"
-        class="bg-gray-900 relative flex-1 max-h-screen overflow-y-scroll flex flex-col"
+        :class="{
+          'bg-opacity-90': showFactionBg,
+          'bg-opacity-75': showSunwellBg,
+          'overflow-hidden': openGuild,
+          'overflow-y-scroll': !openGuild
+        }"
+        class="bg-gray-900 relative flex-1 max-h-screen flex flex-col"
       >
         <div class="container mx-auto font-sans px-5 xl:px-0 flex-1">
           <Navbar
@@ -24,7 +29,18 @@
         <Footer />
       </div>
     </div>
-    <!-- <GuildModal logo-url="https://astral.gg/_nuxt/img/41e90eb.svg" /> -->
+    <GuildModal
+      v-if="openGuild"
+      :id="openGuild.id"
+      :name="openGuild.name"
+      :type="openGuild.type"
+      :raid-days="openGuildRaidDays"
+      :time-range="openGuildTimeRange"
+      :recruitment="openGuild.recruitment"
+      :logo-url="openGuild.logoUrl"
+      :website-url="openGuild.websiteUrl"
+      :contact-url="openGuild.contactUrl"
+    />
     <NotificationList class="fixed bottom-0 w-full" />
   </div>
 </template>
@@ -46,7 +62,10 @@ export default {
     }
   },
   computed: {
-    ...mapState(['faction']),
+    ...mapState([
+      'faction',
+      'openGuild'
+    ]),
     ...mapGetters([
       'isAlliance',
       'isHorde'
@@ -56,6 +75,14 @@ export default {
     },
     showSunwellBg () {
       return this.background === 'sunwell'
+    },
+    openGuildTimeRange () {
+      return this.openGuild.startHour + ' – ' + this.openGuild.endHour
+    },
+    openGuildRaidDays () {
+      return this.openGuild.raidDays
+        .filter(({ playing }) => playing)
+        .map(({ day }) => day)
     }
   },
   watch: {
