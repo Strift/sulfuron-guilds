@@ -38,10 +38,18 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import DangerButton from '~/components/ui/DangerButton.vue'
+import BattleNetIcon from '~/components/ui/BattleNetIcon.vue'
+import PageSectionTitle from '~/components/ui/PageSectionTitle.vue'
 
 export default {
   name: 'Settings',
   layout: 'account',
+  components: {
+    DangerButton,
+    BattleNetIcon,
+    PageSectionTitle
+  },
   computed: {
     ...mapGetters('account', [
       'username',

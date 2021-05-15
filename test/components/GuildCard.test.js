@@ -2,8 +2,8 @@ import { mount } from '@vue/test-utils'
 import factory from '~/test/factory'
 
 import GuildCard from '~/components/GuildCard.vue'
-import MissingGuildLogo from '~/components/MissingGuildLogo.vue'
-import ClassIcon from '~/components/icons/ClassIcon.vue'
+import MissingGuildLogo from '~/components/ui/MissingGuildLogo.vue'
+import ClassIcon from '~/components/ui/ClassIcon.vue'
 
 const makeComponent = (props) => {
   const propsData = factory(GuildCard, props)

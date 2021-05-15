@@ -16,8 +16,12 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import AccountNavItem from '~/components/AccountNavItem.vue'
 
 export default {
+  components: {
+    AccountNavItem
+  },
   computed: {
     ...mapGetters('account', [
       'isAGuildOwner'

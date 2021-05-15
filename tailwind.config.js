@@ -24,13 +24,24 @@ module.exports = {
       },
       opacity: {
         90: '0.9' // Apparently this overrides background opacity too
+      },
+      height: {
+        hd: '744px'
+      },
+      width: {
+        72: '18rem',
+        84: '21rem',
+        96: '24rem'
       }
     }
   },
   variants: {
     borderColor: ({ after }) => after(['focus-within']),
     borderOpacity: ({ after }) => after(['focus-within']),
-    textColor: ['responsive', 'hover', 'focus', 'group-focus']
+    backgroundColor: ['responsive', 'hover', 'focus', 'group-focus', 'group-hover'],
+    backgroundOpacity: ['responsive', 'hover', 'focus', 'group-focus', 'group-hover'],
+    textColor: ['responsive', 'hover', 'focus', 'group-focus', 'group-hover'],
+    height: ({ after }) => after(['group-hover'])
   },
   plugins: [],
   purge: {

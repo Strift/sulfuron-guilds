@@ -21,7 +21,7 @@
 import cloneDeep from 'lodash/cloneDeep'
 
 import FormCheckBox from '~/components/ui/FormCheckBox.vue'
-import ClassIcon from '~/components/icons/ClassIcon.vue'
+import ClassIcon from '~/components/ui/ClassIcon.vue'
 
 import WOW_CLASSES from '~/data/classes.json'
 

@@ -18,3 +18,14 @@
     </div>
   </div>
 </template>
+
+<script>
+import { defineComponent } from '@vue/composition-api'
+import CheckCircleIcon from '~/components/icons/outline/CheckCircleIcon.vue'
+
+export default defineComponent({
+  components: {
+    CheckCircleIcon
+  }
+})
+</script>

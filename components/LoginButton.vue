@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import BattleNetIcon from '~/components/icons/BattleNetIcon.vue'
+import BattleNetIcon from '~/components/ui/BattleNetIcon.vue'
 
 export default {
   components: {

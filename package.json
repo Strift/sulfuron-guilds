@@ -26,6 +26,7 @@
     "@nuxtjs/firebase": "^7.1.1",
     "@nuxtjs/robots": "^2.4.2",
     "@nuxtjs/sentry": "^5.0.3",
+    "@vue/composition-api": "^1.0.0-rc.8",
     "animate.css": "^4.1.1",
     "epic-spinners": "^1.1.0",
     "firebase": "^8.2.1",
@@ -33,6 +34,7 @@
     "is-url": "^1.2.4",
     "lodash": "^4.17.21",
     "nuxt": "^2.14.0",
+    "v-click-outside": "^3.1.2",
     "vue-cookies": "^1.7.4",
     "vue2-animate": "^2.1.4",
     "vuexfire": "^3.2.5"
@@ -40,6 +42,7 @@
   "devDependencies": {
     "@babel/core": "^7.13.8",
     "@babel/preset-env": "^7.13.8",
+    "@nuxtjs/dotenv": "^1.4.1",
     "@nuxtjs/eslint-config": "^3.1.0",
     "@nuxtjs/eslint-module": "^2.0.0",
     "@nuxtjs/tailwindcss": "^3.4.2",

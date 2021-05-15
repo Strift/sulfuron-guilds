@@ -14,7 +14,12 @@
 </template>
 
 <script>
+import SearchIcon from '~/components/icons/solid/SearchIcon.vue'
+
 export default {
+  components: {
+    SearchIcon
+  },
   props: {
     value: {
       type: String,
