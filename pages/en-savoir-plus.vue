@@ -38,20 +38,20 @@
         </FeatureSection>
       </div>
       <div class="flex flex-col md:flex-row md:justify-center md:space-x-16 space-y-10 md:space-y-0">
-        <nuxt-link
+        <NuxtLink
           :to="accountLinkUrl"
           class="bg-blue-900 bg-opacity-25 hover:bg-opacity-75 border border-blue-300 text-blue-300 hover:text-blue-200 text-shadow-sm px-4 py-2 rounded-full shadow-lg w-64 text-center uppercase font-semibold tracking-widest mx-auto md:mx-0"
         >
           <span v-show="isGuest">Connexion</span>
           <span v-show="isAuthenticated">Mon compte</span>
-        </nuxt-link>
-        <nuxt-link
+        </NuxtLink>
+        <NuxtLink
           to="/"
           title="Accueil"
           class="bg-gray-700 bg-opacity-25 hover:bg-opacity-75 border border-gray-400 text-gray-400 hover:text-gray-200 text-shadow-sm px-4 py-2 rounded-full shadow-lg w-64 text-center uppercase font-semibold tracking-widest mx-auto md:mx-0"
         >
           Voir les guildes
-        </nuxt-link>
+        </NuxtLink>
       </div>
     </div>
   </div>
@@ -59,8 +59,12 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import FeatureSection from '~/components/ui/FeatureSection.vue'
 
 export default {
+  components: {
+    FeatureSection
+  },
   computed: {
     ...mapGetters('account', [
       'isGuest',

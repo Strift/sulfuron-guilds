@@ -11,8 +11,8 @@
 </template>
 
 <script>
-import ClassIcon from '~/components/icons/ClassIcon.vue'
-import CloseIcon from '~/components/icons/CloseIcon.vue'
+import ClassIcon from '~/components/ui/ClassIcon.vue'
+import CloseIcon from '~/components/icons/solid/CloseIcon.vue'
 
 export default {
   components: {

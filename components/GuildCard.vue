@@ -1,6 +1,6 @@
 <template>
   <button
-    class="w-full group shadow hover:shadow-md hover:float transition-transform duration-150 ease-in-out"
+    class="w-full group shadow hover:shadow-md hover:float focus:float transition-transform duration-150 ease-in-out focus:outline-none"
     @click="$emit('click')"
   >
     <div class="p-5 flex items-center rounded-t-lg bg-gray-900">
@@ -9,24 +9,24 @@
         :alt="`Logo ${name}`"
         class="h-12 w-12 mr-6 rounded overflow-hidden"
       />
-      <div class="text-gray-400 group-hover:text-blue-300 font-semibold text-lg leading-6">
+      <div class="text-gray-400 group-hover:text-blue-300 group-focus:text-blue-300 font-semibold text-lg leading-6">
         {{ name }}
       </div>
       <div class="ml-auto uppercase tracking-widest text-gray-600 text-sm">
         {{ type }}
       </div>
     </div>
-    <div class="bg-gray-900 group-hover:bg-gray-800 bg-opacity-75 group-hover:bg-opacity-50 text-gray-700 group-hover:text-gray-600 px-6 pt-6 pb-0">
+    <div class="bg-gray-900 group-hover:bg-gray-800 group-focus:bg-gray-800 bg-opacity-75 group-hover:bg-opacity-50 group-focus:bg-opacity-50 text-gray-700 group-hover:text-gray-600 group-focus:text-gray-600 px-6 pt-6 pb-0">
       <div class="flex items-center space-x-4 mb-4">
-        <CalendarIcon class="text-gray-800 group-hover:text-gray-700 flex-shrink-0" />
+        <CalendarIcon class="text-gray-800 group-hover:text-gray-700 group-focus:text-gray-700 flex-shrink-0" />
         <div>{{ readableDays }}</div>
       </div>
       <div class="flex items-center space-x-4">
-        <ClockIcon class="text-gray-800 group-hover:text-gray-700 flex-shrink-0" />
+        <ClockIcon class="text-gray-800 group-hover:text-gray-700 group-focus:text-gray-700 flex-shrink-0" />
         <div>{{ timeRange }}</div>
       </div>
     </div>
-    <div class="bg-gray-900 group-hover:bg-gray-800 bg-opacity-75 group-hover:bg-opacity-50 text-gray-700 group-hover:text-gray-600 p-3 rounded-b-lg">
+    <div class="bg-gray-900 group-hover:bg-gray-800 group-focus:bg-gray-800 bg-opacity-75 group-hover:bg-opacity-50 group-focus:bg-opacity-50 text-gray-700 group-hover:text-gray-600 group-focus:text-gray-600 p-3 rounded-b-lg">
       <GuildRecruitment
         :recruitment="recruitment"
         :expanded="expandGuildRecruitment"

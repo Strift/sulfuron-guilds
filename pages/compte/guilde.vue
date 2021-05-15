@@ -85,7 +85,11 @@ import { debounce } from 'lodash'
 import { mapState, mapGetters } from 'vuex'
 import isUrl from 'is-url'
 
+import FormInput from '~/components/ui/FormInput.vue'
+import FormSelect from '~/components/ui/FormSelect.vue'
+import FormCheckList from '~/components/ui/FormCheckList.vue'
 import FormSpecsList from '~/components/ui/FormSpecsList.vue'
+import PageSectionTitle from '~/components/ui/PageSectionTitle.vue'
 
 import WOW_CLASSES from '~/data/classes.json'
 const DAYS_OF_THE_WEEK = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche']
@@ -94,7 +98,11 @@ export default {
   name: 'Guild',
   layout: 'account',
   components: {
-    FormSpecsList
+    FormInput,
+    FormSelect,
+    FormCheckList,
+    FormSpecsList,
+    PageSectionTitle
   },
   data: () => ({
     factionOptions: [

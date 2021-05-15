@@ -1,12 +1,12 @@
 <template>
   <header class="flex items-center h-24">
-    <nuxt-link
+    <NuxtLink
       to="/"
       title="Accueil"
       class="md:ml-0 md:mr-auto"
     >
       <img src="~/assets/images/logo.png" alt="sulfuron.eu" class="mx-auto h-8 md:h-10">
-    </nuxt-link>
+    </NuxtLink>
     <nav>
       <ul class="flex items-center space-x-5 md:space-x-12 list-none">
         <NavbarLink

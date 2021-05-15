@@ -15,9 +15,14 @@
 </template>
 
 <script>
+import PageTitle from '~/components/ui/PageTitle.vue'
 import AccountNav from '~/components/AccountNav.vue'
+
 export default {
-  components: { AccountNav },
+  components: {
+    PageTitle,
+    AccountNav
+  },
   middleware: ['auth', 'guild']
 }
 </script>

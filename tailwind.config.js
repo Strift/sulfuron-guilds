@@ -38,8 +38,8 @@ module.exports = {
   variants: {
     borderColor: ({ after }) => after(['focus-within']),
     borderOpacity: ({ after }) => after(['focus-within']),
-    backgroundColor: ({ after }) => after(['group-hover']),
-    backgroundOpacity: ({ after }) => after(['group-hover']),
+    backgroundColor: ['responsive', 'hover', 'focus', 'group-focus', 'group-hover'],
+    backgroundOpacity: ['responsive', 'hover', 'focus', 'group-focus', 'group-hover'],
     textColor: ['responsive', 'hover', 'focus', 'group-focus', 'group-hover'],
     height: ({ after }) => after(['group-hover'])
   },

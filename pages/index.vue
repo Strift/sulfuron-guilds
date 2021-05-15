@@ -6,9 +6,9 @@
       </h1>
       <p class="text-gray-400 text-lg text-shadow-md">
         Votre nouvelle plateforme dédiée au recrutement sur Sulfuron.
-        <nuxt-link to="/en-savoir-plus/" class="text-blue-300 hover:text-blue-400 font-semibold">
+        <NuxtLink to="/en-savoir-plus/" class="text-blue-300 hover:text-blue-400 font-semibold">
           En savoir plus.
-        </nuxt-link>
+        </NuxtLink>
       </p>
     </div>
     <div class="sm:flex space-y-6 sm:space-y-0 sm:justify-between sm:border-b border-gray-700 sm:pb-6 mb-6">
@@ -77,9 +77,9 @@
       <p class="text-center text-gray-300 text-lg">
         Votre guilde n'y est pas ? Créez un compte pour pouvoir gérer votre guilde.
       </p>
-      <nuxt-link to="/connexion/" class="bg-blue-900 bg-opacity-25 hover:bg-opacity-75 border border-blue-300 text-blue-300 hover:text-blue-200 text-shadow-sm text-lg px-4 py-2 rounded-full shadow block max-w-xs mx-auto text-center">
+      <NuxtLink to="/connexion/" class="bg-blue-900 bg-opacity-25 hover:bg-opacity-75 border border-blue-300 text-blue-300 hover:text-blue-200 text-shadow-sm text-lg px-4 py-2 rounded-full shadow block max-w-xs mx-auto text-center">
         Connexion
-      </nuxt-link>
+      </NuxtLink>
     </div>
     <div v-show="isAuthenticated" class="space-y-10 mt-20">
       <p class="text-center text-gray-300 text-lg">

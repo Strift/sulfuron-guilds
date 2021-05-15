@@ -23,7 +23,12 @@
 </template>
 
 <script>
+import LockIcon from '~/components/icons/solid/LockIcon.vue'
+
 export default {
+  components: {
+    LockIcon
+  },
   props: {
     name: {
       type: String,

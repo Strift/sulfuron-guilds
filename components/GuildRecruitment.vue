@@ -46,8 +46,8 @@
 </template>
 
 <script>
-import ClassIcon from '~/components/icons/ClassIcon.vue'
-import ChevronDownIcon from '~/components/icons/ChevronDownIcon.vue'
+import ClassIcon from '~/components/ui/ClassIcon.vue'
+import ChevronDownIcon from '~/components/icons/solid/ChevronDownIcon.vue'
 
 import WOW_CLASSES from '~/data/classes.json'
 
