@@ -11,6 +11,7 @@
         :placeholder="placeholder"
         :readonly="disabled === true"
         :value="value"
+        :maxlength="maxLength"
         class="focus:border-blue-300 focus:border-opacity-75 focus:text-gray-400 focus:shadow bg-blue-900 bg-opacity-25 border border-gray-700 text-gray-500 placeholder-gray-700 h-10 rounded px-3 outline-none shadow-sm block w-full"
         @input="$emit('input', $event.target.value)"
       >
@@ -56,6 +57,10 @@ export default {
     },
     errorMessage: {
       type: String,
+      default: null
+    },
+    maxLength: {
+      type: Number,
       default: null
     }
   }

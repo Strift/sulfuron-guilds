@@ -34,6 +34,7 @@
       :id="openGuild.id"
       :name="openGuild.name"
       :type="openGuild.type"
+      :description="openGuild.description"
       :raid-days="openGuildRaidDays"
       :time-range="openGuildTimeRange"
       :recruitment="openGuild.recruitment"

@@ -38,7 +38,7 @@
             </div>
             <div class="lg:max-w-screen-sm lg:mx-auto px-5 text-gray-600">
               <div class="mb-8">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque interdum rutrum sodales. Nullam mattis fermentum libero, non volutpa.
+                {{ description }}
               </div>
               <div class="sm:flex sm:items-start space-y-8 sm:space-y-0">
                 <div class="sm:w-1/2 space-y-4">
@@ -99,6 +99,7 @@ export default {
     id: { type: String, required: true },
     name: { type: String, required: true },
     type: { type: String, required: true },
+    description: { type: String, required: true },
     raidDays: { type: Array, required: true },
     timeRange: { type: String, required: true },
     recruitment: { type: Array, required: true },
