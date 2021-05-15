@@ -15,11 +15,13 @@
 </template>
 
 <script>
+import FullPage from '~/components/FullPage.vue'
 import PageTitle from '~/components/ui/PageTitle.vue'
 import AccountNav from '~/components/AccountNav.vue'
 
 export default {
   components: {
+    FullPage,
     PageTitle,
     AccountNav
   },

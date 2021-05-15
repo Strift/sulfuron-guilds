@@ -93,6 +93,9 @@
 import sortBy from 'lodash/sortBy'
 import { mapGetters } from 'vuex'
 
+import SearchBar from '~/components/SearchBar.vue'
+import GuildCard from '~/components/GuildCard.vue'
+import FactionButton from '~/components/FactionButton.vue'
 import SortAscendingIcon from '~/components/icons/solid/SortAscendingIcon.vue'
 import SearchFiltersButton from '~/components/SearchFiltersButton.vue'
 import SearchFiltersCard from '~/components/SearchFiltersCard.vue'
@@ -101,6 +104,9 @@ import ClassFilter from '~/components/ClassFilter.vue'
 export default {
   name: 'Index',
   components: {
+    SearchBar,
+    GuildCard,
+    FactionButton,
     SortAscendingIcon,
     SearchFiltersButton,
     SearchFiltersCard,

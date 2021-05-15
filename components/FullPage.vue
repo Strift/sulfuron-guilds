@@ -47,13 +47,19 @@
 
 <script>
 import { mapState, mapGetters } from 'vuex'
+import Navbar from '~/components/Navbar.vue'
+import Footer from '~/components/Footer.vue'
 import GuildModal from '~/components/GuildModal.vue'
+import NotificationList from '~/components/NotificationList.vue'
 
 const DEFAULT_FACTION_COOKIE = 'default_faction'
 
 export default {
   components: {
-    GuildModal
+    Navbar,
+    Footer,
+    GuildModal,
+    NotificationList
   },
   props: {
     background: {
