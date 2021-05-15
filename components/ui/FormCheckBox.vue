@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import CheckIcon from '~/components/icons/CheckIcon.vue'
+import CheckIcon from '~/components/icons/solid/CheckIcon.vue'
 
 export default {
   name: 'FormCheckBox',

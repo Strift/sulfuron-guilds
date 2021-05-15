@@ -1,3 +1,4 @@
+const isProduction = () => process.env.NODE_ENV === 'production'
 
 export default {
   /*
@@ -9,7 +10,7 @@ export default {
   ** Runtime config
   */
   publicRuntimeConfig: {
-    baseURL: process.env.NODE_ENV === 'production' ? 'https://guildes.sulfuron.eu' : process.env.BASE_URL
+    baseURL: isProduction() ? 'https://guildes.sulfuron.eu' : process.env.BASE_URL
   },
   /*
   ** Headers of the page
@@ -34,6 +35,7 @@ export default {
   */
   css: [
     '~/assets/css/base.css',
+    '~/assets/css/utilities.css',
     '~/assets/css/animations.css',
     '~/assets/css/fonts.css'
   ],
@@ -45,18 +47,17 @@ export default {
     '~/plugins/vue-cookies.client.js'
   ],
   /*
-  ** Auto import components
-  ** See https://nuxtjs.org/api/configuration-components
-  */
-  components: true,
-  /*
   ** Nuxt.js dev-modules
   */
   buildModules: [
+    // Doc: https://github.com/nuxt-community/dotenv-module
+    '@nuxtjs/dotenv',
     // Doc: https://github.com/nuxt-community/eslint-module
     '@nuxtjs/eslint-module',
     // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
-    '@nuxtjs/tailwindcss'
+    '@nuxtjs/tailwindcss',
+    // Doc: https://sentry.nuxtjs.org/
+    '@nuxtjs/sentry'
   ],
   /*
   ** Nuxt.js modules
@@ -99,7 +100,8 @@ export default {
      */
     exclude: [
       '/auth/battlenet'
-    ]
+    ],
+    fallback: '404.html'
   },
   /*
   ** Firebase module configuration
@@ -131,8 +133,16 @@ export default {
           : undefined
       },
       analytics: {
-        collectionEnabled: process.env.NODE_ENV === 'production'
+        collectionEnabled: isProduction()
       }
     }
+  },
+  /*
+  ** Sentry module configuration
+  */
+  sentry: {
+    dsn: 'https://c641e9d80e684743befafefdbe54d3d9@o571625.ingest.sentry.io/5720079',
+    disabled: !isProduction(),
+    config: {}
   }
 }

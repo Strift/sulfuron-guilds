@@ -7,8 +7,13 @@ export default {
   fromFirestore (snapshot, options) {
     const data = snapshot.data(options)
     return {
+      id: snapshot.id,
       ...data,
+      // Add `description` string for guilds that don't have it
+      description: data.description || '',
+      // Transform `recruitment` array for guilds with old data structure
       recruitment: transformRecruitmentArray(data.recruitment)
+
     }
   }
 }

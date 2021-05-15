@@ -1,5 +1,5 @@
 <template>
-  <nuxt-link
+  <NuxtLink
     v-if="to"
     v-slot="{ href, navigate, isActive }"
     :to="to"
@@ -12,7 +12,7 @@
         <slot name="default" />
       </a>
     </li>
-  </nuxt-link>
+  </NuxtLink>
   <li v-else class="py-3 px-8 flex items-center bg-gray-900 bg-opacity-50 text-gray-700">
     <slot name="default" />
   </li>

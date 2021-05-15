@@ -16,7 +16,7 @@
       <div class="space-y-10 max-w-sm w-full">
         <FormInput :value="name" name="name" label="Nom de guilde" disabled />
         <div>
-          <FormInput v-model.trim="logoUrl" :error-message="errorMessage(logoUrl)" name="logo-url" label="Lien du logo" placeholder="https://exemple.com/logo.png" />
+          <FormInput v-model.trim="logoUrl" :error-message="urlErrorMessage(logoUrl)" name="logo-url" label="Lien du logo" placeholder="https://exemple.com/logo.png" />
           <div class="mt-3 text-gray-500 flex space-x-2 items-baseline">
             <div>ℹ️</div>
             <div>Utilisez un hébergeur comme <a href="https://imgur.com/" target="_blank" class="hover:underline text-blue-300">imgur</a>, puis <br><em>copiez l'adresse de l'image</em> (clic droit).</div>
@@ -34,6 +34,15 @@
           <EmptyGuildLogo v-else class="text-gray-800" />
         </div>
       </div>
+    </div>
+    <div>
+      <FormInput
+        v-model="description"
+        :max-length="144"
+        name="description"
+        label="Présentation"
+        placeholder="Nous sommes une guilde de copains."
+      />
     </div>
     <PageSectionTitle>Horaires</PageSectionTitle>
     <div class="space-y-10 lg:space-y-0 lg:flex lg:space-x-12 xl:justify-between">
@@ -54,7 +63,7 @@
     <PageSectionTitle>Contact</PageSectionTitle>
     <FormInput
       v-model="websiteUrl"
-      :error-message="errorMessage(websiteUrl)"
+      :error-message="urlErrorMessage(websiteUrl)"
       name="website-url"
       label="Lien du site"
       placeholder="https://maguilde.fr/"
@@ -63,7 +72,7 @@
     <div>
       <FormInput
         v-model="contactUrl"
-        :error-message="errorMessage(contactUrl)"
+        :error-message="urlErrorMessage(contactUrl)"
         name="contact-url"
         label="Lien de contact"
         placeholder="https://discord.gg/XXXXXXX"
@@ -85,7 +94,11 @@ import { debounce } from 'lodash'
 import { mapState, mapGetters } from 'vuex'
 import isUrl from 'is-url'
 
+import FormInput from '~/components/ui/FormInput.vue'
+import FormSelect from '~/components/ui/FormSelect.vue'
+import FormCheckList from '~/components/ui/FormCheckList.vue'
 import FormSpecsList from '~/components/ui/FormSpecsList.vue'
+import PageSectionTitle from '~/components/ui/PageSectionTitle.vue'
 
 import WOW_CLASSES from '~/data/classes.json'
 const DAYS_OF_THE_WEEK = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche']
@@ -94,7 +107,11 @@ export default {
   name: 'Guild',
   layout: 'account',
   components: {
-    FormSpecsList
+    FormInput,
+    FormSelect,
+    FormCheckList,
+    FormSpecsList,
+    PageSectionTitle
   },
   data: () => ({
     factionOptions: [
@@ -107,7 +124,8 @@ export default {
       { value: 'Speedrun', label: 'Speedrun' }
     ],
     daysOptions: DAYS_OF_THE_WEEK,
-    wowClasses: WOW_CLASSES.sort((classA, classB) => (classA.name > classB.name) ? 1 : -1)
+    wowClasses: WOW_CLASSES.sort((classA, classB) => (classA.name > classB.name) ? 1 : -1),
+    awaitingTyping: false
   }),
   computed: {
     ...mapGetters('account', ['hasDraftGuild']),
@@ -138,6 +156,16 @@ export default {
       set (value) {
         this.$store.dispatch('account/updateGuild', { type: value })
       }
+    },
+    description: {
+      get () {
+        return this.guild.description
+      },
+      set: debounce(
+        function (value) {
+          this.$store.dispatch('account/updateGuild', { description: value })
+        },
+        1000)
     },
     startHour: {
       get () {
@@ -213,7 +241,7 @@ export default {
         specs: classRecruitment.specs.map(spec => ({ value: spec.value, open: spec.checked }))
       }))
     },
-    errorMessage (value) {
+    urlErrorMessage (value) {
       if (isUrl(value)) {
         return null // no errors
       }

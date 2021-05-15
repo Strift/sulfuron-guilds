@@ -63,6 +63,12 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import PageTitle from '~/components/ui/PageTitle.vue'
+import FormInput from '~/components/ui/FormInput.vue'
+import FormSelect from '~/components/ui/FormSelect.vue'
+import PrimaryButton from '~/components/ui/PrimaryButton.vue'
+import InformationCard from '~/components/ui/InformationCard.vue'
+import PageSectionTitle from '~/components/ui/PageSectionTitle.vue'
 
 import WOW_CLASSES from '~/data/classes.json'
 
@@ -74,6 +80,14 @@ const USERS_STATE_LOADED = 'loaded'
 const USERS_STATE_ERROR = 'error'
 
 export default {
+  components: {
+    PageTitle,
+    FormInput,
+    FormSelect,
+    PrimaryButton,
+    InformationCard,
+    PageSectionTitle
+  },
   middleware: ['auth', 'admin'],
   data: () => ({
     usersState: USERS_STATE_EMPTY,

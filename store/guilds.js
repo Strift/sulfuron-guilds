@@ -13,7 +13,8 @@ const getSpecId = (classValue, specValue) => `${classValue}/${specValue}`
 export const state = () => ({
   list: [],
   classFilters: [],
-  textQuery: ''
+  textQuery: '',
+  fuse: null
 })
 
 export const mutations = {
@@ -55,6 +56,10 @@ export const getters = {
   publishedGuilds (state) {
     return state.list.filter(guild => guild.published)
   },
+  /*
+  ** Array of specializations IDs
+  ** Used internally by `searchResults` getter
+  */
   searchedSpecsIds (state) {
     // Map/flatten array of class.specs[] to specIds[]
     return state.classFilters
@@ -65,15 +70,27 @@ export const getters = {
       })
       .flat()
   },
+  /*
+  ** Result of the fuzzy-search
+  ** Used internally by `searchResults` getter
+  */
   fuzzySearchResults (state) {
     if (state.textQuery.length === 0) {
       return state.list
     }
 
-    const fuse = new Fuse(state.list, FUSE_OPTIONS)
+    // Create Fuse if it does not exist
+    if (state.fuse === null) {
+      state.fuse = new Fuse(state.list, FUSE_OPTIONS)
+    } else {
+      state.fuse.setCollection(state.list)
+    }
 
-    return fuse.search(state.textQuery).map(result => result.item)
+    return state.fuse.search(state.textQuery).map(result => result.item)
   },
+  /*
+  ** Final search results displayed by the UI
+  */
   searchResults (state, getters, rootState) {
     const guilds = getters.fuzzySearchResults
     const searchedSpecsIds = getters.searchedSpecsIds
@@ -81,17 +98,12 @@ export const getters = {
     // Filter the list to only have guilds that match searched specs
     return guilds
       .filter((guild) => {
-        // Filter guilds if they don't match current faction
-        if (guild.faction !== rootState.faction) {
-          return false
-        }
+        // Filter out guilds that don't match the current faction
+        if (guild.faction !== rootState.faction) { return false }
+        // Filter out guilds that don't have a contact URL
+        if (guild.contactUrl.length === 0) { return false }
 
-        // Filter guilds if they don't have contact URL
-        if (guild.contactUrl.length === 0) {
-          return false
-        }
-
-        // Map/flatten array of class.specs[] to specIds[]
+        // Map-flatten array of class.specs[] to specIds[]
         const guildOpenSpecs = guild.recruitment
           .map((classRecruitment) => {
             return classRecruitment.specs
@@ -99,7 +111,7 @@ export const getters = {
               .map(spec => getSpecId(classRecruitment.class, spec.value))
           })
           .flat()
-        // Filter guilds if all searched specs are present in guild open specs
+        // Keep only guilds for which open specs includes all searched specs
         return searchedSpecsIds.every(id => guildOpenSpecs.includes(id))
       })
   },

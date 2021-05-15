@@ -6,9 +6,9 @@
       </h1>
       <p class="text-gray-400 text-lg text-shadow-md">
         Votre nouvelle plateforme dédiée au recrutement sur Sulfuron.
-        <nuxt-link to="/en-savoir-plus/" class="text-blue-300 hover:text-blue-400 font-semibold">
+        <NuxtLink to="/en-savoir-plus/" class="text-blue-300 hover:text-blue-400 font-semibold">
           En savoir plus.
-        </nuxt-link>
+        </NuxtLink>
       </p>
     </div>
     <div class="sm:flex space-y-6 sm:space-y-0 sm:justify-between sm:border-b border-gray-700 sm:pb-6 mb-6">
@@ -25,18 +25,18 @@
       </div>
     </div>
 
-    <SearchFiltersCard v-show="showFiltersCard" class="shadow-xl" />
+    <SearchFiltersCard v-show="showFiltersCard" class="shadow-xl mb-6" />
 
-    <div v-if="classFilters.length" v-show="!showFiltersCard">
+    <div v-if="classFilters.length" v-show="!showFiltersCard" class="mb-3">
       <div class="font-semibold text-sm text-gray-500 uppercase tracking-wider mb-3">
         Filtres
       </div>
-      <transition-group :duration="250" name="fade" tag="div" class="flex flex-row flex-wrap space-x-4">
+      <transition-group :duration="250" name="fade" tag="div" class="flex flex-row flex-wrap">
         <ClassFilter
           v-for="filter in classFilters"
           :key="`${filter.classValue}/${filter.specName}`"
           :wow-class="filter.classValue"
-          class="mb-4"
+          class="mb-4 mr-4"
           @remove="removeClassFilter(filter.classValue, filter.specValue)"
         >
           {{ filter.specName }}
@@ -44,12 +44,18 @@
       </transition-group>
     </div>
 
+    <div class="text-gray-700 flex items-center space-x-2">
+      <SortAscendingIcon />
+      <div>Guildes triées par {{ sortingText }}.</div>
+    </div>
+
     <transition-group :duration="500" name="fade" tag="div" class="grid grid-flow-row grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-12 my-12">
       <div
-        v-for="guild in guildsSearchResults"
+        v-for="guild in orderedSearchResults"
         :key="guild.name"
       >
         <GuildCard
+          :id="guild.id"
           :name="guild.name"
           :type="guild.type"
           :raid-days="raidDays(guild)"
@@ -58,22 +64,22 @@
           :logo-url="guild.logoUrl"
           :website-url="guild.websiteUrl"
           :contact-url="guild.contactUrl"
-          class="shadow-md"
+          @click="openGuild(guild)"
         />
       </div>
     </transition-group>
 
     <div class="text-center mt-12 text-gray-500">
-      {{ guildsSearchResults.length }} {{ resultsText }} trouvées.
+      {{ orderedSearchResults.length }} {{ resultsText }} trouvées.
     </div>
 
     <div v-show="isGuest" class="space-y-10 mt-20">
       <p class="text-center text-gray-300 text-lg">
         Votre guilde n'y est pas ? Créez un compte pour pouvoir gérer votre guilde.
       </p>
-      <nuxt-link to="/connexion/" class="bg-blue-900 bg-opacity-25 hover:bg-opacity-75 border border-blue-300 text-blue-300 hover:text-blue-200 text-shadow-sm text-lg px-4 py-2 rounded-full shadow block max-w-xs mx-auto text-center">
+      <NuxtLink to="/connexion/" class="bg-blue-900 bg-opacity-25 hover:bg-opacity-75 border border-blue-300 text-blue-300 hover:text-blue-200 text-shadow-sm text-lg px-4 py-2 rounded-full shadow block max-w-xs mx-auto text-center">
         Connexion
-      </nuxt-link>
+      </NuxtLink>
     </div>
     <div v-show="isAuthenticated" class="space-y-10 mt-20">
       <p class="text-center text-gray-300 text-lg">
@@ -84,15 +90,24 @@
 </template>
 
 <script>
+import sortBy from 'lodash/sortBy'
 import { mapGetters } from 'vuex'
-import ClassFilter from '~/components/ClassFilter.vue'
 
+import SearchBar from '~/components/SearchBar.vue'
+import GuildCard from '~/components/GuildCard.vue'
+import FactionButton from '~/components/FactionButton.vue'
+import SortAscendingIcon from '~/components/icons/solid/SortAscendingIcon.vue'
 import SearchFiltersButton from '~/components/SearchFiltersButton.vue'
 import SearchFiltersCard from '~/components/SearchFiltersCard.vue'
+import ClassFilter from '~/components/ClassFilter.vue'
 
 export default {
   name: 'Index',
   components: {
+    SearchBar,
+    GuildCard,
+    FactionButton,
+    SortAscendingIcon,
     SearchFiltersButton,
     SearchFiltersCard,
     ClassFilter
@@ -102,15 +117,21 @@ export default {
   }),
   computed: {
     ...mapGetters('guilds', {
-      guildsSearchResults: 'searchResults',
+      searchResults: 'searchResults',
       classFilters: 'classFilters'
     }),
     ...mapGetters('account', [
       'isGuest',
       'isAuthenticated'
     ]),
+    orderedSearchResults () {
+      return sortBy(this.searchResults, ['name'])
+    },
     resultsText () {
-      return this.guildsSearchResults.length > 1 ? 'guildes' : 'guilde'
+      return this.searchResults.length > 1 ? 'guildes' : 'guilde'
+    },
+    sortingText () {
+      return 'ordre alphabétique'
     }
   },
   async mounted () {
@@ -140,6 +161,9 @@ export default {
     },
     removeClassFilter (classValue, specValue) {
       this.$store.commit('guilds/removeClassFilter', { classValue, specValue })
+    },
+    openGuild (guild) {
+      this.$store.commit('setOpenGuild', guild)
     }
   },
   head () {

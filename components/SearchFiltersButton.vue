@@ -10,7 +10,12 @@
 </template>
 
 <script>
+import FilterIcon from '~/components/icons/solid/FilterIcon.vue'
+
 export default {
+  components: {
+    FilterIcon
+  },
   props: {
     active: {
       type: Boolean,

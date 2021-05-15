@@ -1,5 +1,5 @@
 <template>
-  <nuxt-link
+  <NuxtLink
     v-slot="{ href, navigate }"
     :to="to"
     :title="title"
@@ -11,7 +11,7 @@
         <slot name="default" />
       </a>
     </li>
-  </nuxt-link>
+  </NuxtLink>
 </template>
 
 <script>

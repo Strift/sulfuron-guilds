@@ -11,14 +11,14 @@
           </div>
           <ul class="space-y-5 text-gray-500">
             <li>
-              <nuxt-link to="/" class="hover:text-blue-300">
+              <NuxtLink to="/" class="hover:text-blue-300">
                 Guildes
-              </nuxt-link>
+              </NuxtLink>
             </li>
             <li>
-              <nuxt-link to="/en-savoir-plus/" class="hover:text-blue-300">
+              <NuxtLink to="/en-savoir-plus/" class="hover:text-blue-300">
                 En savoir plus
-              </nuxt-link>
+              </NuxtLink>
             </li>
             <li><a href="http://sulfuron.eu" target="_blank" rel="noopener" class="hover:text-blue-300">Actualités</a></li>
           </ul>

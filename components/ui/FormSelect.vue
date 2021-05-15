@@ -36,8 +36,12 @@
 </template>
 
 <script>
+import ChevronDownIcon from '~/components/icons/solid/ChevronDownIcon.vue'
 
 export default {
+  components: {
+    ChevronDownIcon
+  },
   props: {
     name: {
       type: String,
