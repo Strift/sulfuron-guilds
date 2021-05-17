@@ -1,6 +1,6 @@
 <template>
   <div>
-    <label :for="name" class="font-semibold text-blue-400 block leading-none text-shadow-sm mb-4">
+    <label :for="name" class="block font-semibold leading-none mb-4 text-blue-400 text-shadow-sm">
       {{ label }}
     </label>
     <div class="group relative shadow-md">
@@ -12,10 +12,10 @@
         :readonly="disabled === true"
         :value="value"
         :maxlength="maxLength"
-        class="focus:border-blue-300 focus:border-opacity-75 focus:text-gray-400 focus:shadow bg-blue-900 bg-opacity-25 border border-gray-700 text-gray-500 placeholder-gray-700 h-10 rounded px-3 outline-none shadow-sm block w-full"
+        class="bg-blue-900 bg-opacity-25 block border border-gray-700 focus:border-blue-300 focus:border-opacity-75 focus:shadow focus:text-gray-400 h-10 outline-none placeholder-gray-700 px-3 rounded shadow-sm text-gray-500 w-full"
         @input="$emit('input', $event.target.value)"
       >
-      <LockIcon v-if="disabled" class="inline absolute right-0 bottom-0 top-0 my-auto mr-3 text-gray-700 group-focus:text-gray-600" />
+      <LockIcon v-if="disabled" class="absolute bottom-0 group-focus:text-gray-600 inline mr-3 my-auto right-0 text-gray-700 top-0" />
     </div>
     <div v-if="errorMessage" class="mt-2 text-red-500 text-sm">
       {{ errorMessage }}

@@ -1,4 +1,3 @@
-const logger = require('../services/logger')
 const firebase = require('../services/firebase')
 
 const PAGE_SIZE = 1000

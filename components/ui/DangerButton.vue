@@ -1,6 +1,6 @@
 <template>
   <button
-    class="px-4 py-1 rounded-full text-center text-shadow-sm bg-opacity-25 border hover:bg-opacity-50 shadow-md hover:shadow-lg font-semibold text-xs uppercase tracking-widest bg-red-900 border-red-500 text-red-500 hover:text-red-400"
+    class="bg-opacity-25 bg-red-900 border border-red-500 font-semibold hover:bg-opacity-50 hover:shadow-lg hover:text-red-400 px-4 py-1 rounded-full shadow-md text-center text-red-500 text-shadow-sm text-xs tracking-widest uppercase"
     @click="$emit('click')"
   >
     <slot name="default" />

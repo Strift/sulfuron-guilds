@@ -8,7 +8,7 @@
       :checked="checkBox.checked"
       @change="onChange(checkBox, $event)"
     >
-      <div class="flex space-x-2 items-center">
+      <div class="flex items-center space-x-2">
         <ClassIcon :wow-class="checkBox.classValue" class="h-5" />
         <span v-if="checkBox.specValue">{{ checkBox.specName }}</span>
         <span v-else class="font-semibold text-gray-700">{{ checkBox.className }}</span>

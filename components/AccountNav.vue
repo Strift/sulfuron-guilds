@@ -1,5 +1,5 @@
 <template>
-  <nav class="rounded-md overflow-hidden shadow-md">
+  <nav class="overflow-hidden rounded-md shadow-md">
     <ul>
       <AccountNavItem v-if="isAGuildOwner" to="/compte/guilde/">
         Guilde
@@ -8,7 +8,7 @@
         Paramètres
       </AccountNavItem>
       <AccountNavItem class="items-baseline">
-        Pick Up <span class="text-xs uppercase tracking-wider border border-gray-700 h-6 w-16 rounded inline-flex items-center justify-center ml-auto">Soon&trade;</span>
+        Pick Up <span class="border border-gray-700 h-6 inline-flex items-center justify-center ml-auto rounded text-xs tracking-wider uppercase w-16">Soon&trade;</span>
       </AccountNavItem>
     </ul>
   </nav>

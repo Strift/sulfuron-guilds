@@ -1,7 +1,7 @@
 <template>
   <label
     :for="name"
-    class="group flex space-x-2 items-center border border-gray-700 rounded px-3 h-10 shadow-sm focus-within:border-blue-300 focus-within:border-opacity-75 focus-within:text-gray-400 focus-within:shadow min-w-0"
+    class="border border-gray-700 flex focus-within:border-blue-300 focus-within:border-opacity-75 focus-within:shadow focus-within:text-gray-400 group h-10 items-center min-w-0 px-3 rounded shadow-sm space-x-2"
     :class="{
       'bg-blue-900 bg-opacity-25': checked,
       'bg-gray-900 bg-opacity-25': !checked

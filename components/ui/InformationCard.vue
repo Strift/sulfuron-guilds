@@ -1,6 +1,6 @@
 <template>
   <div
-    class=" text-gray-500 border-gray-500 border border-opacity-25 bg-gray-900 bg-opacity-75 rounded px-6 py-4 shadow-md"
+    class="bg-gray-900 bg-opacity-75 border border-gray-500 border-opacity-25 px-6 py-4 rounded shadow-md text-gray-500"
   >
     <slot name="default" />
   </div>

@@ -3,10 +3,10 @@
     <img
       src="~/assets/images/iphone-mockup.png"
       alt="Site sur mobile"
-      class="hidden lg:inline-flex my-auto lg:h-phone-lg xl:h-phone-xl"
+      class="hidden lg:h-phone-lg lg:inline-flex my-auto xl:h-phone-xl"
     >
     <div class="space-y-24">
-      <h1 class="text-blue-100 text-4xl text-center font-bold text-shadow-lg leading-snug">
+      <h1 class="font-bold leading-snug text-4xl text-blue-100 text-center text-shadow-lg">
         Le recrutement des guildes<br> de Sulfuron <em class="italic">à jour</em>
       </h1>
       <div class="flex flex-col justify-center space-y-12">
@@ -37,10 +37,10 @@
           </p>
         </FeatureSection>
       </div>
-      <div class="flex flex-col md:flex-row md:justify-center md:space-x-16 space-y-10 md:space-y-0">
+      <div class="flex flex-col md:flex-row md:justify-center md:space-x-16 md:space-y-0 space-y-10">
         <NuxtLink
           :to="accountLinkUrl"
-          class="bg-blue-900 bg-opacity-25 hover:bg-opacity-75 border border-blue-300 text-blue-300 hover:text-blue-200 text-shadow-sm px-4 py-2 rounded-full shadow-lg w-64 text-center uppercase font-semibold tracking-widest mx-auto md:mx-0"
+          class="bg-blue-900 bg-opacity-25 border border-blue-300 font-semibold hover:bg-opacity-75 hover:text-blue-200 md:mx-0 mx-auto px-4 py-2 rounded-full shadow-lg text-blue-300 text-center text-shadow-sm tracking-widest uppercase w-64"
         >
           <span v-show="isGuest">Connexion</span>
           <span v-show="isAuthenticated">Mon compte</span>
@@ -48,7 +48,7 @@
         <NuxtLink
           to="/"
           title="Accueil"
-          class="bg-gray-700 bg-opacity-25 hover:bg-opacity-75 border border-gray-400 text-gray-400 hover:text-gray-200 text-shadow-sm px-4 py-2 rounded-full shadow-lg w-64 text-center uppercase font-semibold tracking-widest mx-auto md:mx-0"
+          class="bg-gray-700 bg-opacity-25 border border-gray-400 font-semibold hover:bg-opacity-75 hover:text-gray-200 md:mx-0 mx-auto px-4 py-2 rounded-full shadow-lg text-center text-gray-400 text-shadow-sm tracking-widest uppercase w-64"
         >
           Voir les guildes
         </NuxtLink>

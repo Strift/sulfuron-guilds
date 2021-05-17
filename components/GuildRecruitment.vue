@@ -1,17 +1,17 @@
 <template>
   <component
     :is="expandable ? 'button' : 'div'"
-    class="w-full rounded group focus:outline-none"
+    class="focus:outline-none group rounded w-full"
     :class="{ 'hover:bg-gray-800': isOpen && expandable }"
     @click="expandable && $emit('click')"
   >
-    <div class="flex justify-between mb-3 " :class="{ 'group-focus:text-blue-300': expandable }">
-      <div class="font-semibold text-xs uppercase tracking-widest">
+    <div class="flex justify-between mb-3" :class="{ 'group-focus:text-blue-300': expandable }">
+      <div class="font-semibold text-xs tracking-widest uppercase">
         Recrutement
       </div>
       <ChevronDownIcon
         v-if="isOpen && expandable"
-        class="transform transition-transform duration-200"
+        class="duration-200 transform transition-transform"
         :class="{ 'rotate-180': expanded }"
       />
     </div>

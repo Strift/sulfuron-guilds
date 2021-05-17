@@ -1,6 +1,6 @@
 <template>
   <a
-    class="inline-flex items-center py-2 px-4 border space-x-4 text-gray-200"
+    class="border inline-flex items-center px-4 py-2 space-x-4 text-gray-200"
     :href="`${$config.baseURL}/auth/battlenet`"
     @click="startLoading"
   >

@@ -1,7 +1,7 @@
 <template>
   <div class="flex justify-around">
-    <div class="text-center my-10">
-      <h1 class="text-blue-300 font-semibold" style="font-size: 8rem">
+    <div class="my-10 text-center">
+      <h1 class="font-semibold text-blue-300" style="font-size: 8rem">
         {{ error.statusCode }}
       </h1>
       <div class="text-gray-300">

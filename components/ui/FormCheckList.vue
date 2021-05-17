@@ -1,9 +1,9 @@
 <template>
   <div>
-    <div :for="name" class="font-semibold text-blue-400 block leading-none text-shadow-sm mb-4">
+    <div :for="name" class="block font-semibold leading-none mb-4 text-blue-400 text-shadow-sm">
       {{ label }}
     </div>
-    <div class="grid grid-flow-cols grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-6 gap-y-4">
+    <div class="gap-x-6 gap-y-4 grid grid-cols-2 grid-flow-cols lg:grid-cols-5 md:grid-cols-3">
       <FormCheckBox
         v-for="(option, optionIndex) in options"
         :id="inputId(option)"

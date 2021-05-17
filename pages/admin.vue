@@ -40,20 +40,20 @@
         Valider
       </PrimaryButton>
       <PageSectionTitle>📝 Guildes non publiées</PageSectionTitle>
-      <div v-if="draftGuilds.length" class="bg-gray-300 text-gray-800 p-6 rounded shadow">
+      <div v-if="draftGuilds.length" class="bg-gray-300 p-6 rounded shadow text-gray-800">
         <ul class="list-disc list-inside">
           <li v-for="(guild, i) in draftGuilds" :key="i">
-            {{ guildName(guild) }} <span class="text-sm text-gray-600">({{ guild.ownerUid }})</span>
+            {{ guildName(guild) }} <span class="text-gray-600 text-sm">({{ guild.ownerUid }})</span>
           </li>
         </ul>
       </div>
-      <PageSectionTitle class="flex justify-between items-baseline">
-        ✅ Guildes publiées <span class="text-gray-600 text-base">{{ publishedGuilds.length }} guildes</span>
+      <PageSectionTitle class="flex items-baseline justify-between">
+        ✅ Guildes publiées <span class="text-base text-gray-600">{{ publishedGuilds.length }} guildes</span>
       </PageSectionTitle>
-      <div v-if="publishedGuilds.length" class="bg-gray-300 text-gray-800 p-6 rounded shadow">
+      <div v-if="publishedGuilds.length" class="bg-gray-300 p-6 rounded shadow text-gray-800">
         <ul class="list-disc list-inside">
           <li v-for="(guild, i) in publishedGuilds" :key="i">
-            {{ guildName(guild) }} <span class="text-sm text-gray-600">({{ guild.ownerUid }})</span>
+            {{ guildName(guild) }} <span class="text-gray-600 text-sm">({{ guild.ownerUid }})</span>
           </li>
         </ul>
       </div>
