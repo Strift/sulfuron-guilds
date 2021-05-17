@@ -31,7 +31,7 @@
         </NavbarLink>
         <NavbarLink
           v-show="showAdminButton && isAdmin"
-          to="/admin/"
+          to="/admin/guildes/"
           title="Administration"
         >
           Admin

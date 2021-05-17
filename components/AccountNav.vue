@@ -16,7 +16,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import AccountNavItem from '~/components/AccountNavItem.vue'
+import AccountNavItem from '~/components/AsideNavItem.vue'
 
 export default {
   components: {
@@ -29,7 +29,3 @@ export default {
   }
 }
 </script>
-
-<style>
-
-</style>
