@@ -50,13 +50,10 @@
       <PageSectionTitle class="flex items-baseline justify-between">
         ✅ Guildes publiées <span class="text-base text-gray-600">{{ publishedGuilds.length }} guildes</span>
       </PageSectionTitle>
-      <div v-if="publishedGuilds.length" class="bg-gray-300 p-6 rounded shadow text-gray-800">
-        <ul class="list-disc list-inside">
-          <li v-for="(guild, i) in publishedGuilds" :key="i">
-            {{ guildName(guild) }} <span class="text-gray-600 text-sm">({{ guild.ownerUid }})</span>
-          </li>
-        </ul>
-      </div>
+      <AdminGuildList
+        v-if="publishedGuilds.length"
+        :guilds="publishedGuilds"
+      />
     </div>
   </div>
 </template>
@@ -69,6 +66,7 @@ import FormSelect from '~/components/ui/FormSelect.vue'
 import PrimaryButton from '~/components/ui/PrimaryButton.vue'
 import InformationCard from '~/components/ui/InformationCard.vue'
 import PageSectionTitle from '~/components/ui/PageSectionTitle.vue'
+import AdminGuildList from '~/components/AdminGuildList.vue'
 
 import WOW_CLASSES from '~/data/classes.json'
 
@@ -86,7 +84,8 @@ export default {
     FormSelect,
     PrimaryButton,
     InformationCard,
-    PageSectionTitle
+    PageSectionTitle,
+    AdminGuildList
   },
   middleware: ['auth', 'admin'],
   data: () => ({
@@ -97,7 +96,7 @@ export default {
     error: null
   }),
   computed: {
-    ...mapGetters('guilds', [
+    ...mapGetters('admin', [
       'draftGuilds',
       'publishedGuilds'
     ]),
@@ -113,10 +112,10 @@ export default {
   },
   async mounted () {
     // Performing data fetching in mounted hook because of NuxtFirebase issues with SSR
-    await this.$store.dispatch('guilds/enableSync')
+    await this.$store.dispatch('admin/enableGuildsSync')
   },
   async beforeDestroy () {
-    await this.$store.dispatch('guilds/disableSync')
+    await this.$store.dispatch('admin/disableGuildsSync')
   },
   methods: {
     async fetchUsers () {

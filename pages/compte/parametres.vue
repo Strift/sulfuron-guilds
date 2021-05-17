@@ -40,6 +40,7 @@
 import { mapGetters } from 'vuex'
 import DangerButton from '~/components/ui/DangerButton.vue'
 import BattleNetIcon from '~/components/ui/BattleNetIcon.vue'
+import InformationCard from '~/components/ui/InformationCard.vue'
 import PageSectionTitle from '~/components/ui/PageSectionTitle.vue'
 
 export default {
@@ -48,6 +49,7 @@ export default {
   components: {
     DangerButton,
     BattleNetIcon,
+    InformationCard,
     PageSectionTitle
   },
   computed: {
