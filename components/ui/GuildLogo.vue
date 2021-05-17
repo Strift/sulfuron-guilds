@@ -1,5 +1,5 @@
 <template>
-  <div class="items-center justify-center flex">
+  <div class="flex items-center justify-center">
     <img
       v-if="hasLogo && !loadingError"
       :src="url"

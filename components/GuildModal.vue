@@ -1,15 +1,15 @@
 <template>
   <div
-    class="absolute w-screen h-screen bg-black bg-opacity-75 p-3 flex items-center"
+    class="absolute bg-black bg-opacity-75 flex h-screen items-center p-3 w-screen"
   >
     <div
       v-click-outside="close"
-      class="max-h-full w-full sm:container sm:mx-auto overflow-y-auto rounded-lg bg-cover bg-center md:h-hd"
+      class="bg-center bg-cover max-h-full md:h-hd overflow-y-auto rounded-lg sm:container sm:mx-auto w-full"
       style="background-image: url('https://i.imgur.com/HM0AhUz.jpg')"
     >
-      <div class="flex flex-col relative bg-gray-900 bg-opacity-50 min-h-full">
-        <div class="lg:sticky top-0 p-5">
-          <button class="text-blue-300 hover:text-blue-200 text-shadow-sm text-lg space-x-2 flex items-center ml-auto" @click="close">
+      <div class="bg-gray-900 bg-opacity-50 flex flex-col min-h-full relative">
+        <div class="lg:sticky p-5 top-0">
+          <button class="flex hover:text-blue-200 items-center ml-auto space-x-2 text-blue-300 text-lg text-shadow-sm" @click="close">
             <ArrowLeftIcon />
             <span>
               Retour au portail
@@ -17,14 +17,14 @@
           </button>
         </div>
         <div class="flex flex-col flex-grow" style="margin-top: 10vh">
-          <div class="lg:max-w-screen-sm lg:w-full relative sm:flex md:px-5 lg:mx-auto -mb-8 mt-auto">
+          <div class="-mb-8 lg:max-w-screen-sm lg:mx-auto lg:w-full md:px-5 mt-auto relative sm:flex">
             <GuildLogo
               :alt="`Logo ${name}`"
               :url="logoUrl"
-              class="h-32 w-32 bg-gray-900 p-4 rounded overflow-hidden shadow flex-shrink-0 mx-auto"
+              class="bg-gray-900 flex-shrink-0 h-32 mx-auto overflow-hidden p-4 rounded shadow w-32"
             />
-            <div class="hidden sm:flex items-center justify-between w-full ml-8">
-              <div class="text-2xl font-semibold leading-none text-shadow-md text-gray-300">
+            <div class="hidden items-center justify-between ml-8 sm:flex w-full">
+              <div class="font-semibold leading-none text-2xl text-gray-300 text-shadow-md">
                 {{ name }}
               </div>
               <div>
@@ -32,26 +32,26 @@
               </div>
             </div>
           </div>
-          <div class="bg-black bg-opacity-50 pt-16 pb-12">
-            <div class="md:hidden text-center text-2xl font-semibold text-gray-300 leading-none mb-8">
+          <div class="bg-black bg-opacity-50 pb-12 pt-16">
+            <div class="font-semibold leading-none mb-8 md:hidden text-2xl text-center text-gray-300">
               {{ name }}
             </div>
             <div class="lg:max-w-screen-sm lg:mx-auto px-5 text-gray-600">
               <div class="mb-8">
                 {{ description }}
               </div>
-              <div class="sm:flex sm:items-start space-y-8 sm:space-y-0">
+              <div class="sm:flex sm:items-start sm:space-y-0 space-y-8">
                 <div class="sm:w-1/2 space-y-4">
                   <div class="flex items-center space-x-4">
-                    <CalendarIcon class="text-gray-700 flex-shrink-0" />
+                    <CalendarIcon class="flex-shrink-0 text-gray-700" />
                     <div>{{ readableDays }}</div>
                   </div>
                   <div class="flex items-center space-x-4">
-                    <ClockIcon class="text-gray-700 flex-shrink-0" />
+                    <ClockIcon class="flex-shrink-0 text-gray-700" />
                     <div>{{ timeRange }}</div>
                   </div>
                   <div v-if="websiteUrl && websiteUrl !== contactUrl" class="flex items-center space-x-4">
-                    <GlobeIcon class="text-gray-700 flex-shrink-0" />
+                    <GlobeIcon class="flex-shrink-0 text-gray-700" />
                     <a :href="websiteRedirectUrl" rel="noopener" target="_blank" class="hover:text-blue-300">
                       {{ readableWebsiteUrl }}
                     </a>
@@ -63,7 +63,7 @@
                   class="sm:w-1/2"
                 />
               </div>
-              <GuildContactButton :guild-id="id" class="block mx-auto mt-8 md:hidden" />
+              <GuildContactButton :guild-id="id" class="block md:hidden mt-8 mx-auto" />
             </div>
           </div>
         </div>

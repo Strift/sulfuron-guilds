@@ -1,22 +1,22 @@
 <template>
   <div>
     <div class="mb-20">
-      <h1 class="text-4xl text-blue-100 font-semibold mb-3 text-shadow-lg leading-none mb-4">
+      <h1 class="font-semibold leading-none mb-3 mb-4 text-4xl text-blue-100 text-shadow-lg">
         Portail des guildes
       </h1>
       <p class="text-gray-400 text-lg text-shadow-md">
         Votre nouvelle plateforme dédiée au recrutement sur Sulfuron.
-        <NuxtLink to="/en-savoir-plus/" class="text-blue-300 hover:text-blue-400 font-semibold">
+        <NuxtLink to="/en-savoir-plus/" class="font-semibold hover:text-blue-400 text-blue-300">
           En savoir plus.
         </NuxtLink>
       </p>
     </div>
-    <div class="sm:flex space-y-6 sm:space-y-0 sm:justify-between sm:border-b border-gray-700 sm:pb-6 mb-6">
+    <div class="border-gray-700 mb-6 sm:border-b sm:flex sm:justify-between sm:pb-6 sm:space-y-0 space-y-6">
       <div class="border-b border-gray-700 pb-6 sm:border-0 sm:p-0">
         <FactionButton class="text-gray-200" />
       </div>
       <div class="flex space-x-5">
-        <SearchBar class="w-full sm:w-auto" @input="updateTextQuery" />
+        <SearchBar class="sm:w-auto w-full" @input="updateTextQuery" />
         <SearchFiltersButton
           ref="searchFiltersButton"
           :active="showFiltersCard"
@@ -25,10 +25,10 @@
       </div>
     </div>
 
-    <SearchFiltersCard v-show="showFiltersCard" class="shadow-xl mb-6" />
+    <SearchFiltersCard v-show="showFiltersCard" class="mb-6 shadow-xl" />
 
     <div v-if="classFilters.length" v-show="!showFiltersCard" class="mb-3">
-      <div class="font-semibold text-sm text-gray-500 uppercase tracking-wider mb-3">
+      <div class="font-semibold mb-3 text-gray-500 text-sm tracking-wider uppercase">
         Filtres
       </div>
       <transition-group :duration="250" name="fade" tag="div" class="flex flex-row flex-wrap">
@@ -44,12 +44,12 @@
       </transition-group>
     </div>
 
-    <div class="text-gray-700 flex items-center space-x-2">
+    <div class="flex items-center space-x-2 text-gray-700">
       <SortAscendingIcon />
       <div>Guildes triées par {{ sortingText }}.</div>
     </div>
 
-    <transition-group :duration="500" name="fade" tag="div" class="grid grid-flow-row grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-12 my-12">
+    <transition-group :duration="500" name="fade" tag="div" class="gap-12 grid grid-cols-1 grid-flow-row my-12 sm:grid-cols-2 xl:grid-cols-3">
       <div
         v-for="guild in orderedSearchResults"
         :key="guild.name"
@@ -69,19 +69,19 @@
       </div>
     </transition-group>
 
-    <div class="text-center mt-12 text-gray-500">
+    <div class="mt-12 text-center text-gray-500">
       {{ orderedSearchResults.length }} {{ resultsText }} trouvées.
     </div>
 
-    <div v-show="isGuest" class="space-y-10 mt-20">
+    <div v-show="isGuest" class="mt-20 space-y-10">
       <p class="text-center text-gray-300 text-lg">
         Votre guilde n'y est pas ? Créez un compte pour pouvoir gérer votre guilde.
       </p>
-      <NuxtLink to="/connexion/" class="bg-blue-900 bg-opacity-25 hover:bg-opacity-75 border border-blue-300 text-blue-300 hover:text-blue-200 text-shadow-sm text-lg px-4 py-2 rounded-full shadow block max-w-xs mx-auto text-center">
+      <NuxtLink to="/connexion/" class="bg-blue-900 bg-opacity-25 block border border-blue-300 hover:bg-opacity-75 hover:text-blue-200 max-w-xs mx-auto px-4 py-2 rounded-full shadow text-blue-300 text-center text-lg text-shadow-sm">
         Connexion
       </NuxtLink>
     </div>
-    <div v-show="isAuthenticated" class="space-y-10 mt-20">
+    <div v-show="isAuthenticated" class="mt-20 space-y-10">
       <p class="text-center text-gray-300 text-lg">
         Votre guilde n'y est pas ? Contactez un modérateur du Discord pour créer celle-ci.
       </p>

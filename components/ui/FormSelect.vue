@@ -1,6 +1,6 @@
 <template>
   <div>
-    <label :for="name" class="font-semibold text-blue-400 block leading-none text-shadow-sm mb-4">
+    <label :for="name" class="block font-semibold leading-none mb-4 text-blue-400 text-shadow-sm">
       {{ label }}
     </label>
     <div class="group relative shadow-md">
@@ -8,7 +8,7 @@
         :id="name"
         :name="name"
         :readonly="disabled === true"
-        class="focus:border-blue-300 focus:border-opacity-75 focus:text-gray-400 focus:shadow bg-blue-900 bg-opacity-25 border border-gray-700 text-gray-500 h-10 rounded px-3 outline-none shadow-sm block w-full appearance-none"
+        class="appearance-none bg-blue-900 bg-opacity-25 block border border-gray-700 focus:border-blue-300 focus:border-opacity-75 focus:shadow focus:text-gray-400 h-10 outline-none px-3 rounded shadow-sm text-gray-500 w-full"
         required
         @change="$emit('input', $event.target.value)"
         @focus="$emit('focus', $event.target.value)"
@@ -16,7 +16,7 @@
         <option
           v-if="placeholder && !value"
           value=""
-          class="bg-gray-300 text-gray-800 font-semibold"
+          class="bg-gray-300 font-semibold text-gray-800"
         >
           {{ placeholder }}
         </option>
@@ -30,7 +30,7 @@
           {{ option.label }}
         </option>
       </select>
-      <ChevronDownIcon class="inline absolute right-0 bottom-0 top-0 my-auto mr-3 text-gray-600 group-focus:text-gray-500" />
+      <ChevronDownIcon class="absolute bottom-0 group-focus:text-gray-500 inline mr-3 my-auto right-0 text-gray-600 top-0" />
     </div>
   </div>
 </template>

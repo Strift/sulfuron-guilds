@@ -1,12 +1,12 @@
 <template>
-  <footer class="bg-gray-900 py-20 text-gray-300 space-y-12">
-    <div class="container mx-auto md:flex px-5 xl:px-0 space-y-12 md:space-y-0">
+  <footer class="bg-gray-900 py-20 space-y-12 text-gray-300">
+    <div class="container md:flex md:space-y-0 mx-auto px-5 space-y-12 xl:px-0">
       <div class="md:w-1/2">
         <img src="~/assets/images/logo.png" alt="sulfuron.eu" class="h-10">
       </div>
-      <div class="md:w-1/2 md:flex justify-end md:space-x-32 lg:space-x-48 xl:space-x-64 items-baseline space-y-12 md:space-y-0">
+      <div class="items-baseline justify-end lg:space-x-48 md:flex md:space-x-32 md:space-y-0 md:w-1/2 space-y-12 xl:space-x-64">
         <div>
-          <div class="font-semibold text-lg mb-6 md:mb-10">
+          <div class="font-semibold mb-6 md:mb-10 text-lg">
             Sulfuron
           </div>
           <ul class="space-y-5 text-gray-500">
@@ -24,7 +24,7 @@
           </ul>
         </div>
         <div>
-          <div class="font-semibold text-lg mb-6 md:mb-10">
+          <div class="font-semibold mb-6 md:mb-10 text-lg">
             Contact
           </div>
           <ul class="space-y-5 text-gray-500">

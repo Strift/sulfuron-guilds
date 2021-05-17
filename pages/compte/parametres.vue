@@ -3,7 +3,7 @@
     <InformationCard
       v-if="!isAGuildOwner"
     >
-      <div class="font-semibold mb-4 flex space-x-4">
+      <div class="flex font-semibold mb-4 space-x-4">
         <div>ℹ️</div>
         <div>
           Comment enregistrer ma guilde ?
@@ -21,10 +21,10 @@
       Battle.net
     </PageSectionTitle>
     <div class="flex shadow-md">
-      <div class="w-20 h-20 bg-gray-900 rounded-l flex items-center">
+      <div class="bg-gray-900 flex h-20 items-center rounded-l w-20">
         <BattleNetIcon class="h-10" />
       </div>
-      <div class="p-6 flex-grow flex items-center bg-gray-300 text-gray-800 rounded-r">
+      <div class="bg-gray-300 flex flex-grow items-center p-6 rounded-r text-gray-800">
         <div>
           Connecté en tant que <span class="font-semibold">{{ username }}</span>.
         </div>
@@ -40,6 +40,7 @@
 import { mapGetters } from 'vuex'
 import DangerButton from '~/components/ui/DangerButton.vue'
 import BattleNetIcon from '~/components/ui/BattleNetIcon.vue'
+import InformationCard from '~/components/ui/InformationCard.vue'
 import PageSectionTitle from '~/components/ui/PageSectionTitle.vue'
 
 export default {
@@ -48,6 +49,7 @@ export default {
   components: {
     DangerButton,
     BattleNetIcon,
+    InformationCard,
     PageSectionTitle
   },
   computed: {

@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen flex flex-col">
+  <div class="flex flex-col min-h-screen">
     <div
       :class="{
         'bg-grayscale-50': showSunwellBg,
@@ -8,7 +8,7 @@
         'horde': showFactionBg && isHorde,
         'sunwell': showSunwellBg
       }"
-      class="background relative flex-1 flex flex-col"
+      class="background flex flex-1 flex-col relative"
     >
       <div
         :class="{
@@ -17,15 +17,15 @@
           'overflow-hidden': openGuild,
           'overflow-y-scroll': !openGuild
         }"
-        class="bg-gray-900 relative flex-1 max-h-screen flex flex-col"
+        class="bg-gray-900 flex flex-1 flex-col max-h-screen relative"
       >
-        <div class="container mx-auto font-sans px-5 xl:px-0 flex-1">
+        <div class="container flex-1 font-sans mx-auto px-5 xl:px-0">
           <Navbar
             class="mb-6 md:mb-16"
           />
           <slot name="default" />
         </div>
-        <div class="mt-6 lg:mt-12 h-12 lg:h-24 flex-none" style="background-image: linear-gradient(180deg, rgba(26,32,44,0), rgb(26,32,44))" />
+        <div class="flex-none h-12 lg:h-24 lg:mt-12 mt-6" style="background-image: linear-gradient(180deg, rgba(26,32,44,0), rgb(26,32,44))" />
         <Footer />
       </div>
     </div>
@@ -42,7 +42,7 @@
       :website-url="openGuild.websiteUrl"
       :contact-url="openGuild.contactUrl"
     />
-    <NotificationList class="fixed bottom-0 w-full" />
+    <NotificationList class="bottom-0 fixed w-full" />
   </div>
 </template>
 

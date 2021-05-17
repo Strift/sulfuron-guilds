@@ -12,12 +12,12 @@
       </PrimaryButton>
     </div>
     <PageSectionTitle>Général</PageSectionTitle>
-    <div class="flex flex-col-reverse lg:flex-row justify-between">
-      <div class="space-y-10 max-w-sm w-full">
+    <div class="flex flex-col-reverse justify-between lg:flex-row">
+      <div class="max-w-sm space-y-10 w-full">
         <FormInput :value="name" name="name" label="Nom de guilde" disabled />
         <div>
           <FormInput v-model.trim="logoUrl" :error-message="urlErrorMessage(logoUrl)" name="logo-url" label="Lien du logo" placeholder="https://exemple.com/logo.png" />
-          <div class="mt-3 text-gray-500 flex space-x-2 items-baseline">
+          <div class="flex items-baseline mt-3 space-x-2 text-gray-500">
             <div>ℹ️</div>
             <div>Utilisez un hébergeur comme <a href="https://imgur.com/" target="_blank" class="hover:underline text-blue-300">imgur</a>, puis <br><em>copiez l'adresse de l'image</em> (clic droit).</div>
           </div>
@@ -26,10 +26,10 @@
         <FormSelect v-model="type" :options="typeOptions" name="type" label="Type de structure" placeholder="Sélectionnez le type de guilde" />
       </div>
       <div class="mb-10">
-        <div class="font-semibold text-blue-400 block mb-4 leading-none text-shadow-sm">
+        <div class="block font-semibold leading-none mb-4 text-blue-400 text-shadow-sm">
           Logo
         </div>
-        <div class="h-32 w-32 p-4 bg-gray-900 rounded-lg items-center justify-center flex shadow">
+        <div class="bg-gray-900 flex h-32 items-center justify-center p-4 rounded-lg shadow w-32">
           <img v-if="logoUrl" :src="logoUrl" alt="Votre logo" class="text-gray-700">
           <EmptyGuildLogo v-else class="text-gray-800" />
         </div>
@@ -45,19 +45,19 @@
       />
     </div>
     <PageSectionTitle>Horaires</PageSectionTitle>
-    <div class="space-y-10 lg:space-y-0 lg:flex lg:space-x-12 xl:justify-between">
+    <div class="lg:flex lg:space-x-12 lg:space-y-0 space-y-10 xl:justify-between">
       <FormInput v-model="startHour" name="start-hour" type="time" label="Heure de début" class="max-w-sm w-full" />
       <FormInput v-model="endHour" name="end-hour" type="time" label="Heure de fin" class="max-w-sm w-full" />
     </div>
     <FormCheckList v-model="raidDays" :options="daysOptions" name="days" label="Jours de raid" />
     <PageSectionTitle>Recrutement</PageSectionTitle>
     <div>
-      <div class="font-semibold text-blue-400 block leading-none text-shadow-sm mb-4">
+      <div class="block font-semibold leading-none mb-4 text-blue-400 text-shadow-sm">
         Classes recherchées
       </div>
       <FormSpecsList
         v-model="recruitment"
-        class="grid grid-flow-cols grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-6 gap-y-4"
+        class="gap-x-6 gap-y-4 grid grid-cols-2 grid-flow-cols lg:grid-cols-5 md:grid-cols-3"
       />
     </div>
     <PageSectionTitle>Contact</PageSectionTitle>
@@ -80,7 +80,7 @@
       />
       <div
         v-if="contactUrl.length === 0"
-        class="mt-3 text-gray-500 flex space-x-2 items-baseline"
+        class="flex items-baseline mt-3 space-x-2 text-gray-500"
       >
         <div>⚠️</div>
         <div>Lien de contact manquant. Votre guilde n'apparaîtra pas dans les résultats de recherche.</div>

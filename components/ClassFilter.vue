@@ -1,5 +1,5 @@
 <template>
-  <div class="flex space-x-2 items-center bg-blue-900 bg-opacity-50 text-gray-600 py-1 px-3 rounded-full">
+  <div class="bg-blue-900 bg-opacity-50 flex items-center px-3 py-1 rounded-full space-x-2 text-gray-600">
     <ClassIcon :wow-class="wowClass" class="h-5" />
     <div>
       <slot name="default" />

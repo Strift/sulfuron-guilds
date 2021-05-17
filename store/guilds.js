@@ -37,7 +37,7 @@ export const actions = {
     const ref = this.$fire.firestore
       .collection('guilds')
       .withConverter(guildConverter)
-      // .where('published', '==', true)
+      .where('published', '==', true)
 
     return bindFirestoreRef('list', ref, { wait: true })
   }),

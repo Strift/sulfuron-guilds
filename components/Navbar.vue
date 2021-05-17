@@ -1,14 +1,14 @@
 <template>
-  <header class="flex items-center h-24">
+  <header class="flex h-24 items-center">
     <NuxtLink
       to="/"
       title="Accueil"
       class="md:ml-0 md:mr-auto"
     >
-      <img src="~/assets/images/logo.png" alt="sulfuron.eu" class="mx-auto h-8 md:h-10">
+      <img src="~/assets/images/logo.png" alt="sulfuron.eu" class="h-8 md:h-10 mx-auto">
     </NuxtLink>
     <nav>
-      <ul class="flex items-center space-x-5 md:space-x-12 list-none">
+      <ul class="flex items-center list-none md:space-x-12 space-x-5">
         <NavbarLink
           v-show="showAccountButton && hasDraftGuild"
           to="/compte/guilde/"
@@ -22,7 +22,7 @@
           title="Accueil"
           class="hidden md:inline-flex"
         >
-          <span class="space-x-2 flex items-center">
+          <span class="flex items-center space-x-2">
             <ArrowLeftIcon />
             <span>
               Retour au portail
@@ -41,7 +41,7 @@
           :to="accountLinkUrl"
           title="Mon compte"
         >
-          <span class="space-x-2 flex items-center justify-center bg-blue-900 bg-opacity-25 hover:bg-opacity-75 border border-blue-300 px-4 py-2 rounded-full shadow-md">
+          <span class="bg-blue-900 bg-opacity-25 border border-blue-300 flex hover:bg-opacity-75 items-center justify-center px-4 py-2 rounded-full shadow-md space-x-2">
             <UserIcon />
             <span v-show="isGuest">Connexion</span>
             <span v-show="isAuthenticated">

@@ -1,7 +1,7 @@
 <template>
   <button
     :class="{ 'text-gray-500 border-gray-500': !active, 'text-blue-300 border-blue-300': active }"
-    class="px-4 py-2 rounded-full text-center text-shadow-sm bg-opacity-25 border hover:bg-opacity-50 shadow-md hover:shadow-lg bg-blue-900  hover:text-blue-200 flex space-x-2 items-center focus:outline-none focus:border-blue-300 focus:text-gray-400"
+    class="bg-blue-900 bg-opacity-25 border flex focus:border-blue-300 focus:outline-none focus:text-gray-400 hover:bg-opacity-50 hover:shadow-lg hover:text-blue-200 items-center px-4 py-2 rounded-full shadow-md space-x-2 text-center text-shadow-sm"
     @click="$emit('click')"
   >
     <FilterIcon />

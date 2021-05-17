@@ -6,10 +6,10 @@
       type="text"
       placeholder="Nyk Trib..."
       :value="value"
-      class="focus:border-blue-300 focus:border-opacity-75 focus:text-gray-400 focus:shadow bg-blue-900 bg-opacity-25 border border-gray-700 text-gray-500 placeholder-gray-700 h-10 rounded pl-10 pr-3 outline-none shadow-sm block w-full"
+      class="bg-blue-900 bg-opacity-25 block border border-gray-700 focus:border-blue-300 focus:border-opacity-75 focus:shadow focus:text-gray-400 h-10 outline-none pl-10 placeholder-gray-700 pr-3 rounded shadow-sm text-gray-500 w-full"
       @input="$emit('input', $event.target.value)"
     >
-    <SearchIcon class="inline absolute left-0 bottom-0 top-0 my-auto ml-3 text-gray-700" />
+    <SearchIcon class="absolute bottom-0 inline left-0 ml-3 my-auto text-gray-700 top-0" />
   </div>
 </template>
 
