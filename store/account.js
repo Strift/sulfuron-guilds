@@ -124,7 +124,8 @@ export const getters = {
     return state.user?.name
   },
   isAGuildOwner (state) {
-    return state.guild !== null
+    return state.guild !== null &&
+      state.guild.deleted !== true
   },
   hasDraftGuild (state) {
     return state.guild?.published === false

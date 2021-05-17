@@ -47,15 +47,6 @@ export const actions = {
 }
 
 export const getters = {
-  currentFactionGuilds (state, getters, rootState) {
-    return state.list.filter(guild => guild.published && guild.faction === rootState.faction)
-  },
-  draftGuilds (state) {
-    return state.list.filter(guild => guild.published === false)
-  },
-  publishedGuilds (state) {
-    return state.list.filter(guild => guild.published)
-  },
   /*
   ** Array of specializations IDs
   ** Used internally by `searchResults` getter
@@ -98,6 +89,8 @@ export const getters = {
     // Filter the list to only have guilds that match searched specs
     return guilds
       .filter((guild) => {
+        // Filter out deleted guilds
+        if (guild.deleted) { return false }
         // Filter out guilds that don't match the current faction
         if (guild.faction !== rootState.faction) { return false }
         // Filter out guilds that don't have a contact URL
