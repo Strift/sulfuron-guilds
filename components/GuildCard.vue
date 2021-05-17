@@ -34,21 +34,6 @@
         @click="expandGuildRecruitment = !expandGuildRecruitment"
       />
     </div>
-    <!-- <div class="px-6 bg-gray-900 bg-opacity-75 text-gray-700 group-hover:text-gray-600 rounded-b-lg h-0 group-hover:h-full overflow-hidden transition-all duration-150 ease-in-out">
-      <div class="pb-3 text-sm flex font-semibold space-x-2 justify-end" :class="{ 'border-t border-gray-800': false }">
-        <button class="font-semibold group-hover:text-blue-300 flex space-x-2">
-          <div>Voir plus</div>
-          <ArrowNarrowRightIcon />
-        </button>
-        <a v-if="websiteUrl && websiteUrl !== contactUrl" :href="websiteRedirectUrl" rel="noopener" target="_blank" class="hover:text-blue-300">
-          {{ readableWebsiteUrl }}
-        </a>
-        <span v-if="contactUrl && websiteUrl && websiteUrl !== contactUrl">&bull;</span>
-        <a v-if="contactUrl" :href="contactRedirectUrl" target="_blank" rel="noopener" class="hover:text-blue-300">
-          Contact
-        </a>
-      </div>
-    </div> -->
   </button>
 </template>
 
