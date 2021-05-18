@@ -11,6 +11,13 @@
         Publier
       </PrimaryButton>
     </div>
+    <div v-else class="space-y-10">
+      <PageSectionTitle>Tableau de bord</PageSectionTitle>
+      <div class="flex space-x-8">
+        <AccountStatistic label="Visites" :value="99" />
+        <AccountStatistic label="Contacts" :value="99" />
+      </div>
+    </div>
     <PageSectionTitle>Général</PageSectionTitle>
     <div class="flex flex-col-reverse justify-between lg:flex-row">
       <div class="max-w-sm space-y-10 w-full">
@@ -99,6 +106,7 @@ import FormSelect from '~/components/ui/FormSelect.vue'
 import FormCheckList from '~/components/ui/FormCheckList.vue'
 import FormSpecsList from '~/components/ui/FormSpecsList.vue'
 import PageSectionTitle from '~/components/ui/PageSectionTitle.vue'
+import AccountStatistic from '~/components/AccountStatistic.vue'
 
 import WOW_CLASSES from '~/data/classes.json'
 const DAYS_OF_THE_WEEK = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche']
@@ -111,7 +119,8 @@ export default {
     FormSelect,
     FormCheckList,
     FormSpecsList,
-    PageSectionTitle
+    PageSectionTitle,
+    AccountStatistic
   },
   data: () => ({
     factionOptions: [
