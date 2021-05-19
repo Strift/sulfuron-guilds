@@ -20,7 +20,7 @@ service cloud.firestore {
       allow update: if isGuildOwner() || isAdmin();
 
       match /redirects/{redirect} {
-        allow read: if isAuthenticated() && get(/databases/$(data)/documents/guilds/$(guild)).data.ownerUid == request.auth.uid;
+        allow read: if isAuthenticated() && get(/databases/$(database)/documents/guilds/$(guild)).data.ownerUid == request.auth.uid;
       }
     }
 
