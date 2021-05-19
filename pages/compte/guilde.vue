@@ -11,13 +11,23 @@
         Publier
       </PrimaryButton>
     </div>
+    <div v-else class="space-y-10">
+      <PageSectionTitle>Tableau de bord</PageSectionTitle>
+      <div class="flex">
+        <div class="flex space-x-8">
+          <AccountStatistic label="Visites" :value="websiteRedirectsCount" />
+          <AccountStatistic label="Contacts" :value="contactRedirectsCount" />
+        </div>
+        <!-- <AccountRefresh :up-to-date="true" class="ml-auto" /> -->
+      </div>
+    </div>
     <PageSectionTitle>Général</PageSectionTitle>
     <div class="flex flex-col-reverse justify-between lg:flex-row">
       <div class="max-w-sm space-y-10 w-full">
         <FormInput :value="name" name="name" label="Nom de guilde" disabled />
         <div>
           <FormInput v-model.trim="logoUrl" :error-message="urlErrorMessage(logoUrl)" name="logo-url" label="Lien du logo" placeholder="https://exemple.com/logo.png" />
-          <div class="flex items-baseline mt-3 space-x-2 text-gray-500">
+          <div class="flex items-baseline mt-3 space-x-2 text-gray-600">
             <div>ℹ️</div>
             <div>Utilisez un hébergeur comme <a href="https://imgur.com/" target="_blank" class="hover:underline text-blue-300">imgur</a>, puis <br><em>copiez l'adresse de l'image</em> (clic droit).</div>
           </div>
@@ -80,12 +90,13 @@
       />
       <div
         v-if="contactUrl.length === 0"
-        class="flex items-baseline mt-3 space-x-2 text-gray-500"
+        class="flex items-baseline mt-3 space-x-2 text-gray-600"
       >
         <div>⚠️</div>
         <div>Lien de contact manquant. Votre guilde n'apparaîtra pas dans les résultats de recherche.</div>
       </div>
     </div>
+  </div>
   </div>
 </template>
 
@@ -99,6 +110,8 @@ import FormSelect from '~/components/ui/FormSelect.vue'
 import FormCheckList from '~/components/ui/FormCheckList.vue'
 import FormSpecsList from '~/components/ui/FormSpecsList.vue'
 import PageSectionTitle from '~/components/ui/PageSectionTitle.vue'
+import AccountStatistic from '~/components/AccountStatistic.vue'
+import AccountRefresh from '~/components/AccountRefresh.vue'
 
 import WOW_CLASSES from '~/data/classes.json'
 const DAYS_OF_THE_WEEK = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche']
@@ -111,7 +124,9 @@ export default {
     FormSelect,
     FormCheckList,
     FormSpecsList,
-    PageSectionTitle
+    PageSectionTitle,
+    AccountStatistic,
+    AccountRefresh
   },
   data: () => ({
     factionOptions: [
@@ -128,7 +143,7 @@ export default {
     awaitingTyping: false
   }),
   computed: {
-    ...mapGetters('account', ['hasDraftGuild']),
+    ...mapGetters('account', ['hasDraftGuild', 'contactRedirectsCount', 'websiteRedirectsCount']),
     ...mapState('account', ['guild']),
     name () {
       return this.guild.name
