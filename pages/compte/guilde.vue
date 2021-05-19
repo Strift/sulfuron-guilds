@@ -15,10 +15,10 @@
       <PageSectionTitle>Tableau de bord</PageSectionTitle>
       <div class="flex">
         <div class="flex space-x-8">
-          <AccountStatistic label="Visites" :value="99" />
-          <AccountStatistic label="Contacts" :value="99" />
+          <AccountStatistic label="Visites" :value="websiteRedirectsCount" />
+          <AccountStatistic label="Contacts" :value="contactRedirectsCount" />
         </div>
-        <AccountRefresh :up-to-date="true" class="ml-auto" />
+        <!-- <AccountRefresh :up-to-date="true" class="ml-auto" /> -->
       </div>
     </div>
     <PageSectionTitle>Général</PageSectionTitle>
@@ -143,7 +143,7 @@ export default {
     awaitingTyping: false
   }),
   computed: {
-    ...mapGetters('account', ['hasDraftGuild']),
+    ...mapGetters('account', ['hasDraftGuild', 'contactRedirectsCount', 'websiteRedirectsCount']),
     ...mapState('account', ['guild']),
     name () {
       return this.guild.name

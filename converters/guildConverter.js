@@ -13,7 +13,6 @@ export default {
       description: data.description || '',
       // Transform `recruitment` array for guilds with old data structure
       recruitment: transformRecruitmentArray(data.recruitment)
-
     }
   }
 }

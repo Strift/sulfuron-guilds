@@ -12,6 +12,7 @@ export const state = () => ({
   user: null,
   admin: false,
   guild: null,
+  guildRedirects: null,
   error: null
 })
 
@@ -27,6 +28,9 @@ export const mutations = {
   },
   setAdmin (state, admin) {
     state.admin = admin
+  },
+  setGuildRedirects (state, redirects) {
+    state.guildRedirects = redirects
   },
   setError (state, error) {
     state.error = error
@@ -96,6 +100,7 @@ export const actions = {
       return
     }
     await dispatch('enableGuildSync', querySnapshot.docs[0].ref) // There should be only one query result
+    await dispatch('fetchRedirects')
   },
   enableGuildSync: firestoreAction(function ({ bindFirestoreRef }, documentRef) {
     return bindFirestoreRef('guild', documentRef, { reset: true })
@@ -110,7 +115,20 @@ export const actions = {
       .where('ownerUid', '==', this.$fire.auth.currentUser.uid)
       .get()
     query.docs[0].ref.set(payload, { merge: true })
-  })
+  }),
+  async fetchRedirects ({ state, commit }) {
+    if (!state.guild?.id) {
+      return
+    }
+
+    const querySnapshot = await this.$fire.firestore
+      .collection('guilds')
+      .doc(state.guild.id)
+      .collection('redirects')
+      .get()
+
+    commit('setGuildRedirects', querySnapshot.docs.map(doc => doc.data()))
+  }
 }
 
 export const getters = {
@@ -132,5 +150,17 @@ export const getters = {
   },
   isAdmin (state) {
     return state.admin
+  },
+  websiteRedirectsCount (state) {
+    if (!state.guildRedirects) {
+      return 0
+    }
+    return state.guildRedirects.filter(({ type }) => type === 'website').length
+  },
+  contactRedirectsCount (state) {
+    if (!state.guildRedirects) {
+      return 0
+    }
+    return state.guildRedirects.filter(({ type }) => type === 'contact').length
   }
 }

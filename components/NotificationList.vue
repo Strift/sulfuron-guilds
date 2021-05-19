@@ -13,10 +13,14 @@
 
 <script>
 import { mapState } from 'vuex'
+import CookieNotification from '~/components/CookieNotification.vue'
 
 const COOKIES_ENABLED_COOKIE = 'cookies_enabled'
 
 export default {
+  components: {
+    CookieNotification
+  },
   data: () => ({
     autoSaved: false,
     showCookiesBanner: false
