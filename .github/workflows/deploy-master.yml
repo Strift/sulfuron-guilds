@@ -13,8 +13,12 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Repository checkout
         uses: actions/checkout@v2
+      - name: Install Node.js v12
+        uses: actions/setup-node@v2
+        with:
+          node-version: '12'
       - name: Install dependencies
-        uses: yarn
+        run: yarn
       - name: Build for production
         run: yarn generate
       # - name: Deploy to Firebase
