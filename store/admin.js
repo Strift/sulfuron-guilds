@@ -27,20 +27,19 @@ export const actions = {
   disableGuildsSync: firestoreAction(function ({ unbindFirestoreRef }) {
     unbindFirestoreRef('guilds', false)
   }),
-  async removeGuildById (ctx, guildId) {
+  async removeGuildById (ctx, guildId, softDelete = true) {
     const guildRef = this.$fire.firestore
       .collection('guilds')
       .withConverter(guildConverter)
       .doc(guildId)
 
-    await guildRef.update({ deleted: true })
-  },
-  async restoreGuildById (ctx, guildId) {
-    const guildRef = this.$fire.firestore
-      .collection('guilds')
-      .withConverter(guildConverter)
-      .doc(guildId)
-
-    await guildRef.update({ deleted: false })
+    if (softDelete) {
+      await guildRef.update({
+        ownerUid: null,
+        deleted: true
+      })
+    } else {
+      await guildRef.delete()
+    }
   }
 }

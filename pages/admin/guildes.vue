@@ -9,7 +9,7 @@
     <AdminGuildList
       v-if="publishedGuilds.length"
       :guilds="publishedGuilds"
-      :editing="editionMode"
+      :advanced-mode="editionMode"
     />
   </div>
 </template>

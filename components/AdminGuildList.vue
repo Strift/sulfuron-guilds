@@ -2,13 +2,16 @@
   <div class="bg-gray-300 p-6 rounded shadow text-gray-700">
     <table class="w-full">
       <tr class="h-10 text-gray-800 text-left">
+        <th v-if="advancedMode">
+          ID
+        </th>
         <th>Faction</th>
         <th>Nom</th>
         <th>GM</th>
         <th>Activité</th>
         <!-- <th>Clics site</th>
         <th>Clics contact</th> -->
-        <th v-if="editing">
+        <th v-if="advancedMode">
           Actions
         </th>
       </tr>
@@ -21,7 +24,10 @@
           'text-red-800 italic': guild.deleted
         }"
       >
-        <td>{{ guild.faction.charAt(0) }}</td>
+        <td v-if="advancedMode" class="text-gray-600">
+          {{ guild.id }}
+        </td>
+        <td>{{ shortFaction(faction) }}</td>
         <td>{{ guild.name }}</td>
         <td>{{ guild.ownerUid }}</td>
         <td>
@@ -30,7 +36,7 @@
         </td>
         <!-- <td>-</td>
         <td>-</td> -->
-        <td v-if="editing">
+        <td v-if="advancedMode">
           <button
             v-if="!guild.deleted"
             class="bg-red-500 px-2 rounded-full text-red-100 text-xs"
@@ -59,12 +65,17 @@ export default {
       type: Array,
       required: true
     },
-    editing: {
+    advancedMode: {
       type: Boolean,
       required: true
     }
   },
   methods: {
+    shortFaction (faction) {
+      return faction
+        ? faction.charAt(0)
+        : '?'
+    },
     remove (guild) {
       const confirmed = confirm(`Voulez-vous supprimer ${guild.name} ?`)
       if (confirmed) {
@@ -72,7 +83,7 @@ export default {
       }
     },
     restore (guild) {
-      this.$store.dispatch('admin/restoreGuildById', guild.id)
+      this.$store.dispatch('admin/restoreGuildById', guild.id, false)
     }
   }
 }
