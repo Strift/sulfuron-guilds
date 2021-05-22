@@ -9,7 +9,7 @@
         :alt="`Logo ${name}`"
         class="h-12 mr-6 overflow-hidden rounded w-12"
       />
-      <div class="font-semibold group-focus:text-blue-300 group-hover:text-blue-300 leading-6 text-gray-400 text-lg">
+      <div class="font-semibold group-focus:text-blue-300 group-hover:text-blue-300 leading-6 text-gray-400 text-left text-lg">
         {{ name }}
       </div>
       <div class="ml-auto text-gray-600 text-sm tracking-widest uppercase">
