@@ -27,7 +27,7 @@
         <td v-if="advancedMode" class="text-gray-600">
           {{ guild.id }}
         </td>
-        <td>{{ shortFaction(faction) }}</td>
+        <td>{{ shortFaction(guild.faction) }}</td>
         <td>{{ guild.name }}</td>
         <td>{{ guild.ownerUid }}</td>
         <td>
@@ -72,7 +72,7 @@ export default {
   },
   methods: {
     shortFaction (faction) {
-      return faction
+      return faction && faction !== ''
         ? faction.charAt(0)
         : '?'
     },
