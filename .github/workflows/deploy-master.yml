@@ -3,7 +3,7 @@ name: Deploy to production
 
 on:
   push:
-    branches: [ master ]
+    branches: [ actions ]
   workflow_dispatch:
 
 jobs:
@@ -13,6 +13,8 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: 'Repository checkout'
         uses: actions/checkout@v2
+      - name: 'Install dependencies'
+        uses: yarn
       - name: Build for production
         run: yarn generate
       # - name: Deploy to Firebase
