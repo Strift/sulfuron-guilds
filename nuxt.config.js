@@ -1,4 +1,8 @@
 const isProduction = () => process.env.NODE_ENV === 'production'
+const evalBool = (bool) => {
+  if (bool === 'true') { return true } else if (bool === 'false') { return false }
+  return bool
+}
 
 export default {
   /*
@@ -10,7 +14,10 @@ export default {
   ** Runtime config
   */
   publicRuntimeConfig: {
-    baseURL: isProduction() ? 'https://guildes.sulfuron.eu' : process.env.BASE_URL
+    baseURL: isProduction() ? 'https://guildes.sulfuron.eu' : process.env.BASE_URL,
+    features: {
+      ENABLE_PARTNERS: evalBool(process.env.FEATURES_ENABLE_PARTNERS)
+    }
   },
   /*
   ** Headers of the page

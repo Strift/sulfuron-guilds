@@ -23,6 +23,14 @@
             <li><a href="http://sulfuron.eu" target="_blank" rel="noopener" class="hover:text-blue-300">Actualités</a></li>
           </ul>
         </div>
+        <div v-if="$config.features.ENABLE_PARTNERS">
+          <div class="font-semibold mb-6 md:mb-10 text-lg">
+            Partenaires
+          </div>
+          <ul class="space-y-5 text-gray-500">
+            <li><a href="http://www.tbcfrance.com/" target="_blank" rel="noopener" class="hover:text-blue-300">TBC France</a></li>
+          </ul>
+        </div>
         <div>
           <div class="font-semibold mb-6 md:mb-10 text-lg">
             Contact
