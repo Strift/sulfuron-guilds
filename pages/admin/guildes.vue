@@ -5,7 +5,7 @@
     </PageSectionTitle>
     <div class="flex space-x-8">
       <div class="w-1/2">
-        <FormInput v-model="searchText" label="Recherche" placeholder="Nom de guilde, Battle.net" />
+        <FormInput v-model="searchText" name="Recherche" label="Recherche" placeholder="Nom de guilde, Battle.net" />
       </div>
       <div class="w-1/2">
         <div class="font-semibold mb-2 text-blue-400">

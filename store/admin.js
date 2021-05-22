@@ -1,11 +1,14 @@
-import { firestoreAction } from 'vuexfire'
 import guildConverter from '~/converters/guildConverter.js'
 
 export const state = () => ({
   guilds: []
 })
 
-export const mutations = {}
+export const mutations = {
+  setGuilds (state, guilds) {
+    state.guilds = guilds
+  }
+}
 
 export const getters = {
   draftGuilds (state) {
@@ -20,16 +23,21 @@ export const getters = {
 }
 
 export const actions = {
-  enableGuildsSync: firestoreAction(function ({ bindFirestoreRef }) {
-    const ref = this.$fire.firestore
+  async fetchGuilds ({ commit }) {
+    const guildsQuerySnapshot = await this.$fire.firestore
       .collection('guilds')
       .withConverter(guildConverter)
+      .get()
 
-    return bindFirestoreRef('guilds', ref, { wait: true })
-  }),
-  disableGuildsSync: firestoreAction(function ({ unbindFirestoreRef }) {
-    unbindFirestoreRef('guilds', false)
-  }),
+    const guilds = await Promise.all(guildsQuerySnapshot.docs.map(async (doc) => {
+      const redirectsQuerySnapshot = await doc.ref.collection('redirects').get()
+      return {
+        ...doc.data(),
+        redirects: redirectsQuerySnapshot.docs.map(doc => doc.data())
+      }
+    }))
+    commit('setGuilds', guilds)
+  },
   async removeGuildById (ctx, guildId, softDelete = true) {
     const guildRef = this.$fire.firestore
       .collection('guilds')

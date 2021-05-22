@@ -31,11 +31,12 @@ export default {
     error: null
   }),
   async mounted () {
+    await this.$store.dispatch('admin/fetchGuilds')
     // Performing data fetching in mounted hook because of NuxtFirebase issues with SSR
-    await this.$store.dispatch('admin/enableGuildsSync')
+    // await this.$store.dispatch('admin/enableGuildsSync')
   },
   async beforeDestroy () {
-    await this.$store.dispatch('admin/disableGuildsSync')
+    // await this.$store.dispatch('admin/disableGuildsSync')
   }
 }
 </script>

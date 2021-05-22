@@ -30,15 +30,15 @@
           [{{ shortFaction(guild.faction) }}] <span class="font-semibold">{{ guild.name }}</span>
         </td>
         <td>{{ guild.ownerUid }}</td>
-        <td class="text-sm">
+        <td class="text-gray-600 text-sm">
           <span v-if="guild.deleted">-</span>
           <span v-else>100 %</span>
         </td>
-        <td class="text-sm">
-          -
+        <td class="text-gray-600 text-sm">
+          {{ guild.redirects.filter(({ type }) => type === 'website').length }}
         </td>
-        <td class="text-sm">
-          -
+        <td class="text-gray-600 text-sm">
+          {{ guild.redirects.filter(({ type }) => type === 'contact').length }}
         </td>
         <td v-if="advancedMode">
           <button
