@@ -5,18 +5,17 @@
         <th v-if="advancedMode">
           ID
         </th>
-        <th>Faction</th>
-        <th>Nom</th>
+        <th>Guilde</th>
         <th>GM</th>
         <th>Activité</th>
-        <!-- <th>Clics site</th>
-        <th>Clics contact</th> -->
+        <th>Visites</th>
+        <th>Contacts</th>
         <th v-if="advancedMode">
           Actions
         </th>
       </tr>
       <tr
-        v-for="(guild, i) in guilds"
+        v-for="(guild, i) in searchResults"
         :key="guild.id"
         class="h-10"
         :class="{
@@ -27,15 +26,20 @@
         <td v-if="advancedMode" class="text-gray-600">
           {{ guild.id }}
         </td>
-        <td>{{ shortFaction(guild.faction) }}</td>
-        <td>{{ guild.name }}</td>
-        <td>{{ guild.ownerUid }}</td>
         <td>
+          [{{ shortFaction(guild.faction) }}] <span class="font-semibold">{{ guild.name }}</span>
+        </td>
+        <td>{{ guild.ownerUid }}</td>
+        <td class="text-sm">
           <span v-if="guild.deleted">-</span>
           <span v-else>100 %</span>
         </td>
-        <!-- <td>-</td>
-        <td>-</td> -->
+        <td class="text-sm">
+          -
+        </td>
+        <td class="text-sm">
+          -
+        </td>
         <td v-if="advancedMode">
           <button
             v-if="!guild.deleted"
@@ -44,13 +48,6 @@
           >
             Supprimer
           </button>
-          <!-- <button
-            v-else
-            class="bg-blue-500 px-2 rounded-full text-red-100 text-xs"
-            @click="restore(guild)"
-          >
-            Restorer
-          </button> -->
         </td>
       </tr>
     </table>
@@ -58,6 +55,7 @@
 </template>
 
 <script>
+import sortBy from 'lodash/sortBy'
 
 export default {
   props: {
@@ -68,6 +66,19 @@ export default {
     advancedMode: {
       type: Boolean,
       required: true
+    },
+    search: {
+      type: String,
+      default: ''
+    }
+  },
+  computed: {
+    searchResults () {
+      const search = this.search.toLowerCase()
+      return sortBy(
+        this.guilds.filter(({ name, ownerUid }) => name.toLowerCase().includes(search) || ownerUid.toLowerCase().includes(search)),
+        ['name']
+      )
     }
   },
   methods: {

@@ -12,7 +12,10 @@ export const getters = {
     return state.guilds.filter(guild => guild.published === false)
   },
   publishedGuilds (state) {
-    return state.guilds.filter(guild => guild.published)
+    return state.guilds.filter(guild => guild.published && !guild.deleted)
+  },
+  deletedGuilds (state) {
+    return state.guilds.filter(guild => guild.deleted)
   }
 }
 

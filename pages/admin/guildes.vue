@@ -3,12 +3,31 @@
     <PageSectionTitle class="flex items-baseline justify-between">
       Guildes publiées <span class="text-base text-gray-600">{{ publishedGuilds.length }} guildes</span>
     </PageSectionTitle>
-    <FormCheckBox id="editionMode" name="editionMode" :checked="editionMode" @change="editionMode = $event">
-      Je suis un ouf, laisse-moi tout casser.
-    </FormCheckBox>
+    <div class="flex space-x-8">
+      <div class="w-1/2">
+        <FormInput v-model="searchText" label="Recherche" placeholder="Nom de guilde, Battle.net" />
+      </div>
+      <div class="w-1/2">
+        <div class="font-semibold mb-2 text-blue-400">
+          Mode avancé
+        </div>
+        <FormCheckBox id="editionMode" name="editionMode" :checked="editionMode" @change="editionMode = $event">
+          Je suis un ouf, laisse-moi tout casser.
+        </FormCheckBox>
+      </div>
+    </div>
     <AdminGuildList
       v-if="publishedGuilds.length"
       :guilds="publishedGuilds"
+      :advanced-mode="editionMode"
+      :search="searchText"
+    />
+    <PageSectionTitle class="flex items-baseline justify-between">
+      Guildes supprimées <span class="text-base text-gray-600">{{ deletedGuilds.length }} guildes</span>
+    </PageSectionTitle>
+    <AdminGuildList
+      v-if="deletedGuilds.length"
+      :guilds="deletedGuilds"
       :advanced-mode="editionMode"
     />
   </div>
@@ -18,6 +37,7 @@
 import { mapGetters } from 'vuex'
 import PageSectionTitle from '~/components/ui/PageSectionTitle.vue'
 import AdminGuildList from '~/components/AdminGuildList.vue'
+import FormInput from '~/components/ui/FormInput.vue'
 import FormCheckBox from '~/components/ui/FormCheckBox.vue'
 
 export default {
@@ -25,14 +45,17 @@ export default {
   components: {
     PageSectionTitle,
     AdminGuildList,
+    FormInput,
     FormCheckBox
   },
   data: () => ({
+    searchText: '',
     editionMode: false
   }),
   computed: {
     ...mapGetters('admin', [
-      'publishedGuilds'
+      'publishedGuilds',
+      'deletedGuilds'
     ])
   },
   head () {
