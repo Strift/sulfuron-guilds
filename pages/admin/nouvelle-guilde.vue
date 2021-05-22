@@ -31,13 +31,11 @@
       Valider
     </PrimaryButton>
     <PageSectionTitle>Guildes non publiées</PageSectionTitle>
-    <div v-if="draftGuilds.length" class="bg-gray-300 p-6 rounded shadow text-gray-800">
-      <ul class="list-disc list-inside">
-        <li v-for="(guild, i) in draftGuilds" :key="i">
-          {{ guildName(guild) }} <span class="text-gray-600 text-sm">({{ guild.ownerUid }})</span>
-        </li>
-      </ul>
-    </div>
+    <AdminGuildList
+      v-if="draftGuilds.length"
+      :guilds="draftGuilds"
+      :advanced-mode="true"
+    />
   </div>
 </template>
 
@@ -48,6 +46,7 @@ import FormSelect from '~/components/ui/FormSelect.vue'
 import PrimaryButton from '~/components/ui/PrimaryButton.vue'
 import InformationCard from '~/components/ui/InformationCard.vue'
 import PageSectionTitle from '~/components/ui/PageSectionTitle.vue'
+import AdminGuildList from '~/components/AdminGuildList.vue'
 
 import WOW_CLASSES from '~/data/classes.json'
 
@@ -65,7 +64,8 @@ export default {
     FormSelect,
     PrimaryButton,
     InformationCard,
-    PageSectionTitle
+    PageSectionTitle,
+    AdminGuildList
   },
   middleware: ['auth', 'admin'],
   data: () => ({
