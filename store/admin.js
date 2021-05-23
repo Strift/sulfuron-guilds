@@ -38,19 +38,21 @@ export const actions = {
     }))
     commit('setGuilds', guilds)
   },
-  async removeGuildById (ctx, guildId, softDelete = true) {
-    const guildRef = this.$fire.firestore
+  async softDeleteGuildById (ctx, guildId) {
+    await this.$fire.firestore
       .collection('guilds')
       .withConverter(guildConverter)
       .doc(guildId)
-
-    if (softDelete) {
-      await guildRef.update({
+      .update({
         ownerUid: null,
         deleted: true
       })
-    } else {
-      await guildRef.delete()
-    }
+  },
+  async hardDeleteGuildById (ctx, guildId) {
+    await this.$fire.firestore
+      .collection('guilds')
+      .withConverter(guildConverter)
+      .doc(guildId)
+      .delete()
   }
 }

@@ -22,6 +22,7 @@ service cloud.firestore {
       allow create: if isAdmin();
       allow read;
       allow update: if isGuildOwner() || isAdmin();
+      allow delete: if isAdmin();
 
       match /redirects/{redirect} {
         allow read: if isRedirectOwner();

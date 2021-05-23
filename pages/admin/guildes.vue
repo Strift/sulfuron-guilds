@@ -29,6 +29,7 @@
       v-if="deletedGuilds.length"
       :guilds="deletedGuilds"
       :advanced-mode="editionMode"
+      @remove="removeGuild"
     />
   </div>
 </template>
@@ -57,6 +58,15 @@ export default {
       'publishedGuilds',
       'deletedGuilds'
     ])
+  },
+  methods: {
+    removeGuild (guild) {
+      const confirmed = confirm(`Voulez-vous supprimer ${guild.name} ?`)
+      if (confirmed) {
+        this.$store.dispatch('admin/softDeleteGuildById', guild.id)
+      }
+      this.$store.dispatch('admin/fetchGuilds')
+    }
   },
   head () {
     return {

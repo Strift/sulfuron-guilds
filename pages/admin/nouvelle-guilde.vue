@@ -35,6 +35,7 @@
       v-if="draftGuilds.length"
       :guilds="draftGuilds"
       :advanced-mode="true"
+      @remove="removeGuild"
     />
   </div>
 </template>
@@ -120,6 +121,7 @@ export default {
           })
         this.guild = ''
         this.account = ''
+        this.$store.dispatch('admin/fetchGuilds')
       } catch (err) {
         this.error = err
       }
@@ -129,6 +131,13 @@ export default {
         return `[${guild.faction.charAt(0)}] ${guild.name}`
       }
       return `[?] ${guild.name}`
+    },
+    removeGuild (guild) {
+      const confirmed = confirm(`Voulez-vous supprimer ${guild.name} ?`)
+      if (confirmed) {
+        this.$store.dispatch('admin/hardDeleteGuildById', guild.id)
+      }
+      this.$store.dispatch('admin/fetchGuilds')
     }
   },
   head () {

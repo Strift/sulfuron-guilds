@@ -44,7 +44,7 @@
           <button
             v-if="!guild.deleted"
             class="bg-red-500 px-2 rounded-full text-red-100 text-xs"
-            @click="remove(guild)"
+            @click="$emit('remove', guild)"
           >
             Supprimer
           </button>
@@ -86,15 +86,6 @@ export default {
       return faction && faction !== ''
         ? faction.charAt(0)
         : '?'
-    },
-    remove (guild) {
-      const confirmed = confirm(`Voulez-vous supprimer ${guild.name} ?`)
-      if (confirmed) {
-        this.$store.dispatch('admin/removeGuildById', guild.id)
-      }
-    },
-    restore (guild) {
-      this.$store.dispatch('admin/restoreGuildById', guild.id, false)
     }
   }
 }

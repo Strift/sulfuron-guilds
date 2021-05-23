@@ -41,7 +41,7 @@
         </div>
         <div class="bg-gray-900 flex h-32 items-center justify-center p-4 rounded-lg shadow w-32">
           <img v-if="logoUrl" :src="logoUrl" alt="Votre logo" class="text-gray-700">
-          <EmptyGuildLogo v-else class="text-gray-800" />
+          <MissingGuildLogo v-else class="text-gray-800" />
         </div>
       </div>
     </div>
@@ -97,7 +97,6 @@
       </div>
     </div>
   </div>
-  </div>
 </template>
 
 <script>
@@ -105,11 +104,14 @@ import { debounce } from 'lodash'
 import { mapState, mapGetters } from 'vuex'
 import isUrl from 'is-url'
 
+import PrimaryButton from '~/components/ui/PrimaryButton.vue'
+import MissingGuildLogo from '~/components/ui/MissingGuildLogo.vue'
 import FormInput from '~/components/ui/FormInput.vue'
 import FormSelect from '~/components/ui/FormSelect.vue'
 import FormCheckList from '~/components/ui/FormCheckList.vue'
 import FormSpecsList from '~/components/ui/FormSpecsList.vue'
 import PageSectionTitle from '~/components/ui/PageSectionTitle.vue'
+import InformationCard from '~/components/ui/InformationCard.vue'
 import AccountStatistic from '~/components/AccountStatistic.vue'
 import AccountRefresh from '~/components/AccountRefresh.vue'
 
@@ -120,12 +122,15 @@ export default {
   name: 'Guild',
   layout: 'account',
   components: {
+    PrimaryButton,
     FormInput,
     FormSelect,
     FormCheckList,
     FormSpecsList,
+    InformationCard,
     PageSectionTitle,
     AccountStatistic,
+    MissingGuildLogo,
     AccountRefresh
   },
   data: () => ({
