@@ -153,7 +153,7 @@ export default {
     publishRelease: true,
     sourceMapStyle: 'hidden-source-map',
     config: {
-      // release: process.env.GIT_COMMIT_SHA
+      release: process.env.GIT_COMMIT_SHA
     },
     // Options passed to @sentry/webpack-plugin.
     // Docs: https://github.com/getsentry/sentry-webpack-plugin/blob/master/README.md
