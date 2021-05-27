@@ -80,6 +80,33 @@ export default {
   ** See https://nuxtjs.org/api/configuration-build/
   */
   build: {
+    extend (config, { isDev, isClient }) {
+      if (!isDev) {
+        if (isClient) {
+          config.devtool = '#source-map'
+        }
+
+        const SentryWebpackPlugin = require('@sentry/webpack-plugin')
+
+        config.plugins.push(new SentryWebpackPlugin({
+        // sentry-cli configuration
+          authToken: process.env.SENTRY_AUTH_TOKEN,
+          org: 'laurent-cazanove',
+          project: 'laurent-cazanove',
+          // release: process.env.SENTRY_RELEASE,
+          // Sentry options are required
+          include: ['.nuxt/dist/client'],
+          ignore: [
+            'node_modules',
+            '.nuxt/dist/client/img'
+          ],
+          configFile: '.sentryclirc',
+          config: {
+            environment: process.env.ENVIRONMENT || 'development'
+          }
+        }))
+      }
+    },
     // Enabled to fix the following issue
     // https://github.com/nuxt/nuxt.js/issues/5800#issuecomment-549404405
     html: {
