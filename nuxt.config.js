@@ -1,3 +1,5 @@
+import git from 'git-rev-sync'
+
 const isProduction = () => process.env.NODE_ENV === 'production'
 const evalBool = (bool) => {
   if (bool === 'true') { return true } else if (bool === 'false') { return false }
@@ -153,6 +155,7 @@ export default {
     publishRelease: true,
     sourceMapStyle: 'hidden-source-map',
     config: {
+      release: git.long(),
       // release: process.env.GIT_COMMIT_SHA
       environment: process.env.ENVIRONMENT || 'development'
     },
