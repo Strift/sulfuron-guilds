@@ -10,6 +10,7 @@
 - CSS utilities from [TailwindCSS v1](https://v1.tailwindcss.com/)
 - SVG icons from [heroicons](https://heroicons.com/)
 - Testing with [Vue Test Utils](https://vue-test-utils.vuejs.org/) (and [Jest](https://jestjs.io/en/) + [Babel](https://babeljs.io/))
+- Error monitoring with [Sentry](https://sentry.io)
 
 **Node versions**
 
