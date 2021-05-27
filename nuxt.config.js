@@ -154,9 +154,9 @@ export default {
     dsn: 'https://c641e9d80e684743befafefdbe54d3d9@o571625.ingest.sentry.io/5720079',
     publishRelease: true,
     sourceMapStyle: 'hidden-source-map',
+    tracing: true,
     config: {
-      release: git.long(),
-      // release: process.env.GIT_COMMIT_SHA
+      release: git.long(), // GIT_COMMIT_SHA
       environment: process.env.ENVIRONMENT || 'development'
     },
     // Options passed to @sentry/webpack-plugin.

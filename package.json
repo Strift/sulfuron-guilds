@@ -26,6 +26,7 @@
     "@nuxtjs/firebase": "^7.1.1",
     "@nuxtjs/robots": "^2.4.2",
     "@nuxtjs/sentry": "^5.0.3",
+    "@sentry/tracing": "^6.4.1",
     "@vue/composition-api": "^1.0.0-rc.8",
     "animate.css": "^4.1.1",
     "epic-spinners": "^1.1.0",
