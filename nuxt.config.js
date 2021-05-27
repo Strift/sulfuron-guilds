@@ -153,7 +153,8 @@ export default {
     publishRelease: true,
     sourceMapStyle: 'hidden-source-map',
     config: {
-      // release: process.env.GIT_COMMIT_SHA
+      release: process.env.GIT_COMMIT_SHA
+      // environment: process.env.ENVIRONMENT || 'development'
     },
     // Options passed to @sentry/webpack-plugin.
     // Docs: https://github.com/getsentry/sentry-webpack-plugin/blob/master/README.md
@@ -161,17 +162,14 @@ export default {
       authToken: process.env.SENTRY_AUTH_TOKEN,
       org: 'laurent-cazanove',
       project: 'laurent-cazanove',
-      release: process.env.GIT_COMMIT_SHA,
+      // release: process.env.GIT_COMMIT_SHA,
       // Sentry options are required
       include: ['.nuxt/dist/client'],
       ignore: [
         'node_modules',
         '.nuxt/dist/client/img'
-      ],
+      ]
       // configFile: '.sentryclirc',
-      config: {
-        environment: process.env.ENVIRONMENT || 'development'
-      }
     }
   }
 }
