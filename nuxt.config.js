@@ -162,7 +162,7 @@ export default {
       authToken: process.env.SENTRY_AUTH_TOKEN,
       org: 'laurent-cazanove',
       project: 'laurent-cazanove',
-      // release: process.env.GIT_COMMIT_SHA,
+      release: process.env.GIT_COMMIT_SHA,
       // Sentry options are required
       include: ['.nuxt/dist/client'],
       ignore: [
