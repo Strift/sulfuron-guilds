@@ -168,8 +168,8 @@ export default {
       ignore: [
         'node_modules',
         '.nuxt/dist/client/img'
-      ]
-      // configFile: '.sentryclirc',
+      ],
+      configFile: '.sentryclirc'
     }
   }
 }
