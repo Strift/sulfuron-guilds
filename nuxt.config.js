@@ -162,17 +162,16 @@ export default {
     // Options passed to @sentry/webpack-plugin.
     // Docs: https://github.com/getsentry/sentry-webpack-plugin/blob/master/README.md
     webpackConfig: {
+      // Sentry CLI options
       authToken: process.env.SENTRY_AUTH_TOKEN,
       org: 'laurent-cazanove',
       project: 'laurent-cazanove',
-      // release: process.env.GIT_COMMIT_SHA,
-      // Sentry options are required
+      // Sentry options
       include: ['.nuxt/dist/client'],
       ignore: [
         'node_modules',
         '.nuxt/dist/client/img'
-      ],
-      configFile: '.sentryclirc'
+      ]
     }
   }
 }
