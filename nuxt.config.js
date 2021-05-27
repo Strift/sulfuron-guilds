@@ -80,33 +80,6 @@ export default {
   ** See https://nuxtjs.org/api/configuration-build/
   */
   build: {
-    extend (config, { isDev, isClient }) {
-      if (!isDev) {
-        if (isClient) {
-          config.devtool = '#source-map'
-        }
-
-        const SentryWebpackPlugin = require('@sentry/webpack-plugin')
-
-        config.plugins.push(new SentryWebpackPlugin({
-        // sentry-cli configuration
-          authToken: process.env.SENTRY_AUTH_TOKEN,
-          org: 'laurent-cazanove',
-          project: 'laurent-cazanove',
-          // release: process.env.SENTRY_RELEASE,
-          // Sentry options are required
-          include: ['.nuxt/dist/client'],
-          ignore: [
-            'node_modules',
-            '.nuxt/dist/client/img'
-          ],
-          configFile: '.sentryclirc',
-          config: {
-            environment: process.env.ENVIRONMENT || 'development'
-          }
-        }))
-      }
-    },
     // Enabled to fix the following issue
     // https://github.com/nuxt/nuxt.js/issues/5800#issuecomment-549404405
     html: {
@@ -175,8 +148,30 @@ export default {
   ** Sentry module configuration
   */
   sentry: {
-    dsn: 'https://c641e9d80e684743befafefdbe54d3d9@o571625.ingest.sentry.io/5720079',
     disabled: !isProduction(),
-    config: {}
+    dsn: 'https://c641e9d80e684743befafefdbe54d3d9@o571625.ingest.sentry.io/5720079',
+    publishRelease: true,
+    sourceMapStyle: 'hidden-source-map',
+    config: {
+      // release: process.env.GIT_COMMIT_SHA
+    },
+    // Options passed to @sentry/webpack-plugin.
+    // Docs: https://github.com/getsentry/sentry-webpack-plugin/blob/master/README.md
+    webpackConfig: {
+      authToken: process.env.SENTRY_AUTH_TOKEN,
+      org: 'laurent-cazanove',
+      project: 'laurent-cazanove',
+      // release: process.env.SENTRY_RELEASE,
+      // Sentry options are required
+      include: ['.nuxt/dist/client'],
+      ignore: [
+        'node_modules',
+        '.nuxt/dist/client/img'
+      ],
+      // configFile: '.sentryclirc',
+      config: {
+        environment: process.env.ENVIRONMENT || 'development'
+      }
+    }
   }
 }
