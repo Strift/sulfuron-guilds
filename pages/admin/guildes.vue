@@ -21,6 +21,7 @@
       :guilds="publishedGuilds"
       :advanced-mode="editionMode"
       :search="searchText"
+      @remove="removeGuild"
     />
     <PageSectionTitle class="flex items-baseline justify-between">
       Guildes supprimées <span class="text-base text-gray-600">{{ deletedGuilds.length }} guildes</span>
