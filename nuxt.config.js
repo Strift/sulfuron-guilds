@@ -166,8 +166,8 @@ export default {
     webpackConfig: {
       // Sentry CLI options
       authToken: process.env.SENTRY_AUTH_TOKEN,
-      org: 'laurent-cazanove',
-      project: 'laurent-cazanove',
+      org: 'strift',
+      project: 'sulfuron-guilds',
       // Sentry options
       include: ['.nuxt/dist/client'],
       ignore: [
