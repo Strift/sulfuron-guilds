@@ -10,5 +10,13 @@
   {
     "value": "Speedrun",
     "label": "Speedrun"
+  },
+  {
+    "value": "Beginners",
+    "label": "Débutants"
+  },
+  {
+    "value": "RP",
+    "label": "Jeu de rôle"
   }
 ]

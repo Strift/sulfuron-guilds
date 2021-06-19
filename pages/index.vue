@@ -125,7 +125,7 @@ export default {
       'isAuthenticated'
     ]),
     orderedSearchResults () {
-      return sortBy(this.searchResults, ['name'])
+      return sortBy(this.searchResults, [guild => guild.name.toLowerCase()])
     },
     resultsText () {
       return this.searchResults.length > 1 ? 'guildes' : 'guilde'

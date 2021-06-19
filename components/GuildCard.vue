@@ -33,6 +33,9 @@
         class="p-3"
         @click="expandGuildRecruitment = !expandGuildRecruitment"
       />
+      <!-- <div class="group-hover:text-gray-600 italic mt-1 text-gray-800 text-right text-sm">
+        3 minutes ago
+      </div> -->
     </div>
   </button>
 </template>
