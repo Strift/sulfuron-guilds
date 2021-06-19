@@ -72,6 +72,8 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
+    // Doc: https://composition-api.nuxtjs.org/
+    '@nuxtjs/composition-api/module',
     // Doc: https://firebase.nuxtjs.org/
     '@nuxtjs/firebase',
     // Doc: https://github.com/nuxt-community/robots-module
