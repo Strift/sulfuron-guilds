@@ -25,9 +25,9 @@ export default {
       get () {
         return this.$store.state.account.guild.type
       },
-      set (value) {
+      set: debounce(function (value) {
         this.$store.dispatch('account/updateGuild', { type: value })
-      }
+      }, 1000)
     }
   }
 }

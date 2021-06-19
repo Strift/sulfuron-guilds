@@ -28,8 +28,6 @@ const types = [
   }
 ]
 
-jest.useFakeTimers()
-
 describe('GuildTypeInput', () => {
   const localVue = createLocalVue()
   localVue.use(Vuex)
@@ -62,9 +60,11 @@ describe('GuildTypeInput', () => {
   })
 
   it('dispatches a store update on value change', async () => {
+    jest.useFakeTimers('modern')
     const wrapper = mount(GuildTypeInput, { store, localVue })
     await wrapper.findComponent(FormSelect).vm.$emit('input', 'some value')
     jest.advanceTimersByTime(1000)
     expect(store.dispatch).toHaveBeenCalledWith('account/updateGuild', { type: 'some value' })
+    jest.useRealTimers()
   })
 })
