@@ -1,0 +1,42 @@
+name: Test on Pull Requests
+
+on:
+  push:
+    branches:
+      - actions
+  pull_request:
+    branches:
+      - master
+      - develop 
+
+jobs:
+  install_deps:
+    name: Install dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository checkout
+        uses: actions/checkout@v2
+      - name: Install Node.js v12
+        uses: actions/setup-node@v2
+        with:
+          node-version: '12'
+      - name: Install dependencies
+        run: yarn
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: vendor
+          path: node_modules
+  test:
+    name: Run tests
+    needs: install_deps
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository checkout
+        uses: actions/checkout@v2
+      - name: Download artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: vendor
+      - name: Run tests
+        run: yarn test
