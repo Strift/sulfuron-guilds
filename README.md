@@ -10,6 +10,7 @@
 - CSS utilities from [TailwindCSS v1](https://v1.tailwindcss.com/)
 - SVG icons from [heroicons](https://heroicons.com/)
 - Testing with [Vue Test Utils](https://vue-test-utils.vuejs.org/) (and [Jest](https://jestjs.io/en/) + [Babel](https://babeljs.io/))
+- Testing with [Cypress](https://cypress.io/)
 
 **Node versions**
 
@@ -43,6 +44,16 @@ yarn serve --only  hosting,functions,database
 ```
 
 ## 🧪 Testing
+
+**Requirements**
+
+On Linux, cypress requires the following dependencies to be installed.
+
+```bash
+apt-get install libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb
+```
+
+**Running the tests**
 
 Run the tests using the following command:
 
