@@ -10,8 +10,9 @@ on:
       - develop 
 
 jobs:
-  install_deps:
-    name: Install dependencies
+  test:
+    name: Run tests
+    needs: install_deps
     runs-on: ubuntu-latest
     steps:
       - name: Repository checkout
@@ -22,21 +23,5 @@ jobs:
           node-version: '12'
       - name: Install dependencies
         run: yarn
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: vendor
-          path: node_modules
-  test:
-    name: Run tests
-    needs: install_deps
-    runs-on: ubuntu-latest
-    steps:
-      - name: Repository checkout
-        uses: actions/checkout@v2
-      - name: Download artifacts
-        uses: actions/download-artifact@v2
-        with:
-          name: vendor
       - name: Run tests
         run: yarn test
