@@ -77,7 +77,7 @@ export default {
       const search = this.search.toLowerCase()
       return sortBy(
         this.guilds.filter(({ name, ownerUid }) => name.toLowerCase().includes(search) || ownerUid.toLowerCase().includes(search)),
-        ['name']
+        [guild => guild.name.toLowerCase()]
       )
     }
   },

@@ -52,7 +52,7 @@
                   </div>
                   <div v-if="websiteUrl && websiteUrl !== contactUrl" class="flex items-center space-x-4">
                     <GlobeIcon class="flex-shrink-0 text-gray-700" />
-                    <a :href="websiteRedirectUrl" rel="noopener" target="_blank" class="hover:text-blue-300">
+                    <a :href="websiteRedirectUrl" rel="noopener" title="Site web" target="_blank" class="hover:text-blue-300">
                       {{ readableWebsiteUrl }}
                     </a>
                   </div>

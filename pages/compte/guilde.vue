@@ -33,7 +33,7 @@
           </div>
         </div>
         <FormSelect v-model="faction" :options="factionOptions" name="faction" label="Faction" placeholder="Sélectionnez votre faction" />
-        <FormSelect v-model="type" :options="typeOptions" name="type" label="Type de structure" placeholder="Sélectionnez le type de guilde" />
+        <GuildTypeInput />
       </div>
       <div class="mb-10">
         <div class="block font-semibold leading-none mb-4 text-blue-400 text-shadow-sm">
@@ -114,6 +114,7 @@ import PageSectionTitle from '~/components/ui/PageSectionTitle.vue'
 import InformationCard from '~/components/ui/InformationCard.vue'
 import AccountStatistic from '~/components/AccountStatistic.vue'
 import AccountRefresh from '~/components/AccountRefresh.vue'
+import GuildTypeInput from '~/components/GuildTypeInput.vue'
 
 import WOW_CLASSES from '~/data/classes.json'
 const DAYS_OF_THE_WEEK = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche']
@@ -131,6 +132,7 @@ export default {
     PageSectionTitle,
     AccountStatistic,
     MissingGuildLogo,
+    GuildTypeInput,
     AccountRefresh
   },
   data: () => ({
