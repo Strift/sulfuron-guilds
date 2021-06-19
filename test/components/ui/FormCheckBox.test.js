@@ -1,10 +1,15 @@
 import { mount } from '@vue/test-utils'
-import factory from '~/test/factory'
+import faker from 'faker'
 
 import FormCheckBox from '~/components/ui/FormCheckBox.vue'
 
 const makeComponent = (props, defaultSlot = 'label') => {
-  const propsData = factory(FormCheckBox, props)
+  const propsData = {
+    id: faker.lorem.word(),
+    name: faker.lorem.words(2),
+    checked: faker.datatype.boolean(),
+    ...props
+  }
   return mount(
     FormCheckBox, {
       propsData,
