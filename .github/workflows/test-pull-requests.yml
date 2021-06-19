@@ -10,9 +10,8 @@ on:
       - develop 
 
 jobs:
-  test:
-    name: Run tests
-    needs: install_deps
+  jest:
+    name: Run unit tests
     runs-on: ubuntu-latest
     steps:
       - name: Repository checkout
