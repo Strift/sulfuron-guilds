@@ -51,4 +51,16 @@ describe('FormSelect', () => {
     expect(optionsWrapper.length).toBe(options.length)
     expect(optionsWrapper.at(0).text()).not.toBe('placeholder text')
   })
+
+  it('emits input event when select value changes', async () => {
+    const wrapper = mountComponent({ options })
+    await wrapper.find('select').setValue('2')
+    expect(wrapper.emitted('input')[0][0]).toBe('2')
+  })
+
+  it('emits focus event when select is focused', async () => {
+    const wrapper = mountComponent()
+    await wrapper.find('select').element.focus()
+    expect(wrapper.emitted('focus')).toBeTruthy()
+  })
 })
