@@ -1,16 +1,9 @@
 <template>
   <div class="space-y-10">
-    <div
+    <GuildPublish
       v-if="hasDraftGuild"
-      class="flex items-baseline justify-between"
-    >
-      <InformationCard>
-        N'oubliez pas de cliquer sur publier une fois les informations de votre guilde renseignées.
-      </InformationCard>
-      <PrimaryButton @click="publish">
-        Publier
-      </PrimaryButton>
-    </div>
+      @publish="publish"
+    />
     <div v-else class="space-y-10">
       <PageSectionTitle>Tableau de bord</PageSectionTitle>
       <div class="flex">
@@ -96,6 +89,10 @@
         <div>Lien de contact manquant. Votre guilde n'apparaîtra pas dans les résultats de recherche.</div>
       </div>
     </div>
+    <GuildPublish
+      v-if="hasDraftGuild"
+      @publish="publish"
+    />
   </div>
 </template>
 
@@ -104,17 +101,16 @@ import { debounce } from 'lodash'
 import { mapState, mapGetters } from 'vuex'
 import isUrl from 'is-url'
 
-import PrimaryButton from '~/components/ui/PrimaryButton.vue'
 import MissingGuildLogo from '~/components/ui/MissingGuildLogo.vue'
 import FormInput from '~/components/ui/FormInput.vue'
 import FormSelect from '~/components/ui/FormSelect.vue'
 import FormCheckList from '~/components/ui/FormCheckList.vue'
 import FormSpecsList from '~/components/ui/FormSpecsList.vue'
 import PageSectionTitle from '~/components/ui/PageSectionTitle.vue'
-import InformationCard from '~/components/ui/InformationCard.vue'
 import AccountStatistic from '~/components/AccountStatistic.vue'
-import AccountRefresh from '~/components/AccountRefresh.vue'
+// import AccountRefresh from '~/components/AccountRefresh.vue'
 import GuildTypeInput from '~/components/GuildTypeInput.vue'
+import GuildPublish from '~/components/GuildPublish.vue'
 
 import WOW_CLASSES from '~/data/classes.json'
 const DAYS_OF_THE_WEEK = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche']
@@ -123,17 +119,16 @@ export default {
   name: 'Guild',
   layout: 'account',
   components: {
-    PrimaryButton,
     FormInput,
     FormSelect,
     FormCheckList,
     FormSpecsList,
-    InformationCard,
     PageSectionTitle,
     AccountStatistic,
     MissingGuildLogo,
     GuildTypeInput,
-    AccountRefresh
+    GuildPublish
+    // AccountRefresh
   },
   data: () => ({
     factionOptions: [
