@@ -17,11 +17,10 @@
       />
       <FormSelect
         v-model="account"
-        :options="users"
+        :options="usersOptions"
         label="Compte Battle.net du GM"
-        :placeholder="accountPlaceholder"
+        :placeholder="usersPlaceholder"
         name="bnet-account"
-        @focus="fetchUsers"
       />
     </div>
     <InformationCard>
@@ -42,6 +41,13 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import { ref, computed, defineComponent } from '@nuxtjs/composition-api'
+import useUsers, {
+  STATE_EMPTY as USERS_STATE_EMPTY,
+  STATE_LOADING as USERS_STATE_LOADING,
+  STATE_LOADED as USERS_STATE_LOADED
+} from '~/composables/useUsers'
+
 import FormInput from '~/components/ui/FormInput.vue'
 import FormSelect from '~/components/ui/FormSelect.vue'
 import PrimaryButton from '~/components/ui/PrimaryButton.vue'
@@ -53,12 +59,7 @@ import WOW_CLASSES from '~/data/classes.json'
 
 const DAYS_OF_THE_WEEK = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche']
 
-const USERS_STATE_EMPTY = 'empty'
-const USERS_STATE_LOADING = 'loading'
-const USERS_STATE_LOADED = 'loaded'
-const USERS_STATE_ERROR = 'error'
-
-export default {
+export default defineComponent({
   layout: 'admin',
   components: {
     FormInput,
@@ -69,39 +70,34 @@ export default {
     AdminGuildList
   },
   middleware: ['auth', 'admin'],
-  data: () => ({
-    usersState: USERS_STATE_EMPTY,
-    users: [],
-    guild: '',
-    account: '',
-    error: null
-  }),
+  setup () {
+    const { users, state: usersState, fetchUsers } = useUsers()
+
+    const usersOptions = computed(() => users.value.map(userId => ({ label: userId, value: userId })))
+    const usersPlaceholder = computed(() => {
+      if (usersState.value === USERS_STATE_EMPTY) { return 'Cliquez pour charger...' }
+      if (usersState.value === USERS_STATE_LOADING) { return 'Chargement...' }
+      if (usersState.value === USERS_STATE_LOADED) { return 'Sélectionnez le compte' }
+      return 'Erreur'
+    })
+    const guild = ref('')
+    const account = ref('')
+
+    fetchUsers()
+    return {
+      guild,
+      account,
+      usersOptions,
+      usersPlaceholder,
+      fetchUsers
+    }
+  },
   computed: {
     ...mapGetters('admin', [
       'draftGuilds'
-    ]),
-    accountPlaceholder () {
-      if (this.usersState === USERS_STATE_EMPTY) { return 'Cliquez pour charger...' }
-
-      if (this.usersState === USERS_STATE_LOADING) { return 'Chargement...' }
-
-      if (this.usersState === USERS_STATE_LOADED) { return 'Sélectionnez le compte' }
-
-      return 'Erreur'
-    }
+    ])
   },
   methods: {
-    async fetchUsers () {
-      this.usersState = USERS_STATE_LOADING
-      try {
-        const listUsers = this.$fire.functions.httpsCallable('listUsers')
-        const { data } = await listUsers()
-        this.users = data.users.map(userId => ({ label: userId, value: userId }))
-        this.usersState = USERS_STATE_LOADED
-      } catch (err) {
-        this.usersState = USERS_STATE_ERROR
-      }
-    },
     async createGuild () {
       try {
         await this.$fire.firestore
@@ -123,7 +119,7 @@ export default {
         this.account = ''
         this.$store.dispatch('admin/fetchGuilds')
       } catch (err) {
-        this.error = err
+        // TODO: handle error
       }
     },
     guildName (guild) {
@@ -145,5 +141,5 @@ export default {
       title: 'Nouvelle guilde'
     }
   }
-}
+})
 </script>

@@ -2522,6 +2522,21 @@
     lodash "^4.17.15"
     pretty "^2.0.0"
 
+"@vueuse/firebase@^5.0.3":
+  version "5.0.3"
+  resolved "https://registry.yarnpkg.com/@vueuse/firebase/-/firebase-5.0.3.tgz#0fe5bcccf155e34b8b16b9e53bc50922dab6bf50"
+  integrity sha512-0+GRBfe7xJ5DMMn1BjTSGVc3jfLMCnAUgcNc1tvZIOlNPBSrDZ79lD60RoJvCk8LjhNHSfyfVzHx0BdunXYvcw==
+  dependencies:
+    "@vueuse/shared" "5.0.3"
+    vue-demi "*"
+
+"@vueuse/shared@5.0.3":
+  version "5.0.3"
+  resolved "https://registry.yarnpkg.com/@vueuse/shared/-/shared-5.0.3.tgz#31613951d5036459650ad8d47a9185e8950ea3c9"
+  integrity sha512-aY93WPygr8H/4RB8YuOmAD83Y+faq7zwW10Kd9i0kD9zf5ysVP+32j09rF/mZVtGCa0CSM8ambPZMsEhCkRbwQ==
+  dependencies:
+    vue-demi "*"
+
 "@webassemblyjs/ast@1.9.0":
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/@webassemblyjs/ast/-/ast-1.9.0.tgz#bd850604b4042459a5a41cd7d338cbed695ed964"
@@ -12131,6 +12146,11 @@ vue-cookies@^1.7.4:
   version "1.7.4"
   resolved "https://registry.yarnpkg.com/vue-cookies/-/vue-cookies-1.7.4.tgz#d241d0a0431da0795837651d10b4d73e7c8d3e8d"
   integrity sha512-mOS5Btr8V9zvAtkmQ7/TfqJIropOx7etDAgBywPCmHjvfJl2gFbH2XgoMghleLoyyMTi5eaJss0mPN7arMoslA==
+
+vue-demi@*:
+  version "0.9.1"
+  resolved "https://registry.yarnpkg.com/vue-demi/-/vue-demi-0.9.1.tgz#25d6e1ebd4d4010757ff3571e2bf6a1d7bf3de82"
+  integrity sha512-7s1lufRD2l369eFWPjgLvhqCRk0XzGWJsQc7K4q+0mZtixyGIvsK1Cg88P4NcaRIEiBuuN4q1NN4SZKFKwQswA==
 
 vue-eslint-parser@^7.0.0:
   version "7.6.0"
