@@ -1,4 +1,4 @@
-import { ref, useContext, watch } from '@nuxtjs/composition-api'
+import { ref, useContext } from '@nuxtjs/composition-api'
 
 export const STATE_EMPTY = 'empty'
 export const STATE_LOADING = 'loading'
