@@ -1,4 +1,5 @@
-import { ref, useContext, useStore } from '@nuxtjs/composition-api'
+import { useStore } from '@nuxtjs/composition-api'
+import useFirestore from '../useFirestore'
 import WOW_CLASSES from '~/data/classes.json'
 
 const DAYS_OF_THE_WEEK = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche']
@@ -19,13 +20,13 @@ const newGuild = (ownerUid, name) => ({
 })
 
 export default function useCreateGuild () {
-  const { $fire } = useContext()
+  const firestore = useFirestore()
   const store = useStore()
 
   const createGuild = async (ownerUid, name) => {
     try {
       const guild = newGuild(ownerUid, name)
-      await $fire.firestore.collection('guilds').add(guild)
+      await firestore.collection('guilds').add(guild)
       store.dispatch('admin/fetchGuilds')
     } catch (err) {
       // TODO: handle error

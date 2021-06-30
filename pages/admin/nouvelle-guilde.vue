@@ -45,8 +45,8 @@ import useUsers, {
   STATE_EMPTY as USERS_STATE_EMPTY,
   STATE_LOADING as USERS_STATE_LOADING,
   STATE_LOADED as USERS_STATE_LOADED
-} from '~/composables/useUsers'
-import useCreateGuild from '~/composables/useCreateGuild'
+} from '~/composables/admin/useUsers'
+import useCreateGuild from '~/composables/admin/useCreateGuild'
 
 import FormInput from '~/components/ui/FormInput.vue'
 import FormSelect from '~/components/ui/FormSelect.vue'
