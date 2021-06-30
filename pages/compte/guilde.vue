@@ -4,15 +4,12 @@
       v-if="hasDraftGuild"
       @publish="publish"
     />
-    <div v-else class="space-y-10">
+    <div class="space-y-10">
       <PageSectionTitle>Tableau de bord</PageSectionTitle>
-      <div class="flex">
-        <div class="flex space-x-8">
-          <AccountStatistic label="Visites" :value="websiteRedirectsCount" />
-          <AccountStatistic label="Contacts" :value="contactRedirectsCount" />
-        </div>
-        <!-- <AccountRefresh :up-to-date="true" class="ml-auto" /> -->
-      </div>
+      <GuildDashboard
+        :website-redirects="websiteRedirectsCount"
+        :contact-redirects="contactRedirectsCount"
+      />
     </div>
     <PageSectionTitle>Général</PageSectionTitle>
     <div class="flex flex-col-reverse justify-between lg:flex-row">
@@ -107,8 +104,7 @@ import FormSelect from '~/components/ui/FormSelect.vue'
 import FormCheckList from '~/components/ui/FormCheckList.vue'
 import FormSpecsList from '~/components/ui/FormSpecsList.vue'
 import PageSectionTitle from '~/components/ui/PageSectionTitle.vue'
-import AccountStatistic from '~/components/AccountStatistic.vue'
-// import AccountRefresh from '~/components/AccountRefresh.vue'
+import GuildDashboard from '~/components/GuildDashboard.vue'
 import GuildTypeInput from '~/components/GuildTypeInput.vue'
 import GuildPublish from '~/components/GuildPublish.vue'
 
@@ -124,7 +120,7 @@ export default {
     FormCheckList,
     FormSpecsList,
     PageSectionTitle,
-    AccountStatistic,
+    GuildDashboard,
     MissingGuildLogo,
     GuildTypeInput,
     GuildPublish
