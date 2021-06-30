@@ -23,9 +23,6 @@
         name="bnet-account"
       />
     </div>
-    <InformationCard>
-      🛠️ La liste déroulante bug un peu, n'hésitez pas à re-cliquer lorsque nécessaire.
-    </InformationCard>
     <PrimaryButton @click="createGuild(account, guild)">
       Valider
     </PrimaryButton>
