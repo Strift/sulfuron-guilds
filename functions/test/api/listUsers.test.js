@@ -1,7 +1,4 @@
-const firebaseTools = require('firebase-tools')
 const admin = require('firebase-admin')
-
-firebaseTools.emulators.start()
 
 process.env.FIREBASE_AUTH_EMULATOR_HOST = 'localhost:9099'
 
@@ -29,9 +26,8 @@ describe('listUsers', () => {
 
   it('returns the list of Firebase Auth Users', async () => {
     const uid = 'fakeBnet#1234'
-    admin.auth().createUser({
-      uid
-    })
+    admin.auth().createUser({ uid })
+
     const { users } = await wrapped()
     expect(users).toEqual([uid])
     admin.auth().deleteUser(uid)
