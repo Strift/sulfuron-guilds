@@ -67,7 +67,10 @@ export default {
     contactUrl: { type: String, required: true },
     // activity: { type: Number, required: true },
     // supports: { type: Number, required: true },
-    updatedAt: { type: Date, required: true }
+    updatedAt: {
+      type: Date,
+      default: null
+    }
   },
   data: () => ({
     loadingError: false,
@@ -78,7 +81,9 @@ export default {
       return this.raidDays.map(day => day.slice(0, 3)).join(', ')
     },
     relativeUpdatedDate () {
-      return DateTime.fromJSDate(this.updatedAt).toRelative({ locale: 'fr' })
+      return this.updatedAt
+        ? DateTime.fromJSDate(this.updatedAt).toRelative({ locale: 'fr' })
+        : 'il y a un moment'
     }
   }
 }

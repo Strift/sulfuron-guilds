@@ -59,4 +59,9 @@ describe('GuildCard', () => {
     const wrapper = makeComponent({ updatedAt: threeDaysAgo })
     expect(wrapper.text()).toContain('il y a 3 jours')
   })
+
+  it('has a default message for missing update date', () => {
+    const wrapper = makeComponent({ updatedAt: undefined })
+    expect(wrapper.text()).toContain('il y a un moment')
+  })
 })
