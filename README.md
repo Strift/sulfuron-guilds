@@ -51,7 +51,9 @@ Run the tests using the following command:
 yarn test
 ```
 
-> This commands just runs Jest, so you can use any Jest-recognized flags like `--watch`. 
+> This commands just runs Jest, so you can use any Jest CLI flags like `--watch`. 
+
+Tests that involves browser locale (to format dates) require `full-icu` to be installed.
 
 ## 🚀 Production
 

@@ -52,4 +52,16 @@ describe('GuildCard', () => {
     const wrapper = makeComponent()
     expect(wrapper.findComponent(GuildRecruitment).exists()).toBe(true)
   })
+
+  it('shows when it was last updated', () => {
+    const threeDaysAgo = new Date()
+    threeDaysAgo.setDate(threeDaysAgo.getDate() - 3)
+    const wrapper = makeComponent({ updatedAt: threeDaysAgo })
+    expect(wrapper.text()).toContain('il y a 3 jours')
+  })
+
+  it('has a default message for missing update date', () => {
+    const wrapper = makeComponent({ updatedAt: undefined })
+    expect(wrapper.text()).toContain('il y a un moment')
+  })
 })

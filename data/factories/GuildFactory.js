@@ -23,6 +23,7 @@ export default function (props) {
     logoUrl: faker.image.imageUrl(),
     websiteUrl: faker.internet.url(),
     contactUrl: faker.internet.url(),
+    updatedAt: faker.date.recent(),
     ...props
   }
 }
