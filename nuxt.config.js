@@ -22,6 +22,12 @@ export default {
     }
   },
   /*
+  ** Router config
+  */
+  router: {
+    trailingSlash: true
+  },
+  /*
   ** Headers of the page
   ** See https://nuxtjs.org/api/configuration-head
   */

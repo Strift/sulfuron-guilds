@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="mb-20">
-      <h1 class="font-semibold leading-none mb-3 mb-4 text-4xl text-blue-100 text-shadow-lg">
+      <h1 class="font-semibold leading-none mb-4 text-4xl text-blue-100 text-shadow-lg">
         Portail des guildes
       </h1>
       <p class="text-gray-400 text-lg text-shadow-md">

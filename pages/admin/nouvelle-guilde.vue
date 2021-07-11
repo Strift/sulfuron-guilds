@@ -17,17 +17,13 @@
       />
       <FormSelect
         v-model="account"
-        :options="users"
+        :options="usersOptions"
         label="Compte Battle.net du GM"
-        :placeholder="accountPlaceholder"
+        :placeholder="usersPlaceholder"
         name="bnet-account"
-        @focus="fetchUsers"
       />
     </div>
-    <InformationCard>
-      🛠️ La liste déroulante bug un peu, n'hésitez pas à re-cliquer lorsque nécessaire.
-    </InformationCard>
-    <PrimaryButton @click="createGuild">
+    <PrimaryButton @click="createGuild(account, guild)">
       Valider
     </PrimaryButton>
     <PageSectionTitle>Guildes non publiées</PageSectionTitle>
@@ -41,7 +37,14 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { ref, computed, defineComponent, useStore } from '@nuxtjs/composition-api'
+import useUsers, {
+  STATE_EMPTY as USERS_STATE_EMPTY,
+  STATE_LOADING as USERS_STATE_LOADING,
+  STATE_LOADED as USERS_STATE_LOADED
+} from '~/composables/admin/useUsers'
+import useCreateGuild from '~/composables/admin/useCreateGuild'
+
 import FormInput from '~/components/ui/FormInput.vue'
 import FormSelect from '~/components/ui/FormSelect.vue'
 import PrimaryButton from '~/components/ui/PrimaryButton.vue'
@@ -49,16 +52,7 @@ import InformationCard from '~/components/ui/InformationCard.vue'
 import PageSectionTitle from '~/components/ui/PageSectionTitle.vue'
 import AdminGuildList from '~/components/AdminGuildList.vue'
 
-import WOW_CLASSES from '~/data/classes.json'
-
-const DAYS_OF_THE_WEEK = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche']
-
-const USERS_STATE_EMPTY = 'empty'
-const USERS_STATE_LOADING = 'loading'
-const USERS_STATE_LOADED = 'loaded'
-const USERS_STATE_ERROR = 'error'
-
-export default {
+export default defineComponent({
   layout: 'admin',
   components: {
     FormInput,
@@ -69,75 +63,41 @@ export default {
     AdminGuildList
   },
   middleware: ['auth', 'admin'],
-  data: () => ({
-    usersState: USERS_STATE_EMPTY,
-    users: [],
-    guild: '',
-    account: '',
-    error: null
-  }),
-  computed: {
-    ...mapGetters('admin', [
-      'draftGuilds'
-    ]),
-    accountPlaceholder () {
-      if (this.usersState === USERS_STATE_EMPTY) { return 'Cliquez pour charger...' }
+  setup () {
+    const guild = ref('')
+    const account = ref('')
 
-      if (this.usersState === USERS_STATE_LOADING) { return 'Chargement...' }
+    const store = useStore()
+    const { users, state: usersState, fetchUsers } = useUsers()
+    const createGuild = useCreateGuild()
 
-      if (this.usersState === USERS_STATE_LOADED) { return 'Sélectionnez le compte' }
-
+    const usersOptions = computed(() => users.value.map(userId => ({ label: userId, value: userId })))
+    const usersPlaceholder = computed(() => {
+      if (usersState.value === USERS_STATE_EMPTY) { return 'Cliquez pour charger...' }
+      if (usersState.value === USERS_STATE_LOADING) { return 'Chargement...' }
+      if (usersState.value === USERS_STATE_LOADED) { return 'Sélectionnez le compte' }
       return 'Erreur'
-    }
-  },
-  methods: {
-    async fetchUsers () {
-      this.usersState = USERS_STATE_LOADING
-      try {
-        const listUsers = this.$fire.functions.httpsCallable('listUsers')
-        const { data } = await listUsers()
-        this.users = data.users.map(userId => ({ label: userId, value: userId }))
-        this.usersState = USERS_STATE_LOADED
-      } catch (err) {
-        this.usersState = USERS_STATE_ERROR
-      }
-    },
-    async createGuild () {
-      try {
-        await this.$fire.firestore
-          .collection('guilds')
-          .add({
-            ownerUid: this.account,
-            name: this.guild,
-            published: false,
-            type: '',
-            logoUrl: '',
-            startHour: '',
-            endHour: '',
-            raidDays: DAYS_OF_THE_WEEK.map(day => ({ day, playing: false })),
-            recruitment: WOW_CLASSES.map(classObj => ({ class: classObj.value, open: false })),
-            websiteUrl: '',
-            contactUrl: ''
-          })
-        this.guild = ''
-        this.account = ''
-        this.$store.dispatch('admin/fetchGuilds')
-      } catch (err) {
-        this.error = err
-      }
-    },
-    guildName (guild) {
-      if (guild.faction && guild.faction !== '') {
-        return `[${guild.faction.charAt(0)}] ${guild.name}`
-      }
-      return `[?] ${guild.name}`
-    },
-    removeGuild (guild) {
+    })
+    const draftGuilds = computed(() => store.getters['admin/draftGuilds'])
+
+    const removeGuild = (guild) => {
       const confirmed = confirm(`Voulez-vous supprimer ${guild.name} ?`)
       if (confirmed) {
-        this.$store.dispatch('admin/hardDeleteGuildById', guild.id)
+        store.dispatch('admin/hardDeleteGuildById', guild.id)
+        store.dispatch('admin/fetchGuilds')
       }
-      this.$store.dispatch('admin/fetchGuilds')
+    }
+
+    fetchUsers()
+    return {
+      guild,
+      account,
+      usersOptions,
+      usersPlaceholder,
+      draftGuilds,
+      fetchUsers,
+      createGuild,
+      removeGuild
     }
   },
   head () {
@@ -145,5 +105,5 @@ export default {
       title: 'Nouvelle guilde'
     }
   }
-}
+})
 </script>

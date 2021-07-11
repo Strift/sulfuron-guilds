@@ -33,14 +33,15 @@
         class="p-3"
         @click="expandGuildRecruitment = !expandGuildRecruitment"
       />
-      <!-- <div class="group-hover:text-gray-600 italic mt-1 text-gray-800 text-right text-sm">
-        3 minutes ago
-      </div> -->
+      <div class="group-hover:text-gray-600 italic mt-1 text-gray-800 text-right text-sm">
+        {{ relativeUpdatedDate }}
+      </div>
     </div>
   </button>
 </template>
 
 <script>
+import { DateTime } from 'luxon'
 import GuildLogo from './ui/GuildLogo.vue'
 import GuildRecruitment from './GuildRecruitment.vue'
 import CalendarIcon from '~/components/icons/solid/CalendarIcon.vue'
@@ -63,9 +64,13 @@ export default {
     recruitment: { type: Array, required: true },
     logoUrl: { type: String, required: true },
     websiteUrl: { type: String, required: true },
-    contactUrl: { type: String, required: true }
+    contactUrl: { type: String, required: true },
     // activity: { type: Number, required: true },
-    // supports: { type: Number, required: true }
+    // supports: { type: Number, required: true },
+    updatedAt: {
+      type: Date,
+      default: null
+    }
   },
   data: () => ({
     loadingError: false,
@@ -74,6 +79,11 @@ export default {
   computed: {
     readableDays () {
       return this.raidDays.map(day => day.slice(0, 3)).join(', ')
+    },
+    relativeUpdatedDate () {
+      return this.updatedAt
+        ? DateTime.fromJSDate(this.updatedAt).toRelative({ locale: 'fr' })
+        : 'il y a un moment'
     }
   }
 }
