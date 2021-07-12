@@ -2,8 +2,6 @@
 name: Deploy to production
 
 on:
-  push:
-    branches: [ master ]
   workflow_dispatch:
 
 jobs:
@@ -25,7 +23,7 @@ jobs:
         run: yarn
       - name: Generate static files
         run: yarn generate
-      - name: Deploy to Firebase
+      - name: Deploy front-end to Firebase
         uses: lowply/deploy-firebase@v0.0.4
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}

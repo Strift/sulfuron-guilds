@@ -10,11 +10,12 @@ const FUSE_OPTIONS = {
 
 const getSpecId = (classValue, specValue) => `${classValue}/${specValue}`
 
+let fuse = null
+
 export const state = () => ({
   list: [],
   classFilters: [],
-  textQuery: '',
-  fuse: null
+  textQuery: ''
 })
 
 export const mutations = {
@@ -71,13 +72,13 @@ export const getters = {
     }
 
     // Create Fuse if it does not exist
-    if (state.fuse === null) {
-      state.fuse = new Fuse(state.list, FUSE_OPTIONS)
+    if (fuse === null) {
+      fuse = new Fuse(state.list, FUSE_OPTIONS)
     } else {
-      state.fuse.setCollection(state.list)
+      fuse.setCollection(state.list)
     }
 
-    return state.fuse.search(state.textQuery).map(result => result.item)
+    return fuse.search(state.textQuery).map(result => result.item)
   },
   /*
   ** Final search results displayed by the UI
