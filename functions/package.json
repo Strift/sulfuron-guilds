@@ -8,7 +8,7 @@
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log",
     "test:run": "jest ./test/ --detectOpenHandles",
-    "test": "firebase emulators:exec --only auth,database,firestore 'yarn test:run'"
+    "test": "firebase emulators:exec --only auth,firestore,functions 'yarn test:run'"
   },
   "engines": {
     "node": "12"
