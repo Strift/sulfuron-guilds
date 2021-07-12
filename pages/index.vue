@@ -64,6 +64,7 @@
           :logo-url="guild.logoUrl"
           :website-url="guild.websiteUrl"
           :contact-url="guild.contactUrl"
+          :updated-at="guild.updatedAt"
           @click="openGuild(guild)"
         />
       </div>
