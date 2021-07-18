@@ -27,10 +27,11 @@
 
     <SearchFiltersCard v-show="showFiltersCard" class="mb-6 shadow-xl" />
 
-    <div v-if="classFilters.length" v-show="!showFiltersCard" class="mb-3">
+    <!-- <div v-if="classFilters.length" v-show="!showFiltersCard" class="mb-3">
       <div class="font-semibold mb-3 text-gray-500 text-sm tracking-wider uppercase">
         Filtres
       </div>
+      <ActiveClassFiltersList />
       <transition-group :duration="250" name="fade" tag="div" class="flex flex-row flex-wrap">
         <ClassFilter
           v-for="filter in classFilters"
@@ -42,33 +43,42 @@
           {{ filter.specName }}
         </ClassFilter>
       </transition-group>
-    </div>
+    </div> -->
 
-    <div class="flex items-center space-x-2 text-gray-700">
-      <SortAscendingIcon />
-      <div>Guildes triées par {{ sortingText }}.</div>
-    </div>
-
-    <transition-group :duration="500" name="fade" tag="div" class="gap-12 grid grid-cols-1 grid-flow-row my-12 sm:grid-cols-2 xl:grid-cols-3">
-      <div
-        v-for="guild in orderedSearchResults"
-        :key="guild.name"
-      >
-        <GuildCard
-          :id="guild.id"
-          :name="guild.name"
-          :type="guild.type"
-          :raid-days="raidDays(guild)"
-          :time-range="timeRange(guild)"
-          :recruitment="guild.recruitment"
-          :logo-url="guild.logoUrl"
-          :website-url="guild.websiteUrl"
-          :contact-url="guild.contactUrl"
-          :updated-at="guild.updatedAt"
-          @click="openGuild(guild)"
-        />
+    <div class="flex mb-12 mt-8">
+      <div class="pr-12 w-1/3">
+        <div class="font-semibold mb-10 text-gray-500 text-sm tracking-wider uppercase">
+          Filtres
+        </div>
+        <SearchFilters class="text-gray-600" />
       </div>
-    </transition-group>
+      <div class="w-2/3">
+        <div class="flex items-center mb-10 space-x-2 text-gray-500">
+          <SortAscendingIcon />
+          <div>Guildes triées par {{ sortingText }}.</div>
+        </div>
+        <transition-group :duration="500" name="fade" tag="div" class="gap-12 grid grid-cols-1 grid-flow-row sm:grid-cols-2 xl:grid-cols-2">
+          <div
+            v-for="guild in orderedSearchResults"
+            :key="guild.name"
+          >
+            <GuildCard
+              :id="guild.id"
+              :name="guild.name"
+              :type="guild.type"
+              :raid-days="raidDays(guild)"
+              :time-range="timeRange(guild)"
+              :recruitment="guild.recruitment"
+              :logo-url="guild.logoUrl"
+              :website-url="guild.websiteUrl"
+              :contact-url="guild.contactUrl"
+              :updated-at="guild.updatedAt"
+              @click="openGuild(guild)"
+            />
+          </div>
+        </transition-group>
+      </div>
+    </div>
 
     <div class="mt-12 text-center text-gray-500">
       {{ orderedSearchResults.length }} {{ resultsText }} trouvées.
@@ -100,6 +110,7 @@ import FactionButton from '~/components/FactionButton.vue'
 import SortAscendingIcon from '~/components/icons/solid/SortAscendingIcon.vue'
 import SearchFiltersButton from '~/components/SearchFiltersButton.vue'
 import SearchFiltersCard from '~/components/SearchFiltersCard.vue'
+import SearchFilters from '~/components/SearchFilters.vue'
 import ClassFilter from '~/components/ClassFilter.vue'
 
 export default {
@@ -111,6 +122,7 @@ export default {
     SortAscendingIcon,
     SearchFiltersButton,
     SearchFiltersCard,
+    SearchFilters,
     ClassFilter
   },
   data: () => ({
