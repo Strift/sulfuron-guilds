@@ -2,13 +2,12 @@ import Fuse from 'fuse.js'
 import { firestoreAction } from 'vuexfire'
 
 import guildConverter from '~/converters/guildConverter.js'
+import getSpecId from '~/data/utils/getSpecId'
 
 const FUSE_OPTIONS = {
   threshold: 0.2,
   keys: ['name', 'type']
 }
-
-const getSpecId = (classValue, specValue) => `${classValue}/${specValue}`
 
 let fuse = null
 
