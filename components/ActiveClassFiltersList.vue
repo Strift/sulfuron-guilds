@@ -1,5 +1,5 @@
 <template>
-  <transition-group :duration="250" name="fade" tag="div" class="flex flex-row flex-wrap">
+  <transition-group :duration="100" name="fade" tag="div" class="flex flex-row flex-wrap">
     <ClassFilter
       v-for="filter in classFilters"
       :key="`${filter.classValue}/${filter.specName}`"

@@ -1,11 +1,10 @@
 import sortBy from 'lodash/sortBy'
 import { ref } from '@nuxtjs/composition-api'
+import findClassIndex from '~/data/utils/findClassIndex'
+import findSpecIndex from '~/data/utils/findSpecIndex'
 import WOW_CLASSES from '~/data/classes.json'
 
 export default function () {
-  const findClassIndex = (classes, classValue) => classes.findIndex(wowClass => wowClass.class === classValue)
-  const findSpecIndex = (specs, specValue) => specs.findIndex(spec => spec.value === specValue)
-
   const filters = ref(
     sortBy(WOW_CLASSES, 'name')
       .map(wowClass => ({

@@ -1,7 +1,6 @@
 <template>
   <div>
-    <ActiveClassFiltersList />
-    <div class="space-y-4">
+    <div class="space-y-6">
       <div v-for="wowClass in classToggles" :key="wowClass.value">
         <SecondaryButton
           class="flex items-center justify-between w-full"
@@ -16,7 +15,7 @@
               :id="specializationSlug(wowClass.value, spec.value)"
               :name="spec.name"
               type="checkbox"
-              @change="onChange({ classValue: wowClass.value, specValue: spec.value }, $event.target.checked)"
+              @change="updateClassFilter({ classValue: wowClass.value, specValue: spec.value }, $event.target.checked)"
             >
             <SpecializationIcon
               :class-value="wowClass.value"
@@ -37,12 +36,13 @@
 <script>
 import sortBy from 'lodash/sortBy'
 import cloneDeep from 'lodash/cloneDeep'
-import { defineComponent, useStore } from '@nuxtjs/composition-api'
+import { computed, defineComponent, useStore } from '@nuxtjs/composition-api'
 import SpecializationIcon from './ui/SpecializationIcon.vue'
 import SecondaryButton from './ui/SecondaryButton.vue'
 import ChevronDownIcon from '~/components/icons/solid/ChevronDownIcon.vue'
 import ActiveClassFiltersList from '~/components/ActiveClassFiltersList.vue'
 import specializationSlug from '~/data/utils/specializationSlug'
+import findClassIndex from '~/data/utils/findClassIndex'
 import useToggle from '~/composables/useToggle'
 import useClassFilters from '~/composables/useClassFilters'
 
@@ -56,27 +56,31 @@ export default defineComponent({
     SecondaryButton
   },
   setup () {
+    const { filters: classFilters, setFilter: setClassFilter } = useClassFilters()
+    const store = useStore()
+
+    const updateClassFilter = ({ classValue, specValue }, checked) => {
+      setClassFilter({ classValue, specValue }, checked)
+      store.commit('guilds/setClassFilters', cloneDeep(classFilters.value))
+    }
+
     const classToggles = sortBy(WOW_CLASSES, 'name')
       .map((wowClass) => {
-        const { isOn: isExpanded, toggle } = useToggle(false)
+        const { isOn, toggle } = useToggle(false)
+        const isExpanded = computed(() => {
+          const classIndex = findClassIndex(classFilters.value, wowClass.value)
+          return isOn.value || classFilters.value[classIndex].specs.some(({ checked }) => checked)
+        })
         return {
           isExpanded,
           toggle,
           ...wowClass
         }
       })
-
-    const { filters: classFilters, setFilter: setClassFilter } = useClassFilters()
-    const store = useStore()
-
-    const onChange = ({ classValue, specValue }, checked) => {
-      setClassFilter({ classValue, specValue }, checked)
-      store.commit('guilds/setClassFilters', cloneDeep(classFilters.value))
-    }
     return {
       classToggles,
       specializationSlug,
-      onChange
+      updateClassFilter
     }
   }
 })
