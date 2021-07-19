@@ -2,22 +2,21 @@
   <div>
     <ActiveClassFiltersList />
     <div class="space-y-4">
-      <div v-for="wowClass in classesToggles" :key="wowClass.value">
-        <button
-          class="flex font-semibold items-center justify-between mb-3 text-blue-300 w-56"
-          @click="wowClass.toggle()"
+      <div v-for="wowClass in classToggles" :key="wowClass.value">
+        <SecondaryButton
+          class="flex items-center justify-between w-full"
+          @click="wowClass.toggle"
         >
-          <span class="text-sm">
-            {{ wowClass.name }}
-          </span>
-          <ChevronDownIcon />
-        </button>
-        <div v-show="wowClass.expanded.value" class="space-y-1">
+          {{ wowClass.name }}
+          <ChevronDownIcon class="duration-150 transform transition-transform" :class="{ 'rotate-180': wowClass.isExpanded.value }" />
+        </SecondaryButton>
+        <div v-show="wowClass.isExpanded.value" class="mt-4 space-y-2">
           <label v-for="spec in wowClass.specs" :key="spec.value" class="flex items-center space-x-3">
             <input
               :id="specializationSlug(wowClass.value, spec.value)"
               :name="spec.name"
               type="checkbox"
+              @change="onChange({ classValue: wowClass.value, specValue: spec.value }, $event.target.checked)"
             >
             <SpecializationIcon
               :class-value="wowClass.value"
@@ -37,12 +36,15 @@
 
 <script>
 import sortBy from 'lodash/sortBy'
-import { defineComponent, ref } from '@nuxtjs/composition-api'
+import cloneDeep from 'lodash/cloneDeep'
+import { defineComponent, useStore } from '@nuxtjs/composition-api'
 import SpecializationIcon from './ui/SpecializationIcon.vue'
+import SecondaryButton from './ui/SecondaryButton.vue'
 import ChevronDownIcon from '~/components/icons/solid/ChevronDownIcon.vue'
 import ActiveClassFiltersList from '~/components/ActiveClassFiltersList.vue'
 import specializationSlug from '~/data/utils/specializationSlug'
 import useToggle from '~/composables/useToggle'
+import useClassFilters from '~/composables/useClassFilters'
 
 import WOW_CLASSES from '~/data/classes.json'
 
@@ -50,22 +52,31 @@ export default defineComponent({
   components: {
     ChevronDownIcon,
     ActiveClassFiltersList,
-    SpecializationIcon
+    SpecializationIcon,
+    SecondaryButton
   },
   setup () {
-    const classesToggles = sortBy(WOW_CLASSES, 'name')
+    const classToggles = sortBy(WOW_CLASSES, 'name')
       .map((wowClass) => {
-        const { isOn: expanded, toggle } = useToggle(false)
+        const { isOn: isExpanded, toggle } = useToggle(false)
         return {
-          expanded,
+          isExpanded,
           toggle,
           ...wowClass
         }
       })
 
+    const { filters: classFilters, setFilter: setClassFilter } = useClassFilters()
+    const store = useStore()
+
+    const onChange = ({ classValue, specValue }, checked) => {
+      setClassFilter({ classValue, specValue }, checked)
+      store.commit('guilds/setClassFilters', cloneDeep(classFilters.value))
+    }
     return {
-      classesToggles,
-      specializationSlug
+      classToggles,
+      specializationSlug,
+      onChange
     }
   }
 })

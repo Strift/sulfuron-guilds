@@ -17,47 +17,25 @@
       </div>
       <div class="flex space-x-5">
         <SearchBar class="sm:w-auto w-full" @input="updateTextQuery" />
-        <SearchFiltersButton
-          ref="searchFiltersButton"
-          :active="showFiltersCard"
-          @click="showFiltersCard = !showFiltersCard"
-        />
       </div>
     </div>
 
-    <SearchFiltersCard v-show="showFiltersCard" class="mb-6 shadow-xl" />
-
-    <!-- <div v-if="classFilters.length" v-show="!showFiltersCard" class="mb-3">
-      <div class="font-semibold mb-3 text-gray-500 text-sm tracking-wider uppercase">
-        Filtres
-      </div>
-      <ActiveClassFiltersList />
-      <transition-group :duration="250" name="fade" tag="div" class="flex flex-row flex-wrap">
-        <ClassFilter
-          v-for="filter in classFilters"
-          :key="`${filter.classValue}/${filter.specName}`"
-          :wow-class="filter.classValue"
-          class="mb-4 mr-4"
-          @remove="removeClassFilter(filter.classValue, filter.specValue)"
-        >
-          {{ filter.specName }}
-        </ClassFilter>
-      </transition-group>
-    </div> -->
-
-    <div class="flex mb-12 mt-8">
-      <div class="pr-12 w-1/3">
-        <div class="font-semibold mb-10 text-gray-500 text-sm tracking-wider uppercase">
-          Filtres
+    <div class="mb-12 mt-8 sm:flex">
+      <div class="mb-12 sm:pr-12 sm:w-1/3">
+        <div class="flex items-center mb-6 space-x-2 text-gray-600">
+          <FilterIcon />
+          <div class="font-semibold text-sm tracking-wider uppercase">
+            Filtres
+          </div>
         </div>
-        <SearchFilters class="text-gray-600" />
+        <SearchFilters class="text-gray-300" />
       </div>
       <div class="w-2/3">
-        <div class="flex items-center mb-10 space-x-2 text-gray-500">
+        <div class="flex items-center mb-10 space-x-2 text-gray-600">
           <SortAscendingIcon />
           <div>Guildes triées par {{ sortingText }}.</div>
         </div>
-        <transition-group :duration="500" name="fade" tag="div" class="gap-12 grid grid-cols-1 grid-flow-row sm:grid-cols-2 xl:grid-cols-2">
+        <transition-group :duration="500" name="fade" tag="div" class="gap-12 grid grid-cols-1 grid-flow-row sm:grid-cols-2">
           <div
             v-for="guild in orderedSearchResults"
             :key="guild.name"
@@ -108,10 +86,8 @@ import SearchBar from '~/components/SearchBar.vue'
 import GuildCard from '~/components/GuildCard.vue'
 import FactionButton from '~/components/FactionButton.vue'
 import SortAscendingIcon from '~/components/icons/solid/SortAscendingIcon.vue'
-import SearchFiltersButton from '~/components/SearchFiltersButton.vue'
-import SearchFiltersCard from '~/components/SearchFiltersCard.vue'
 import SearchFilters from '~/components/SearchFilters.vue'
-import ClassFilter from '~/components/ClassFilter.vue'
+import FilterIcon from '~/components/icons/solid/FilterIcon.vue'
 
 export default {
   name: 'Index',
@@ -120,10 +96,8 @@ export default {
     GuildCard,
     FactionButton,
     SortAscendingIcon,
-    SearchFiltersButton,
-    SearchFiltersCard,
     SearchFilters,
-    ClassFilter
+    FilterIcon
   },
   data: () => ({
     showFiltersCard: false

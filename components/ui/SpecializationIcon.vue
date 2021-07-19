@@ -2,6 +2,7 @@
   <img
     :src="`/images/class-icons/${imageSlug}.jpg`"
     :alt="altText"
+    class="rounded-sm"
   >
 </template>
 

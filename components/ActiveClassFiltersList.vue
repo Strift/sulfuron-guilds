@@ -24,6 +24,11 @@ export default {
     ...mapGetters('guilds', {
       classFilters: 'classFilters'
     })
+  },
+  methods: {
+    removeClassFilter (classValue, specValue) {
+      this.$store.commit('guilds/removeClassFilter', { classValue, specValue })
+    }
   }
 }
 </script>
