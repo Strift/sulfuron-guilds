@@ -18,8 +18,15 @@ export default function () {
     filters.value[classIndex].specs[specIndex].checked = enabled
   }
 
+  const isChecked = ({ classValue, specValue }) => {
+    const classIndex = findClassIndex(filters.value, classValue)
+    const specIndex = findSpecIndex(filters.value[classIndex].specs, specValue)
+    return filters.value[classIndex].specs[specIndex].checked
+  }
+
   return {
     filters,
-    setFilter
+    setFilter,
+    isChecked
   }
 }

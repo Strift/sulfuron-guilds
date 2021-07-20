@@ -20,49 +20,48 @@
       </div>
     </div>
 
-    <div class="mb-12 mt-8 sm:flex sm:space-y-0 space-y-6">
-      <div class="sm:pr-10 sm:w-1/3 xl:pr-12">
-        <div class="flex items-center mb-6 space-x-2 text-gray-600">
-          <FilterIcon />
-          <div class="font-semibold text-sm tracking-wider uppercase">
-            Filtres
-          </div>
+    <div class="mb-12">
+      <!-- <div class="flex items-center mb-6 space-x-2 text-gray-600">
+        <FilterIcon />
+        <div class="font-semibold text-sm tracking-wider uppercase">
+          Filtres
         </div>
-        <SearchFilters class="lg:w-56 text-gray-300" />
+      </div> -->
+      <SearchFilters class="text-gray-300" />
 
-        <!-- <div v-show="classFilters.length" class="sm:hidden">
+      <!-- <div v-show="classFilters.length" class="sm:hidden">
           <div class="font-semibold mb-3 mt-10 text-gray-600">
             Filtres actifs
           </div>
           <ActiveClassFiltersList />
         </div> -->
+    </div>
+
+    <div>
+      <div class="flex items-center mb-10 space-x-2 text-gray-600">
+        <SortAscendingIcon />
+        <div>Guildes triées par {{ sortingText }}.</div>
       </div>
-      <div class="sm:w-2/3">
-        <div class="flex items-center mb-10 space-x-2 text-gray-600">
-          <SortAscendingIcon />
-          <div>Guildes triées par {{ sortingText }}.</div>
+      <transition-group :duration="500" name="fade" tag="div" class="gap-12 grid grid-cols-1 grid-flow-row lg:grid-cols-2">
+        <div
+          v-for="guild in orderedSearchResults"
+          :key="guild.name"
+        >
+          <GuildCard
+            :id="guild.id"
+            :name="guild.name"
+            :type="guild.type"
+            :raid-days="raidDays(guild)"
+            :time-range="timeRange(guild)"
+            :recruitment="guild.recruitment"
+            :logo-url="guild.logoUrl"
+            :website-url="guild.websiteUrl"
+            :contact-url="guild.contactUrl"
+            :updated-at="guild.updatedAt"
+            @click="openGuild(guild)"
+          />
         </div>
-        <transition-group :duration="500" name="fade" tag="div" class="gap-12 grid grid-cols-1 grid-flow-row lg:grid-cols-2">
-          <div
-            v-for="guild in orderedSearchResults"
-            :key="guild.name"
-          >
-            <GuildCard
-              :id="guild.id"
-              :name="guild.name"
-              :type="guild.type"
-              :raid-days="raidDays(guild)"
-              :time-range="timeRange(guild)"
-              :recruitment="guild.recruitment"
-              :logo-url="guild.logoUrl"
-              :website-url="guild.websiteUrl"
-              :contact-url="guild.contactUrl"
-              :updated-at="guild.updatedAt"
-              @click="openGuild(guild)"
-            />
-          </div>
-        </transition-group>
-      </div>
+      </transition-group>
     </div>
 
     <div class="mt-12 text-center text-gray-500">

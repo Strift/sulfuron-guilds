@@ -1,8 +1,9 @@
 <template>
   <img
     :src="`/images/class-icons/${imageSlug}.jpg`"
-    :alt="altText"
+    :alt="alt"
     class="rounded-sm"
+    :class="{ 'grayscale-100': grayscale }"
   >
 </template>
 
@@ -20,9 +21,13 @@ export default defineComponent({
       type: String,
       required: true
     },
-    altText: {
+    alt: {
       type: String,
       required: true
+    },
+    grayscale: {
+      type: Boolean,
+      default: false
     }
   },
   setup (props) {
