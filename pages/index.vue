@@ -20,24 +20,32 @@
       </div>
     </div>
 
-    <div class="mb-12">
-      <div class="flex items-center justify-between mb-6">
-        <div class="flex items-center space-x-2 text-gray-500">
+    <div class="mb-6">
+      <div class="flex items-center justify-between mb-6 text-gray-500">
+        <div class="hidden items-center sm:flex space-x-2">
           <FilterIcon />
           <div class="font-semibold text-sm tracking-wider uppercase">
-            Filtres
+            Filtres de classe
           </div>
         </div>
-        <ResetFiltersButton />
-      </div>
-      <SearchFilters />
-
-      <!-- <div v-show="classFilters.length" class="sm:hidden">
-          <div class="font-semibold mb-3 mt-10 text-gray-600">
-            Filtres actifs
+        <button class="flex items-center sm:hidden space-x-2" @click="expandFilters = !expandFilters">
+          <FilterIcon />
+          <div class="font-semibold text-sm tracking-wider uppercase">
+            Filtres de classe
           </div>
-          <ActiveClassFiltersList />
-        </div> -->
+          <ChevronDownIcon class="duration-150 transform transition-transform" :class="{ 'rotate-180': expandFilters }" />
+        </button>
+        <ResetFiltersButton v-show="classFilters.length" class="hidden sm:inline-flex" />
+      </div>
+      <SearchFilters class="hidden sm:block" />
+      <SearchFilters v-show="expandFilters" class="sm:hidden" />
+
+      <div v-show="classFilters.length && !expandFilters" class="mt-6 sm:hidden">
+        <div class="font-semibold mb-3 text-gray-600">
+          Filtres actifs
+        </div>
+        <ActiveClassFiltersList />
+      </div>
     </div>
 
     <div>
@@ -99,6 +107,8 @@ import FactionButton from '~/components/FactionButton.vue'
 import SearchFilters from '~/components/SearchFilters.vue'
 import ActiveClassFiltersList from '~/components/ActiveClassFiltersList.vue'
 import ResetFiltersButton from '~/components/ResetFiltersButton.vue'
+import ChevronDownIcon from '~/components/icons/solid/ChevronDownIcon.vue'
+import WOW_CLASSES from '~/data/classes.json'
 
 export default {
   name: 'Index',
@@ -110,10 +120,12 @@ export default {
     FactionButton,
     SearchFilters,
     ActiveClassFiltersList,
-    ResetFiltersButton
+    ResetFiltersButton,
+    ChevronDownIcon
   },
   data: () => ({
-    showFiltersCard: false
+    showFiltersCard: false,
+    expandFilters: false
   }),
   computed: {
     ...mapGetters('guilds', {
@@ -133,6 +145,9 @@ export default {
     sortingText () {
       return 'ordre alphabétique'
     }
+  },
+  created () {
+    this.$store.commit('guilds/initializeClassFilters')
   },
   async mounted () {
     this.$store.commit('setFactionBackground')
@@ -164,9 +179,6 @@ export default {
     },
     openGuild (guild) {
       this.$store.commit('setOpenGuild', guild)
-    },
-    resetClassFilters () {
-
     }
   },
   head () {

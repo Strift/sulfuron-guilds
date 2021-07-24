@@ -34,6 +34,7 @@ module.exports = {
         background: 'background background-opacity'
       },
       opacity: {
+        75: '0.75',
         90: '0.9' // Apparently this overrides background opacity too
       },
       height: {

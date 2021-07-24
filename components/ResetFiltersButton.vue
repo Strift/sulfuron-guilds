@@ -1,32 +1,21 @@
 <template>
-  <PrimaryButton
-    @click="resetFilters"
-  >
-    Réinitialiser
-  </PrimaryButton>
+  <SecondaryButton @click="resetClassFilters">
+    Réinitialiser les filtres
+  </SecondaryButton>
 </template>
 
 <script>
-import cloneDeep from 'lodash/cloneDeep'
-import { defineComponent, useStore } from '@nuxtjs/composition-api'
-import PrimaryButton from '~/components/ui/PrimaryButton.vue'
-import useClassFilters from '~/composables/useClassFilters'
+import { defineComponent } from '@nuxtjs/composition-api'
+import SecondaryButton from '~/components/ui/SecondaryButton.vue'
+import useGuildsStore from '~/composables/useGuildsStore'
 
 export default defineComponent({
   components: {
-    PrimaryButton
+    SecondaryButton
   },
   setup () {
-    const store = useStore()
-    const { filters, setAllFilters } = useClassFilters()
-
-    const resetFilters = () => {
-      setAllFilters(false)
-      store.commit('guilds/setClassFilters', cloneDeep(filters.value))
-    }
-    return {
-      resetFilters
-    }
+    const { resetClassFilters } = useGuildsStore()
+    return { resetClassFilters }
   }
 })
 </script>

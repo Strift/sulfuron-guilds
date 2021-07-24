@@ -1,26 +1,26 @@
 import { useStore, computed } from '@nuxtjs/composition-api'
-import cloneDeep from 'lodash/cloneDeep'
-import useClassFilters from './useClassFilters'
 
 export default function () {
   const store = useStore()
-  const { filters, setFilter } = useClassFilters()
 
-  const updateStore = () => store.commit('guilds/setClassFilters', cloneDeep(filters.value))
+  const classFilters = computed(() => store.state.guilds.classFilters)
 
-  const setClassFilter = ({ classValue, specValue }, checked) => {
-    setFilter({ classValue, specValue }, checked)
-    updateStore()
-  }
-
-  const classFilters = computed(() => {
-    return store.state.guilds.classFilters
+  const activeClassFilters = computed(() => {
+    return store.getters['guilds/classFilters']
   })
 
-  updateStore()
+  const setClassFilter = ({ classValue, specValue }, checked) => {
+    store.commit('guilds/setClassFilter', { classValue, specValue, enabled: checked })
+  }
+
+  const resetClassFilters = () => {
+    store.commit('guilds/setAllClassFilters', false)
+  }
 
   return {
+    classFilters,
+    activeClassFilters,
     setClassFilter,
-    classFilters
+    resetClassFilters
   }
 }
