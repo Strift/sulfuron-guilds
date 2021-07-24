@@ -9,13 +9,23 @@ export default function () {
     sortBy(WOW_CLASSES, 'name')
       .map(wowClass => ({
         class: wowClass.value,
+        name: wowClass.name,
         specs: wowClass.specs.map(spec => ({ ...spec, checked: false }))
       }))
   )
+
   const setFilter = ({ classValue, specValue }, enabled) => {
     const classIndex = findClassIndex(filters.value, classValue)
     const specIndex = findSpecIndex(filters.value[classIndex].specs, specValue)
     filters.value[classIndex].specs[specIndex].checked = enabled
+  }
+
+  const setAllFilters = (enabled) => {
+    filters.value.forEach((wowClass) => {
+      wowClass.specs.forEach((spec) => {
+        spec.checked = enabled
+      })
+    })
   }
 
   const isChecked = ({ classValue, specValue }) => {
@@ -27,6 +37,7 @@ export default function () {
   return {
     filters,
     setFilter,
+    setAllFilters,
     isChecked
   }
 }

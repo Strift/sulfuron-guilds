@@ -21,13 +21,16 @@
     </div>
 
     <div class="mb-12">
-      <!-- <div class="flex items-center mb-6 space-x-2 text-gray-600">
-        <FilterIcon />
-        <div class="font-semibold text-sm tracking-wider uppercase">
-          Filtres
+      <div class="flex items-center justify-between mb-6">
+        <div class="flex items-center space-x-2 text-gray-500">
+          <FilterIcon />
+          <div class="font-semibold text-sm tracking-wider uppercase">
+            Filtres
+          </div>
         </div>
-      </div> -->
-      <SearchFilters class="text-gray-300" />
+        <ResetFiltersButton />
+      </div>
+      <SearchFilters />
 
       <!-- <div v-show="classFilters.length" class="sm:hidden">
           <div class="font-semibold mb-3 mt-10 text-gray-600">
@@ -38,11 +41,11 @@
     </div>
 
     <div>
-      <div class="flex items-center mb-10 space-x-2 text-gray-600">
+      <div class="flex items-center mb-10 space-x-2 text-gray-500">
         <SortAscendingIcon />
         <div>Guildes triées par {{ sortingText }}.</div>
       </div>
-      <transition-group :duration="500" name="fade" tag="div" class="gap-12 grid grid-cols-1 grid-flow-row lg:grid-cols-2">
+      <transition-group :duration="500" name="fade" tag="div" class="gap-12 grid grid-cols-1 grid-flow-row lg:grid-cols-2 xl:grid-cols-3">
         <div
           v-for="guild in orderedSearchResults"
           :key="guild.name"
@@ -95,6 +98,7 @@ import GuildCard from '~/components/GuildCard.vue'
 import FactionButton from '~/components/FactionButton.vue'
 import SearchFilters from '~/components/SearchFilters.vue'
 import ActiveClassFiltersList from '~/components/ActiveClassFiltersList.vue'
+import ResetFiltersButton from '~/components/ResetFiltersButton.vue'
 
 export default {
   name: 'Index',
@@ -105,7 +109,8 @@ export default {
     GuildCard,
     FactionButton,
     SearchFilters,
-    ActiveClassFiltersList
+    ActiveClassFiltersList,
+    ResetFiltersButton
   },
   data: () => ({
     showFiltersCard: false
@@ -159,6 +164,9 @@ export default {
     },
     openGuild (guild) {
       this.$store.commit('setOpenGuild', guild)
+    },
+    resetClassFilters () {
+
     }
   },
   head () {

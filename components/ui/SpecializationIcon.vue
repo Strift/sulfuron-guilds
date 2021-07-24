@@ -3,7 +3,7 @@
     :src="`/images/class-icons/${imageSlug}.jpg`"
     :alt="alt"
     class="rounded-sm"
-    :class="{ 'grayscale-100': grayscale }"
+    :class="{ 'grayscale-75': grayscale }"
   >
 </template>
 

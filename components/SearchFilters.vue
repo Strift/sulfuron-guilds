@@ -1,25 +1,15 @@
 <template>
   <div class="flex flex-row flex-wrap justify-between">
     <div
-      v-for="wowClass in classToggles"
-      :key="wowClass.value"
+      v-for="wowClass in classFilters"
+      :key="wowClass.class"
       class="bg-gray-900 bg-opacity-75 border-t-4 px-5 py-4 rounded-b shadow"
-      :class="`border-${wowClass.value}`"
+      :class="`border-${wowClass.class}`"
     >
-      <div class="font-semibold mb-3 text-gray-500 text-sm">
+      <div class="mb-4" :class="`text-${wowClass.class}`">
         {{ wowClass.name }}
       </div>
       <div class="flex space-x-3">
-        <!-- <FormCheckBox
-          v-for="spec in wowClass.specs"
-          :id="specializationSlug(wowClass.value, spec.value)"
-          :key="spec.value"
-          :name="specializationSlug(wowClass.value, spec.value)"
-          :checked="isChecked({ classValue: wowClass.value, specValue: spec.value })"
-          class="w-20"
-          @change="updateClassFilter({ classValue: wowClass.value, specValue: spec.value }, $event)"
-        > -->
-        <!-- </FormCheckBox> -->
         <label
           v-for="spec in wowClass.specs"
           :key="spec.value"
@@ -27,20 +17,21 @@
           class="flex flex-col space-y-2"
         >
           <SpecializationIcon
-            :class-value="wowClass.value"
+            :class-value="wowClass.class"
             :spec-value="spec.value"
             :alt="`Icone ${wowClass.name} spéciliasation ${spec.name}`"
             :title="spec.name"
+            :grayscale="!spec.checked"
             height="20"
             width="20"
-            :grayscale="!isChecked({ classValue: wowClass.value, specValue: spec.value })"
           />
           <input
-            :id="specializationSlug(wowClass.value, spec.value)"
+            :id="specializationSlug(wowClass.class, spec.value)"
+            :checked="spec.checked"
             :name="spec.name"
             type="checkbox"
             class="mx-auto"
-            @change="updateClassFilter({ classValue: wowClass.value, specValue: spec.value }, $event.target.checked)"
+            @change="setClassFilter({ classValue: wowClass.class, specValue: spec.value }, $event.target.checked)"
           >
         </label>
       </div>
@@ -49,60 +40,25 @@
 </template>
 
 <script>
-import sortBy from 'lodash/sortBy'
-import cloneDeep from 'lodash/cloneDeep'
-import { computed, defineComponent, useStore } from '@nuxtjs/composition-api'
-
-import FormCheckBox from '~/components/ui/FormCheckBox.vue'
+import { defineComponent } from '@nuxtjs/composition-api'
 import SpecializationIcon from '~/components/ui/SpecializationIcon.vue'
-import SecondaryButton from '~/components/ui/SecondaryButton.vue'
-import ChevronDownIcon from '~/components/icons/solid/ChevronDownIcon.vue'
 import ActiveClassFiltersList from '~/components/ActiveClassFiltersList.vue'
-
+import ChevronDownIcon from '~/components/icons/solid/ChevronDownIcon.vue'
+import useGuildsStore from '~/composables/useGuildsStore'
 import specializationSlug from '~/data/utils/specializationSlug'
-import findClassIndex from '~/data/utils/findClassIndex'
-
-import useToggle from '~/composables/useToggle'
-import useClassFilters from '~/composables/useClassFilters'
-
-import WOW_CLASSES from '~/data/classes.json'
-import findSpecIndex from '~/data/utils/findSpecIndex'
 
 export default defineComponent({
   components: {
-    FormCheckBox,
-    ChevronDownIcon,
-    ActiveClassFiltersList,
     SpecializationIcon,
-    SecondaryButton
+    ActiveClassFiltersList,
+    ChevronDownIcon
   },
   setup () {
-    const { filters: classFilters, setFilter: setClassFilter, isChecked } = useClassFilters()
-    const store = useStore()
-
-    const updateClassFilter = ({ classValue, specValue }, checked) => {
-      setClassFilter({ classValue, specValue }, checked)
-      store.commit('guilds/setClassFilters', cloneDeep(classFilters.value))
-    }
-
-    const classToggles = sortBy(WOW_CLASSES, 'name')
-      .map((wowClass) => {
-        const { isOn, toggle } = useToggle(true)
-        const isExpanded = computed(() => {
-          const classIndex = findClassIndex(classFilters.value, wowClass.value)
-          return isOn.value || classFilters.value[classIndex].specs.some(({ checked }) => checked)
-        })
-        return {
-          isExpanded,
-          toggle,
-          ...wowClass
-        }
-      })
+    const { classFilters, setClassFilter } = useGuildsStore()
     return {
-      classToggles,
-      specializationSlug,
-      updateClassFilter,
-      isChecked
+      classFilters,
+      setClassFilter,
+      specializationSlug
     }
   }
 })

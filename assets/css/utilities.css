@@ -20,6 +20,6 @@
   }
 }
 
-.grayscale-100 {
-  filter: grayscale(100%);
+.grayscale-75 {
+  filter: grayscale(75%);
 }
