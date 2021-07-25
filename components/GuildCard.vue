@@ -1,7 +1,9 @@
 <template>
   <button
-    class="duration-150 ease-in-out focus:float focus:outline-none group hover:float hover:shadow-md shadow transition-transform w-full"
+    class="duration-150 ease-in-out focus:float focus:outline-none group hover:float hover:shadow-md overflow-hidden shadow transition-transform w-full"
     @click="$emit('click')"
+    @mouseenter="isHovered = true"
+    @mouseleave="isHovered = false"
   >
     <div class="bg-gray-900 flex items-center p-5 rounded-t-lg">
       <GuildLogo
@@ -26,15 +28,27 @@
         <div>{{ timeRange }}</div>
       </div>
     </div>
-    <div class="bg-gray-900 bg-opacity-75 group-focus:bg-gray-800 group-focus:bg-opacity-50 group-focus:text-gray-600 group-hover:bg-gray-800 group-hover:bg-opacity-50 group-hover:text-gray-600 p-3 rounded-b-lg text-gray-700">
+    <div class="bg-gray-900 bg-opacity-75 group-focus:bg-gray-800 group-focus:bg-opacity-50 group-focus:text-gray-600 group-hover:bg-gray-800 group-hover:bg-opacity-50 group-hover:text-gray-600 py-3 rounded-b-lg text-gray-700">
       <GuildRecruitment
         :recruitment="recruitment"
         :expanded="expandGuildRecruitment"
-        class="p-3"
+        class="px-6 py-3"
         @click="expandGuildRecruitment = !expandGuildRecruitment"
       />
-      <div class="group-hover:text-gray-600 italic mt-1 text-gray-800 text-right text-sm">
-        {{ relativeUpdatedDate }}
+      <div class="flex justify-between">
+        <div class="group-hover:text-gray-600 italic mt-1 pl-6 text-gray-800 text-sm">
+          {{ relativeUpdatedDate }}
+        </div>
+        <transition name="slideRight">
+          <div
+            v-show="isHovered"
+            class="flex font-semibold items-center ml-6 pr-6 space-x-2 text-blue-300 text-sm"
+            style="animation-duration: 0.5s"
+          >
+            <span>Voir plus</span>
+            <ArrowNarrowRightIcon />
+          </div>
+        </transition>
       </div>
     </div>
   </button>
@@ -44,8 +58,9 @@
 import { DateTime } from 'luxon'
 import GuildLogo from './ui/GuildLogo.vue'
 import GuildRecruitment from './GuildRecruitment.vue'
-import CalendarIcon from '~/components/icons/solid/CalendarIcon.vue'
 import ClockIcon from '~/components/icons/solid/ClockIcon.vue'
+import CalendarIcon from '~/components/icons/solid/CalendarIcon.vue'
+import ArrowNarrowRightIcon from '~/components/icons/solid/ArrowNarrowRightIcon.vue'
 
 export default {
   name: 'GuildCard',
@@ -53,7 +68,8 @@ export default {
     GuildLogo,
     ClockIcon,
     CalendarIcon,
-    GuildRecruitment
+    GuildRecruitment,
+    ArrowNarrowRightIcon
   },
   props: {
     id: { type: String, required: true },
@@ -74,16 +90,19 @@ export default {
   },
   data: () => ({
     loadingError: false,
-    expandGuildRecruitment: false
+    expandGuildRecruitment: false,
+    isHovered: false
   }),
   computed: {
     readableDays () {
       return this.raidDays.map(day => day.slice(0, 3)).join(', ')
     },
     relativeUpdatedDate () {
-      return this.updatedAt
+      const capitalize = str => str.charAt(0).toUpperCase() + str.slice(1)
+      return capitalize(this.updatedAt
         ? DateTime.fromJSDate(this.updatedAt).toRelative({ locale: 'fr' })
         : 'il y a un moment'
+      )
     }
   }
 }
