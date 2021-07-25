@@ -1,10 +1,10 @@
 <template>
-  <img
+  <nuxt-img
     :src="`/images/class-icons/${imageSlug}.jpg`"
     :alt="alt"
     class="rounded-sm"
     :class="{ 'grayscale-75': grayscale }"
-  >
+  />
 </template>
 
 <script>

@@ -30,7 +30,7 @@
           Logo
         </div>
         <div class="bg-gray-900 flex h-32 items-center justify-center p-4 rounded-lg shadow w-32">
-          <img v-if="logoUrl" :src="logoUrl" alt="Votre logo" class="text-gray-700">
+          <nuxt-img v-if="logoUrl" :src="logoUrl" alt="Votre logo" class="text-gray-700" />
           <MissingGuildLogo v-else class="text-gray-800" />
         </div>
       </div>

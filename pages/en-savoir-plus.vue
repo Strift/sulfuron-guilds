@@ -1,10 +1,10 @@
 <template>
   <div class="lg:flex lg:space-x-8 xl:space-x-20">
-    <img
+    <nuxt-img
       src="~/assets/images/iphone-mockup.png"
       alt="Site sur mobile"
       class="hidden lg:h-phone-lg lg:inline-flex my-auto xl:h-phone-xl"
-    >
+    />
     <div class="space-y-24">
       <h1 class="font-bold leading-snug text-4xl text-blue-100 text-center text-shadow-lg">
         Le recrutement des guildes<br> de Sulfuron <em class="italic">à jour</em>

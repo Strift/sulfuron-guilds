@@ -72,7 +72,9 @@ export default {
     // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
     '@nuxtjs/tailwindcss',
     // Doc: https://sentry.nuxtjs.org/
-    '@nuxtjs/sentry'
+    '@nuxtjs/sentry',
+    // Doc: https://image.nuxtjs.org/
+    '@nuxt/image'
   ],
   /*
   ** Nuxt.js modules
@@ -181,5 +183,10 @@ export default {
         '.nuxt/dist/client/img'
       ]
     }
+  },
+  /*
+  ** Nuxt images
+  */
+  image: {
   }
 }
