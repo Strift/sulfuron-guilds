@@ -5,12 +5,26 @@
   >
     <transition name="slide" mode="out-in">
       <div v-if="isAlliance" key="alliance" class="flex items-center w-full">
-        <nuxt-img src="~/assets/images/alliance-logo.png" alt="Blason de l'Alliance" title="Alliance" class="h-10 mr-4" />
+        <nuxt-img
+          src="/images/alliance-logo.png"
+          alt="Blason de l'Alliance"
+          title="Alliance"
+          class="mr-4"
+          height="40"
+          width="40"
+        />
         <div>Alliance</div>
         <SwitchIcon class="ml-auto" />
       </div>
       <div v-else key="horde" class="flex items-center w-full">
-        <nuxt-img src="~/assets/images/horde-logo.png" alt="Blason de la Horde" title="Horde" class="h-10 mr-4" />
+        <nuxt-img
+          src="/images/horde-logo.png"
+          alt="Blason de la Horde"
+          title="Horde"
+          class="mr-4"
+          height="40"
+          width="40"
+        />
         <div>Horde</div>
         <SwitchIcon class="ml-auto" />
       </div>

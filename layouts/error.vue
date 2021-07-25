@@ -21,7 +21,7 @@ export default {
   },
   head () {
     return {
-      title: '404'
+      title: `${this.error.statusCode} | ${this.error.message}`
     }
   }
 }

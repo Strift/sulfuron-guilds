@@ -5,7 +5,7 @@
       title="Accueil"
       class="md:ml-0 md:mr-auto"
     >
-      <nuxt-img src="~/assets/images/logo.png" alt="sulfuron.eu" class="h-8 md:h-10 mx-auto" />
+      <nuxt-img src="/images/logo.png" alt="sulfuron.eu" class="h-8 md:h-10 mx-auto" />
     </NuxtLink>
     <nav>
       <ul class="flex items-center list-none md:space-x-12 space-x-5">

@@ -1,9 +1,10 @@
 <template>
   <div class="lg:flex lg:space-x-8 xl:space-x-20">
     <nuxt-img
-      src="~/assets/images/iphone-mockup.png"
+      src="/images/iphone-mockup.png"
       alt="Site sur mobile"
       class="hidden lg:h-phone-lg lg:inline-flex my-auto xl:h-phone-xl"
+      sizes="xl:370.33px lg:317.42px"
     />
     <div class="space-y-24">
       <h1 class="font-bold leading-snug text-4xl text-blue-100 text-center text-shadow-lg">
