@@ -2,6 +2,7 @@
   <div class="flex items-center justify-center">
     <img
       v-if="hasLogo && !loadingError"
+      v-lazy-load
       :src="url"
       :alt="alt"
       class="w-full"
