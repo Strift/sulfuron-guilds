@@ -5,9 +5,9 @@
         v-for="wowClass in classFilters"
         :key="wowClass.class"
         class="bg-gray-900 bg-opacity-75 border-t-4 px-5 py-4 rounded-b shadow"
-        :class="hasOneSpecChecked(wowClass) ? `border-${wowClass.class}` : 'border-gray-900'"
+        :class="hasOneSpecChecked(wowClass) ? getClassBorderColorClass(wowClass.class) : 'border-gray-900'"
       >
-        <div class="mb-4" :class="`text-${wowClass.class}`">
+        <div class="mb-4" :class="[ getClassTextColorClass(wowClass.class) ]">
           {{ wowClass.name }}
         </div>
         <div class="flex justify-between space-x-3">
@@ -46,6 +46,8 @@ import { defineComponent } from '@nuxtjs/composition-api'
 import SpecializationIcon from '~/components/ui/SpecializationIcon.vue'
 import useGuildsStore from '~/composables/useGuildsStore'
 import specializationSlug from '~/data/utils/specializationSlug'
+import getClassTextColorClass from '~/data/utils/getClassTextColorClass'
+import getClassBorderColorClass from '~/data/utils/getClassBorderColorClass'
 
 export default defineComponent({
   components: {
@@ -60,7 +62,9 @@ export default defineComponent({
       classFilters,
       setClassFilter,
       hasOneSpecChecked,
-      specializationSlug
+      specializationSlug,
+      getClassTextColorClass,
+      getClassBorderColorClass
     }
   }
 })
