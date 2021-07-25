@@ -108,7 +108,6 @@ import SearchFilters from '~/components/SearchFilters.vue'
 import ActiveClassFiltersList from '~/components/ActiveClassFiltersList.vue'
 import ResetFiltersButton from '~/components/ResetFiltersButton.vue'
 import ChevronDownIcon from '~/components/icons/solid/ChevronDownIcon.vue'
-import WOW_CLASSES from '~/data/classes.json'
 
 export default {
   name: 'Index',
