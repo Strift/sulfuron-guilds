@@ -6,6 +6,8 @@
       :src="url"
       :alt="alt"
       class="w-full"
+      height="48"
+      width="48"
       @error="loadingError = true"
     >
     <MissingGuildLogo v-else class="text-gray-700" />
