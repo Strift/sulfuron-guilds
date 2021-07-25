@@ -27,7 +27,6 @@
               width="20"
             />
             <input
-              :id="specializationSlug(wowClass.class, spec.value)"
               :checked="spec.checked"
               :name="spec.name"
               type="checkbox"
