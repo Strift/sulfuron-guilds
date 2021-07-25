@@ -1,7 +1,7 @@
 <template>
   <div class="flex items-center justify-center">
     <img
-      v-if="hasLogo && !loadingError"
+      v-if="hasSecureLogoUrl && !loadingError"
       v-lazy-load
       :src="url"
       :alt="alt"
@@ -29,9 +29,10 @@ export default {
     loadingError: false
   }),
   computed: {
-    hasLogo () {
+    hasSecureLogoUrl () {
       return this.url !== '' &&
-        this.url != null
+        this.url != null &&
+        this.url.startsWith('https://')
     }
   }
 }
