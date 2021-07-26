@@ -17,58 +17,63 @@
       </div>
       <div class="flex space-x-5">
         <SearchBar class="sm:w-auto w-full" @input="updateTextQuery" />
-        <SearchFiltersButton
-          ref="searchFiltersButton"
-          :active="showFiltersCard"
-          @click="showFiltersCard = !showFiltersCard"
-        />
       </div>
     </div>
 
-    <SearchFiltersCard v-show="showFiltersCard" class="mb-6 shadow-xl" />
-
-    <div v-if="classFilters.length" v-show="!showFiltersCard" class="mb-3">
-      <div class="font-semibold mb-3 text-gray-500 text-sm tracking-wider uppercase">
-        Filtres
+    <div class="mb-6">
+      <div class="flex items-center justify-between mb-6 text-gray-500">
+        <div class="hidden items-center sm:flex space-x-2">
+          <FilterIcon />
+          <div class="font-semibold text-sm tracking-wider uppercase">
+            Filtres de classe
+          </div>
+        </div>
+        <button class="flex items-center sm:hidden space-x-2" @click="expandFilters = !expandFilters">
+          <FilterIcon />
+          <div class="font-semibold text-sm tracking-wider uppercase">
+            Filtres de classe
+          </div>
+          <ChevronDownIcon class="duration-150 transform transition-transform" :class="{ 'rotate-180': expandFilters }" />
+        </button>
+        <ResetFiltersButton v-show="classFilters.length" class="hidden sm:inline-flex" />
       </div>
-      <transition-group :duration="250" name="fade" tag="div" class="flex flex-row flex-wrap">
-        <ClassFilter
-          v-for="filter in classFilters"
-          :key="`${filter.classValue}/${filter.specName}`"
-          :wow-class="filter.classValue"
-          class="mb-4 mr-4"
-          @remove="removeClassFilter(filter.classValue, filter.specValue)"
+      <SearchFilters class="hidden sm:block" />
+      <SearchFilters v-show="expandFilters" class="sm:hidden" />
+
+      <div v-show="classFilters.length && !expandFilters" class="mt-6 sm:hidden">
+        <div class="font-semibold mb-3 text-gray-600">
+          Filtres actifs
+        </div>
+        <ActiveClassFiltersList />
+      </div>
+    </div>
+
+    <div>
+      <div class="flex items-center mb-10 space-x-2 text-gray-500">
+        <SortAscendingIcon />
+        <div>Guildes triées par {{ sortingText }}.</div>
+      </div>
+      <transition-group :duration="500" name="fade" tag="div" class="gap-12 grid grid-cols-1 grid-flow-row lg:grid-cols-2 xl:grid-cols-3">
+        <div
+          v-for="guild in orderedSearchResults"
+          :key="guild.name"
         >
-          {{ filter.specName }}
-        </ClassFilter>
+          <GuildCard
+            :id="guild.id"
+            :name="guild.name"
+            :type="guild.type"
+            :raid-days="raidDays(guild)"
+            :time-range="timeRange(guild)"
+            :recruitment="guild.recruitment"
+            :logo-url="guild.logoUrl"
+            :website-url="guild.websiteUrl"
+            :contact-url="guild.contactUrl"
+            :updated-at="guild.updatedAt"
+            @click="openGuild(guild)"
+          />
+        </div>
       </transition-group>
     </div>
-
-    <div class="flex items-center space-x-2 text-gray-700">
-      <SortAscendingIcon />
-      <div>Guildes triées par {{ sortingText }}.</div>
-    </div>
-
-    <transition-group :duration="500" name="fade" tag="div" class="gap-12 grid grid-cols-1 grid-flow-row my-12 sm:grid-cols-2 xl:grid-cols-3">
-      <div
-        v-for="guild in orderedSearchResults"
-        :key="guild.name"
-      >
-        <GuildCard
-          :id="guild.id"
-          :name="guild.name"
-          :type="guild.type"
-          :raid-days="raidDays(guild)"
-          :time-range="timeRange(guild)"
-          :recruitment="guild.recruitment"
-          :logo-url="guild.logoUrl"
-          :website-url="guild.websiteUrl"
-          :contact-url="guild.contactUrl"
-          :updated-at="guild.updatedAt"
-          @click="openGuild(guild)"
-        />
-      </div>
-    </transition-group>
 
     <div class="mt-12 text-center text-gray-500">
       {{ orderedSearchResults.length }} {{ resultsText }} trouvées.
@@ -94,27 +99,32 @@
 import sortBy from 'lodash/sortBy'
 import { mapGetters } from 'vuex'
 
+import FilterIcon from '~/components/icons/solid/FilterIcon.vue'
+import SortAscendingIcon from '~/components/icons/solid/SortAscendingIcon.vue'
 import SearchBar from '~/components/SearchBar.vue'
 import GuildCard from '~/components/GuildCard.vue'
 import FactionButton from '~/components/FactionButton.vue'
-import SortAscendingIcon from '~/components/icons/solid/SortAscendingIcon.vue'
-import SearchFiltersButton from '~/components/SearchFiltersButton.vue'
-import SearchFiltersCard from '~/components/SearchFiltersCard.vue'
-import ClassFilter from '~/components/ClassFilter.vue'
+import SearchFilters from '~/components/SearchFilters.vue'
+import ActiveClassFiltersList from '~/components/ActiveClassFiltersList.vue'
+import ResetFiltersButton from '~/components/ResetFiltersButton.vue'
+import ChevronDownIcon from '~/components/icons/solid/ChevronDownIcon.vue'
 
 export default {
   name: 'Index',
   components: {
+    FilterIcon,
+    SortAscendingIcon,
     SearchBar,
     GuildCard,
     FactionButton,
-    SortAscendingIcon,
-    SearchFiltersButton,
-    SearchFiltersCard,
-    ClassFilter
+    SearchFilters,
+    ActiveClassFiltersList,
+    ResetFiltersButton,
+    ChevronDownIcon
   },
   data: () => ({
-    showFiltersCard: false
+    showFiltersCard: false,
+    expandFilters: false
   }),
   computed: {
     ...mapGetters('guilds', {
@@ -134,6 +144,9 @@ export default {
     sortingText () {
       return 'ordre alphabétique'
     }
+  },
+  created () {
+    this.$store.commit('guilds/initializeClassFilters')
   },
   async mounted () {
     this.$store.commit('setFactionBackground')

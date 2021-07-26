@@ -13,6 +13,17 @@ module.exports = {
   },
   theme: {
     extend: {
+      colors: {
+        druid: '#ff7c0a',
+        hunter: '#aad372',
+        mage: '#3fc7eb',
+        paladin: '#f48cba',
+        priest: '#ffffff',
+        rogue: '#fff468',
+        shaman: '#0070dd',
+        warlock: '#8788ee',
+        warrior: '#c69b6d'
+      },
       fontFamily: {
         sans: [
           'Open Sans',
@@ -23,6 +34,7 @@ module.exports = {
         background: 'background background-opacity'
       },
       opacity: {
+        75: '0.75',
         90: '0.9' // Apparently this overrides background opacity too
       },
       height: {
@@ -52,6 +64,7 @@ module.exports = {
       'layouts/**/*.vue',
       'pages/**/*.vue',
       'plugins/**/*.js',
+      'data/**/*.js',
       'nuxt.config.js'
     ]
   }

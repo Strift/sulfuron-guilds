@@ -1,14 +1,18 @@
 import Fuse from 'fuse.js'
+import sortBy from 'lodash/sortBy'
 import { firestoreAction } from 'vuexfire'
 
 import guildConverter from '~/converters/guildConverter.js'
+import findClassIndex from '~/data/utils/findClassIndex'
+import findSpecIndex from '~/data/utils/findSpecIndex'
+import getSpecId from '~/data/utils/getSpecId'
+
+import WOW_CLASSES from '~/data/classes.json'
 
 const FUSE_OPTIONS = {
   threshold: 0.2,
   keys: ['name', 'type']
 }
-
-const getSpecId = (classValue, specValue) => `${classValue}/${specValue}`
 
 let fuse = null
 
@@ -24,6 +28,26 @@ export const mutations = {
   },
   setTextQuery (state, textQuery) {
     state.textQuery = textQuery
+  },
+  setAllClassFilters (state, enabled) {
+    state.classFilters.forEach((wowClass) => {
+      wowClass.specs.forEach((spec) => {
+        spec.checked = enabled
+      })
+    })
+  },
+  initializeClassFilters (state) {
+    state.classFilters = sortBy(WOW_CLASSES, 'name')
+      .map(wowClass => ({
+        name: wowClass.name,
+        class: wowClass.value,
+        specs: wowClass.specs.map(spec => ({ ...spec, checked: false }))
+      }))
+  },
+  setClassFilter (state, { classValue, specValue, enabled }) {
+    const classIndex = findClassIndex(state.classFilters, classValue)
+    const specIndex = findSpecIndex(state.classFilters[classIndex].specs, specValue)
+    state.classFilters[classIndex].specs[specIndex].checked = enabled
   },
   removeClassFilter (state, { classValue, specValue }) {
     const classIndex = state.classFilters.findIndex(classFilter => classFilter.class === classValue)
@@ -115,9 +139,10 @@ export const getters = {
         return classFilter.specs
           .filter(({ checked }) => checked)
           .map(spec => ({
+            className: classFilter.name,
             classValue: classFilter.class,
-            specValue: spec.value,
-            specName: spec.name
+            specName: spec.name,
+            specValue: spec.value
           }))
       })
       .flat()
