@@ -2,7 +2,7 @@
   <footer class="bg-gray-900 py-20 space-y-12 text-gray-300">
     <div class="container md:flex md:space-y-0 mx-auto px-5 space-y-12 xl:px-0">
       <div class="md:w-1/2">
-        <img src="~/assets/images/logo.png" alt="sulfuron.eu" class="h-10">
+        <nuxt-img src="/images/logo.png" alt="sulfuron.eu" class="h-10" />
       </div>
       <div class="items-baseline justify-end lg:space-x-48 md:flex md:space-x-32 md:space-y-0 md:w-1/2 space-y-12 xl:space-x-64">
         <div>

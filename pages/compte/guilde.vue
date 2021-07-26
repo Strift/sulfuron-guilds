@@ -21,6 +21,13 @@
             <div>ℹ️</div>
             <div>Utilisez un hébergeur comme <a href="https://imgur.com/" target="_blank" class="hover:underline text-blue-300">imgur</a>, puis <br><em>copiez l'adresse de l'image</em> (clic droit).</div>
           </div>
+          <div
+            v-if="logoUrl.startsWith('http:')"
+            class="flex items-baseline mt-3 space-x-2 text-gray-600"
+          >
+            <div>⚠️</div>
+            <div>Seules les images hébérgées sur un serveur sécurisé (https) sont affichées.</div>
+          </div>
         </div>
         <FormSelect v-model="faction" :options="factionOptions" name="faction" label="Faction" placeholder="Sélectionnez votre faction" />
         <GuildTypeInput />
@@ -30,7 +37,7 @@
           Logo
         </div>
         <div class="bg-gray-900 flex h-32 items-center justify-center p-4 rounded-lg shadow w-32">
-          <img v-if="logoUrl" :src="logoUrl" alt="Votre logo" class="text-gray-700">
+          <nuxt-img v-if="logoUrl" :src="logoUrl" alt="Votre logo" class="text-gray-700" />
           <MissingGuildLogo v-else class="text-gray-800" />
         </div>
       </div>

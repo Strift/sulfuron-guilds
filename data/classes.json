@@ -3,81 +3,162 @@
     "value": "druid",
     "name": "Druide",
     "specs": [
-      { "name": "Équilibre", "value": "balance" },
-      { "name": "Combat farouche", "value": "feral-combat" },
-      { "name": "Restauration", "value": "restoration" }
+      {
+        "name": "Équilibre",
+        "value": "balance"
+      },
+      {
+        "name": "Combat farouche",
+        "value": "feral-combat"
+      },
+      {
+        "name": "Restauration",
+        "value": "restoration"
+      }
     ]
   },
   {
     "value": "hunter",
     "name": "Chasseur",
     "specs": [
-      { "name": "Maîtrise des bêtes", "value": "beast-mastery" },
-      { "name": "Précision", "value": "marksmanship" },
-      { "name": "Survie", "value": "survival" }
+      {
+        "name": "Maîtrise des bêtes",
+        "value": "beast-mastery"
+      },
+      {
+        "name": "Précision",
+        "value": "marksmanship"
+      },
+      {
+        "name": "Survie",
+        "value": "survival"
+      }
     ]
   },
   {
     "value": "mage",
     "name": "Mage",
     "specs": [
-      { "name": "Arcane", "value": "arcane" },
-      { "name": "Feu", "value": "fire" },
-      { "name": "Givre", "value": "frost" }
+      {
+        "name": "Arcane",
+        "value": "arcane"
+      },
+      {
+        "name": "Feu",
+        "value": "fire"
+      },
+      {
+        "name": "Givre",
+        "value": "frost"
+      }
     ]
   },
   {
     "value": "paladin",
     "name": "Paladin",
     "specs": [
-      { "name": "Sacré", "value": "holy" },
-      { "name": "Protection", "value": "protection" },
-      { "name": "Vindicte", "value": "retribution" }
+      {
+        "name": "Sacré",
+        "value": "holy"
+      },
+      {
+        "name": "Protection",
+        "value": "protection"
+      },
+      {
+        "name": "Vindicte",
+        "value": "retribution"
+      }
     ]
   },
   {
     "value": "priest",
     "name": "Prêtre",
     "specs": [
-      { "name": "Discipline", "value": "discipline" },
-      { "name": "Sacré", "value": "holy" },
-      { "name": "Ombre", "value": "shadow" }
+      {
+        "name": "Discipline",
+        "value": "discipline"
+      },
+      {
+        "name": "Sacré",
+        "value": "holy"
+      },
+      {
+        "name": "Ombre",
+        "value": "shadow"
+      }
     ]
   },
   {
     "value": "rogue",
     "name": "Voleur",
     "specs": [
-      { "name": "Assassinat", "value": "assassination" },
-      { "name": "Combat", "value": "combat" },
-      { "name": "Finesse", "value": "subtlety" }
+      {
+        "name": "Assassinat",
+        "value": "assassination"
+      },
+      {
+        "name": "Combat",
+        "value": "combat"
+      },
+      {
+        "name": "Finesse",
+        "value": "subtlety"
+      }
     ]
   },
   {
     "value": "shaman",
     "name": "Chaman",
     "specs": [
-      { "name": "Elementaire", "value": "elemental" },
-      { "name": "Amélioration", "value": "enhancement" },
-      { "name": "Restauration", "value": "restoration" }
+      {
+        "name": "Élementaire",
+        "value": "elemental"
+      },
+      {
+        "name": "Amélioration",
+        "value": "enhancement"
+      },
+      {
+        "name": "Restauration",
+        "value": "restoration"
+      }
     ]
   },
   {
     "value": "warlock",
     "name": "Démoniste",
     "specs": [
-      { "name": "Affliction", "value": "affliction" },
-      { "name": "Démonologie", "value": "demonology" },
-      { "name": "Destruction", "value": "destruction" }
+      {
+        "name": "Affliction",
+        "value": "affliction"
+      },
+      {
+        "name": "Démonologie",
+        "value": "demonology"
+      },
+      {
+        "name": "Destruction",
+        "value": "destruction"
+      }
     ]
   },
   {
     "value": "warrior",
     "name": "Guerrier",
     "specs": [
-      { "name": "Armes", "value": "arms" },
-      { "name": "Fureur", "value": "fury" },
-      { "name": "Protection", "value": "protection" }
+      {
+        "name": "Armes",
+        "value": "arms"
+      },
+      {
+        "name": "Fureur",
+        "value": "fury"
+      },
+      {
+        "name": "Protection",
+        "value": "protection"
+      }
     ]
   }
 ]

@@ -1,10 +1,13 @@
 <template>
   <div class="flex items-center justify-center">
     <img
-      v-if="hasLogo && !loadingError"
+      v-if="hasSecureLogoUrl && !loadingError"
+      v-lazy-load
       :src="url"
       :alt="alt"
       class="w-full"
+      height="48"
+      width="48"
       @error="loadingError = true"
     >
     <MissingGuildLogo v-else class="text-gray-700" />
@@ -26,9 +29,10 @@ export default {
     loadingError: false
   }),
   computed: {
-    hasLogo () {
+    hasSecureLogoUrl () {
       return this.url !== '' &&
-        this.url != null
+        this.url != null &&
+        this.url.startsWith('https://')
     }
   }
 }
