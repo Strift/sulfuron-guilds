@@ -1,5 +1,5 @@
 <template>
-  <div class="space-y-8">
+  <div class="space-y-8 text-gray-500">
     <PageSectionTitle>Stats</PageSectionTitle>
     <div v-if="publishedGuilds && publishedGuilds.length">
       <table>
@@ -17,7 +17,7 @@
           :key="specId"
         >
           <td>{{ specId }}</td>
-          <td>{{ allianceStats[specId].open / allianceStats[specId].total * 100 }}</td>
+          <td>{{ formatPercentage(allianceStats[specId].open / allianceStats[specId].total * 100) }}</td>
         </tr>
         <tr>
           <td colspan="2">
@@ -29,7 +29,7 @@
           :key="specId"
         >
           <td>{{ specId }}</td>
-          <td>{{ hordeStats[specId].open / hordeStats[specId].total * 100 }}</td>
+          <td>{{ formatPercentage(hordeStats[specId].open / hordeStats[specId].total * 100) }}</td>
         </tr>
       </table>
     </div>
@@ -39,6 +39,7 @@
 <script>
 import { defineComponent } from '@nuxtjs/composition-api'
 import { mapGetters } from 'vuex'
+import sortBy from 'lodash/sortBy'
 import PageSectionTitle from '~/components/ui/PageSectionTitle.vue'
 import getSpecId from '~/data/utils/getSpecId'
 
@@ -95,6 +96,9 @@ export default defineComponent({
             .flat()
         })
         .flat()
+    },
+    formatPercentage (percent) {
+      return Number.parseFloat(percent).toFixed(2)
     }
   },
   head () {
