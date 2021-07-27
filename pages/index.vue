@@ -20,7 +20,7 @@
       </div>
     </div>
 
-    <div class="mb-6">
+    <div class="mb-10">
       <div class="flex items-center justify-between mb-6 text-gray-500">
         <div class="hidden items-center sm:flex space-x-2">
           <FilterIcon />
@@ -49,9 +49,17 @@
     </div>
 
     <div>
-      <div class="flex items-center mb-10 space-x-2 text-gray-500">
-        <SortAscendingIcon />
-        <div>Guildes triées par {{ sortingText }}.</div>
+      <div class="mb-10 sm:flex sm:justify-between sm:space-y-0 space-y-3">
+        <div class="flex items-center space-x-2 text-gray-600">
+          <SortAscendingIcon />
+          <div>Guildes triées par {{ sortingText }}.</div>
+        </div>
+        <div>
+          <label class="hover:text-blue-300 text-gray-600">
+            <input v-model="removeOutdatedGuilds" type="checkbox" name="removeOutdatedGuilds">
+            <span class="ml-2">Afficher uniquement les guildes à jour.</span>
+          </label>
+        </div>
       </div>
       <transition-group :duration="500" name="fade" tag="div" class="gap-12 grid grid-cols-1 grid-flow-row lg:grid-cols-2 xl:grid-cols-3">
         <div
@@ -135,6 +143,14 @@ export default {
       'isGuest',
       'isAuthenticated'
     ]),
+    removeOutdatedGuilds: {
+      get () {
+        return this.$store.state.guilds.removeOutdatedGuilds
+      },
+      set (value) {
+        this.$store.commit('guilds/setRemoveOutdatedGuilds', value)
+      }
+    },
     orderedSearchResults () {
       return sortBy(this.searchResults, [guild => guild.name.toLowerCase()])
     },

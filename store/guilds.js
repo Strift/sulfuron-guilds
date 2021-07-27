@@ -19,7 +19,8 @@ let fuse = null
 export const state = () => ({
   list: [],
   classFilters: [],
-  textQuery: ''
+  textQuery: '',
+  removeOutdatedGuilds: true
 })
 
 export const mutations = {
@@ -54,6 +55,9 @@ export const mutations = {
     const specIndex = state.classFilters[classIndex].specs.findIndex(({ value }) => value === specValue)
 
     state.classFilters[classIndex].specs[specIndex].checked = false
+  },
+  setRemoveOutdatedGuilds (state, removeOutdatedGuilds) {
+    state.removeOutdatedGuilds = removeOutdatedGuilds
   }
 }
 
@@ -120,6 +124,8 @@ export const getters = {
         if (guild.faction !== rootState.faction) { return false }
         // Filter out guilds that don't have a contact URL
         if (guild.contactUrl.length === 0) { return false }
+        // Filter out guilds that are not updated
+        if (state.removeOutdatedGuilds && guild.updatedAt === undefined) { return false }
 
         // Map-flatten array of class.specs[] to specIds[]
         const guildOpenSpecs = guild.recruitment
