@@ -270,7 +270,7 @@ export default {
   },
   head () {
     return {
-      title: this.name
+      title: 'Ma guilde'
     }
   }
 }
