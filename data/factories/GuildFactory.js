@@ -20,7 +20,7 @@ export default function (props) {
           open: faker.datatype.boolean()
         }))
       })),
-    logoUrl: faker.image.imageUrl(),
+    logoUrl: faker.image.imageUrl().replace('http://', 'https://'),
     websiteUrl: faker.internet.url(),
     contactUrl: faker.internet.url(),
     updatedAt: faker.date.recent(),

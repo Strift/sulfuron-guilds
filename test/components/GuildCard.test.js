@@ -7,7 +7,9 @@ import GuildRecruitment from '~/components/GuildRecruitment.vue'
 
 const makeComponent = (props) => {
   const propsData = guildFactory(props)
-  return mount(GuildCard, { propsData })
+  return mount(GuildCard, {
+    propsData
+  })
 }
 
 describe('GuildCard', () => {
@@ -31,8 +33,13 @@ describe('GuildCard', () => {
     expect(wrapper.findComponent(MissingGuildLogo).exists()).toBe(true)
   })
 
-  it('shows MissingGuildLogo when logo image is not loading', async () => {
-    const wrapper = makeComponent({ logoUrl: 'xszaxq' })
+  it('shows MissingGuildLogo when logo is not hosted on https', () => {
+    const wrapper = makeComponent({ logoUrl: 'http://placeimg.com/640/480' })
+    expect(wrapper.findComponent(MissingGuildLogo).exists()).toBe(true)
+  })
+
+  it('shows MissingGuildLogo when logo image emits an error', async () => {
+    const wrapper = makeComponent()
     await wrapper.find('img').trigger('error')
     expect(wrapper.findComponent(MissingGuildLogo).exists()).toBe(true)
   })

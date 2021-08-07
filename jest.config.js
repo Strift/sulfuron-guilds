@@ -15,5 +15,8 @@ module.exports = {
     // support the same ~/ -> rootdir/ alias mapping in source code
     '^~/(.*)$': '<rootDir>/$1'
   },
-  testRegex: './test/.*.test.js$'
+  testRegex: './test/.*.test.js$',
+  setupFiles: [
+    './jest.setup.js'
+  ]
 }
