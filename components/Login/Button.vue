@@ -1,8 +1,7 @@
 <template>
   <a
     class="border inline-flex items-center px-4 py-2 space-x-4 text-gray-200"
-    :href="`${$config.baseURL}/auth/battlenet`"
-    @click="startLoading"
+    :href="href"
   >
     <BattleNetIcon class="h-8 w-8" />
     <div>Connexion</div>
@@ -11,9 +10,10 @@
 
 <script>
 export default {
-  methods: {
-    startLoading () {
-      this.$store.commit('account/startAuthLoading')
+  props: {
+    href: {
+      type: String,
+      required: true
     }
   }
 }

@@ -11,6 +11,9 @@ module.exports = {
     // process `*.vue` files with `vue-jest`
     '.*\\.(vue)$': 'vue-jest'
   },
+  transformIgnorePatterns: [
+    'node_modules/(?!epic-spinners)'
+  ],
   moduleNameMapper: {
     // support the same ~/ -> rootdir/ alias mapping in source code
     '^~/(.*)$': '<rootDir>/$1'

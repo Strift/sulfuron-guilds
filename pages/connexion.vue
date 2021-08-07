@@ -8,7 +8,11 @@
         La connexion est nécessaire uniquement pour administrer une guilde.
       </p>
       <div class="mt-auto text-center">
-        <LoginButton class="hover:shadow-lg mb-12 shadow-md" />
+        <LoginButton
+          :href="`${$config.baseURL}/auth/battlenet`"
+          class="hover:shadow-lg mb-12 shadow-md"
+          @click="startLoading"
+        />
         <p class="text-center text-gray-500">
           En cliquant sur Connexion, vous serez redirigé vers le site de Blizzard.
         </p>
@@ -60,6 +64,9 @@ export default {
     async handleAuthRedirect () {
       await this.$store.dispatch('account/login', this.authToken)
       this.$router.push('/')
+    },
+    startLoading () {
+      this.$store.commit('account/startAuthLoading')
     }
   },
   head () {
