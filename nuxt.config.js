@@ -22,6 +22,10 @@ export default {
     }
   },
   /*
+  ** Components config
+  */
+  components: true,
+  /*
   ** Router config
   */
   router: {
