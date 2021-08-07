@@ -87,7 +87,7 @@ export default defineComponent({
   },
   head () {
     return {
-      title: 'Nouvelle guilde'
+      title: 'Nouvelle guilde - Sulfuron-EU'
     }
   }
 })

@@ -61,7 +61,7 @@ export default {
   },
   head () {
     return {
-      title: 'Guildes'
+      title: 'Guildes - Sulfuron-EU'
     }
   }
 }

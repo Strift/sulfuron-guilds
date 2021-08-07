@@ -253,7 +253,7 @@ export default {
   },
   head () {
     return {
-      title: 'Ma guilde'
+      title: 'Ma guilde - Sulfuron-EU'
     }
   }
 }

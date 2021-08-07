@@ -21,7 +21,7 @@ export default {
   },
   head () {
     return {
-      title: `${this.error.statusCode} | ${this.error.message}`
+      title: `Erreur ${this.error.statusCode}  - Sulfuron-EU`
     }
   }
 }

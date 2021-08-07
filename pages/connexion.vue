@@ -71,7 +71,7 @@ export default {
   },
   head () {
     return {
-      title: 'Connexion'
+      title: 'Connexion - Sulfuron-EU'
     }
   }
 }

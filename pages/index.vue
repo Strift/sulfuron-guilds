@@ -1,19 +1,9 @@
 <template>
   <div>
-    <div class="mb-20">
-      <h1 class="font-semibold leading-none mb-4 text-4xl text-blue-100 text-shadow-lg">
-        Portail des guildes
-      </h1>
-      <p class="text-gray-400 text-lg text-shadow-md">
-        Votre nouvelle plateforme dédiée au recrutement sur Sulfuron.
-        <NuxtLink to="/en-savoir-plus/" class="font-semibold hover:text-blue-400 text-blue-300">
-          En savoir plus.
-        </NuxtLink>
-      </p>
-    </div>
+    <HomeHeader class="mb-20" />
     <div class="border-gray-700 mb-6 sm:border-b sm:flex sm:justify-between sm:pb-6 sm:space-y-0 space-y-6">
       <div class="border-b border-gray-700 pb-6 sm:border-0 sm:p-0">
-        <FactionButton class="text-gray-200" />
+        <HomeFactionButton class="text-gray-200" />
       </div>
       <div class="flex space-x-5">
         <SearchBar class="sm:w-auto w-full" @input="updateTextQuery" />
@@ -111,7 +101,6 @@ import FilterIcon from '~/components/icons/solid/FilterIcon.vue'
 import SortAscendingIcon from '~/components/icons/solid/SortAscendingIcon.vue'
 import SearchBar from '~/components/SearchBar.vue'
 import GuildCard from '~/components/GuildCard.vue'
-import FactionButton from '~/components/FactionButton.vue'
 import SearchFilters from '~/components/SearchFilters.vue'
 import ActiveClassFiltersList from '~/components/ActiveClassFiltersList.vue'
 import ResetFiltersButton from '~/components/ResetFiltersButton.vue'
@@ -124,7 +113,6 @@ export default {
     SortAscendingIcon,
     SearchBar,
     GuildCard,
-    FactionButton,
     SearchFilters,
     ActiveClassFiltersList,
     ResetFiltersButton,
@@ -198,7 +186,7 @@ export default {
   },
   head () {
     return {
-      title: 'Portail des guildes'
+      title: 'Trouvez et rejoignez votre nouvelle guilde - Sulfuron-EU'
     }
   }
 }

@@ -56,7 +56,7 @@ export default {
   },
   head () {
     return {
-      title: 'Paramètres'
+      title: 'Paramètres - Sulfuron-EU'
     }
   }
 }

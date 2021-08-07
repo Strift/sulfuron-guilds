@@ -85,7 +85,7 @@ export default {
   },
   head () {
     return {
-      title: 'Pourquoi cette plateforme ?'
+      title: 'Pourquoi cette plateforme ? - Sulfuron-EU'
     }
   }
 }
