@@ -1,6 +1,6 @@
 <template>
   <div class="space-y-8">
-    <PageSectionTitle>Créer une guilde</PageSectionTitle>
+    <BaseHeader2>Créer une guilde</BaseHeader2>
     <InformationCard class="space-y-2">
       <p class="font-semibold">
         ⚠ Attention
@@ -10,7 +10,7 @@
       </p>
     </InformationCard>
     <div class="max-w-sm space-y-10">
-      <FormInput
+      <BaseInput
         v-model="guild"
         label="Nom de la guilde"
         name="guild-name"
@@ -26,7 +26,7 @@
     <PrimaryButton @click="createGuild(account, guild)">
       Valider
     </PrimaryButton>
-    <PageSectionTitle>Guildes non publiées</PageSectionTitle>
+    <BaseHeader2>Guildes non publiées</BaseHeader2>
     <AdminGuildList
       v-if="draftGuilds.length"
       :guilds="draftGuilds"
@@ -45,21 +45,17 @@ import useUsers, {
 } from '~/composables/admin/useUsers'
 import useCreateGuild from '~/composables/admin/useCreateGuild'
 
-import FormInput from '~/components/ui/FormInput.vue'
 import FormSelect from '~/components/ui/FormSelect.vue'
 import PrimaryButton from '~/components/ui/PrimaryButton.vue'
 import InformationCard from '~/components/ui/InformationCard.vue'
-import PageSectionTitle from '~/components/ui/PageSectionTitle.vue'
 import AdminGuildList from '~/components/AdminGuildList.vue'
 
 export default defineComponent({
   layout: 'admin',
   components: {
-    FormInput,
     FormSelect,
     PrimaryButton,
     InformationCard,
-    PageSectionTitle,
     AdminGuildList
   },
   middleware: ['auth', 'admin'],

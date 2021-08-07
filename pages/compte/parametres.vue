@@ -17,9 +17,9 @@
         <li>Nom de guilde</li>
       </ul>
     </InformationCard>
-    <PageSectionTitle>
+    <BaseHeader2>
       Battle.net
-    </PageSectionTitle>
+    </BaseHeader2>
     <div class="flex shadow-md">
       <div class="bg-gray-900 flex h-20 items-center rounded-l w-20">
         <BattleNetIcon class="h-10" />
@@ -41,7 +41,6 @@ import { mapGetters } from 'vuex'
 import DangerButton from '~/components/ui/DangerButton.vue'
 import BattleNetIcon from '~/components/ui/BattleNetIcon.vue'
 import InformationCard from '~/components/ui/InformationCard.vue'
-import PageSectionTitle from '~/components/ui/PageSectionTitle.vue'
 
 export default {
   name: 'Settings',
@@ -49,8 +48,7 @@ export default {
   components: {
     DangerButton,
     BattleNetIcon,
-    InformationCard,
-    PageSectionTitle
+    InformationCard
   },
   computed: {
     ...mapGetters('account', [
@@ -71,7 +69,3 @@ export default {
   }
 }
 </script>
-
-<style>
-
-</style>

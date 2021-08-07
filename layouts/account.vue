@@ -1,5 +1,5 @@
 <template>
-  <FullPage>
+  <FullPageLayout>
     <PageTitle>
       Mon compte
     </PageTitle>
@@ -11,19 +11,15 @@
         <Nuxt />
       </div>
     </div>
-  </FullPage>
+  </FullPageLayout>
 </template>
 
 <script>
-import FullPage from '~/components/FullPage.vue'
 import PageTitle from '~/components/ui/PageTitle.vue'
-import AccountNav from '~/components/AccountNav.vue'
 
 export default {
   components: {
-    FullPage,
-    PageTitle,
-    AccountNav
+    PageTitle
   },
   middleware: ['auth', 'guild']
 }

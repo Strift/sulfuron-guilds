@@ -1,5 +1,5 @@
 <template>
-  <FullPage>
+  <FullPageLayout>
     <PageTitle>
       Admin zone 👀
     </PageTitle>
@@ -11,17 +11,15 @@
         <Nuxt />
       </div>
     </div>
-  </FullPage>
+  </FullPageLayout>
 </template>
 
 <script>
-import FullPage from '~/components/FullPage.vue'
 import PageTitle from '~/components/ui/PageTitle.vue'
 import AdminNav from '~/components/AdminNav.vue'
 
 export default {
   components: {
-    FullPage,
     PageTitle,
     AdminNav
   },
