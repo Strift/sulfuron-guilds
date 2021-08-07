@@ -31,6 +31,7 @@ const types = [
 describe('AccountGuildTypeInput', () => {
   const localVue = createLocalVue()
   localVue.use(Vuex)
+  localVue.component('BaseSelect', BaseSelect) // TODO: update with real Nuxt Components registration logic
   let store
   let guild
 

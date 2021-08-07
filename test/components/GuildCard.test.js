@@ -1,13 +1,17 @@
-import { mount } from '@vue/test-utils'
+import { mount, createLocalVue } from '@vue/test-utils'
 import guildFactory from '~/data/factories/GuildFactory.js'
 
 import GuildCard from '~/components/GuildCard.vue'
 import MissingGuildLogo from '~/components/ui/MissingGuildLogo.vue'
 import GuildRecruitment from '~/components/GuildRecruitment.vue'
 
+const localVue = createLocalVue()
+localVue.directive('lazy-load', {})
+
 const makeComponent = (props) => {
   const propsData = guildFactory(props)
   return mount(GuildCard, {
+    localVue,
     propsData
   })
 }

@@ -1,8 +1,10 @@
-import { mount } from '@vue/test-utils'
+import { createLocalVue, mount } from '@vue/test-utils'
 import guildFactory from '~/data/factories/GuildFactory.js'
 import GuildModal from '~/components/GuildModal.vue'
 
 const baseURL = 'url.com'
+const localVue = createLocalVue()
+localVue.directive('lazy-load', {})
 
 let guild
 
@@ -14,7 +16,8 @@ const makeComponent = (props) => {
       $config: {
         baseURL
       }
-    }
+    },
+    localVue
   })
 }
 
