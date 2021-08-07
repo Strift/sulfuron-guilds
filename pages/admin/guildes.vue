@@ -1,19 +1,19 @@
 <template>
   <div class="space-y-8">
-    <PageSectionTitle class="flex items-baseline justify-between">
+    <BaseHeader2 class="flex items-baseline justify-between">
       Guildes publiées <span class="text-base text-gray-600">{{ publishedGuilds.length }} guildes</span>
-    </PageSectionTitle>
+    </BaseHeader2>
     <div class="flex space-x-8">
       <div class="w-1/2">
-        <FormInput v-model="searchText" name="Recherche" label="Recherche" placeholder="Nom de guilde, Battle.net" />
+        <BaseInput v-model="searchText" name="Recherche" label="Recherche" placeholder="Nom de guilde, Battle.net" />
       </div>
       <div class="w-1/2">
         <div class="font-semibold mb-2 text-blue-400">
           Mode avancé
         </div>
-        <FormCheckBox id="editionMode" name="editionMode" :checked="editionMode" @change="editionMode = $event">
+        <BaseCheckListItem id="editionMode" name="editionMode" :checked="editionMode" @change="editionMode = $event">
           Je suis un ouf, laisse-moi tout casser.
-        </FormCheckBox>
+        </BaseCheckListItem>
       </div>
     </div>
     <AdminGuildList
@@ -23,9 +23,9 @@
       :search="searchText"
       @remove="removeGuild"
     />
-    <PageSectionTitle class="flex items-baseline justify-between">
+    <BaseHeader2 class="flex items-baseline justify-between">
       Guildes supprimées <span class="text-base text-gray-600">{{ deletedGuilds.length }} guildes</span>
-    </PageSectionTitle>
+    </BaseHeader2>
     <AdminGuildList
       v-if="deletedGuilds.length"
       :guilds="deletedGuilds"
@@ -37,19 +37,9 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import PageSectionTitle from '~/components/ui/PageSectionTitle.vue'
-import AdminGuildList from '~/components/AdminGuildList.vue'
-import FormInput from '~/components/ui/FormInput.vue'
-import FormCheckBox from '~/components/ui/FormCheckBox.vue'
 
 export default {
   layout: 'admin',
-  components: {
-    PageSectionTitle,
-    AdminGuildList,
-    FormInput,
-    FormCheckBox
-  },
   data: () => ({
     searchText: '',
     editionMode: false
@@ -71,7 +61,7 @@ export default {
   },
   head () {
     return {
-      title: 'Guildes'
+      title: 'Guildes - Sulfuron-EU'
     }
   }
 }

@@ -22,6 +22,10 @@ export default {
     }
   },
   /*
+  ** Components config
+  */
+  components: true,
+  /*
   ** Router config
   */
   router: {
@@ -35,11 +39,9 @@ export default {
     htmlAttrs: {
       lang: 'fr'
     },
-    titleTemplate: '%s - Sulfuron.eu',
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'Votre nouvelle plateforme dédiée au recrutement des guildes sur le serveur WoW Classic Sulfuron' }
+      { name: 'viewport', content: 'width=device-width, initial-scale=1' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
@@ -89,7 +91,9 @@ export default {
     // Doc: https://www.npmjs.com/package/nuxt-lazy-load
     ['nuxt-lazy-load', {
       directiveOnly: true
-    }]
+    }],
+    // Doc: https://sitemap.nuxtjs.org/
+    '@nuxtjs/sitemap'
   ],
   /*
   ** Build configuration

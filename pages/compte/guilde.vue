@@ -1,22 +1,22 @@
 <template>
   <div class="space-y-10">
-    <GuildPublish
+    <AccountGuildPublish
       v-if="hasDraftGuild"
       @publish="publish"
     />
     <div class="space-y-10">
-      <PageSectionTitle>Tableau de bord</PageSectionTitle>
-      <GuildDashboard
+      <BaseHeader2>Tableau de bord</BaseHeader2>
+      <AccountGuildOverview
         :website-redirects="websiteRedirectsCount"
         :contact-redirects="contactRedirectsCount"
       />
     </div>
-    <PageSectionTitle>Général</PageSectionTitle>
+    <BaseHeader2>Général</BaseHeader2>
     <div class="flex flex-col-reverse justify-between lg:flex-row">
       <div class="max-w-sm space-y-10 w-full">
-        <FormInput :value="name" name="name" label="Nom de guilde" disabled />
+        <BaseInput :value="name" name="name" label="Nom de guilde" disabled />
         <div>
-          <FormInput v-model.trim="logoUrl" :error-message="urlErrorMessage(logoUrl)" name="logo-url" label="Lien du logo" placeholder="https://exemple.com/logo.png" />
+          <BaseInput v-model.trim="logoUrl" :error-message="urlErrorMessage(logoUrl)" name="logo-url" label="Lien du logo" placeholder="https://exemple.com/logo.png" />
           <div class="flex items-baseline mt-3 space-x-2 text-gray-600">
             <div>ℹ️</div>
             <div>Utilisez un hébergeur comme <a href="https://imgur.com/" target="_blank" class="hover:underline text-blue-300">imgur</a>, puis <br><em>copiez l'adresse de l'image</em> (clic droit).</div>
@@ -29,8 +29,8 @@
             <div>Seules les images hébérgées sur un serveur sécurisé (https) sont affichées.</div>
           </div>
         </div>
-        <FormSelect v-model="faction" :options="factionOptions" name="faction" label="Faction" placeholder="Sélectionnez votre faction" />
-        <GuildTypeInput />
+        <BaseSelect v-model="faction" :options="factionOptions" name="faction" label="Faction" placeholder="Sélectionnez votre faction" />
+        <AccountGuildTypeInput />
       </div>
       <div class="mb-10">
         <div class="block font-semibold leading-none mb-4 text-blue-400 text-shadow-sm">
@@ -43,7 +43,7 @@
       </div>
     </div>
     <div>
-      <FormInput
+      <BaseInput
         v-model="description"
         :max-length="144"
         name="description"
@@ -51,24 +51,24 @@
         placeholder="Nous sommes une guilde de copains."
       />
     </div>
-    <PageSectionTitle>Horaires</PageSectionTitle>
+    <BaseHeader2>Horaires</BaseHeader2>
     <div class="lg:flex lg:space-x-12 lg:space-y-0 space-y-10 xl:justify-between">
-      <FormInput v-model="startHour" name="start-hour" type="time" label="Heure de début" class="max-w-sm w-full" />
-      <FormInput v-model="endHour" name="end-hour" type="time" label="Heure de fin" class="max-w-sm w-full" />
+      <BaseInput v-model="startHour" name="start-hour" type="time" label="Heure de début" class="max-w-sm w-full" />
+      <BaseInput v-model="endHour" name="end-hour" type="time" label="Heure de fin" class="max-w-sm w-full" />
     </div>
-    <FormCheckList v-model="raidDays" :options="daysOptions" name="days" label="Jours de raid" />
-    <PageSectionTitle>Recrutement</PageSectionTitle>
+    <BaseCheckList v-model="raidDays" :options="daysOptions" name="days" label="Jours de raid" />
+    <BaseHeader2>Recrutement</BaseHeader2>
     <div>
       <div class="block font-semibold leading-none mb-4 text-blue-400 text-shadow-sm">
         Classes recherchées
       </div>
-      <FormSpecsList
+      <AccountSpecializationListInput
         v-model="recruitment"
         class="gap-x-6 gap-y-4 grid grid-cols-2 grid-flow-cols lg:grid-cols-5 md:grid-cols-3"
       />
     </div>
-    <PageSectionTitle>Contact</PageSectionTitle>
-    <FormInput
+    <BaseHeader2>Contact</BaseHeader2>
+    <BaseInput
       v-model="websiteUrl"
       :error-message="urlErrorMessage(websiteUrl)"
       name="website-url"
@@ -77,7 +77,7 @@
       class="max-w-sm w-full"
     />
     <div>
-      <FormInput
+      <BaseInput
         v-model="contactUrl"
         :error-message="urlErrorMessage(contactUrl)"
         name="contact-url"
@@ -93,7 +93,7 @@
         <div>Lien de contact manquant. Votre guilde n'apparaîtra pas dans les résultats de recherche.</div>
       </div>
     </div>
-    <GuildPublish
+    <AccountGuildPublish
       v-if="hasDraftGuild"
       @publish="publish"
     />
@@ -106,14 +106,6 @@ import { mapState, mapGetters } from 'vuex'
 import isUrl from 'is-url'
 
 import MissingGuildLogo from '~/components/ui/MissingGuildLogo.vue'
-import FormInput from '~/components/ui/FormInput.vue'
-import FormSelect from '~/components/ui/FormSelect.vue'
-import FormCheckList from '~/components/ui/FormCheckList.vue'
-import FormSpecsList from '~/components/ui/FormSpecsList.vue'
-import PageSectionTitle from '~/components/ui/PageSectionTitle.vue'
-import GuildDashboard from '~/components/GuildDashboard.vue'
-import GuildTypeInput from '~/components/GuildTypeInput.vue'
-import GuildPublish from '~/components/GuildPublish.vue'
 
 import WOW_CLASSES from '~/data/classes.json'
 const DAYS_OF_THE_WEEK = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche']
@@ -122,16 +114,7 @@ export default {
   name: 'Guild',
   layout: 'account',
   components: {
-    FormInput,
-    FormSelect,
-    FormCheckList,
-    FormSpecsList,
-    PageSectionTitle,
-    GuildDashboard,
-    MissingGuildLogo,
-    GuildTypeInput,
-    GuildPublish
-    // AccountRefresh
+    MissingGuildLogo
   },
   data: () => ({
     factionOptions: [
@@ -270,7 +253,7 @@ export default {
   },
   head () {
     return {
-      title: 'Ma guilde'
+      title: 'Ma guilde - Sulfuron-EU'
     }
   }
 }

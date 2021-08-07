@@ -1,18 +1,14 @@
 <template>
-  <FullPage :background="background">
+  <FullPageLayout :background="background">
     <Nuxt />
-  </FullPage>
+  </FullPageLayout>
 </template>
 
 <script>
 import { mapState } from 'vuex'
-import FullPage from '~/components/FullPage.vue'
 
 export default {
   name: 'DefaultLayout',
-  components: {
-    FullPage
-  },
   computed: {
     ...mapState(['background'])
   }

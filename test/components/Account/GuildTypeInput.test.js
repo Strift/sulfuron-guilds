@@ -1,8 +1,8 @@
 import { expect, jest } from '@jest/globals'
 import { mount, createLocalVue } from '@vue/test-utils'
 import Vuex from 'vuex'
-import GuildTypeInput from '~/components/GuildTypeInput.vue'
-import FormSelect from '~/components/ui/FormSelect.vue'
+import AccountGuildTypeInput from '~/components/Account/GuildTypeInput.vue'
+import BaseSelect from '~/components/Base/Select.vue'
 import guildFactory from '~/data/factories/GuildFactory.js'
 
 const types = [
@@ -28,9 +28,10 @@ const types = [
   }
 ]
 
-describe('GuildTypeInput', () => {
+describe('AccountGuildTypeInput', () => {
   const localVue = createLocalVue()
   localVue.use(Vuex)
+  localVue.component('BaseSelect', BaseSelect) // TODO: update with real Nuxt Components registration logic
   let store
   let guild
 
@@ -50,19 +51,19 @@ describe('GuildTypeInput', () => {
   })
 
   it('lists all options', () => {
-    const wrapper = mount(GuildTypeInput, { store, localVue })
-    expect(wrapper.findComponent(FormSelect).props('options')).toEqual(types)
+    const wrapper = mount(AccountGuildTypeInput, { store, localVue })
+    expect(wrapper.findComponent(BaseSelect).props('options')).toEqual(types)
   })
 
   it('defaults to the store value', () => {
-    const wrapper = mount(GuildTypeInput, { store, localVue })
-    expect(wrapper.findComponent(FormSelect).props('value')).toEqual(guild.type)
+    const wrapper = mount(AccountGuildTypeInput, { store, localVue })
+    expect(wrapper.findComponent(BaseSelect).props('value')).toEqual(guild.type)
   })
 
   it('dispatches a store update on value change', async () => {
     jest.useFakeTimers('modern')
-    const wrapper = mount(GuildTypeInput, { store, localVue })
-    await wrapper.findComponent(FormSelect).vm.$emit('input', 'some value')
+    const wrapper = mount(AccountGuildTypeInput, { store, localVue })
+    await wrapper.findComponent(BaseSelect).vm.$emit('input', 'some value')
     jest.advanceTimersByTime(1000)
     expect(store.dispatch).toHaveBeenCalledWith('account/updateGuild', { type: 'some value' })
     jest.useRealTimers()

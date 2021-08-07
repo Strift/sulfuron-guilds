@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils'
 import faker from 'faker'
 
-import FormCheckBox from '~/components/ui/FormCheckBox.vue'
+import BaseCheckListItem from '~/components/Base/CheckListItem.vue'
 
 const makeComponent = (props, defaultSlot = 'label') => {
   const propsData = {
@@ -11,7 +11,7 @@ const makeComponent = (props, defaultSlot = 'label') => {
     ...props
   }
   return mount(
-    FormCheckBox, {
+    BaseCheckListItem, {
       propsData,
       slots: {
         default: defaultSlot
@@ -20,7 +20,7 @@ const makeComponent = (props, defaultSlot = 'label') => {
   )
 }
 
-describe('FormCheckbox', () => {
+describe('BaseCheckListItem', () => {
   it('should have an id', () => {
     const wrapper = makeComponent({ id: 'checkbox-id' })
     expect(wrapper.find('input[type=checkbox]').attributes('id')).toBe('checkbox-id')

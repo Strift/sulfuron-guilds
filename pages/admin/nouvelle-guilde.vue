@@ -1,21 +1,21 @@
 <template>
   <div class="space-y-8">
-    <PageSectionTitle>Créer une guilde</PageSectionTitle>
-    <InformationCard class="space-y-2">
+    <BaseHeader2>Créer une guilde</BaseHeader2>
+    <BaseInformationCard class="space-y-2">
       <p class="font-semibold">
         ⚠ Attention
       </p>
       <p>
         Les GMs ne peuvent pas modifier le nom de leur guilde, faites bien attention à l'orthographe.
       </p>
-    </InformationCard>
+    </BaseInformationCard>
     <div class="max-w-sm space-y-10">
-      <FormInput
+      <BaseInput
         v-model="guild"
         label="Nom de la guilde"
         name="guild-name"
       />
-      <FormSelect
+      <BaseSelect
         v-model="account"
         :options="usersOptions"
         label="Compte Battle.net du GM"
@@ -23,10 +23,10 @@
         name="bnet-account"
       />
     </div>
-    <PrimaryButton @click="createGuild(account, guild)">
+    <BasePrimaryButton @click="createGuild(account, guild)">
       Valider
-    </PrimaryButton>
-    <PageSectionTitle>Guildes non publiées</PageSectionTitle>
+    </BasePrimaryButton>
+    <BaseHeader2>Guildes non publiées</BaseHeader2>
     <AdminGuildList
       v-if="draftGuilds.length"
       :guilds="draftGuilds"
@@ -45,23 +45,8 @@ import useUsers, {
 } from '~/composables/admin/useUsers'
 import useCreateGuild from '~/composables/admin/useCreateGuild'
 
-import FormInput from '~/components/ui/FormInput.vue'
-import FormSelect from '~/components/ui/FormSelect.vue'
-import PrimaryButton from '~/components/ui/PrimaryButton.vue'
-import InformationCard from '~/components/ui/InformationCard.vue'
-import PageSectionTitle from '~/components/ui/PageSectionTitle.vue'
-import AdminGuildList from '~/components/AdminGuildList.vue'
-
 export default defineComponent({
   layout: 'admin',
-  components: {
-    FormInput,
-    FormSelect,
-    PrimaryButton,
-    InformationCard,
-    PageSectionTitle,
-    AdminGuildList
-  },
   middleware: ['auth', 'admin'],
   setup () {
     const guild = ref('')
@@ -102,7 +87,7 @@ export default defineComponent({
   },
   head () {
     return {
-      title: 'Nouvelle guilde'
+      title: 'Nouvelle guilde - Sulfuron-EU'
     }
   }
 })

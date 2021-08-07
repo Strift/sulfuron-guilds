@@ -8,7 +8,11 @@
         La connexion est nécessaire uniquement pour administrer une guilde.
       </p>
       <div class="mt-auto text-center">
-        <LoginButton class="hover:shadow-lg mb-12 shadow-md" />
+        <LoginButton
+          :href="`${$config.baseURL}/auth/battlenet`"
+          class="hover:shadow-lg mb-12 shadow-md"
+          @click="startLoading"
+        />
         <p class="text-center text-gray-500">
           En cliquant sur Connexion, vous serez redirigé vers le site de Blizzard.
         </p>
@@ -35,15 +39,11 @@
 <script>
 import { mapGetters } from 'vuex'
 import OrbitSpinner from 'epic-spinners/src/components/lib/OrbitSpinner.vue'
-import LoginCard from '~/components/LoginCard.vue'
-import LoginButton from '~/components/LoginButton.vue'
 
 const AUTH_TOKEN_QUERY = 'auth_token'
 
 export default {
   components: {
-    LoginCard,
-    LoginButton,
     OrbitSpinner
   },
   scrollToTop: true,
@@ -64,11 +64,21 @@ export default {
     async handleAuthRedirect () {
       await this.$store.dispatch('account/login', this.authToken)
       this.$router.push('/')
+    },
+    startLoading () {
+      this.$store.commit('account/startAuthLoading')
     }
   },
   head () {
     return {
-      title: 'Connexion'
+      title: 'Connexion - Sulfuron-EU',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: 'Inscrivez-vous au portail des guildes de Sulfuron-EU pour gérer le recrutement de votre guilde sur The Burning Crusade Classic.'
+        }
+      ]
     }
   }
 }
