@@ -1,6 +1,6 @@
 <template>
   <div>
-    <FormCheckBox
+    <BaseCheckListItem
       v-for="checkBox in checkBoxesToDisplay"
       :id="checkBox.id"
       :key="checkBox.id"
@@ -13,14 +13,13 @@
         <span v-if="checkBox.specValue">{{ checkBox.specName }}</span>
         <span v-else class="font-semibold text-gray-700">{{ checkBox.className }}</span>
       </div>
-    </FormCheckBox>
+    </BaseCheckListItem>
   </div>
 </template>
 
 <script>
 import cloneDeep from 'lodash/cloneDeep'
 
-import FormCheckBox from '~/components/ui/FormCheckBox.vue'
 import ClassIcon from '~/components/ui/ClassIcon.vue'
 
 import WOW_CLASSES from '~/data/classes.json'
@@ -38,7 +37,6 @@ const specName = (classValue, specValue) => {
 
 export default {
   components: {
-    FormCheckBox,
     ClassIcon
   },
   props: {

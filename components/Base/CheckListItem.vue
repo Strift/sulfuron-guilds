@@ -32,7 +32,6 @@
 import CheckIcon from '~/components/icons/solid/CheckIcon.vue'
 
 export default {
-  name: 'FormCheckBox',
   components: {
     CheckIcon
   },

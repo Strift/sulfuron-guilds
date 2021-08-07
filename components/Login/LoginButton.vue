@@ -10,12 +10,7 @@
 </template>
 
 <script>
-import BattleNetIcon from '~/components/ui/BattleNetIcon.vue'
-
 export default {
-  components: {
-    BattleNetIcon
-  },
   methods: {
     startLoading () {
       this.$store.commit('account/startAuthLoading')

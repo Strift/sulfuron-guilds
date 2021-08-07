@@ -1,6 +1,6 @@
 <template>
   <div class="space-y-10">
-    <InformationCard
+    <BaseInformationCard
       v-if="!isAGuildOwner"
     >
       <div class="flex font-semibold mb-4 space-x-4">
@@ -16,10 +16,10 @@
         <li>BattleTag&trade; <em>(avec les majuscules, si nécessaire)</em></li>
         <li>Nom de guilde</li>
       </ul>
-    </InformationCard>
-    <PageSectionTitle>
+    </BaseInformationCard>
+    <BaseHeader2>
       Battle.net
-    </PageSectionTitle>
+    </BaseHeader2>
     <div class="flex shadow-md">
       <div class="bg-gray-900 flex h-20 items-center rounded-l w-20">
         <BattleNetIcon class="h-10" />
@@ -30,28 +30,18 @@
         </div>
       </div>
     </div>
-    <DangerButton @click="logout">
+    <BaseDangerButton @click="logout">
       Déconnexion
-    </DangerButton>
+    </BaseDangerButton>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
-import DangerButton from '~/components/ui/DangerButton.vue'
-import BattleNetIcon from '~/components/ui/BattleNetIcon.vue'
-import InformationCard from '~/components/ui/InformationCard.vue'
-import PageSectionTitle from '~/components/ui/PageSectionTitle.vue'
 
 export default {
   name: 'Settings',
   layout: 'account',
-  components: {
-    DangerButton,
-    BattleNetIcon,
-    InformationCard,
-    PageSectionTitle
-  },
   computed: {
     ...mapGetters('account', [
       'username',
@@ -71,7 +61,3 @@ export default {
   }
 }
 </script>
-
-<style>
-
-</style>

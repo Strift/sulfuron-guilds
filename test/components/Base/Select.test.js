@@ -1,7 +1,7 @@
 import { expect } from '@jest/globals'
 import { mount } from '@vue/test-utils'
 
-import FormSelect from '~/components/ui/FormSelect.vue'
+import BaseSelect from '~/components/Base/Select.vue'
 
 const mountComponent = (props) => {
   const propsData = {
@@ -11,7 +11,7 @@ const mountComponent = (props) => {
     ...props
   }
   return mount(
-    FormSelect, {
+    BaseSelect, {
       propsData,
       attachTo: document.body
     }
@@ -20,7 +20,7 @@ const mountComponent = (props) => {
 
 const options = [{ label: 'First', value: '1' }, { label: 'Second', value: '2' }]
 
-describe('FormSelect', () => {
+describe('BaseSelect', () => {
   it('has a label', () => {
     const wrapper = mountComponent({ label: 'my little label', name: 'my-select-field' })
     expect(wrapper.find('label').text()).toBe('my little label')

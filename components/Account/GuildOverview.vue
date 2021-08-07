@@ -9,12 +9,7 @@
 </template>
 
 <script>
-import AccountStatistic from '~/components/AccountStatistic.vue'
-
 export default {
-  components: {
-    AccountStatistic
-  },
   props: {
     websiteRedirects: {
       type: Number,
@@ -27,7 +22,3 @@ export default {
   }
 }
 </script>
-
-<style>
-
-</style>

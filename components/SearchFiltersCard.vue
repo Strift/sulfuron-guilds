@@ -3,7 +3,7 @@
     <div class="font-bold mb-4 text-gray-300 text-xs tracking-wider uppercase">
       Classes
     </div>
-    <FormSpecsList
+    <AccountSpecializationListInput
       v-model="classFilters"
       class="gap-x-6 gap-y-2 grid grid-cols-1 lg:grid-cols-5 sm:gap-y-4 sm:grid-cols-3"
     />
@@ -13,14 +13,9 @@
 <script>
 import sortBy from 'lodash/sortBy'
 
-import FormSpecsList from '~/components/ui/FormSpecsList.vue'
-
 import WOW_CLASSES from '~/data/classes.json'
 
 export default {
-  components: {
-    FormSpecsList
-  },
   computed: {
     classFilters: {
       get () {

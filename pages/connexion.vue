@@ -35,15 +35,11 @@
 <script>
 import { mapGetters } from 'vuex'
 import OrbitSpinner from 'epic-spinners/src/components/lib/OrbitSpinner.vue'
-import LoginCard from '~/components/LoginCard.vue'
-import LoginButton from '~/components/LoginButton.vue'
 
 const AUTH_TOKEN_QUERY = 'auth_token'
 
 export default {
   components: {
-    LoginCard,
-    LoginButton,
     OrbitSpinner
   },
   scrollToTop: true,

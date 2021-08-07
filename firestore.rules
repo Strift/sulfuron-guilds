@@ -10,10 +10,6 @@ service cloud.firestore {
       return isAuthenticated() && resource.data.ownerUid == request.auth.uid
     }
 
-    function isRedirectOwner () {
-      return isAuthenticated() && get(/databases/$(database)/documents/guilds/$(guild)).data.ownerUid == request.auth.uid
-    }
-
     function isAdmin () {
       return isAuthenticated() && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.admin == true
     }
@@ -23,6 +19,10 @@ service cloud.firestore {
       allow read;
       allow update: if isGuildOwner() || isAdmin();
       allow delete: if isAdmin();
+
+      function isRedirectOwner () {
+        return isAuthenticated() && get(/databases/$(database)/documents/guilds/$(guild)).data.ownerUid == request.auth.uid
+      }
 
       match /redirects/{redirect} {
         allow read: if isRedirectOwner();

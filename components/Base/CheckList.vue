@@ -4,7 +4,7 @@
       {{ label }}
     </div>
     <div class="gap-x-6 gap-y-4 grid grid-cols-2 grid-flow-cols lg:grid-cols-5 md:grid-cols-3">
-      <FormCheckBox
+      <BaseCheckListItem
         v-for="(option, optionIndex) in options"
         :id="inputId(option)"
         :key="inputId(option)"
@@ -13,18 +13,13 @@
         @change="updateChecked($event, optionIndex)"
       >
         {{ option }}
-      </FormCheckBox>
+      </BaseCheckListItem>
     </div>
   </div>
 </template>
 
 <script>
-import FormCheckBox from '~/components/ui/FormCheckBox.vue'
-
 export default {
-  components: {
-    FormCheckBox
-  },
   props: {
     name: {
       type: String,
