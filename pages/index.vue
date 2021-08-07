@@ -186,7 +186,14 @@ export default {
   },
   head () {
     return {
-      title: 'Trouvez et rejoignez votre nouvelle guilde - Sulfuron-EU'
+      title: 'Trouvez et rejoignez votre nouvelle guilde - Sulfuron-EU',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: 'Trouvez et rejoignez votre nouvelle guilde WoW Classic sur sur le serveur Sulfuron (The Burning Crusade).'
+        }
+      ]
     }
   }
 }

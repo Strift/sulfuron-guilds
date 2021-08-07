@@ -71,7 +71,14 @@ export default {
   },
   head () {
     return {
-      title: 'Connexion - Sulfuron-EU'
+      title: 'Connexion - Sulfuron-EU',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: 'Inscrivez-vous au portail des guildes de Sulfuron-EU pour gérer le recrutement de votre guilde sur The Burning Crusade Classic.'
+        }
+      ]
     }
   }
 }
