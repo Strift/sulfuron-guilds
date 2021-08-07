@@ -91,7 +91,9 @@ export default {
     // Doc: https://www.npmjs.com/package/nuxt-lazy-load
     ['nuxt-lazy-load', {
       directiveOnly: true
-    }]
+    }],
+    // Doc: https://sitemap.nuxtjs.org/
+    '@nuxtjs/sitemap'
   ],
   /*
   ** Build configuration
