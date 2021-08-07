@@ -1,5 +1,5 @@
 <template>
-  <FormSelect
+  <BaseSelect
     v-model="type"
     :options="options"
     name="type"
@@ -10,13 +10,9 @@
 
 <script>
 import { debounce } from 'lodash'
-import FormSelect from '~/components/ui/FormSelect.vue'
 import GUILD_TYPES from '~/data/guildTypes.json'
 
 export default {
-  components: {
-    FormSelect
-  },
   data: () => ({
     options: GUILD_TYPES
   }),

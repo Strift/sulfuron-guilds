@@ -1,22 +1,12 @@
 <template>
   <nav class="overflow-hidden rounded-md shadow-md">
     <ul>
-      <AsideNavItem to="/admin/nouvelle-guilde/">
+      <BaseSideNavItem to="/admin/nouvelle-guilde/">
         Nouvelle guilde
-      </AsideNavItem>
-      <AsideNavItem to="/admin/guildes/">
+      </BaseSideNavItem>
+      <BaseSideNavItem to="/admin/guildes/">
         Guildes
-      </AsideNavItem>
+      </BaseSideNavItem>
     </ul>
   </nav>
 </template>
-
-<script>
-import AsideNavItem from '~/components/AsideNavItem.vue'
-
-export default {
-  components: {
-    AsideNavItem
-  }
-}
-</script>

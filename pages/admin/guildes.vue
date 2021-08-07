@@ -37,13 +37,9 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import AdminGuildList from '~/components/AdminGuildList.vue'
 
 export default {
   layout: 'admin',
-  components: {
-    AdminGuildList
-  },
   data: () => ({
     searchText: '',
     editionMode: false

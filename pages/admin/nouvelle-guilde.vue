@@ -15,7 +15,7 @@
         label="Nom de la guilde"
         name="guild-name"
       />
-      <FormSelect
+      <BaseSelect
         v-model="account"
         :options="usersOptions"
         label="Compte Battle.net du GM"
@@ -23,9 +23,9 @@
         name="bnet-account"
       />
     </div>
-    <PrimaryButton @click="createGuild(account, guild)">
+    <BasePrimaryButton @click="createGuild(account, guild)">
       Valider
-    </PrimaryButton>
+    </BasePrimaryButton>
     <BaseHeader2>Guildes non publiées</BaseHeader2>
     <AdminGuildList
       v-if="draftGuilds.length"
@@ -45,17 +45,8 @@ import useUsers, {
 } from '~/composables/admin/useUsers'
 import useCreateGuild from '~/composables/admin/useCreateGuild'
 
-import FormSelect from '~/components/ui/FormSelect.vue'
-import PrimaryButton from '~/components/ui/PrimaryButton.vue'
-import AdminGuildList from '~/components/AdminGuildList.vue'
-
 export default defineComponent({
   layout: 'admin',
-  components: {
-    FormSelect,
-    PrimaryButton,
-    AdminGuildList
-  },
   middleware: ['auth', 'admin'],
   setup () {
     const guild = ref('')

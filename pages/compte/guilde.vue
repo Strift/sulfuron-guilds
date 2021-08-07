@@ -29,7 +29,7 @@
             <div>Seules les images hébérgées sur un serveur sécurisé (https) sont affichées.</div>
           </div>
         </div>
-        <FormSelect v-model="faction" :options="factionOptions" name="faction" label="Faction" placeholder="Sélectionnez votre faction" />
+        <BaseSelect v-model="faction" :options="factionOptions" name="faction" label="Faction" placeholder="Sélectionnez votre faction" />
         <AccountGuildTypeInput />
       </div>
       <div class="mb-10">
@@ -106,7 +106,6 @@ import { mapState, mapGetters } from 'vuex'
 import isUrl from 'is-url'
 
 import MissingGuildLogo from '~/components/ui/MissingGuildLogo.vue'
-import FormSelect from '~/components/ui/FormSelect.vue'
 
 import WOW_CLASSES from '~/data/classes.json'
 const DAYS_OF_THE_WEEK = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche']
@@ -115,7 +114,6 @@ export default {
   name: 'Guild',
   layout: 'account',
   components: {
-    FormSelect,
     MissingGuildLogo
   },
   data: () => ({

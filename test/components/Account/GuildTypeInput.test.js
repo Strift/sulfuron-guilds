@@ -2,7 +2,7 @@ import { expect, jest } from '@jest/globals'
 import { mount, createLocalVue } from '@vue/test-utils'
 import Vuex from 'vuex'
 import AccountGuildTypeInput from '~/components/Account/GuildTypeInput.vue'
-import FormSelect from '~/components/ui/FormSelect.vue'
+import BaseSelect from '~/components/Base/Select.vue'
 import guildFactory from '~/data/factories/GuildFactory.js'
 
 const types = [
@@ -51,18 +51,18 @@ describe('AccountGuildTypeInput', () => {
 
   it('lists all options', () => {
     const wrapper = mount(AccountGuildTypeInput, { store, localVue })
-    expect(wrapper.findComponent(FormSelect).props('options')).toEqual(types)
+    expect(wrapper.findComponent(BaseSelect).props('options')).toEqual(types)
   })
 
   it('defaults to the store value', () => {
     const wrapper = mount(AccountGuildTypeInput, { store, localVue })
-    expect(wrapper.findComponent(FormSelect).props('value')).toEqual(guild.type)
+    expect(wrapper.findComponent(BaseSelect).props('value')).toEqual(guild.type)
   })
 
   it('dispatches a store update on value change', async () => {
     jest.useFakeTimers('modern')
     const wrapper = mount(AccountGuildTypeInput, { store, localVue })
-    await wrapper.findComponent(FormSelect).vm.$emit('input', 'some value')
+    await wrapper.findComponent(BaseSelect).vm.$emit('input', 'some value')
     jest.advanceTimersByTime(1000)
     expect(store.dispatch).toHaveBeenCalledWith('account/updateGuild', { type: 'some value' })
     jest.useRealTimers()
