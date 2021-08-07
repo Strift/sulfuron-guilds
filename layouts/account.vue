@@ -1,8 +1,8 @@
 <template>
   <FullPageLayout>
-    <PageTitle>
+    <BaseHeader1>
       Mon compte
-    </PageTitle>
+    </BaseHeader1>
     <div class="lg:space-x-24 md:flex md:space-x-16 md:space-y-0 space-y-16">
       <aside class="md:w-1/4">
         <AccountNav />
@@ -15,12 +15,7 @@
 </template>
 
 <script>
-import PageTitle from '~/components/ui/PageTitle.vue'
-
 export default {
-  components: {
-    PageTitle
-  },
   middleware: ['auth', 'guild']
 }
 </script>
