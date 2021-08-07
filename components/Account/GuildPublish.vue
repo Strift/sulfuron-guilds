@@ -2,9 +2,9 @@
   <div
     class="flex items-baseline justify-between"
   >
-    <InformationCard>
+    <BaseInformationCard>
       N'oubliez pas de cliquer sur publier une fois les informations de votre guilde renseignées.
-    </InformationCard>
+    </BaseInformationCard>
     <PrimaryButton @click="$emit('publish')">
       Publier
     </PrimaryButton>
@@ -14,12 +14,10 @@
 <script>
 import { defineComponent } from '@nuxtjs/composition-api'
 
-import InformationCard from '~/components/ui/InformationCard.vue'
 import PrimaryButton from '~/components/ui/PrimaryButton.vue'
 
 export default defineComponent({
   components: {
-    InformationCard,
     PrimaryButton
   }
 })

@@ -1,14 +1,14 @@
 <template>
   <div class="space-y-8">
     <BaseHeader2>Créer une guilde</BaseHeader2>
-    <InformationCard class="space-y-2">
+    <BaseInformationCard class="space-y-2">
       <p class="font-semibold">
         ⚠ Attention
       </p>
       <p>
         Les GMs ne peuvent pas modifier le nom de leur guilde, faites bien attention à l'orthographe.
       </p>
-    </InformationCard>
+    </BaseInformationCard>
     <div class="max-w-sm space-y-10">
       <BaseInput
         v-model="guild"
@@ -47,7 +47,6 @@ import useCreateGuild from '~/composables/admin/useCreateGuild'
 
 import FormSelect from '~/components/ui/FormSelect.vue'
 import PrimaryButton from '~/components/ui/PrimaryButton.vue'
-import InformationCard from '~/components/ui/InformationCard.vue'
 import AdminGuildList from '~/components/AdminGuildList.vue'
 
 export default defineComponent({
@@ -55,7 +54,6 @@ export default defineComponent({
   components: {
     FormSelect,
     PrimaryButton,
-    InformationCard,
     AdminGuildList
   },
   middleware: ['auth', 'admin'],
