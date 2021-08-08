@@ -10,7 +10,7 @@
           title="Accueil"
           class="md:ml-0 md:mr-auto"
         >
-          <BaseLogo class="mx-auto" />
+          <BaseLogo class="mx-auto" :navbar="true" />
         </NuxtLink>
         <nav>
           <ul class="flex items-center list-none md:space-x-12 space-x-5">
