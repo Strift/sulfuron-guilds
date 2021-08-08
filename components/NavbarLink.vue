@@ -5,7 +5,7 @@
     :title="title"
   >
     <li
-      class="hover:text-blue-200 space-x-2 text-blue-300 text-lg text-shadow-sm"
+      class="hover:text-blue-400 space-x-2 text-blue-300 text-lg text-shadow-sm"
     >
       <a :href="href" @click="navigate">
         <slot name="default" />

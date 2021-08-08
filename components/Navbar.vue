@@ -41,7 +41,7 @@
           :to="accountLinkUrl"
           title="Mon compte"
         >
-          <span class="bg-blue-900 bg-opacity-25 border border-blue-300 flex hover:bg-opacity-75 items-center justify-center px-4 py-2 rounded-full shadow-md space-x-2">
+          <span class="bg-blue-900 bg-opacity-25 border border-blue-300 flex hover:bg-opacity-50 items-center justify-center px-4 py-2 rounded-full shadow-md space-x-2">
             <UserIcon />
             <span v-show="isGuest">Connexion</span>
             <span v-show="isAuthenticated">
@@ -57,14 +57,12 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import NavbarLink from '~/components/ui/NavbarLink.vue'
 import BellIcon from '~/components/icons/outline/BellIcon.vue'
 import UserIcon from '~/components/icons/solid/UserIcon.vue'
 import ArrowLeftIcon from '~/components/icons/solid/ArrowLeftIcon.vue'
 
 export default {
   components: {
-    NavbarLink,
     BellIcon,
     UserIcon,
     ArrowLeftIcon

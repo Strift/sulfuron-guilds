@@ -23,3 +23,7 @@
 .grayscale-75 {
   filter: grayscale(75%);
 }
+
+.bg-blur {
+  backdrop-filter: blur(5px);
+}

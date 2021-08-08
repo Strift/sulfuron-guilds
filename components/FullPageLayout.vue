@@ -19,12 +19,17 @@
         }"
         class="bg-gray-900 flex flex-1 flex-col max-h-screen relative"
       >
-        <div class="container flex-1 font-sans mx-auto px-5 xl:px-0">
-          <Navbar
-            class="mb-6 md:mb-16"
-          />
-          <slot name="default" />
+        <div
+          class="bg-gray-900 bg-opacity-75 duration-150 mb-6 md:mb-16 shadow-lg transition-opacity"
+          :class="{'bg-opacity-75 bg-blur ': false}"
+        >
+          <BaseContainer>
+            <Navbar />
+          </BaseContainer>
         </div>
+        <BaseContainer class="flex-1">
+          <slot name="default" />
+        </BaseContainer>
         <div class="flex-none h-12 lg:h-24 lg:mt-12 mt-6" style="background-image: linear-gradient(180deg, rgba(26,32,44,0), rgb(26,32,44))" />
         <Footer />
       </div>
