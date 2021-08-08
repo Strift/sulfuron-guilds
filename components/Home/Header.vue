@@ -22,22 +22,27 @@
             Soyez notifiés lorsqu'une guilde recrute votre classe.
           </div>
         </div>
-        <!-- <NuxtLink
-          to="/en-savoir-plus/"
-          class="bg-blue-900 bg-opacity-25 border border-blue-300 font-semibold hover:bg-opacity-75 hover:text-blue-200 ml-auto px-4 py-2 rounded-full shadow-lg text-blue-300 text-center text-shadow-sm tracking-widest uppercase w-64"
-        >
-          En savoir plus
-        </NuxtLink> -->
         <NuxtLink
           to="/en-savoir-plus/"
-          class="bg-opacity-50 bg-yellow-900 border border-yellow-400 font-semibold hover:bg-opacity-75 hover:shadow-lg hover:text-yellow-500 ml-auto px-5 py-1 rounded-full shadow-md text-center text-lg text-shadow-sm text-yellow-300 tracking-widest uppercase w-64"
+          class="bg-opacity-50 bg-yellow-900 border border-yellow-400 font-semibold hover:bg-opacity-75 hover:shadow-lg hover:text-yellow-500 ml-auto px-5 py-1 rounded-full shadow-md text-lg text-shadow-sm text-yellow-300 tracking-widest uppercase w-64"
         >
-          Activer
+          <span class="flex items-center justify-center space-x-2">
+            <BellIcon height="24" width="24" />
+            <span>Activer
+            </span>
+          </span>
         </NuxtLink>
-      <!-- <button class="bg-opacity-50 bg-yellow-900 border border-yellow-400 hover:bg-opacity-75 hover:shadow-lg hover:text-yellow-500 ml-auto px-5 py-1 rounded-full shadow-md text-center text-lg text-shadow-sm text-yellow-300">
-          En savoir plus
-        </button> -->
       </div>
     </HomeBanner>
   </div>
 </template>
+
+<script>
+import BellIcon from '~/components/icons/solid/BellIcon.vue'
+
+export default {
+  components: {
+    BellIcon
+  }
+}
+</script>
