@@ -76,7 +76,9 @@ export default {
     // Doc: https://sentry.nuxtjs.org/
     '@nuxtjs/sentry',
     // Doc: https://image.nuxtjs.org/
-    '@nuxt/image'
+    '@nuxt/image',
+    // Doc: https://pwa.nuxtjs.org/
+    '@nuxtjs/pwa'
   ],
   /*
   ** Nuxt.js modules
@@ -163,6 +165,11 @@ export default {
         collectionEnabled: isProduction()
       }
     }
+  },
+  /*
+  ** PWA module configuration
+  */
+  pwa: {
   },
   /*
   ** Sentry module configuration
