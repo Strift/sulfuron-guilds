@@ -19,14 +19,7 @@
         }"
         class="bg-gray-900 flex flex-1 flex-col max-h-screen relative"
       >
-        <div
-          class="bg-gray-900 bg-opacity-75 duration-150 mb-6 md:mb-16 shadow-lg transition-opacity"
-          :class="{'bg-opacity-75 bg-blur ': false}"
-        >
-          <BaseContainer>
-            <Navbar />
-          </BaseContainer>
-        </div>
+        <Navbar class="mb-6 md:mb-16" />
         <BaseContainer class="flex-1">
           <slot name="default" />
         </BaseContainer>
