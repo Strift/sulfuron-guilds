@@ -171,6 +171,10 @@ export default {
   ** PWA module configuration
   */
   pwa: {
+    manifest: {
+      background_color: '#1A202C',
+      theme_color: '#1A202C'
+    }
   },
   /*
   ** Sentry module configuration
