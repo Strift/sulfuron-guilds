@@ -12,6 +12,7 @@ localVue.component('LoginCard', LoginCard)
 localVue.component('LoginButton', LoginButton)
 localVue.component('BattleNetIcon', BattleNetIcon)
 
+// eslint-disable-next-line
 const store = new Vuex.Store({
   modules: {
     account: {
