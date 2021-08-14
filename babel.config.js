@@ -4,9 +4,11 @@ module.exports = {
       '@babel/preset-env',
       {
         targets: {
-          esmodules: true
+          esmodules: true,
+          node: 'current'
         }
       }
-    ]
+    ],
+    '@babel/preset-typescript'
   ]
 }
