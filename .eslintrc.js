@@ -6,8 +6,11 @@ module.exports = {
     browser: true,
     node: true
   },
+  parserOptions: {
+    parser: 'babel-eslint'
+  },
   extends: [
-    '@nuxtjs/eslint-config-typescript',
+    '@nuxtjs',
     'plugin:nuxt/recommended'
   ],
   plugins: [
