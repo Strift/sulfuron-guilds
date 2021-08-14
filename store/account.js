@@ -89,7 +89,7 @@ export const actions = {
       commit('setAdmin', userRef.data().admin)
     }
   },
-  async fetchGuild ({ _commit, dispatch }) {
+  async fetchGuild ({ commit, dispatch }) {
     const querySnapshot = await this.$fire.firestore
       .collection('guilds')
       .withConverter(guildConverter)
@@ -109,7 +109,7 @@ export const actions = {
   disableGuildSync: firestoreAction(function ({ unbindFirestoreRef }) {
     return unbindFirestoreRef('guild', false)
   }),
-  updateGuild: firestoreAction(async function (_ctx, payload) {
+  updateGuild: firestoreAction(async function (ctx, payload) {
     const query = await this.$fire.firestore
       .collection('guilds')
       .where('ownerUid', '==', this.$fire.auth.currentUser.uid)

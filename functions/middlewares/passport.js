@@ -17,7 +17,7 @@ passport.use(new BattlenetStrategy({
   clientSecret: BATTLENET_CLIENT_SECRET,
   callbackURL: `${APP_HOST}/auth/battlenet/callback`,
   region: 'eu'
-}, function (_accessToken, _refreshToken, profile, done) {
+}, function (accessToken, refreshToken, profile, done) {
   return done(null, profile)
 }))
 

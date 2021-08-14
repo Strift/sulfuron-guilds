@@ -134,11 +134,6 @@ export default {
     fallback: '404.html'
   },
   /*
-  ** Typescript module configuration
-  */
-  typescript: {
-  },
-  /*
   ** Firebase module configuration
   */
   firebase: {

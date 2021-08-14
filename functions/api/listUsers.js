@@ -2,7 +2,7 @@ const firebase = require('../services/firebase')
 
 const PAGE_SIZE = 1000
 
-module.exports = async function (_data, _context) {
+module.exports = async function (data, context) {
   let allUsers = []
 
   let { users, pageToken } = await firebase.auth().listUsers(PAGE_SIZE)

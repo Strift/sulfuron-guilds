@@ -37,7 +37,6 @@ describe('AccountGuildTypeInput', () => {
 
   beforeEach(() => {
     guild = guildFactory()
-    // eslint-disable-next-line
     store = new Vuex.Store({
       modules: {
         account: {
