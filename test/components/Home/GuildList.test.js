@@ -20,6 +20,8 @@ const guilds = [...Array(10)].map((_, index) => ({
   id: index.toString(),
   ...guildFactory({ faction: guildsFaction })
 }))
+const alphabeticallySortedGuilds = sortBy(guilds, [guild => guild.name.toLowerCase()])
+const chronologicallySortedGuilds = orderBy(guilds, [guild => guild.updatedAt], ['desc'])
 
 let store
 
@@ -56,9 +58,8 @@ const mountComponent = ({ defaultSorting } = {}) => {
 }
 
 describe('GuildsList', () => {
-  it('sorts guilds alphabetically by default', () => {
-    const wrapper = mountComponent()
-    const alphabeticallySortedGuilds = sortBy(guilds, [guild => guild.name.toLowerCase()])
+  it('can sort guilds alphabetically', () => {
+    const wrapper = mountComponent({ defaultSorting: searchStore.SortingType.ALPHABETICAL })
     const listItemsWrappers = wrapper.findAllComponents(GuildsListItem).wrappers
 
     expect(listItemsWrappers.map(wrapper => wrapper.props().name))
@@ -67,8 +68,14 @@ describe('GuildsList', () => {
 
   it('can sort guilds by last update date', () => {
     const wrapper = mountComponent({ defaultSorting: searchStore.SortingType.CHRONOLOGICAL })
-    const chronologicallySortedGuilds = orderBy(guilds, [guild => guild.updatedAt], ['desc'])
+    const listItemsWrappers = wrapper.findAllComponents(GuildsListItem).wrappers
 
+    expect(listItemsWrappers.map(wrapper => wrapper.props().updatedAt))
+      .toEqual(chronologicallySortedGuilds.map(({ updatedAt }) => updatedAt))
+  })
+
+  it('defaults to chronological sorting', () => {
+    const wrapper = mountComponent()
     const listItemsWrappers = wrapper.findAllComponents(GuildsListItem).wrappers
 
     expect(listItemsWrappers.map(wrapper => wrapper.props().updatedAt))
@@ -77,11 +84,10 @@ describe('GuildsList', () => {
 
   it('updates the open guild when an item is clicked', async () => {
     const wrapper = mountComponent()
-    const alphabeticallySortedGuilds = sortBy(guilds, [guild => guild.name.toLowerCase()])
     const listItemsWrappers = wrapper.findAllComponents(GuildsListItem).wrappers
 
     const randomIndex = Math.floor(Math.random() * listItemsWrappers.length)
     await listItemsWrappers[randomIndex].trigger('click')
-    expect(store.state.openGuild).toEqual(alphabeticallySortedGuilds[randomIndex])
+    expect(store.state.openGuild).toEqual(chronologicallySortedGuilds[randomIndex])
   })
 })

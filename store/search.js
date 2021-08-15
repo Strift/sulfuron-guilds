@@ -4,7 +4,7 @@ export const SortingType = {
 }
 
 export const state = () => ({
-  sorting: SortingType.ALPHABETICAL
+  sorting: SortingType.CHRONOLOGICAL
 })
 
 export const mutations = {

@@ -29,16 +29,14 @@ const mountComponent = () => {
 }
 
 describe('HomeSorting', () => {
-  it('defaults to alphabetical order', () => {
+  it('defaults to the store value', () => {
     const wrapper = mountComponent()
-    expect(wrapper.find('select').element.value).toBe(SortingType.ALPHABETICAL)
+    expect(wrapper.find('select').element.value).toBe(store.state.search.sorting)
   })
 
   it('updates the search store sorting', async () => {
     const wrapper = mountComponent()
     const select = wrapper.find('select')
-
-    expect(store.state.search.sorting).toBe(SortingType.ALPHABETICAL)
 
     await select.setValue(SortingType.CHRONOLOGICAL)
     expect(store.state.search.sorting).toBe(SortingType.CHRONOLOGICAL)
