@@ -1,22 +1,26 @@
 import { mount, createLocalVue } from '@vue/test-utils'
-import guildFactory from '~/data/factories/GuildFactory.js'
+import guildFactory from '~/data/factories/guildFactory.js'
 
-import GuildCard from '~/components/GuildCard.vue'
+import HomeGuildsListItem from '~/components/Home/GuildsListItem.vue'
 import MissingGuildLogo from '~/components/ui/MissingGuildLogo.vue'
 import GuildRecruitment from '~/components/GuildRecruitment.vue'
 
 const localVue = createLocalVue()
 localVue.directive('lazy-load', {})
 
+let componentsCreated = 0
 const makeComponent = (props) => {
-  const propsData = guildFactory(props)
-  return mount(GuildCard, {
+  const guild = guildFactory(props)
+  return mount(HomeGuildsListItem, {
     localVue,
-    propsData
+    propsData: {
+      id: (++componentsCreated).toString(),
+      ...guild
+    }
   })
 }
 
-describe('GuildCard', () => {
+describe('GuildsListItem', () => {
   it('shows the guild name', () => {
     const wrapper = makeComponent({ name: 'Astral' })
     expect(wrapper.text()).toContain('Astral')
@@ -50,13 +54,15 @@ describe('GuildCard', () => {
 
   it('shows the raid days shortened', () => {
     const wrapper = makeComponent()
-    const readableRaidDays = wrapper.props().raidDays.map(day => day.slice(0, 3)).join(', ')
+    const readableRaidDays = wrapper.props().raidDays
+      .filter(({ playing }) => playing)
+      .map(({ day }) => day.slice(0, 3)).join(', ')
     expect(wrapper.text()).toContain(readableRaidDays)
   })
 
   it('shows the time range', () => {
-    const wrapper = makeComponent({ timeRange: '06h06 - 23h23' })
-    expect(wrapper.text()).toContain('06h06 - 23h23')
+    const wrapper = makeComponent({ startHour: '06:06', endHour: '23:23' })
+    expect(wrapper.text()).toContain('06:06 – 23:23')
   })
 
   it('shows the GuildRecruitment', () => {
@@ -74,5 +80,11 @@ describe('GuildCard', () => {
   it('has a default message for missing update date', () => {
     const wrapper = makeComponent({ updatedAt: undefined })
     expect(wrapper.text()).toContain('Il y a un moment')
+  })
+
+  it('emits a click event on click', async () => {
+    const wrapper = makeComponent()
+    await wrapper.find('button').element.click()
+    expect(wrapper.emitted().click).toBeTruthy()
   })
 })

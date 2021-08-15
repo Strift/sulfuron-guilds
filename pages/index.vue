@@ -40,10 +40,7 @@
 
     <div>
       <div class="mb-10 sm:flex sm:justify-between sm:space-y-0 space-y-3">
-        <div class="flex items-center space-x-2 text-gray-600">
-          <SortAscendingIcon />
-          <div>Guildes triées par {{ sortingText }}.</div>
-        </div>
+        <HomeSorting />
         <div>
           <label class="hover:text-blue-300 text-gray-600">
             <input v-model="removeOutdatedGuilds" type="checkbox" name="removeOutdatedGuilds">
@@ -51,26 +48,7 @@
           </label>
         </div>
       </div>
-      <transition-group :duration="500" name="fade" tag="div" class="gap-12 grid grid-cols-1 grid-flow-row lg:grid-cols-2 xl:grid-cols-3">
-        <div
-          v-for="guild in orderedSearchResults"
-          :key="guild.name"
-        >
-          <GuildCard
-            :id="guild.id"
-            :name="guild.name"
-            :type="guild.type"
-            :raid-days="raidDays(guild)"
-            :time-range="timeRange(guild)"
-            :recruitment="guild.recruitment"
-            :logo-url="guild.logoUrl"
-            :website-url="guild.websiteUrl"
-            :contact-url="guild.contactUrl"
-            :updated-at="guild.updatedAt"
-            @click="openGuild(guild)"
-          />
-        </div>
-      </transition-group>
+      <HomeGuildsList />
     </div>
 
     <div class="mt-12 text-center text-gray-500">
@@ -98,9 +76,7 @@ import sortBy from 'lodash/sortBy'
 import { mapGetters } from 'vuex'
 
 import FilterIcon from '~/components/icons/solid/FilterIcon.vue'
-import SortAscendingIcon from '~/components/icons/solid/SortAscendingIcon.vue'
 import SearchBar from '~/components/SearchBar.vue'
-import GuildCard from '~/components/GuildCard.vue'
 import SearchFilters from '~/components/SearchFilters.vue'
 import ActiveClassFiltersList from '~/components/ActiveClassFiltersList.vue'
 import ResetFiltersButton from '~/components/ResetFiltersButton.vue'
@@ -110,9 +86,7 @@ export default {
   name: 'Index',
   components: {
     FilterIcon,
-    SortAscendingIcon,
     SearchBar,
-    GuildCard,
     SearchFilters,
     ActiveClassFiltersList,
     ResetFiltersButton,
@@ -166,16 +140,6 @@ export default {
     },
     timeRange ({ startHour, endHour }) {
       return startHour + ' – ' + endHour
-    },
-    raidDays ({ raidDays }) {
-      return raidDays
-        .filter(({ playing }) => playing)
-        .map(({ day }) => day)
-    },
-    recruitmentClasses ({ recruitment }) {
-      return recruitment
-        .filter(({ open }) => open)
-        .map(recruitmentState => recruitmentState.class)
     },
     removeClassFilter (classValue, specValue) {
       this.$store.commit('guilds/removeClassFilter', { classValue, specValue })

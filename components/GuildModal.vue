@@ -101,7 +101,8 @@ export default {
     type: { type: String, required: true },
     description: { type: String, required: true },
     raidDays: { type: Array, required: true },
-    timeRange: { type: String, required: true },
+    startHour: { type: String, required: true },
+    endHour: { type: String, required: true },
     recruitment: { type: Array, required: true },
     logoUrl: { type: String, required: true },
     websiteUrl: { type: String, required: true },
@@ -113,8 +114,14 @@ export default {
     isOpen () {
       return this.$store.state.openGuild !== null
     },
+    timeRange () {
+      return this.startHour + ' – ' + this.endHour
+    },
     readableDays () {
-      return this.raidDays.map(day => day.slice(0, 3)).join(', ')
+      return this.raidDays
+        .filter(({ playing }) => playing)
+        .map(({ day }) => day.slice(0, 3))
+        .join(', ')
     },
     readableWebsiteUrl () {
       let hostname
