@@ -6,7 +6,7 @@
         <span>Guildes triées par</span>
         <select
           v-model="sortingOrder"
-          class="bg-transparent font-semibold text-blue-300"
+          class="bg-transparent focus:text-blue-400 hover:text-blue-400 outline-none pr-1 text-blue-300"
         >
           <option :value="SortingType.ALPHABETICAL" class="bg-gray-300 text-gray-900">
             ordre alphabétique
