@@ -54,13 +54,15 @@ describe('GuildCard', () => {
 
   it('shows the raid days shortened', () => {
     const wrapper = makeComponent()
-    const readableRaidDays = wrapper.props().raidDays.map(day => day.slice(0, 3)).join(', ')
+    const readableRaidDays = wrapper.props().raidDays
+      .filter(({ playing }) => playing)
+      .map(({ day }) => day.slice(0, 3)).join(', ')
     expect(wrapper.text()).toContain(readableRaidDays)
   })
 
   it('shows the time range', () => {
-    const wrapper = makeComponent({ timeRange: '06h06 - 23h23' })
-    expect(wrapper.text()).toContain('06h06 - 23h23')
+    const wrapper = makeComponent({ startHour: '06:06', endHour: '23:23' })
+    expect(wrapper.text()).toContain('06:06 – 23:23')
   })
 
   it('shows the GuildRecruitment', () => {

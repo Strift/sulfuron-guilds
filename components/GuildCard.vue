@@ -76,7 +76,8 @@ export default {
     name: { type: String, required: true },
     type: { type: String, required: true },
     raidDays: { type: Array, required: true },
-    timeRange: { type: String, required: true },
+    startHour: { type: String, required: true },
+    endHour: { type: String, required: true },
     recruitment: { type: Array, required: true },
     logoUrl: { type: String, required: true },
     websiteUrl: { type: String, required: true },
@@ -94,8 +95,14 @@ export default {
     isHovered: false
   }),
   computed: {
+    timeRange () {
+      return this.startHour + ' – ' + this.endHour
+    },
     readableDays () {
-      return this.raidDays.map(day => day.slice(0, 3)).join(', ')
+      return this.raidDays
+        .filter(({ playing }) => playing)
+        .map(({ day }) => day.slice(0, 3))
+        .join(', ')
     },
     relativeUpdatedDate () {
       const capitalize = str => str.charAt(0).toUpperCase() + str.slice(1)

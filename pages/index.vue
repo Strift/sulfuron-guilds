@@ -40,10 +40,7 @@
 
     <div>
       <div class="mb-10 sm:flex sm:justify-between sm:space-y-0 space-y-3">
-        <div class="flex items-center space-x-2 text-gray-600">
-          <SortAscendingIcon />
-          <div>Guildes triées par {{ sortingText }}.</div>
-        </div>
+        <HomeSorting />
         <div>
           <label class="hover:text-blue-300 text-gray-600">
             <input v-model="removeOutdatedGuilds" type="checkbox" name="removeOutdatedGuilds">
@@ -60,8 +57,9 @@
             :id="guild.id"
             :name="guild.name"
             :type="guild.type"
-            :raid-days="raidDays(guild)"
-            :time-range="timeRange(guild)"
+            :raid-days="guild.raidDays"
+            :start-hour="guild.startHour"
+            :end-hour="guild.endHour"
             :recruitment="guild.recruitment"
             :logo-url="guild.logoUrl"
             :website-url="guild.websiteUrl"
@@ -98,7 +96,6 @@ import sortBy from 'lodash/sortBy'
 import { mapGetters } from 'vuex'
 
 import FilterIcon from '~/components/icons/solid/FilterIcon.vue'
-import SortAscendingIcon from '~/components/icons/solid/SortAscendingIcon.vue'
 import SearchBar from '~/components/SearchBar.vue'
 import GuildCard from '~/components/GuildCard.vue'
 import SearchFilters from '~/components/SearchFilters.vue'
@@ -110,7 +107,6 @@ export default {
   name: 'Index',
   components: {
     FilterIcon,
-    SortAscendingIcon,
     SearchBar,
     GuildCard,
     SearchFilters,
