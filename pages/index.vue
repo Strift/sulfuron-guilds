@@ -163,16 +163,6 @@ export default {
     timeRange ({ startHour, endHour }) {
       return startHour + ' – ' + endHour
     },
-    raidDays ({ raidDays }) {
-      return raidDays
-        .filter(({ playing }) => playing)
-        .map(({ day }) => day)
-    },
-    recruitmentClasses ({ recruitment }) {
-      return recruitment
-        .filter(({ open }) => open)
-        .map(recruitmentState => recruitmentState.class)
-    },
     removeClassFilter (classValue, specValue) {
       this.$store.commit('guilds/removeClassFilter', { classValue, specValue })
     },
