@@ -15,7 +15,7 @@ export default function (props) {
   const begin = faker.datatype.datetime()
   const end = faker.datatype.datetime()
   return {
-    name: faker.company.companyName(),
+    name: faker.unique(faker.company.companyName),
     faction: faker.random.arrayElement(['Alliance', 'Horde']),
     type: faker.random.arrayElement(GUILD_TYPES).value,
     description: faker.lorem.text(),

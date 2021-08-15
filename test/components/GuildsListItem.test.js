@@ -1,7 +1,7 @@
 import { mount, createLocalVue } from '@vue/test-utils'
 import guildFactory from '~/data/factories/guildFactory.js'
 
-import GuildCard from '~/components/GuildCard.vue'
+import GuildsListItem from '~/components/Home/GuildsListItem.vue'
 import MissingGuildLogo from '~/components/ui/MissingGuildLogo.vue'
 import GuildRecruitment from '~/components/GuildRecruitment.vue'
 
@@ -11,7 +11,7 @@ localVue.directive('lazy-load', {})
 let componentsCreated = 0
 const makeComponent = (props) => {
   const guild = guildFactory(props)
-  return mount(GuildCard, {
+  return mount(GuildsListItem, {
     localVue,
     propsData: {
       id: (++componentsCreated).toString(),
@@ -20,7 +20,7 @@ const makeComponent = (props) => {
   })
 }
 
-describe('GuildCard', () => {
+describe('GuildsListItem', () => {
   it('shows the guild name', () => {
     const wrapper = makeComponent({ name: 'Astral' })
     expect(wrapper.text()).toContain('Astral')

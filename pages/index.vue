@@ -48,27 +48,7 @@
           </label>
         </div>
       </div>
-      <transition-group :duration="500" name="fade" tag="div" class="gap-12 grid grid-cols-1 grid-flow-row lg:grid-cols-2 xl:grid-cols-3">
-        <div
-          v-for="guild in orderedSearchResults"
-          :key="guild.name"
-        >
-          <GuildCard
-            :id="guild.id"
-            :name="guild.name"
-            :type="guild.type"
-            :raid-days="guild.raidDays"
-            :start-hour="guild.startHour"
-            :end-hour="guild.endHour"
-            :recruitment="guild.recruitment"
-            :logo-url="guild.logoUrl"
-            :website-url="guild.websiteUrl"
-            :contact-url="guild.contactUrl"
-            :updated-at="guild.updatedAt"
-            @click="openGuild(guild)"
-          />
-        </div>
-      </transition-group>
+      <HomeGuildsList />
     </div>
 
     <div class="mt-12 text-center text-gray-500">
@@ -97,7 +77,6 @@ import { mapGetters } from 'vuex'
 
 import FilterIcon from '~/components/icons/solid/FilterIcon.vue'
 import SearchBar from '~/components/SearchBar.vue'
-import GuildCard from '~/components/GuildCard.vue'
 import SearchFilters from '~/components/SearchFilters.vue'
 import ActiveClassFiltersList from '~/components/ActiveClassFiltersList.vue'
 import ResetFiltersButton from '~/components/ResetFiltersButton.vue'
@@ -108,7 +87,6 @@ export default {
   components: {
     FilterIcon,
     SearchBar,
-    GuildCard,
     SearchFilters,
     ActiveClassFiltersList,
     ResetFiltersButton,
