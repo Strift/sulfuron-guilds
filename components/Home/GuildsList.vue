@@ -28,14 +28,19 @@
 </template>
 
 <script>
-import { defineComponent } from '@nuxtjs/composition-api'
+import { defineComponent, useStore } from '@nuxtjs/composition-api'
 import useSearchStore from '~/composables/useSearchStore'
 
 export default defineComponent({
   setup () {
+    const store = useStore()
     const { orderedResults } = useSearchStore()
+    const openGuild = (guild) => {
+      store.commit('setOpenGuild', guild)
+    }
     return {
-      guilds: orderedResults
+      guilds: orderedResults,
+      openGuild
     }
   }
 })

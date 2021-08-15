@@ -1,7 +1,7 @@
 import { mount, createLocalVue } from '@vue/test-utils'
 import guildFactory from '~/data/factories/guildFactory.js'
 
-import GuildsListItem from '~/components/Home/GuildsListItem.vue'
+import HomeGuildsListItem from '~/components/Home/GuildsListItem.vue'
 import MissingGuildLogo from '~/components/ui/MissingGuildLogo.vue'
 import GuildRecruitment from '~/components/GuildRecruitment.vue'
 
@@ -11,7 +11,7 @@ localVue.directive('lazy-load', {})
 let componentsCreated = 0
 const makeComponent = (props) => {
   const guild = guildFactory(props)
-  return mount(GuildsListItem, {
+  return mount(HomeGuildsListItem, {
     localVue,
     propsData: {
       id: (++componentsCreated).toString(),
@@ -80,5 +80,11 @@ describe('GuildsListItem', () => {
   it('has a default message for missing update date', () => {
     const wrapper = makeComponent({ updatedAt: undefined })
     expect(wrapper.text()).toContain('Il y a un moment')
+  })
+
+  it('emits a click event on click', async () => {
+    const wrapper = makeComponent()
+    await wrapper.find('button').element.click()
+    expect(wrapper.emitted().click).toBeTruthy()
   })
 })

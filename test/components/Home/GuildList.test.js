@@ -3,6 +3,7 @@ import { mount, createLocalVue } from '@vue/test-utils'
 import sortBy from 'lodash/sortBy'
 import orderBy from 'lodash/orderBy'
 import guildFactory from '~/data/factories/guildFactory'
+import * as rootStore from '~/store'
 import * as guildsStore from '~/store/guilds'
 import * as searchStore from '~/store/search'
 import GuildsList from '~/components/Home/GuildsList.vue'
@@ -13,18 +14,20 @@ localVue.use(Vuex)
 localVue.directive('lazy-load', {})
 localVue.component('HomeGuildsListItem', GuildsListItem)
 
+const guildsFaction = 'Horde'
+
 const guilds = [...Array(10)].map((_, index) => ({
   id: index.toString(),
-  ...guildFactory({ faction: 'Horde' })
+  ...guildFactory({ faction: guildsFaction })
 }))
 
 let store
 
 const mountComponent = ({ defaultSorting } = {}) => {
   store = new Vuex.Store({
-    state: {
-      faction: 'Horde'
-    },
+    state: rootStore.state,
+    mutations: rootStore.mutations,
+    getters: rootStore.getters,
     modules: {
       guilds: {
         state: guildsStore.state,
@@ -40,6 +43,7 @@ const mountComponent = ({ defaultSorting } = {}) => {
     }
   })
 
+  store.state.faction = guildsFaction
   store.state.guilds.list = guilds
   if (defaultSorting) {
     store.state.search.sorting = defaultSorting
@@ -53,8 +57,8 @@ const mountComponent = ({ defaultSorting } = {}) => {
 
 describe('GuildsList', () => {
   it('sorts guilds alphabetically by default', () => {
-    const alphabeticallySortedGuilds = sortBy(guilds, [guild => guild.name.toLowerCase()])
     const wrapper = mountComponent()
+    const alphabeticallySortedGuilds = sortBy(guilds, [guild => guild.name.toLowerCase()])
     const listItemsWrappers = wrapper.findAllComponents(GuildsListItem).wrappers
 
     expect(listItemsWrappers.map(wrapper => wrapper.props().name))
@@ -69,5 +73,15 @@ describe('GuildsList', () => {
 
     expect(listItemsWrappers.map(wrapper => wrapper.props().updatedAt))
       .toEqual(chronologicallySortedGuilds.map(({ updatedAt }) => updatedAt))
+  })
+
+  it('updates the open guild when an item is clicked', async () => {
+    const wrapper = mountComponent()
+    const alphabeticallySortedGuilds = sortBy(guilds, [guild => guild.name.toLowerCase()])
+    const listItemsWrappers = wrapper.findAllComponents(GuildsListItem).wrappers
+
+    const randomIndex = Math.floor(Math.random() * listItemsWrappers.length)
+    await listItemsWrappers[randomIndex].trigger('click')
+    expect(store.state.openGuild).toEqual(alphabeticallySortedGuilds[randomIndex])
   })
 })
