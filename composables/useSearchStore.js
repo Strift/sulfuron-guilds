@@ -14,6 +14,10 @@ export default function useSearchStore () {
     store.commit('search/setSorting', sorting)
   }
 
+  const setTextQuery = (textQuery) => {
+    store.commit('search/setTextQuery', textQuery)
+  }
+
   const results = computed(() => store.getters['guilds/searchResults'])
 
   const orderedResults = computed(() => {
@@ -26,6 +30,7 @@ export default function useSearchStore () {
   return {
     sorting,
     setSorting,
+    setTextQuery,
     orderedResults
   }
 }

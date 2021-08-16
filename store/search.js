@@ -4,11 +4,15 @@ export const SortingType = {
 }
 
 export const state = () => ({
-  sorting: SortingType.CHRONOLOGICAL
+  sorting: SortingType.CHRONOLOGICAL,
+  textQuery: ''
 })
 
 export const mutations = {
   setSorting (state, sorting) {
     state.sorting = sorting
+  },
+  setTextQuery (state, textQuery) {
+    state.textQuery = textQuery
   }
 }

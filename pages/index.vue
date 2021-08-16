@@ -6,7 +6,7 @@
         <HomeFactionButton class="text-gray-200" />
       </div>
       <div class="flex space-x-5">
-        <SearchBar class="sm:w-auto w-full" @input="updateTextQuery" />
+        <HomeSearchBar class="sm:w-auto w-full" />
       </div>
     </div>
 
@@ -76,7 +76,6 @@ import sortBy from 'lodash/sortBy'
 import { mapGetters } from 'vuex'
 
 import FilterIcon from '~/components/icons/solid/FilterIcon.vue'
-import SearchBar from '~/components/SearchBar.vue'
 import SearchFilters from '~/components/SearchFilters.vue'
 import ActiveClassFiltersList from '~/components/ActiveClassFiltersList.vue'
 import ResetFiltersButton from '~/components/ResetFiltersButton.vue'
@@ -86,7 +85,6 @@ export default {
   name: 'Index',
   components: {
     FilterIcon,
-    SearchBar,
     SearchFilters,
     ActiveClassFiltersList,
     ResetFiltersButton,
@@ -135,9 +133,6 @@ export default {
     await this.$store.dispatch('guilds/disableSync')
   },
   methods: {
-    updateTextQuery (textQuery) {
-      this.$store.commit('guilds/setTextQuery', textQuery)
-    },
     timeRange ({ startHour, endHour }) {
       return startHour + ' – ' + endHour
     },
