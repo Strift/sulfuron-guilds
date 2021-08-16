@@ -79,7 +79,7 @@ describe('GuildsListItem', () => {
 
   it('has a default message for missing update date', () => {
     const wrapper = makeComponent({ updatedAt: undefined })
-    expect(wrapper.text()).toContain('Il y a un moment')
+    expect(wrapper.text()).toContain('Il y a longtemps')
   })
 
   it('emits a click event on click', async () => {

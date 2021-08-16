@@ -1,4 +1,5 @@
 import Fuse from 'fuse.js'
+import { DateTime } from 'luxon'
 import sortBy from 'lodash/sortBy'
 import { firestoreAction } from 'vuexfire'
 
@@ -125,7 +126,12 @@ export const getters = {
         // Filter out guilds that don't have a contact URL
         if (guild.contactUrl.length === 0) { return false }
         // Filter out guilds that are not updated
-        if (state.removeOutdatedGuilds && guild.updatedAt === undefined) { return false }
+        if (state.removeOutdatedGuilds &&
+          (guild.updatedAt === undefined || DateTime.fromJSDate(guild.updatedAt).diffNow('days').days < -30)
+        ) {
+          console.log('removed', guild.name, guild.updatedAt)
+          return false
+        }
 
         // Map-flatten array of class.specs[] to specIds[]
         const guildOpenSpecs = guild.recruitment

@@ -108,7 +108,7 @@ export default {
       const capitalize = str => str.charAt(0).toUpperCase() + str.slice(1)
       return capitalize(this.updatedAt
         ? DateTime.fromJSDate(this.updatedAt).toRelative({ locale: 'fr' })
-        : 'il y a un moment'
+        : 'il y a longtemps'
       )
     }
   }
