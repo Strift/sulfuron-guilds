@@ -23,12 +23,7 @@
       <h1 class="font-bold leading-none pb-8 text-4xl text-gray-900">
         Connexion en cours...
       </h1>
-      <OrbitSpinner
-        :animation-duration="600"
-        :size="120"
-        class="m-auto"
-        color="#4299E1"
-      />
+      <BaseLoader class="m-auto" />
       <p class="mt-auto text-center text-gray-500">
         Veuillez patienter.
       </p>
@@ -38,14 +33,10 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import OrbitSpinner from 'epic-spinners/src/components/lib/OrbitSpinner.vue'
 
 const AUTH_TOKEN_QUERY = 'auth_token'
 
 export default {
-  components: {
-    OrbitSpinner
-  },
   scrollToTop: true,
   computed: {
     ...mapGetters('account', [

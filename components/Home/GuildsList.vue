@@ -1,5 +1,9 @@
 <template>
+  <div v-if="!guilds.length">
+    <BaseLoader class="mx-auto" />
+  </div>
   <transition-group
+    v-else
     :duration="500"
     name="fade"
     tag="div"
@@ -28,16 +32,14 @@
 </template>
 
 <script>
-import { defineComponent, useStore } from '@nuxtjs/composition-api'
+import { defineComponent } from '@nuxtjs/composition-api'
 import useSearchStore from '~/composables/useSearchStore'
+import useGuildModal from '~/composables/useGuildModal'
 
 export default defineComponent({
   setup () {
-    const store = useStore()
     const { orderedResults } = useSearchStore()
-    const openGuild = (guild) => {
-      store.commit('setOpenGuild', guild)
-    }
+    const { openGuild } = useGuildModal()
     return {
       guilds: orderedResults,
       openGuild

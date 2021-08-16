@@ -143,9 +143,6 @@ export default {
     },
     removeClassFilter (classValue, specValue) {
       this.$store.commit('guilds/removeClassFilter', { classValue, specValue })
-    },
-    openGuild (guild) {
-      this.$store.commit('setOpenGuild', guild)
     }
   },
   head () {
