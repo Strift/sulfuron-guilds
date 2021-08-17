@@ -1,17 +1,19 @@
 import { createLocalVue, mount } from '@vue/test-utils'
-import guildFactory from '~/data/factories/GuildFactory.js'
+import guildFactory from '~/data/factories/guildFactory.js'
 import GuildModal from '~/components/GuildModal.vue'
 
 const baseURL = 'url.com'
 const localVue = createLocalVue()
 localVue.directive('lazy-load', {})
 
-let guild
-
+let componentsCreated = 0
 const makeComponent = (props) => {
-  guild = guildFactory(props)
+  const guild = guildFactory(props)
   return mount(GuildModal, {
-    propsData: guild,
+    propsData: {
+      id: (++componentsCreated).toString(),
+      ...guild
+    },
     mocks: {
       $config: {
         baseURL
@@ -37,7 +39,7 @@ describe('GuildModal', () => {
     const wrapper = makeComponent()
     const linkWrapper = wrapper.find('a[title=Contact]')
     expect(linkWrapper.text()).toEqual('Contact')
-    expect(linkWrapper.attributes('href')).toEqual(`${baseURL}/redirect/?type=contact&guild=${guild.id}`)
+    expect(linkWrapper.attributes('href')).toEqual(`${baseURL}/redirect/?type=contact&guild=${componentsCreated}`)
   })
 
   it('only shows the contact link when the website URL is the same', () => {

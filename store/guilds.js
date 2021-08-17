@@ -1,4 +1,5 @@
 import Fuse from 'fuse.js'
+import { DateTime } from 'luxon'
 import sortBy from 'lodash/sortBy'
 import { firestoreAction } from 'vuexfire'
 
@@ -19,16 +20,12 @@ let fuse = null
 export const state = () => ({
   list: [],
   classFilters: [],
-  textQuery: '',
   removeOutdatedGuilds: true
 })
 
 export const mutations = {
   setClassFilters (state, classFilters) {
     state.classFilters = classFilters
-  },
-  setTextQuery (state, textQuery) {
-    state.textQuery = textQuery
   },
   setAllClassFilters (state, enabled) {
     state.classFilters.forEach((wowClass) => {
@@ -94,8 +91,8 @@ export const getters = {
   ** Result of the fuzzy-search
   ** Used internally by `searchResults` getter
   */
-  fuzzySearchResults (state) {
-    if (state.textQuery.length === 0) {
+  fuzzySearchResults (state, _, rootState) {
+    if (rootState.search.textQuery.length === 0) {
       return state.list
     }
 
@@ -106,7 +103,7 @@ export const getters = {
       fuse.setCollection(state.list)
     }
 
-    return fuse.search(state.textQuery).map(result => result.item)
+    return fuse.search(rootState.search.textQuery).map(result => result.item)
   },
   /*
   ** Final search results displayed by the UI
@@ -125,7 +122,9 @@ export const getters = {
         // Filter out guilds that don't have a contact URL
         if (guild.contactUrl.length === 0) { return false }
         // Filter out guilds that are not updated
-        if (state.removeOutdatedGuilds && guild.updatedAt === undefined) { return false }
+        if (state.removeOutdatedGuilds &&
+          (guild.updatedAt === undefined || DateTime.fromJSDate(guild.updatedAt).diffNow('days').days < -30)
+        ) { return false }
 
         // Map-flatten array of class.specs[] to specIds[]
         const guildOpenSpecs = guild.recruitment

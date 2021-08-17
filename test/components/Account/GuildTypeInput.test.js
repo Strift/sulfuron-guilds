@@ -3,7 +3,7 @@ import { mount, createLocalVue } from '@vue/test-utils'
 import Vuex from 'vuex'
 import AccountGuildTypeInput from '~/components/Account/GuildTypeInput.vue'
 import BaseSelect from '~/components/Base/Select.vue'
-import guildFactory from '~/data/factories/GuildFactory.js'
+import guildFactory from '~/data/factories/guildFactory.js'
 
 const types = [
   {

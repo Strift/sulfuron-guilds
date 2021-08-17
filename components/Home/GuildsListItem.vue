@@ -56,8 +56,8 @@
 
 <script>
 import { DateTime } from 'luxon'
-import GuildLogo from './ui/GuildLogo.vue'
-import GuildRecruitment from './GuildRecruitment.vue'
+import GuildLogo from '../ui/GuildLogo.vue'
+import GuildRecruitment from '../GuildRecruitment.vue'
 import ClockIcon from '~/components/icons/solid/ClockIcon.vue'
 import CalendarIcon from '~/components/icons/solid/CalendarIcon.vue'
 import ArrowNarrowRightIcon from '~/components/icons/solid/ArrowNarrowRightIcon.vue'
@@ -76,7 +76,8 @@ export default {
     name: { type: String, required: true },
     type: { type: String, required: true },
     raidDays: { type: Array, required: true },
-    timeRange: { type: String, required: true },
+    startHour: { type: String, required: true },
+    endHour: { type: String, required: true },
     recruitment: { type: Array, required: true },
     logoUrl: { type: String, required: true },
     websiteUrl: { type: String, required: true },
@@ -94,14 +95,20 @@ export default {
     isHovered: false
   }),
   computed: {
+    timeRange () {
+      return this.startHour + ' – ' + this.endHour
+    },
     readableDays () {
-      return this.raidDays.map(day => day.slice(0, 3)).join(', ')
+      return this.raidDays
+        .filter(({ playing }) => playing)
+        .map(({ day }) => day.slice(0, 3))
+        .join(', ')
     },
     relativeUpdatedDate () {
       const capitalize = str => str.charAt(0).toUpperCase() + str.slice(1)
       return capitalize(this.updatedAt
         ? DateTime.fromJSDate(this.updatedAt).toRelative({ locale: 'fr' })
-        : 'il y a un moment'
+        : 'il y a longtemps'
       )
     }
   }
