@@ -25,7 +25,9 @@
           </div>
           <ChevronDownIcon class="duration-150 transform transition-transform" :class="{ 'rotate-180': expandFilters }" />
         </button>
-        <ResetFiltersButton v-show="classFilters.length" class="hidden sm:inline-flex" />
+        <div class="hidden sm:inline-flex">
+          <ResetFiltersButton v-if="classFilters.length > 0" />
+        </div>
       </div>
       <SearchFilters class="hidden sm:block" />
       <SearchFilters v-show="expandFilters" class="sm:hidden" />
