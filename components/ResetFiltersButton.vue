@@ -1,18 +1,14 @@
 <template>
-  <SecondaryButton @click="resetClassFilters">
+  <BaseSecondaryButton @click="resetClassFilters">
     Réinitialiser les filtres
-  </SecondaryButton>
+  </BaseSecondaryButton>
 </template>
 
 <script>
 import { defineComponent } from '@nuxtjs/composition-api'
-import SecondaryButton from '~/components/ui/SecondaryButton.vue'
 import useGuildsStore from '~/composables/useGuildsStore'
 
 export default defineComponent({
-  components: {
-    SecondaryButton
-  },
   setup () {
     const { resetClassFilters } = useGuildsStore()
     return { resetClassFilters }

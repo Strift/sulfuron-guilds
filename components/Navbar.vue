@@ -1,70 +1,75 @@
 <template>
-  <header class="flex h-24 items-center">
-    <NuxtLink
-      to="/"
-      title="Accueil"
-      class="md:ml-0 md:mr-auto"
-    >
-      <nuxt-img src="/images/logo.png" alt="sulfuron.eu" class="h-8 md:h-10 mx-auto" />
-    </NuxtLink>
-    <nav>
-      <ul class="flex items-center list-none md:space-x-12 space-x-5">
-        <NavbarLink
-          v-show="showAccountButton && hasDraftGuild"
-          to="/compte/guilde/"
-          title="Votre page de guilde est activée !"
-        >
-          <BellIcon class="text-red-500" style="height: 24px; width: 24px" />
-        </NavbarLink>
-        <NavbarLink
-          v-show="showBackButton"
+  <header
+    class="bg-gray-900 bg-opacity-25 duration-150 mb-6 md:mb-16 shadow-lg transition-background"
+    :class="{'bg-opacity-75 bg-blur ': false}"
+  >
+    <BaseContainer>
+      <div class="flex h-24 items-center">
+        <NuxtLink
           to="/"
           title="Accueil"
-          class="hidden md:inline-flex"
+          class="md:ml-0 md:mr-auto"
         >
-          <span class="flex items-center space-x-2">
-            <ArrowLeftIcon />
-            <span>
-              Retour au portail
-            </span>
-          </span>
-        </NavbarLink>
-        <NavbarLink
-          v-show="showAdminButton && isAdmin"
-          to="/admin/guildes/"
-          title="Administration"
-        >
-          Admin
-        </NavbarLink>
-        <NavbarLink
-          v-show="showAccountButton"
-          :to="accountLinkUrl"
-          title="Mon compte"
-        >
-          <span class="bg-blue-900 bg-opacity-25 border border-blue-300 flex hover:bg-opacity-75 items-center justify-center px-4 py-2 rounded-full shadow-md space-x-2">
-            <UserIcon />
-            <span v-show="isGuest">Connexion</span>
-            <span v-show="isAuthenticated">
-              <span class="hidden lg:inline">Mon compte</span>
-              <span class="lg:hidden">Compte</span>
-            </span>
-          </span>
-        </NavbarLink>
-      </ul>
-    </nav>
+          <BaseLogo class="mx-auto" :navbar="true" />
+        </NuxtLink>
+        <nav>
+          <ul class="flex items-center list-none md:space-x-12 space-x-5">
+            <NavbarLink
+              v-show="showAccountButton && hasDraftGuild"
+              to="/compte/guilde/"
+              title="Votre page de guilde est activée !"
+            >
+              <BellIcon class="text-red-500" style="height: 24px; width: 24px" />
+            </NavbarLink>
+            <NavbarLink
+              v-show="showBackButton"
+              to="/"
+              title="Accueil"
+              class="hidden md:inline-flex"
+            >
+              <span class="flex items-center space-x-2">
+                <ArrowLeftIcon />
+                <span>
+                  Retour au portail
+                </span>
+              </span>
+            </NavbarLink>
+            <NavbarLink
+              v-show="showAdminButton && isAdmin"
+              to="/admin/guildes/"
+              title="Administration"
+            >
+              Admin
+            </NavbarLink>
+            <NavbarLink
+              v-show="showAccountButton"
+              :to="accountLinkUrl"
+              title="Mon compte"
+            >
+              <span class="bg-blue-900 bg-opacity-25 border border-blue-300 flex hover:bg-opacity-50 items-center justify-center px-4 py-2 rounded-full shadow-md space-x-2">
+                <UserIcon />
+                <span v-show="isGuest">Connexion</span>
+                <span v-show="isAuthenticated">
+                  <span class="hidden lg:inline">Mon compte</span>
+                  <span class="lg:hidden">Compte</span>
+                </span>
+              </span>
+            </NavbarLink>
+          </ul>
+        </nav>
+      </div>
+    </BaseContainer>
   </header>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
-import NavbarLink from '~/components/ui/NavbarLink.vue'
 import BellIcon from '~/components/icons/outline/BellIcon.vue'
 import UserIcon from '~/components/icons/solid/UserIcon.vue'
 import ArrowLeftIcon from '~/components/icons/solid/ArrowLeftIcon.vue'
 
 export default {
   components: {
-    NavbarLink,
     BellIcon,
     UserIcon,
     ArrowLeftIcon

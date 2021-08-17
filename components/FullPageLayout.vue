@@ -19,12 +19,10 @@
         }"
         class="bg-gray-900 flex flex-1 flex-col max-h-screen relative"
       >
-        <div class="container flex-1 font-sans mx-auto px-5 xl:px-0">
-          <Navbar
-            class="mb-6 md:mb-16"
-          />
+        <Navbar class="mb-6 md:mb-16" />
+        <BaseContainer class="flex-1">
           <slot name="default" />
-        </div>
+        </BaseContainer>
         <div class="flex-none h-12 lg:h-24 lg:mt-12 mt-6" style="background-image: linear-gradient(180deg, rgba(26,32,44,0), rgb(26,32,44))" />
         <Footer />
       </div>
@@ -35,8 +33,9 @@
       :name="openGuild.name"
       :type="openGuild.type"
       :description="openGuild.description"
-      :raid-days="openGuildRaidDays"
-      :time-range="openGuildTimeRange"
+      :raid-days="openGuild.raidDays"
+      :start-hour="openGuild.startHour"
+      :end-hour="openGuild.endHour"
       :recruitment="openGuild.recruitment"
       :logo-url="openGuild.logoUrl"
       :website-url="openGuild.websiteUrl"

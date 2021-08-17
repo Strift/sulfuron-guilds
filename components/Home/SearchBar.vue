@@ -5,9 +5,8 @@
       name="search"
       type="text"
       placeholder="Rechercher une guilde"
-      :value="value"
       class="bg-blue-900 bg-opacity-25 block border border-gray-700 focus:border-blue-300 focus:border-opacity-75 focus:shadow focus:text-gray-400 h-10 outline-none pl-10 placeholder-gray-700 pr-3 rounded shadow-sm text-gray-500 w-full"
-      @input="$emit('input', $event.target.value)"
+      @input="setTextQuery($event.target.value)"
     >
     <SearchIcon class="absolute bottom-0 inline left-0 ml-3 my-auto text-gray-700 top-0" />
   </div>
@@ -15,15 +14,16 @@
 
 <script>
 import SearchIcon from '~/components/icons/solid/SearchIcon.vue'
+import useSearchStore from '~/composables/useSearchStore'
 
 export default {
   components: {
     SearchIcon
   },
-  props: {
-    value: {
-      type: String,
-      default: ''
+  setup () {
+    const { setTextQuery } = useSearchStore()
+    return {
+      setTextQuery
     }
   }
 }
