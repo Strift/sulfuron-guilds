@@ -39,6 +39,7 @@
     "luxon": "^1.28.0",
     "nuxt": "^2.14.0",
     "nuxt-lazy-load": "^1.2.6",
+    "url-slug": "^3.0.2",
     "v-click-outside": "^3.1.2",
     "vue-cookies": "^1.7.4",
     "vue2-animate": "^2.1.4",

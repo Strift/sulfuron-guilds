@@ -38,12 +38,14 @@
 
 <script>
 import { ref, computed, defineComponent, useStore } from '@nuxtjs/composition-api'
+import useCreateGuild from '~/composables/admin/useCreateGuild'
 import useUsers, {
   STATE_EMPTY as USERS_STATE_EMPTY,
   STATE_LOADING as USERS_STATE_LOADING,
   STATE_LOADED as USERS_STATE_LOADED
 } from '~/composables/admin/useUsers'
-import useCreateGuild from '~/composables/admin/useCreateGuild'
+
+import useGuilds from '~/composables/database/useGuilds'
 
 export default defineComponent({
   layout: 'admin',
@@ -54,7 +56,7 @@ export default defineComponent({
 
     const store = useStore()
     const { users, state: usersState, fetchUsers } = useUsers()
-    const createGuild = useCreateGuild()
+    const { createGuild } = useCreateGuild()
 
     const usersOptions = computed(() => users.value.map(userId => ({ label: userId, value: userId })))
     const usersPlaceholder = computed(() => {
