@@ -15,13 +15,7 @@
         label="Nom de la guilde"
         name="guild-name"
       />
-      <BaseSelect
-        v-model="account"
-        :options="usersOptions"
-        label="Compte Battle.net du GM"
-        :placeholder="usersPlaceholder"
-        name="bnet-account"
-      />
+      <AdminUserInput v-model="account" />
     </div>
     <BasePrimaryButton @click="createGuild(account, guild)">
       Valider
@@ -33,19 +27,16 @@
       :advanced-mode="true"
       @remove="removeGuild"
     />
+    <BaseLoader
+      v-else
+      class="mx-auto"
+    />
   </div>
 </template>
 
 <script>
 import { ref, computed, defineComponent, useStore } from '@nuxtjs/composition-api'
 import useCreateGuild from '~/composables/admin/useCreateGuild'
-import useUsers, {
-  STATE_EMPTY as USERS_STATE_EMPTY,
-  STATE_LOADING as USERS_STATE_LOADING,
-  STATE_LOADED as USERS_STATE_LOADED
-} from '~/composables/admin/useUsers'
-
-import useGuilds from '~/composables/database/useGuilds'
 
 export default defineComponent({
   layout: 'admin',
@@ -55,16 +46,7 @@ export default defineComponent({
     const account = ref('')
 
     const store = useStore()
-    const { users, state: usersState, fetchUsers } = useUsers()
     const { createGuild } = useCreateGuild()
-
-    const usersOptions = computed(() => users.value.map(userId => ({ label: userId, value: userId })))
-    const usersPlaceholder = computed(() => {
-      if (usersState.value === USERS_STATE_EMPTY) { return 'Cliquez pour charger...' }
-      if (usersState.value === USERS_STATE_LOADING) { return 'Chargement...' }
-      if (usersState.value === USERS_STATE_LOADED) { return 'Sélectionnez le compte' }
-      return 'Erreur'
-    })
     const draftGuilds = computed(() => store.getters['admin/draftGuilds'])
 
     const removeGuild = (guild) => {
@@ -74,15 +56,10 @@ export default defineComponent({
         store.dispatch('admin/fetchGuilds')
       }
     }
-
-    fetchUsers()
     return {
       guild,
       account,
-      usersOptions,
-      usersPlaceholder,
       draftGuilds,
-      fetchUsers,
       createGuild,
       removeGuild
     }

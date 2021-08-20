@@ -6,18 +6,16 @@ export default function useGuilds () {
   const store = useStore()
 
   const create = async (guild) => {
-    try {
-      await firestore.collection('guilds').add(guild)
-    } catch (err) {
-      // TODO: handle error
-    }
+    await firestore.collection('guilds').add(guild)
   }
 
   const fetch = () => {
     store.dispatch('admin/fetchGuilds')
   }
 
-  const list = computed(() => store.state.guilds.list)
+  const list = computed(() => {
+    return store.getters['admin/allGuilds']
+  })
 
   return {
     create,

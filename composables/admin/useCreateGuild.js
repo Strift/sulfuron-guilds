@@ -4,10 +4,10 @@ import useGuilds from '~/composables/database/useGuilds'
 
 const DAYS_OF_THE_WEEK = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche']
 
-const newGuild = (ownerUid, name) => ({
+const newGuild = (ownerUid, name, slug) => ({
   ownerUid,
   name,
-  slug: guildSlug(name),
+  slug,
   published: false,
   type: '',
   logoUrl: '',
@@ -26,10 +26,15 @@ const newGuild = (ownerUid, name) => ({
 })
 
 export default function useCreateGuild () {
-  const { create, fetch } = useGuilds()
+  const { create, fetch, list } = useGuilds()
 
   const createGuild = async (ownerUid, name) => {
-    const guild = newGuild(ownerUid, name)
+    const slug = guildSlug(name)
+    if (list.value.some(guild => guild.slug === slug)) {
+      alert(`Impossible de créer la guilde <${name}> car l'URL '${slug}' est déjà utilisé.`)
+      return
+    }
+    const guild = newGuild(ownerUid, name, slug)
     await create(guild)
     fetch()
   }

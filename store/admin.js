@@ -11,6 +11,9 @@ export const mutations = {
 }
 
 export const getters = {
+  allGuilds (state) {
+    return state.guilds
+  },
   draftGuilds (state) {
     return state.guilds.filter(guild => guild.published === false)
   },
