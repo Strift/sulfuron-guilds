@@ -74,11 +74,12 @@ export default {
   },
   computed: {
     searchResults () {
-      const search = this.search.toLowerCase()
-      return sortBy(
-        this.guilds.filter(({ name, ownerUid }) => name.toLowerCase().includes(search) || ownerUid.toLowerCase().includes(search)),
-        [guild => guild.name.toLowerCase()]
-      )
+      const text = this.search.toLowerCase()
+      const matchingGuilds = this.guilds.filter((guild) => {
+        return guild.name.toLowerCase().includes(text) || guild.ownerUid?.toLowerCase().includes(text)
+      })
+
+      return sortBy(matchingGuilds, [guild => guild.name.toLowerCase()])
     }
   },
   methods: {

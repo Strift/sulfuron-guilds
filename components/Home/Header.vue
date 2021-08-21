@@ -9,7 +9,7 @@
         En savoir plus.
       </NuxtLink>
     </p>
-    <!-- <HomeBanner>
+    <HomeBanner>
       <template slot="tag">
         Nouveauté
       </template>
@@ -33,7 +33,7 @@
           </span>
         </NuxtLink>
       </div>
-    </HomeBanner> -->
+    </HomeBanner>
   </div>
 </template>
 

@@ -37,7 +37,6 @@ export default function useGuilds () {
 
   const deleteById = (id, { hardDelete = false } = {}) => {
     const docRef = firestore.collection('guilds').withConverter(guildConverter).doc(id)
-
     if (hardDelete) {
       return docRef.delete()
     } else {
