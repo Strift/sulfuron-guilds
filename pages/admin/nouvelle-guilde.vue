@@ -11,57 +11,77 @@
     </BaseInformationCard>
     <div class="max-w-sm space-y-10">
       <BaseInput
-        v-model="guild"
+        v-model="guildName"
         label="Nom de la guilde"
         name="guild-name"
       />
-      <AdminUserInput v-model="account" />
+      <AdminUserInput v-model="ownerUid" />
     </div>
-    <BasePrimaryButton @click="createGuild(account, guild)">
+    <BasePrimaryButton @click="onGuildCreate">
       Valider
     </BasePrimaryButton>
     <BaseHeader2>Guildes non publiées</BaseHeader2>
-    <AdminGuildList
-      v-if="draftGuilds.length"
-      :guilds="draftGuilds"
-      :advanced-mode="true"
-      @remove="removeGuild"
-    />
-    <BaseLoader
-      v-else
-      class="mx-auto"
-    />
+    <Promised :promise="draftGuilds">
+      <template v-slot="data">
+        <AdminGuildList
+          :guilds="data"
+          :advanced-mode="true"
+          @remove="onGuildRemove"
+        />
+      </template>
+      <template v-slot:pending>
+        <BaseLoader class="mx-auto" />
+      </template>
+    </Promised>
   </div>
 </template>
 
 <script>
-import { ref, computed, defineComponent, useStore } from '@nuxtjs/composition-api'
+import { ref, defineComponent, computed } from '@nuxtjs/composition-api'
+import { Promised } from 'vue-promised'
 import useCreateGuild from '~/composables/admin/useCreateGuild'
+import useGuilds from '~/composables/database/useGuilds'
 
 export default defineComponent({
   layout: 'admin',
   middleware: ['auth', 'admin'],
+  components: {
+    Promised
+  },
   setup () {
-    const guild = ref('')
-    const account = ref('')
+    const { name: guildName, ownerUid, createGuild } = useCreateGuild()
+    const { list, deleteById } = useGuilds()
 
-    const store = useStore()
-    const { createGuild } = useCreateGuild()
-    const draftGuilds = computed(() => store.getters['admin/draftGuilds'])
+    const guilds = ref([])
+    const draftGuilds = computed(() => {
+      return guilds.value.then(guilds => guilds.filter(guild => guild.published === false))
+    })
 
-    const removeGuild = (guild) => {
+    const fetchGuilds = () => {
+      guilds.value = list({ published: false })
+    }
+
+    const onGuildRemove = (guild) => {
       const confirmed = confirm(`Voulez-vous supprimer ${guild.name} ?`)
       if (confirmed) {
-        store.dispatch('admin/hardDeleteGuildById', guild.id)
-        store.dispatch('admin/fetchGuilds')
+        deleteById(guild.id, { hardDelete: true })
+        fetchGuilds()
       }
     }
+    const onGuildCreate = async () => {
+      const guildId = await createGuild()
+      if (guildId) {
+        fetchGuilds()
+      }
+    }
+
+    fetchGuilds()
     return {
-      guild,
-      account,
+      guildName,
+      ownerUid,
       draftGuilds,
-      createGuild,
-      removeGuild
+      onGuildCreate,
+      onGuildRemove
     }
   },
   head () {

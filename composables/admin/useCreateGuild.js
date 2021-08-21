@@ -1,10 +1,11 @@
+import { computed, ref } from '@nuxtjs/composition-api'
 import WOW_CLASSES from '~/data/classes.json'
 import guildSlug from '~/data/utils/guildSlug'
 import useGuilds from '~/composables/database/useGuilds'
 
 const DAYS_OF_THE_WEEK = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche']
 
-const newGuild = (ownerUid, name, slug) => ({
+const guildData = (ownerUid, name, slug) => ({
   ownerUid,
   name,
   slug,
@@ -26,20 +27,25 @@ const newGuild = (ownerUid, name, slug) => ({
 })
 
 export default function useCreateGuild () {
-  const { create, fetch, list } = useGuilds()
+  const { create, findBySlug } = useGuilds()
+  const name = ref('')
+  const ownerUid = ref('')
+  const slug = computed(() => guildSlug(name.value))
 
-  const createGuild = async (ownerUid, name) => {
-    const slug = guildSlug(name)
-    if (list.value.some(guild => guild.slug === slug)) {
-      alert(`Impossible de créer la guilde <${name}> car l'URL '${slug}' est déjà utilisé.`)
-      return
+  const createGuild = async () => {
+    const guildWithSameSlug = await findBySlug(slug.value)
+    if (guildWithSameSlug) {
+      alert(`Impossible de créer la guilde <${name.value}> car l'URL '${slug.value}' est déjà utilisée par <${guildWithSameSlug.name}.`)
+      return null
     }
-    const guild = newGuild(ownerUid, name, slug)
-    await create(guild)
-    fetch()
+    const guild = guildData(ownerUid.value, name.value, slug.value)
+    const guildRef = await create(guild)
+    return guildRef.id
   }
 
   return {
+    name,
+    ownerUid,
     createGuild
   }
 }
