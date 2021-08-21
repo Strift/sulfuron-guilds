@@ -12,8 +12,8 @@
         >
           <BaseLogo class="mx-auto" :navbar="true" />
         </NuxtLink>
-        <nav>
-          <ul class="flex items-center list-none md:space-x-12 space-x-5">
+        <nav class="w-full">
+          <ul class="flex items-center justify-end list-none md:space-x-12 space-x-5">
             <NavbarLink
               v-show="showAccountButton && hasDraftGuild"
               to="/compte/guilde/"
@@ -25,7 +25,6 @@
               v-show="showBackButton"
               to="/"
               title="Accueil"
-              class="hidden md:inline-flex"
             >
               <span class="flex items-center space-x-2">
                 <ArrowLeftIcon />
