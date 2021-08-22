@@ -24,13 +24,30 @@ export default function useSearchStore () {
     if (sorting.value === SortingType.ALPHABETICAL) {
       return sortBy(results.value, [guild => guild.name.toLowerCase()])
     }
-    return orderBy(results.value, [guild => guild.updatedAt], ['desc'])
+    return orderBy(results.value, [
+      (guild) => {
+        if (guild.updatedAt) {
+          return guild.updatedAt
+        }
+        return new Date(2021, 1, 1)
+      },
+      guild => guild.name.toLowerCase()
+    ],
+    ['desc'])
   })
+
+  const removeOutdatedGuilds = computed(() => store.state.search.removeOutdatedGuilds)
+
+  const setRemoveOutdatedGuilds = (removeOutdatedGuilds) => {
+    store.commit('search/setRemoveOutdatedGuilds', removeOutdatedGuilds)
+  }
 
   return {
     sorting,
     setSorting,
     setTextQuery,
-    orderedResults
+    orderedResults,
+    removeOutdatedGuilds,
+    setRemoveOutdatedGuilds
   }
 }

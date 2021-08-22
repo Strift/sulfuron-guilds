@@ -1,6 +1,7 @@
 <template>
   <div>
     <HomeHeader class="mb-20" />
+
     <div class="border-gray-700 mb-6 sm:border-b sm:flex sm:justify-between sm:pb-6 sm:space-y-0 space-y-6">
       <div class="border-b border-gray-700 pb-6 sm:border-0 sm:p-0">
         <HomeFactionButton class="text-gray-200" />
@@ -40,22 +41,19 @@
       </div>
     </div>
 
-    <div>
-      <div class="mb-10 sm:flex sm:justify-between sm:space-y-0 space-y-3">
-        <HomeSorting />
-        <div>
-          <label class="hover:text-blue-300 text-gray-600">
-            <input v-model="removeOutdatedGuilds" type="checkbox" name="removeOutdatedGuilds">
-            <span class="ml-2">Afficher uniquement les guildes à jour.</span>
-          </label>
-        </div>
+    <div class="mb-10 sm:flex sm:justify-between sm:space-y-0 space-y-3">
+      <HomeSorting />
+      <div>
+        <label class="hover:text-blue-300 text-gray-600">
+          <input v-model="removeOutdatedResults" type="checkbox" name="removeOutdatedGuilds">
+          <span class="ml-2">Afficher uniquement les guildes à jour.</span>
+        </label>
       </div>
-      <HomeGuildsList />
     </div>
 
-    <div class="mt-12 text-center text-gray-500">
-      {{ orderedSearchResults.length }} {{ resultsText }} trouvées.
-    </div>
+    <HomeGuildsList />
+
+    <HomeSearchSummary class="mt-12" />
 
     <div v-show="isGuest" class="mt-20 space-y-10">
       <p class="text-center text-gray-300 text-lg">
@@ -74,15 +72,15 @@
 </template>
 
 <script>
-import sortBy from 'lodash/sortBy'
 import { mapGetters } from 'vuex'
 
-import { ref } from '@nuxtjs/composition-api'
+import { computed, ref } from '@nuxtjs/composition-api'
 import FilterIcon from '~/components/icons/solid/FilterIcon.vue'
 import SearchFilters from '~/components/SearchFilters.vue'
 import ActiveClassFiltersList from '~/components/ActiveClassFiltersList.vue'
 import ResetFiltersButton from '~/components/ResetFiltersButton.vue'
 import ChevronDownIcon from '~/components/icons/solid/ChevronDownIcon.vue'
+import useSearchStore from '~/composables/useSearchStore'
 
 export default {
   name: 'Index',
@@ -94,38 +92,27 @@ export default {
     ChevronDownIcon
   },
   setup () {
+    const { removeOutdatedGuilds, setRemoveOutdatedGuilds } = useSearchStore()
+
     const expandFilters = ref(false)
+    const removeOutdatedResults = computed({
+      get: () => removeOutdatedGuilds.value,
+      set: value => setRemoveOutdatedGuilds(value)
+    })
 
     return {
-      expandFilters
+      expandFilters,
+      removeOutdatedResults
     }
   },
   computed: {
     ...mapGetters('guilds', {
-      searchResults: 'searchResults',
       classFilters: 'classFilters'
     }),
     ...mapGetters('account', [
       'isGuest',
       'isAuthenticated'
-    ]),
-    removeOutdatedGuilds: {
-      get () {
-        return this.$store.state.search.removeOutdatedGuilds
-      },
-      set (value) {
-        this.$store.commit('search/setRemoveOutdatedGuilds', value)
-      }
-    },
-    orderedSearchResults () {
-      return sortBy(this.searchResults, [guild => guild.name.toLowerCase()])
-    },
-    resultsText () {
-      return this.searchResults.length > 1 ? 'guildes' : 'guilde'
-    },
-    sortingText () {
-      return 'ordre alphabétique'
-    }
+    ])
   },
   created () {
     this.$store.commit('guilds/initializeClassFilters')
@@ -137,14 +124,6 @@ export default {
   },
   async beforeDestroy () {
     await this.$store.dispatch('guilds/disableSync')
-  },
-  methods: {
-    timeRange ({ startHour, endHour }) {
-      return startHour + ' – ' + endHour
-    },
-    removeClassFilter (classValue, specValue) {
-      this.$store.commit('guilds/removeClassFilter', { classValue, specValue })
-    }
   },
   head () {
     return {
