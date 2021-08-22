@@ -5,7 +5,6 @@ export default function useGuilds () {
   const firestore = useFirestore()
 
   const create = (guild) => {
-    console.log('Creating', guild)
     return firestore.collection('guilds').add(guild)
   }
 

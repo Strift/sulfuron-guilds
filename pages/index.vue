@@ -27,17 +27,17 @@
           <ChevronDownIcon class="duration-150 transform transition-transform" :class="{ 'rotate-180': expandFilters }" />
         </button>
         <div class="hidden sm:inline-flex">
-          <ResetFiltersButton v-if="classFilters.length > 0" />
+          <HomeSearchFiltersResetButton v-if="classFilters.length > 0" />
         </div>
       </div>
-      <SearchFilters class="hidden sm:block" />
-      <SearchFilters v-show="expandFilters" class="sm:hidden" />
+      <HomeSearchFilters class="hidden sm:block" />
+      <HomeSearchFilters v-show="expandFilters" class="sm:hidden" />
 
       <div v-show="classFilters.length && !expandFilters" class="mt-6 sm:hidden">
         <div class="font-semibold mb-3 text-gray-600">
           Filtres actifs
         </div>
-        <ActiveClassFiltersList />
+        <HomeSearchActiveFilters />
       </div>
     </div>
 
@@ -73,26 +73,22 @@
 
 <script>
 import { mapGetters } from 'vuex'
-
 import { computed, ref } from '@nuxtjs/composition-api'
-import FilterIcon from '~/components/icons/solid/FilterIcon.vue'
-import SearchFilters from '~/components/SearchFilters.vue'
-import ActiveClassFiltersList from '~/components/ActiveClassFiltersList.vue'
-import ResetFiltersButton from '~/components/ResetFiltersButton.vue'
-import ChevronDownIcon from '~/components/icons/solid/ChevronDownIcon.vue'
 import useSearchStore from '~/composables/useSearchStore'
+import useAccountStore from '~/composables/useAccountStore'
+
+import FilterIcon from '~/components/icons/solid/FilterIcon.vue'
+import ChevronDownIcon from '~/components/icons/solid/ChevronDownIcon.vue'
 
 export default {
   name: 'Index',
   components: {
     FilterIcon,
-    SearchFilters,
-    ActiveClassFiltersList,
-    ResetFiltersButton,
     ChevronDownIcon
   },
   setup () {
     const { removeOutdatedGuilds, setRemoveOutdatedGuilds } = useSearchStore()
+    const { isGuest, isAuthenticated } = useAccountStore()
 
     const expandFilters = ref(false)
     const removeOutdatedResults = computed({
@@ -102,17 +98,15 @@ export default {
 
     return {
       expandFilters,
-      removeOutdatedResults
+      removeOutdatedResults,
+      isGuest,
+      isAuthenticated
     }
   },
   computed: {
     ...mapGetters('guilds', {
       classFilters: 'classFilters'
-    }),
-    ...mapGetters('account', [
-      'isGuest',
-      'isAuthenticated'
-    ])
+    })
   },
   created () {
     this.$store.commit('guilds/initializeClassFilters')
