@@ -77,6 +77,7 @@
 import sortBy from 'lodash/sortBy'
 import { mapGetters } from 'vuex'
 
+import { ref } from '@nuxtjs/composition-api'
 import FilterIcon from '~/components/icons/solid/FilterIcon.vue'
 import SearchFilters from '~/components/SearchFilters.vue'
 import ActiveClassFiltersList from '~/components/ActiveClassFiltersList.vue'
@@ -92,10 +93,13 @@ export default {
     ResetFiltersButton,
     ChevronDownIcon
   },
-  data: () => ({
-    showFiltersCard: false,
-    expandFilters: false
-  }),
+  setup () {
+    const expandFilters = ref(false)
+
+    return {
+      expandFilters
+    }
+  },
   computed: {
     ...mapGetters('guilds', {
       searchResults: 'searchResults',
@@ -107,10 +111,10 @@ export default {
     ]),
     removeOutdatedGuilds: {
       get () {
-        return this.$store.state.guilds.removeOutdatedGuilds
+        return this.$store.state.search.removeOutdatedGuilds
       },
       set (value) {
-        this.$store.commit('guilds/setRemoveOutdatedGuilds', value)
+        this.$store.commit('search/setRemoveOutdatedGuilds', value)
       }
     },
     orderedSearchResults () {

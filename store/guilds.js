@@ -19,8 +19,7 @@ let fuse = null
 
 export const state = () => ({
   list: [],
-  classFilters: [],
-  removeOutdatedGuilds: true
+  classFilters: []
 })
 
 export const mutations = {
@@ -52,9 +51,6 @@ export const mutations = {
     const specIndex = state.classFilters[classIndex].specs.findIndex(({ value }) => value === specValue)
 
     state.classFilters[classIndex].specs[specIndex].checked = false
-  },
-  setRemoveOutdatedGuilds (state, removeOutdatedGuilds) {
-    state.removeOutdatedGuilds = removeOutdatedGuilds
   }
 }
 
@@ -122,7 +118,7 @@ export const getters = {
         // Filter out guilds that don't have a contact URL
         if (guild.contactUrl.length === 0) { return false }
         // Filter out guilds that are not updated
-        if (state.removeOutdatedGuilds &&
+        if (rootState.search.removeOutdatedGuilds &&
           (guild.updatedAt === undefined || DateTime.fromJSDate(guild.updatedAt).diffNow('days').days < -30)
         ) { return false }
 
