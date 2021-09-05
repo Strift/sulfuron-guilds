@@ -1,6 +1,6 @@
 <template>
   <header
-    class="bg-gray-900 bg-opacity-25 duration-150 mb-6 md:mb-16 shadow-lg transition-background"
+    class="bg-gray-900 bg-opacity-25 duration-150 mb-12 md:mb-16 shadow-lg transition-background"
     :class="{'bg-opacity-75 bg-blur ': false}"
   >
     <BaseContainer>
@@ -21,19 +21,10 @@
             >
               <BellIcon class="text-red-500" style="height: 24px; width: 24px" />
             </NavbarLink>
-            <NavbarLink
+            <BackButton
               v-show="showBackButton"
-              to="/"
-              title="Accueil"
               class="hidden md:inline-flex"
-            >
-              <span class="flex items-center space-x-2">
-                <ArrowLeftIcon />
-                <span>
-                  Retour au portail
-                </span>
-              </span>
-            </NavbarLink>
+            />
             <NavbarLink
               v-show="showAdminButton && isAdmin"
               to="/admin/guildes/"
@@ -66,13 +57,11 @@
 import { mapGetters } from 'vuex'
 import BellIcon from '~/components/icons/outline/BellIcon.vue'
 import UserIcon from '~/components/icons/solid/UserIcon.vue'
-import ArrowLeftIcon from '~/components/icons/solid/ArrowLeftIcon.vue'
 
 export default {
   components: {
     BellIcon,
-    UserIcon,
-    ArrowLeftIcon
+    UserIcon
   },
   computed: {
     ...mapGetters('account', [

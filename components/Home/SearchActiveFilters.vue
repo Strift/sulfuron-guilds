@@ -26,7 +26,7 @@
 <script>
 import { defineComponent } from '@nuxtjs/composition-api'
 import ActiveFilter from '~/components/ui/ActiveFilter.vue'
-import SpecializationIcon from '~/components/ui/SpecializationIcon.vue'
+import SpecializationIcon from '~/components/SpecializationIcon.vue'
 import useGuildsStore from '~/composables/useGuildsStore'
 import specializationSlug from '~/data/utils/specializationSlug'
 

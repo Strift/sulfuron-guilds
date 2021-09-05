@@ -1,5 +1,5 @@
 <template>
-  <div class="lg:flex lg:space-x-8 xl:space-x-20">
+  <BaseContainer class="lg:flex lg:space-x-8 xl:space-x-20">
     <nuxt-img
       src="/images/iphone-mockup.png"
       alt="Site sur mobile"
@@ -55,7 +55,7 @@
         </NuxtLink>
       </div>
     </div>
-  </div>
+  </BaseContainer>
 </template>
 
 <script>
@@ -63,6 +63,7 @@ import { mapGetters } from 'vuex'
 import FeatureSection from '~/components/ui/FeatureSection.vue'
 
 export default {
+  layout: 'default',
   components: {
     FeatureSection
   },

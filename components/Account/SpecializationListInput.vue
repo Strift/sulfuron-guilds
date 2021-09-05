@@ -19,21 +19,9 @@
 
 <script>
 import cloneDeep from 'lodash/cloneDeep'
-
 import ClassIcon from '~/components/ui/ClassIcon.vue'
-
-import WOW_CLASSES from '~/data/classes.json'
-
-const className = (classValue) => {
-  const { name } = WOW_CLASSES.find(wowClass => wowClass.value === classValue)
-  return name
-}
-
-const specName = (classValue, specValue) => {
-  const wowClass = WOW_CLASSES.find(wowClass => wowClass.value === classValue)
-  const { name } = wowClass.specs.find(spec => spec.value === specValue)
-  return name
-}
+import getClassName from '~/data/utils/getClassName'
+import getSpecName from '~/data/utils/getSpecName'
 
 export default {
   components: {
@@ -57,7 +45,7 @@ export default {
               checked: spec.checked,
               classValue: wowClass.class,
               specValue: spec.value,
-              specName: specName(wowClass.class, spec.value)
+              specName: getSpecName(wowClass.class, spec.value)
             })
           })
         } else {
@@ -65,7 +53,7 @@ export default {
             id: wowClass.class,
             checked: false,
             classValue: wowClass.class,
-            className: className(wowClass.class)
+            className: getClassName(wowClass.class)
           })
         }
       })

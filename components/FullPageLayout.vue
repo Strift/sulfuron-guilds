@@ -20,9 +20,9 @@
         class="bg-gray-900 flex flex-1 flex-col max-h-screen relative"
       >
         <Navbar class="mb-6 md:mb-16" />
-        <BaseContainer class="flex-1">
+        <div class="flex-1">
           <slot name="default" />
-        </BaseContainer>
+        </div>
         <div class="flex-none h-12 lg:h-24 lg:mt-12 mt-6" style="background-image: linear-gradient(180deg, rgba(26,32,44,0), rgb(26,32,44))" />
         <Footer />
       </div>

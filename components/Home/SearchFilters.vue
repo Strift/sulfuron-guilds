@@ -42,7 +42,7 @@
 
 <script>
 import { defineComponent } from '@nuxtjs/composition-api'
-import SpecializationIcon from '~/components/ui/SpecializationIcon.vue'
+import SpecializationIcon from '~/components/SpecializationIcon.vue'
 import useGuildsStore from '~/composables/useGuildsStore'
 import specializationSlug from '~/data/utils/specializationSlug'
 import getClassTextColorClass from '~/data/utils/getClassTextColorClass'

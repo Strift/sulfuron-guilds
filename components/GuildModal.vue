@@ -74,7 +74,7 @@
 
 <script>
 import vClickOutside from 'v-click-outside'
-import GuildLogo from '~/components/ui/GuildLogo.vue'
+import GuildLogo from '~/components/Guild/Logo.vue'
 import ClockIcon from '~/components/icons/solid/ClockIcon.vue'
 import GlobeIcon from '~/components/icons/solid/GlobeIcon.vue'
 import CalendarIcon from '~/components/icons/solid/CalendarIcon.vue'

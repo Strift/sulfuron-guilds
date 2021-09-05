@@ -56,7 +56,7 @@
 
 <script>
 import { DateTime } from 'luxon'
-import GuildLogo from '../ui/GuildLogo.vue'
+import GuildLogo from '../Guild/Logo.vue'
 import GuildRecruitment from '../GuildRecruitment.vue'
 import ClockIcon from '~/components/icons/solid/ClockIcon.vue'
 import CalendarIcon from '~/components/icons/solid/CalendarIcon.vue'

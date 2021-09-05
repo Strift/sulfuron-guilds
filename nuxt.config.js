@@ -146,6 +146,9 @@ export default {
     },
     services: {
       auth: {
+        emulatorPort: (process.env.NODE_ENV === 'development' && process.env.FIREBASE_EMULATOR_AUTH === 'true')
+          ? 8080
+          : undefined,
         initialize: {
           onAuthStateChangedAction: 'account/onFirebaseAuthStateChanged'
         }

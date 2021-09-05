@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <BaseContainer>
     <HomeHeader class="mb-20" />
 
     <div class="border-gray-700 mb-6 sm:border-b sm:flex sm:justify-between sm:pb-6 sm:space-y-0 space-y-6">
@@ -68,7 +68,7 @@
         Votre guilde n'y est pas ? Contactez un modérateur du Discord pour créer celle-ci.
       </p>
     </div>
-  </div>
+  </BaseContainer>
 </template>
 
 <script>
@@ -82,6 +82,7 @@ import ChevronDownIcon from '~/components/icons/solid/ChevronDownIcon.vue'
 
 export default {
   name: 'Index',
+  layout: 'default',
   components: {
     FilterIcon,
     ChevronDownIcon
