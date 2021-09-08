@@ -1,23 +1,25 @@
 <template>
-  <div class="max-w-screen-md mx-auto px-5 relative space-y-12 text-gray-500 xl:px-0">
-    <NuxtLink
-      to="/"
-      title="Accueil"
-      class="hover:text-blue-400 space-x-2 text-blue-300 text-lg text-shadow-sm"
-    >
-      <span class="flex items-center space-x-2">
-        <ArrowLeftIcon />
-        <span>
-          Retour au portail
+  <div class="relative max-w-screen-md px-5 mx-auto text-gray-500 xl:px-0">
+    <div class="mb-10">
+      <NuxtLink
+        to="/"
+        title="Accueil"
+        class="space-x-2 text-lg text-blue-300 hover:text-blue-400 text-shadow-sm"
+      >
+        <span class="flex items-center space-x-2">
+          <ArrowLeftIcon />
+          <span>
+            Retour au portail
+          </span>
         </span>
-      </span>
-    </NuxtLink>
-    <div class="justify-end sm:flex sm:flex-row-reverse">
-      <div class="mb-8 sm:ml-12 sm:mr-0 sm:my-auto text-center">
+      </NuxtLink>
+    </div>
+    <div class="justify-end mb-10 sm:flex sm:flex-row-reverse">
+      <div class="mb-8 text-center sm:ml-12 sm:mr-0 sm:my-auto sm:text-left">
         <h1 class="mb-2 text-4xl text-blue-100">
           {{ guild.name }}
         </h1>
-        <div class="text-blue-300  tracking-wider  uppercase">
+        <div class="tracking-wider text-blue-300 uppercase">
           Guilde {{ guild.type }}
         </div>
       </div>
@@ -25,32 +27,35 @@
       <GuildLogo
         :alt="`Logo ${guild.name}`"
         :url="guild.logoUrl"
-        class="bg-gray-900 flex-shrink-0 h-40 mx-auto overflow-hidden p-4 rounded shadow sm:mx-0 w-40"
+        class="flex-shrink-0 w-40 h-40 p-4 mx-auto overflow-hidden bg-gray-900 rounded shadow sm:mx-0"
       />
-    </div>
-    <GuildHeader2 class="mb-4">
-      Disponibilités
-    </GuildHeader2>
-    <div class="mb-10">
-      <div class="flex items-center mb-3 space-x-2">
-        <CalendarIcon class="text-gray-600" />
-        <p>{{ readableDays }}</p>
-      </div>
-      <div class="flex items-center mb-3 space-x-2">
-        <ClockIcon class="text-gray-600" />
-        <div>{{ timeRange }}</div>
-      </div>
     </div>
     <GuildHeader2 class="mb-4">
       Présentation
     </GuildHeader2>
-    <p class="leading-7 mb-10">
+    <p class="mb-6 leading-7">
       {{ guild.description }}
     </p>
+    <div class="mb-10">
+      <div class="flex items-center mb-3 space-x-3">
+        <CalendarIcon class="text-gray-600" />
+        <p>{{ readableDays }}</p>
+      </div>
+      <div class="flex items-center mb-3 space-x-3">
+        <ClockIcon class="text-gray-600" />
+        <div>{{ timeRange }}</div>
+      </div>
+      <div v-if="websiteRedirectUrl" class="flex items-center space-x-3">
+        <GlobeIcon class="flex-shrink-0 text-gray-600" />
+        <a :href="websiteRedirectUrl" rel="noopener" title="Site web" target="_blank" class="hover:text-blue-300">
+          {{ readableWebsiteUrl }}
+        </a>
+      </div>
+    </div>
     <GuildHeader2 class="mb-4">
       Recrutement
     </GuildHeader2>
-    <div class="gap-x-12 gap-y-8 grid grid-cols-1 mb-10 pt-3 sm:grid-cols-2">
+    <div class="grid grid-cols-1 pt-3 mb-10 gap-x-12 gap-y-8 sm:grid-cols-2">
       <GuildClassCard
         v-for="recruitmentStatus in recruitmentStatuses"
         :key="recruitmentStatus.classValue"
@@ -79,14 +84,17 @@
         </div>
       </GuildClassCard>
     </div>
-    <div class="bottom-0 pb-8 sticky">
-      <GuildContactButton :guild-id="guild.id" class="flex justify-center py-2 shadow-lg w-full" />
+    <div class="sticky bottom-0 pb-8">
+      <GuildContactButton
+        :guild-id="guild.id"
+        class="flex justify-center w-full py-2 shadow-lg"
+      />
     </div>
   </div>
 </template>
 
 <script>
-import { computed, defineComponent, useAsync, useRoute } from '@nuxtjs/composition-api'
+import { computed, defineComponent, useAsync, useContext, useRoute } from '@nuxtjs/composition-api'
 import sortBy from 'lodash/sortBy'
 import useGuilds from '~/composables/database/useGuilds'
 import getClassName from '~/data/utils/getClassName'
@@ -106,6 +114,7 @@ export default defineComponent({
   },
   layout: 'default',
   setup () {
+    const context = useContext()
     const route = useRoute()
     const { findBySlug } = useGuilds()
     const guild = useAsync(
@@ -134,6 +143,22 @@ export default defineComponent({
           }),
         ['className'])
     })
+    const readableWebsiteUrl = computed(() => {
+      let hostname
+      try {
+        const url = new URL(guild.value.websiteUrl)
+        hostname = url.hostname
+      } catch (error) {
+        hostname = guild.value.websiteUrl
+      }
+      return hostname
+    })
+    const websiteRedirectUrl = computed(() => {
+      if (guild.value.websiteUrl && guild.value.websiteUrl !== guild.value.contactUrl) {
+        return `${context.$config.baseURL}/redirect/?type=website&guild=${guild.value.id}`
+      }
+      return null
+    })
 
     return {
       guild,
@@ -141,7 +166,9 @@ export default defineComponent({
       readableDays,
       recruitmentStatuses,
       getSpecName,
-      getClassTextColorClass
+      getClassTextColorClass,
+      readableWebsiteUrl,
+      websiteRedirectUrl
     }
   }
 })

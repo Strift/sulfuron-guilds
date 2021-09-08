@@ -5,7 +5,7 @@
         {{ title }}
       </div>
     </div>
-    <div class="text-gray-600">
+    <div class="text-gray-500">
       <slot name="default" />
     </div>
   </div>
