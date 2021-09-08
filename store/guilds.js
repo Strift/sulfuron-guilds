@@ -65,7 +65,19 @@ export const actions = {
   }),
   disableSync: firestoreAction(function ({ unbindFirestoreRef }) {
     unbindFirestoreRef('list', false)
-  })
+  }),
+  async findBySlug (ctx, slug) {
+    const guildSnapshot = await this.$fire.firestore
+      .collection('guilds')
+      .withConverter(guildConverter)
+      .where('slug', '==', slug)
+      .get()
+
+    if (guildSnapshot.empty) {
+      return null
+    }
+    return guildSnapshot.docs[0].data()
+  }
 }
 
 export const getters = {

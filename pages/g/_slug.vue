@@ -94,9 +94,8 @@
 </template>
 
 <script>
-import { computed, defineComponent, useAsync, useContext, useRoute } from '@nuxtjs/composition-api'
+import { defineComponent } from '@nuxtjs/composition-api'
 import sortBy from 'lodash/sortBy'
-import useGuilds from '~/composables/database/useGuilds'
 import getClassName from '~/data/utils/getClassName'
 import getSpecName from '~/data/utils/getSpecName'
 import getClassTextColorClass from '~/data/utils/getClassTextColorClass'
@@ -113,25 +112,28 @@ export default defineComponent({
     ArrowLeftIcon
   },
   layout: 'default',
-  setup () {
-    const context = useContext()
-    const route = useRoute()
-    const { findBySlug } = useGuilds()
-    const guild = useAsync(
-      () => findBySlug(route.value.params.slug), route.value.params.slug,
-      route.value.fullPath
-    )
-
-    const timeRange = computed(() => guild.value.startHour + ' – ' + guild.value.endHour)
-    const readableDays = computed(() => {
-      return guild.value.raidDays
+  scrollToTop: true,
+  async asyncData ({ params, store }) {
+    const guild = await store.dispatch('guilds/findBySlug', params.slug)
+    return {
+      guild
+    }
+  },
+  data: () => ({
+  }),
+  computed: {
+    timeRange () {
+      return this.guild.startHour + ' – ' + this.guild.endHour
+    },
+    readableDays () {
+      return this.guild.raidDays
         .filter(({ playing }) => playing)
         .map(({ day }) => day)
         .join(', ')
-    })
-    const recruitmentStatuses = computed(() => {
+    },
+    recruitmentStatuses () {
       return sortBy(
-        guild.value.recruitment
+        this.guild.recruitment
           .filter(({ specs }) => specs.some(({ open }) => open))
           .map((recruitmentStatus) => {
             return {
@@ -142,34 +144,27 @@ export default defineComponent({
             }
           }),
         ['className'])
-    })
-    const readableWebsiteUrl = computed(() => {
+    },
+    readableWebsiteUrl () {
       let hostname
       try {
-        const url = new URL(guild.value.websiteUrl)
+        const url = new URL(this.guild.websiteUrl)
         hostname = url.hostname
       } catch (error) {
-        hostname = guild.value.websiteUrl
+        hostname = this.guild.websiteUrl
       }
       return hostname
-    })
-    const websiteRedirectUrl = computed(() => {
-      if (guild.value.websiteUrl && guild.value.websiteUrl !== guild.value.contactUrl) {
-        return `${context.$config.baseURL}/redirect/?type=website&guild=${guild.value.id}`
+    },
+    websiteRedirectUrl () {
+      if (this.guild.websiteUrl && this.guild.websiteUrl !== this.guild.contactUrl) {
+        return `${this.$config.baseURL}/redirect/?type=website&guild=${this.guild.id}`
       }
       return null
-    })
-
-    return {
-      guild,
-      timeRange,
-      readableDays,
-      recruitmentStatuses,
-      getSpecName,
-      getClassTextColorClass,
-      readableWebsiteUrl,
-      websiteRedirectUrl
     }
+  },
+  methods: {
+    getSpecName,
+    getClassTextColorClass
   }
 })
 </script>
