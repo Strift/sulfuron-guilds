@@ -1,4 +1,4 @@
-import WOW_CLASSES from '~/data/classes.json'
+import WOW_CLASSES from '../../classes.json'
 
 export default function (recruitment) {
   // Update from data format that doesn't handle specs to format that handles it

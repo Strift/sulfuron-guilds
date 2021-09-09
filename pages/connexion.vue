@@ -38,6 +38,7 @@ const AUTH_TOKEN_QUERY = 'auth_token'
 
 export default {
   scrollToTop: true,
+  layout: 'default',
   computed: {
     ...mapGetters('account', [
       'isGuest'

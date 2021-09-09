@@ -1,4 +1,4 @@
-import transformRecruitmentArray from '~/data/converters/utils/transformRecruitmentArray.js'
+import transformRecruitmentArray from './utils/transformRecruitmentArray.js'
 
 export default {
   toFirestore (guild) {

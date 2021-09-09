@@ -22,6 +22,6 @@ module.exports = {
     // Disabled because of issue
     // https://github.com/babel/babel/issues/10904#issuecomment-730391306
     'template-curly-spacing': 'off',
-    'vue/static-class-names-order': 1
+    'vue/static-class-names-order': 0
   }
 }

@@ -5,7 +5,8 @@ export const SortingType = {
 
 export const state = () => ({
   sorting: SortingType.CHRONOLOGICAL,
-  textQuery: ''
+  textQuery: '',
+  removeOutdatedGuilds: true
 })
 
 export const mutations = {
@@ -14,5 +15,8 @@ export const mutations = {
   },
   setTextQuery (state, textQuery) {
     state.textQuery = textQuery
+  },
+  setRemoveOutdatedGuilds (state, removeOutdatedGuilds) {
+    state.removeOutdatedGuilds = removeOutdatedGuilds
   }
 }

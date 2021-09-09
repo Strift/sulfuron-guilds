@@ -16,47 +16,77 @@
         </BaseCheckListItem>
       </div>
     </div>
-    <AdminGuildList
-      v-if="publishedGuilds.length"
-      :guilds="publishedGuilds"
-      :advanced-mode="editionMode"
-      :search="searchText"
-      @remove="removeGuild"
-    />
+    <Promised :promise="publishedGuilds">
+      <template #default="data">
+        <AdminGuildList
+          :guilds="data"
+          :advanced-mode="editionMode"
+          :search="searchText"
+          @remove="onGuildRemove"
+        />
+      </template>
+      <template v-slot:pending>
+        <BaseLoader class="mx-auto" />
+      </template>
+    </Promised>
     <BaseHeader2 class="flex items-baseline justify-between">
       Guildes supprimées <span class="text-base text-gray-600">{{ deletedGuilds.length }} guildes</span>
     </BaseHeader2>
-    <AdminGuildList
-      v-if="deletedGuilds.length"
-      :guilds="deletedGuilds"
-      :advanced-mode="editionMode"
-      @remove="removeGuild"
-    />
+    <Promised :promise="deletedGuilds">
+      <template #default="data">
+        <AdminGuildList
+          :guilds="data"
+          :advanced-mode="editionMode"
+          :search="searchText"
+        />
+      </template>
+      <template v-slot:pending>
+        <BaseLoader class="mx-auto" />
+      </template>
+    </Promised>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { computed, ref } from '@nuxtjs/composition-api'
+import { Promised } from 'vue-promised'
+import useGuilds from '~/composables/database/useGuilds'
 
 export default {
   layout: 'admin',
-  data: () => ({
-    searchText: '',
-    editionMode: false
-  }),
-  computed: {
-    ...mapGetters('admin', [
-      'publishedGuilds',
-      'deletedGuilds'
-    ])
-  },
-  methods: {
-    removeGuild (guild) {
+  components: { Promised },
+  setup () {
+    const { list, deleteById } = useGuilds()
+    const searchText = ref('')
+    const editionMode = ref(false)
+
+    const guilds = ref([])
+    const publishedGuilds = computed(() => {
+      return guilds.value.then(guilds => guilds.filter(guild => guild.published && !guild.deleted))
+    })
+    const deletedGuilds = computed(() => {
+      return guilds.value.then(guilds => guilds.filter(guild => guild.deleted))
+    })
+
+    const fetchGuilds = () => {
+      guilds.value = list({ published: true })
+    }
+
+    const onGuildRemove = async (guild) => {
       const confirmed = confirm(`Voulez-vous supprimer ${guild.name} ?`)
       if (confirmed) {
-        this.$store.dispatch('admin/softDeleteGuildById', guild.id)
+        await deleteById(guild.id)
+        fetchGuilds()
       }
-      this.$store.dispatch('admin/fetchGuilds')
+    }
+
+    fetchGuilds()
+    return {
+      searchText,
+      editionMode,
+      publishedGuilds,
+      deletedGuilds,
+      onGuildRemove
     }
   },
   head () {

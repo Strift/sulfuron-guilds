@@ -1,127 +1,113 @@
 <template>
-  <div>
+  <BaseContainer>
     <HomeHeader class="mb-20" />
-    <div class="border-gray-700 mb-6 sm:border-b sm:flex sm:justify-between sm:pb-6 sm:space-y-0 space-y-6">
-      <div class="border-b border-gray-700 pb-6 sm:border-0 sm:p-0">
+
+    <div class="mb-6 space-y-6 border-gray-700 sm:border-b sm:flex sm:justify-between sm:pb-6 sm:space-y-0">
+      <div class="pb-6 border-b border-gray-700 sm:border-0 sm:p-0">
         <HomeFactionButton class="text-gray-200" />
       </div>
       <div class="flex space-x-5">
-        <HomeSearchBar class="sm:w-auto w-full" />
+        <HomeSearchBar class="w-full sm:w-auto" />
       </div>
     </div>
 
     <div class="mb-10">
       <div class="flex items-center justify-between mb-6 text-gray-500">
-        <div class="hidden items-center sm:flex space-x-2">
+        <div class="items-center hidden space-x-2 sm:flex">
           <FilterIcon />
-          <div class="font-semibold text-sm tracking-wider uppercase">
+          <div class="text-sm font-semibold tracking-wider uppercase">
             Filtres de classe
           </div>
         </div>
-        <button class="flex items-center sm:hidden space-x-2" @click="expandFilters = !expandFilters">
+        <button class="flex items-center space-x-2 sm:hidden" @click="expandFilters = !expandFilters">
           <FilterIcon />
-          <div class="font-semibold text-sm tracking-wider uppercase">
+          <div class="text-sm font-semibold tracking-wider uppercase">
             Filtres de classe
           </div>
-          <ChevronDownIcon class="duration-150 transform transition-transform" :class="{ 'rotate-180': expandFilters }" />
+          <ChevronDownIcon class="transition-transform duration-150 transform" :class="{ 'rotate-180': expandFilters }" />
         </button>
         <div class="hidden sm:inline-flex">
-          <ResetFiltersButton v-if="classFilters.length > 0" />
+          <HomeSearchFiltersResetButton v-if="classFilters.length > 0" />
         </div>
       </div>
-      <SearchFilters class="hidden sm:block" />
-      <SearchFilters v-show="expandFilters" class="sm:hidden" />
+      <HomeSearchFilters class="hidden sm:block" />
+      <HomeSearchFilters v-show="expandFilters" class="sm:hidden" />
 
       <div v-show="classFilters.length && !expandFilters" class="mt-6 sm:hidden">
-        <div class="font-semibold mb-3 text-gray-600">
+        <div class="mb-3 font-semibold text-gray-600">
           Filtres actifs
         </div>
-        <ActiveClassFiltersList />
+        <HomeSearchActiveFilters />
       </div>
     </div>
 
-    <div>
-      <div class="mb-10 sm:flex sm:justify-between sm:space-y-0 space-y-3">
-        <HomeSorting />
-        <div>
-          <label class="hover:text-blue-300 text-gray-600">
-            <input v-model="removeOutdatedGuilds" type="checkbox" name="removeOutdatedGuilds">
-            <span class="ml-2">Afficher uniquement les guildes à jour.</span>
-          </label>
-        </div>
+    <div class="mb-10 space-y-3 sm:flex sm:justify-between sm:space-y-0">
+      <HomeSorting />
+      <div>
+        <label class="text-gray-600 hover:text-blue-300">
+          <input v-model="removeOutdatedResults" type="checkbox" name="removeOutdatedGuilds">
+          <span class="ml-2">Afficher uniquement les guildes à jour.</span>
+        </label>
       </div>
-      <HomeGuildsList />
     </div>
 
-    <div class="mt-12 text-center text-gray-500">
-      {{ orderedSearchResults.length }} {{ resultsText }} trouvées.
-    </div>
+    <HomeGuildsList />
+
+    <HomeSearchSummary class="mt-12" />
 
     <div v-show="isGuest" class="mt-20 space-y-10">
-      <p class="text-center text-gray-300 text-lg">
+      <p class="text-lg text-center text-gray-300">
         Votre guilde n'y est pas ? Créez un compte pour pouvoir gérer votre guilde.
       </p>
-      <NuxtLink to="/connexion/" class="bg-blue-900 bg-opacity-25 block border border-blue-300 hover:bg-opacity-75 hover:text-blue-200 max-w-xs mx-auto px-4 py-2 rounded-full shadow text-blue-300 text-center text-lg text-shadow-sm">
+      <NuxtLink to="/connexion/" class="block max-w-xs px-4 py-2 mx-auto text-lg text-center text-blue-300 bg-blue-900 bg-opacity-25 border border-blue-300 rounded-full shadow hover:bg-opacity-75 hover:text-blue-200 text-shadow-sm">
         Connexion
       </NuxtLink>
     </div>
     <div v-show="isAuthenticated" class="mt-20 space-y-10">
-      <p class="text-center text-gray-300 text-lg">
+      <p class="text-lg text-center text-gray-300">
         Votre guilde n'y est pas ? Contactez un modérateur du Discord pour créer celle-ci.
       </p>
     </div>
-  </div>
+  </BaseContainer>
 </template>
 
 <script>
-import sortBy from 'lodash/sortBy'
 import { mapGetters } from 'vuex'
+import { computed, ref } from '@nuxtjs/composition-api'
+import useSearchStore from '~/composables/useSearchStore'
+import useAccountStore from '~/composables/useAccountStore'
 
 import FilterIcon from '~/components/icons/solid/FilterIcon.vue'
-import SearchFilters from '~/components/SearchFilters.vue'
-import ActiveClassFiltersList from '~/components/ActiveClassFiltersList.vue'
-import ResetFiltersButton from '~/components/ResetFiltersButton.vue'
 import ChevronDownIcon from '~/components/icons/solid/ChevronDownIcon.vue'
 
 export default {
   name: 'Index',
+  layout: 'default',
   components: {
     FilterIcon,
-    SearchFilters,
-    ActiveClassFiltersList,
-    ResetFiltersButton,
     ChevronDownIcon
   },
-  data: () => ({
-    showFiltersCard: false,
-    expandFilters: false
-  }),
+  setup () {
+    const { removeOutdatedGuilds, setRemoveOutdatedGuilds } = useSearchStore()
+    const { isGuest, isAuthenticated } = useAccountStore()
+
+    const expandFilters = ref(false)
+    const removeOutdatedResults = computed({
+      get: () => removeOutdatedGuilds.value,
+      set: value => setRemoveOutdatedGuilds(value)
+    })
+
+    return {
+      expandFilters,
+      removeOutdatedResults,
+      isGuest,
+      isAuthenticated
+    }
+  },
   computed: {
     ...mapGetters('guilds', {
-      searchResults: 'searchResults',
       classFilters: 'classFilters'
-    }),
-    ...mapGetters('account', [
-      'isGuest',
-      'isAuthenticated'
-    ]),
-    removeOutdatedGuilds: {
-      get () {
-        return this.$store.state.guilds.removeOutdatedGuilds
-      },
-      set (value) {
-        this.$store.commit('guilds/setRemoveOutdatedGuilds', value)
-      }
-    },
-    orderedSearchResults () {
-      return sortBy(this.searchResults, [guild => guild.name.toLowerCase()])
-    },
-    resultsText () {
-      return this.searchResults.length > 1 ? 'guildes' : 'guilde'
-    },
-    sortingText () {
-      return 'ordre alphabétique'
-    }
+    })
   },
   created () {
     this.$store.commit('guilds/initializeClassFilters')
@@ -134,14 +120,6 @@ export default {
   async beforeDestroy () {
     await this.$store.dispatch('guilds/disableSync')
   },
-  methods: {
-    timeRange ({ startHour, endHour }) {
-      return startHour + ' – ' + endHour
-    },
-    removeClassFilter (classValue, specValue) {
-      this.$store.commit('guilds/removeClassFilter', { classValue, specValue })
-    }
-  },
   head () {
     return {
       title: 'Trouvez et rejoignez votre nouvelle guilde - Sulfuron-EU',
@@ -149,7 +127,7 @@ export default {
         {
           hid: 'description',
           name: 'description',
-          content: 'Trouvez et rejoignez votre nouvelle guilde WoW Classic sur sur le serveur Sulfuron (The Burning Crusade).'
+          content: 'Trouvez et rejoignez votre nouvelle guilde WoW Classic sur le serveur Sulfuron (The Burning Crusade).'
         }
       ]
     }
