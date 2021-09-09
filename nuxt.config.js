@@ -1,4 +1,6 @@
 import git from 'git-rev-sync'
+import guildConverter from './data/converters/guildConverter'
+import firebaseConfig from './firebaseConfig'
 
 const evalBool = (bool) => {
   if (bool === 'true') { return true } else if (bool === 'false') { return false }
@@ -114,6 +116,33 @@ export default {
   ** See https://nuxtjs.org/docs/2.x/configuration-glossary/configuration-generate
   */
   generate: {
+    async routes () {
+      try {
+        const { default: firebase } = await import('firebase/app')
+
+        await import('firebase/firestore')
+        if (!firebase.apps.length) {
+          firebase.initializeApp(firebaseConfig)
+        }
+        const firestore = firebase.firestore()
+
+        const querySnapshot = await firestore
+          .collection('guilds')
+          .withConverter(guildConverter)
+          .where('published', '==', true)
+          .get()
+
+        return querySnapshot.docs.map((doc) => {
+          const guild = doc.data()
+          return {
+            route: `/g/${guild.slug}/`,
+            payload: guild
+          }
+        })
+      } catch (error) {
+        console.error(error)
+      }
+    },
     /*
      * Do not re-generate when changes happen in these files or folders
      */
@@ -135,15 +164,7 @@ export default {
   ** Firebase module configuration
   */
   firebase: {
-    config: {
-      apiKey: 'AIzaSyDgCfIFFy-5Lw8rQ-HF3M--T-oT270LdpE',
-      authDomain: 'sulfuron-guilds.firebaseapp.com',
-      databaseURL: 'https://sulfuron-guilds.firebaseio.com',
-      projectId: process.env.FIREBASE_PROJECT_ID,
-      storageBucket: 'sulfuron-guilds.appspot.com',
-      messagingSenderId: '229682010576',
-      appId: '1:229682010576:web:db892c4df7f3ba3b1281d5'
-    },
+    config: firebaseConfig,
     services: {
       auth: {
         emulatorPort: (process.env.NODE_ENV === 'development' && process.env.FIREBASE_EMULATOR_AUTH === 'true')

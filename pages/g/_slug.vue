@@ -113,13 +113,30 @@ export default defineComponent({
   },
   layout: 'default',
   scrollToTop: true,
-  async asyncData ({ params, store, error }) {
+  async asyncData ({ params, store, error, payload }) {
+    if (payload) {
+      return {
+        guild: payload
+      }
+    }
     const guild = await store.dispatch('guilds/findBySlug', params.slug)
     if (guild === null) {
       error({ statusCode: 404, message: 'Hmm... on dirait que cette guilde n\'existe pas' })
     }
     return {
       guild
+    }
+  },
+  head () {
+    return {
+      title: `${this.guild.name} - Sulfuron-EU`,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: `Rejoignez la guilde ${this.guild.type} ${this.guild.name} sur le serveur Sulfuron (The Burning Crusade).`
+        }
+      ]
     }
   },
   data: () => ({
