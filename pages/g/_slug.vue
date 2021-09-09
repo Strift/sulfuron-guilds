@@ -84,7 +84,7 @@
         </div>
       </GuildClassCard>
     </div>
-    <div class="sticky bottom-0 pb-8">
+    <div class="mt-10">
       <GuildContactButton
         :guild-id="guild.id"
         class="flex justify-center w-full py-2 shadow-lg"
