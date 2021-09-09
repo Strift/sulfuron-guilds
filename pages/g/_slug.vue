@@ -129,7 +129,8 @@ export default defineComponent({
   },
   head () {
     const title = `${this.guild.name} - Sulfuron-EU`
-    const description = `Rejoignez la guilde ${this.guild.type} ${this.guild.name} sur le serveur Sulfuron (The Burning Crusade).`
+    const guildType = this.guild.type === 'Classique' ? 'PVE' : this.guild.type
+    const description = `Rejoignez la guilde ${guildType} ${this.guild.name} sur le serveur Sulfuron (The Burning Crusade).`
     const pageUrl = `${this.$config.baseURL}${this.$route.path}`
     const imageUrl = '/images/new-logo.png'
     return {
