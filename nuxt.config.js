@@ -187,7 +187,8 @@ export default {
       analytics: {
         collectionEnabled: isProduction()
       }
-    }
+    },
+    terminateDatabasesAfterGenerate: true
   },
   /*
   ** Sentry module configuration
