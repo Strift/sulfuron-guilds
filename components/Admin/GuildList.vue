@@ -1,13 +1,12 @@
 <template>
-  <div class="bg-gray-300 p-6 rounded shadow text-gray-700">
+  <div class="p-6 text-gray-700 bg-gray-300 rounded shadow">
     <table class="w-full">
-      <tr class="h-10 text-gray-800 text-left">
+      <tr class="h-10 text-left text-gray-800">
         <th v-if="advancedMode">
           ID
         </th>
         <th>Guilde</th>
         <th>GM</th>
-        <th>Activité</th>
         <th>Visites</th>
         <th>Contacts</th>
         <th v-if="advancedMode">
@@ -27,23 +26,19 @@
           {{ guild.id }}
         </td>
         <td>
-          [{{ shortFaction(guild.faction) }}] <span class="font-semibold">{{ guild.name }}</span>
+          [{{ shortFaction(guild.faction) }}] <span class="font-semibold">{{ guild.name }}</span> <span class="text-sm text-gray-600">{{ guild.slug ? guild.slug : '⚠️' }}</span>
         </td>
         <td>{{ guild.ownerUid }}</td>
-        <td class="text-gray-600 text-sm">
-          <span v-if="guild.deleted">-</span>
-          <span v-else>100 %</span>
-        </td>
-        <td class="text-gray-600 text-sm">
+        <td class="text-sm text-gray-600">
           {{ guild.redirects.filter(({ type }) => type === 'website').length }}
         </td>
-        <td class="text-gray-600 text-sm">
+        <td class="text-sm text-gray-600">
           {{ guild.redirects.filter(({ type }) => type === 'contact').length }}
         </td>
         <td v-if="advancedMode">
           <button
             v-if="!guild.deleted"
-            class="bg-red-500 px-2 rounded-full text-red-100 text-xs"
+            class="px-2 text-xs text-red-100 bg-red-500 rounded-full"
             @click="$emit('remove', guild)"
           >
             Supprimer

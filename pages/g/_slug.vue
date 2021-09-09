@@ -113,8 +113,11 @@ export default defineComponent({
   },
   layout: 'default',
   scrollToTop: true,
-  async asyncData ({ params, store }) {
+  async asyncData ({ params, store, error }) {
     const guild = await store.dispatch('guilds/findBySlug', params.slug)
+    if (guild === null) {
+      error({ statusCode: 404, message: 'Hmm... on dirait que cette guilde n\'existe pas' })
+    }
     return {
       guild
     }
