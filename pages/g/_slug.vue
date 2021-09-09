@@ -128,14 +128,21 @@ export default defineComponent({
     }
   },
   head () {
+    const title = `${this.guild.name} - Sulfuron-EU`
+    const description = `Rejoignez la guilde ${this.guild.type} ${this.guild.name} sur le serveur Sulfuron (The Burning Crusade).`
+    const pageUrl = `${this.$config.baseURL}${this.$route.path}`
+    const imageUrl = '/images/new-logo.png'
     return {
-      title: `${this.guild.name} - Sulfuron-EU`,
+      title,
       meta: [
-        {
-          hid: 'description',
-          name: 'description',
-          content: `Rejoignez la guilde ${this.guild.type} ${this.guild.name} sur le serveur Sulfuron (The Burning Crusade).`
-        }
+        { name: 'description', content: description, hid: 'description' },
+        { property: 'og:title', content: title },
+        { property: 'og:description', content: description },
+        { property: 'og:image', content: imageUrl },
+        { property: 'og:url', content: pageUrl },
+        { property: 'og:site_name', content: 'Sulfuron.EU' },
+        { name: 'twitter:image:alt', content: imageUrl },
+        { name: 'twitter:card', content: 'summary_large_image' }
       ]
     }
   },
