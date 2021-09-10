@@ -16,11 +16,11 @@
     </div>
     <div class="justify-end mb-10 sm:flex sm:flex-row-reverse">
       <div class="mb-8 text-center sm:ml-12 sm:mr-0 sm:my-auto sm:text-left">
-        <h1 class="mb-2 text-4xl text-blue-100">
+        <h1 class="mb-1 text-4xl text-blue-100">
           {{ guild.name }}
         </h1>
         <div class="tracking-wider text-blue-300 uppercase">
-          Guilde {{ guild.type }}
+          Guilde {{ guildType }}
         </div>
       </div>
       <!-- use vibrant.js to get surrounding logo color -->
@@ -87,6 +87,7 @@
     <div class="mt-10">
       <GuildContactButton
         :guild-id="guild.id"
+        :is-discord="hasDiscordContactUrl"
         class="flex justify-center w-full py-2 shadow-lg"
       />
     </div>
@@ -129,8 +130,7 @@ export default defineComponent({
   },
   head () {
     const title = `${this.guild.name} - Sulfuron-EU`
-    const guildType = this.guild.type === 'Classique' ? 'PVE' : this.guild.type
-    const description = `Rejoignez la guilde ${guildType} ${this.guild.name} sur le serveur Sulfuron (The Burning Crusade).`
+    const description = `Rejoignez la guilde ${this.guildType} ${this.guild.name} sur le serveur The Burning Crusade, Sulfuron.`
     const pageUrl = `${this.$config.baseURL}${this.$route.path}`
     const imageUrl = '/images/new-logo.png'
     return {
@@ -150,6 +150,11 @@ export default defineComponent({
   data: () => ({
   }),
   computed: {
+    guildType () {
+      return this.guild.type === 'Classique'
+        ? 'PVE'
+        : this.guild.type
+    },
     timeRange () {
       return this.guild.startHour + ' – ' + this.guild.endHour
     },
@@ -188,6 +193,9 @@ export default defineComponent({
         return `${this.$config.baseURL}/redirect/?type=website&guild=${this.guild.id}`
       }
       return null
+    },
+    hasDiscordContactUrl () {
+      return this.guild.contactUrl?.includes('https://discord.gg/')
     }
   },
   methods: {
