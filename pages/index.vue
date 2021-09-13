@@ -110,6 +110,7 @@ export default {
     })
   },
   created () {
+    this.$store.commit('search/setTextQuery', '')
     this.$store.commit('guilds/initializeClassFilters')
   },
   async mounted () {
