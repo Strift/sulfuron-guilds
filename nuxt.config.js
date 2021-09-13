@@ -116,33 +116,33 @@ export default {
   ** See https://nuxtjs.org/docs/2.x/configuration-glossary/configuration-generate
   */
   generate: {
-    async routes () {
-      try {
-        const { default: firebase } = await import('firebase/app')
+    // async routes () {
+    //   try {
+    //     const { default: firebase } = await import('firebase/app')
 
-        await import('firebase/firestore')
-        if (!firebase.apps.length) {
-          firebase.initializeApp(firebaseConfig)
-        }
-        const firestore = firebase.firestore()
+    //     await import('firebase/firestore')
+    //     if (!firebase.apps.length) {
+    //       firebase.initializeApp(firebaseConfig)
+    //     }
+    //     const firestore = firebase.firestore()
 
-        const querySnapshot = await firestore
-          .collection('guilds')
-          .withConverter(guildConverter)
-          .where('published', '==', true)
-          .get()
+    //     const querySnapshot = await firestore
+    //       .collection('guilds')
+    //       .withConverter(guildConverter)
+    //       .where('published', '==', true)
+    //       .get()
 
-        return querySnapshot.docs.map((doc) => {
-          const guild = doc.data()
-          return {
-            route: `/g/${guild.slug}/`,
-            payload: guild
-          }
-        })
-      } catch (error) {
-        console.error(error)
-      }
-    },
+    //     return querySnapshot.docs.map((doc) => {
+    //       const guild = doc.data()
+    //       return {
+    //         route: `/g/${guild.slug}/`,
+    //         payload: guild
+    //       }
+    //     })
+    //   } catch (error) {
+    //     console.error(error)
+    //   }
+    // },
     /*
      * Do not re-generate when changes happen in these files or folders
      */
