@@ -82,12 +82,12 @@ describe('GuildsList', () => {
       .toEqual(chronologicallySortedGuilds.map(({ updatedAt }) => updatedAt))
   })
 
-  it('updates the open guild when an item is clicked', async () => {
-    const wrapper = mountComponent()
-    const listItemsWrappers = wrapper.findAllComponents(GuildsListItem).wrappers
+  // it('updates the open guild when an item is clicked', async () => {
+  //   const wrapper = mountComponent()
+  //   const listItemsWrappers = wrapper.findAllComponents(GuildsListItem).wrappers
 
-    const randomIndex = Math.floor(Math.random() * listItemsWrappers.length)
-    await listItemsWrappers[randomIndex].trigger('click')
-    expect(store.state.openGuild).toEqual(chronologicallySortedGuilds[randomIndex])
-  })
+  //   const randomIndex = Math.floor(Math.random() * listItemsWrappers.length)
+  //   await listItemsWrappers[randomIndex].trigger('click')
+  //   expect(store.state.openGuild).toEqual(chronologicallySortedGuilds[randomIndex])
+  // })
 })

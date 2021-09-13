@@ -66,10 +66,7 @@ export const actions = {
   disableSync: firestoreAction(function ({ unbindFirestoreRef }) {
     unbindFirestoreRef('list', false)
   }),
-  async findBySlug ({ state, dispatch }, slug) {
-    if (state.list.length === 0) {
-      await dispatch('enableSync')
-    }
+  async findBySlug (ctx, slug) {
     const guildSnapshot = await this.$fire.firestore
       .collection('guilds')
       .withConverter(guildConverter)

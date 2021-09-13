@@ -14,82 +14,85 @@
         </span>
       </NuxtLink>
     </div>
-    <div class="justify-end mb-10 sm:flex sm:flex-row-reverse">
-      <div class="mb-8 text-center sm:ml-12 sm:mr-0 sm:my-auto sm:text-left">
-        <h1 class="mb-1 text-4xl text-blue-100">
-          {{ guild.name }}
-        </h1>
-        <div class="tracking-wider text-blue-300 uppercase">
-          Guilde {{ guildType }}
-        </div>
-      </div>
-      <!-- use vibrant.js to get surrounding logo color -->
-      <GuildLogo
-        :alt="`Logo ${guild.name}`"
-        :url="guild.logoUrl"
-        class="flex-shrink-0 w-40 h-40 p-4 mx-auto overflow-hidden bg-gray-900 rounded shadow sm:mx-0"
-      />
-    </div>
-    <GuildHeader2 class="mb-4">
-      Présentation
-    </GuildHeader2>
-    <p class="mb-6 leading-7">
-      {{ guild.description }}
-    </p>
-    <div class="mb-10">
-      <div class="flex items-center mb-3 space-x-3">
-        <CalendarIcon class="text-gray-600" />
-        <p>{{ readableDays }}</p>
-      </div>
-      <div class="flex items-center mb-3 space-x-3">
-        <ClockIcon class="text-gray-600" />
-        <div>{{ timeRange }}</div>
-      </div>
-      <div v-if="websiteRedirectUrl" class="flex items-center space-x-3">
-        <GlobeIcon class="flex-shrink-0 text-gray-600" />
-        <a :href="websiteRedirectUrl" rel="noopener" title="Site web" target="_blank" class="hover:text-blue-300">
-          {{ readableWebsiteUrl }}
-        </a>
-      </div>
-    </div>
-    <GuildHeader2 class="mb-4">
-      Recrutement
-    </GuildHeader2>
-    <div class="grid grid-cols-1 pt-3 mb-10 gap-x-12 gap-y-8 sm:grid-cols-2">
-      <GuildClassCard
-        v-for="recruitmentStatus in recruitmentStatuses"
-        :key="recruitmentStatus.classValue"
-        :title="recruitmentStatus.className"
-        :title-class="getClassTextColorClass(recruitmentStatus.classValue)"
-        :specs="recruitmentStatus.specs"
-        :border-color-class="recruitmentStatus.borderClass"
-        class="shadow"
-      >
-        <div class="space-y-2">
-          <div
-            v-for="spec in recruitmentStatus.specs"
-            :key="spec.value"
-          >
-            <SpecializationIcon
-              :class-value="recruitmentStatus.classValue"
-              :spec-value="spec.value"
-              :alt="`Icone ${recruitmentStatus.className} spéciliasation ${getSpecName(recruitmentStatus.classValue, spec.value)}`"
-              :title="getSpecName(recruitmentStatus.classValue, spec.value)"
-              height="20"
-              width="20"
-              class="inline mr-2"
-            />
-            <span>{{ getSpecName(recruitmentStatus.classValue, spec.value) }}</span>
+    <BaseLoader v-if="$fetchState.pending" class="mx-auto" />
+    <div v-else>
+      <div class="justify-end mb-10 sm:flex sm:flex-row-reverse">
+        <div class="mb-8 text-center sm:ml-12 sm:mr-0 sm:my-auto sm:text-left">
+          <h1 class="mb-1 text-4xl text-blue-100">
+            {{ guild.name }}
+          </h1>
+          <div class="tracking-wider text-blue-300 uppercase">
+            Guilde {{ formatGuildType(guild.type) }}
           </div>
         </div>
-      </GuildClassCard>
-    </div>
-    <div class="mt-10">
-      <GuildContactButton
-        :guild-id="guild.id"
-        :is-discord="hasDiscordContactUrl"
-        class="flex justify-center w-full py-2 shadow-lg"
-      />
+        <!-- use vibrant.js to get surrounding logo color -->
+        <GuildLogo
+          :alt="`Logo ${guild.name}`"
+          :url="guild.logoUrl"
+          class="flex-shrink-0 w-40 h-40 p-4 mx-auto overflow-hidden bg-gray-900 rounded shadow sm:mx-0"
+        />
+      </div>
+      <GuildHeader2 class="mb-4">
+        Présentation
+      </GuildHeader2>
+      <p class="mb-6 leading-7">
+        {{ guild.description }}
+      </p>
+      <div class="mb-10">
+        <div class="flex items-center mb-3 space-x-3">
+          <CalendarIcon class="text-gray-600" />
+          <p>{{ formatDays(guild.raidDays) }}</p>
+        </div>
+        <div class="flex items-center mb-3 space-x-3">
+          <ClockIcon class="text-gray-600" />
+          <div>{{ formatTimeRange(guild.startHour, guild.endHour) }}</div>
+        </div>
+        <div v-if="guild.websiteUrl && guild.websiteUrl !== guild.contactUrl" class="flex items-center space-x-3">
+          <GlobeIcon class="flex-shrink-0 text-gray-600" />
+          <a :href="websiteRedirectUrl(guild.id)" rel="noopener" title="Site web" target="_blank" class="hover:text-blue-300">
+            {{ formatWebsiteUrl(guild.id) }}
+          </a>
+        </div>
+      </div>
+      <GuildHeader2 class="mb-4">
+        Recrutement
+      </GuildHeader2>
+      <div class="grid grid-cols-1 pt-3 mb-10 gap-x-12 gap-y-8 sm:grid-cols-2">
+        <GuildClassCard
+          v-for="recruitmentStatus in recruitmentStatuses(guild.recruitment)"
+          :key="recruitmentStatus.classValue"
+          :title="recruitmentStatus.className"
+          :title-class="getClassTextColorClass(recruitmentStatus.classValue)"
+          :specs="recruitmentStatus.specs"
+          :border-color-class="recruitmentStatus.borderClass"
+          class="shadow"
+        >
+          <div class="space-y-2">
+            <div
+              v-for="spec in recruitmentStatus.specs"
+              :key="spec.value"
+            >
+              <SpecializationIcon
+                :class-value="recruitmentStatus.classValue"
+                :spec-value="spec.value"
+                :alt="`Icone ${recruitmentStatus.className} spéciliasation ${getSpecName(recruitmentStatus.classValue, spec.value)}`"
+                :title="getSpecName(recruitmentStatus.classValue, spec.value)"
+                height="20"
+                width="20"
+                class="inline mr-2"
+              />
+              <span>{{ getSpecName(recruitmentStatus.classValue, spec.value) }}</span>
+            </div>
+          </div>
+        </GuildClassCard>
+      </div>
+      <div class="mt-10">
+        <GuildContactButton
+          :guild-id="guild.id"
+          :is-discord="isDiscordUrl(guild.contactUrl)"
+          class="flex justify-center w-full py-2 shadow-lg"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -104,6 +107,7 @@ import ClockIcon from '~/components/icons/solid/ClockIcon.vue'
 import GlobeIcon from '~/components/icons/solid/GlobeIcon.vue'
 import CalendarIcon from '~/components/icons/solid/CalendarIcon.vue'
 import ArrowLeftIcon from '~/components/icons/solid/ArrowLeftIcon.vue'
+import guildConverter from '~/data/converters/guildConverter'
 
 export default defineComponent({
   components: {
@@ -114,59 +118,77 @@ export default defineComponent({
   },
   layout: 'default',
   scrollToTop: true,
-  async asyncData ({ params, store, error, payload }) {
-    if (payload) {
-      return {
-        guild: payload
-      }
+  fetchOnServer: false,
+  async fetch () {
+    const guildSnapshot = await this.$fire.firestore
+      .collection('guilds')
+      .withConverter(guildConverter)
+      .where('slug', '==', this.$route.params.slug)
+      .get()
+
+    if (guildSnapshot.empty) {
+      throw new Error('Hmm... on dirait que cette guilde n\'existe pas')
     }
-    const guild = await store.dispatch('guilds/findBySlug', params.slug)
-    if (guild === null) {
-      error({ statusCode: 404, message: 'Hmm... on dirait que cette guilde n\'existe pas' })
-    }
-    return {
-      guild
-    }
-  },
-  head () {
-    const title = `${this.guild.name} - Sulfuron-EU`
-    const description = `Rejoignez la guilde ${this.guildType} ${this.guild.name} sur le serveur The Burning Crusade, Sulfuron.`
-    const pageUrl = `${this.$config.baseURL}${this.$route.path}`
-    const imageUrl = '/images/new-logo.png'
-    return {
-      title,
-      meta: [
-        { name: 'description', content: description, hid: 'description' },
-        { property: 'og:title', content: title },
-        { property: 'og:description', content: description },
-        { property: 'og:image', content: imageUrl },
-        { property: 'og:url', content: pageUrl },
-        { property: 'og:site_name', content: 'Sulfuron.EU' },
-        { name: 'twitter:image:alt', content: imageUrl },
-        { name: 'twitter:card', content: 'summary_large_image' }
-      ]
-    }
+    this.guild = guildSnapshot.docs[0].data()
   },
   data: () => ({
+    guild: null
   }),
-  computed: {
-    guildType () {
-      return this.guild.type === 'Classique'
+  // head () {
+  //   const title = `${this.guild.name} - Sulfuron-EU`
+  //   const description = `Rejoignez la guilde ${this.guildType} ${this.guild.name} sur le serveur The Burning Crusade, Sulfuron.`
+  //   const pageUrl = `${this.$config.baseURL}${this.$route.path}`
+  //   const imageUrl = '/images/new-logo.png'
+  //   return {
+  //     title,
+  //     meta: [
+  //       { name: 'description', content: description, hid: 'description' },
+  //       { property: 'og:title', content: title },
+  //       { property: 'og:description', content: description },
+  //       { property: 'og:image', content: imageUrl },
+  //       { property: 'og:url', content: pageUrl },
+  //       { property: 'og:site_name', content: 'Sulfuron.EU' },
+  //       { name: 'twitter:image:alt', content: imageUrl },
+  //       { name: 'twitter:card', content: 'summary_large_image' }
+  //     ]
+  //   }
+  // },
+  methods: {
+    getSpecName,
+    getClassTextColorClass,
+    formatGuildType (type) {
+      return type === 'Classique'
         ? 'PVE'
-        : this.guild.type
+        : type
     },
-    timeRange () {
-      return this.guild.startHour + ' – ' + this.guild.endHour
+    formatTimeRange (startHour, endHour) {
+      return startHour + ' – ' + endHour
     },
-    readableDays () {
-      return this.guild.raidDays
+    formatDays (raidDays) {
+      return raidDays
         .filter(({ playing }) => playing)
         .map(({ day }) => day)
         .join(', ')
     },
-    recruitmentStatuses () {
+    formatWebsiteUrl (websiteUrl) {
+      let hostname
+      try {
+        const url = new URL(websiteUrl)
+        hostname = url.hostname
+      } catch (error) {
+        hostname = websiteUrl
+      }
+      return hostname
+    },
+    websiteRedirectUrl (guildId) {
+      return `${this.$config.baseURL}/redirect/?type=website&guild=${guildId}`
+    },
+    isDiscordUrl (contactUrl) {
+      return contactUrl?.includes('https://discord.gg/')
+    },
+    recruitmentStatuses (recruitment) {
       return sortBy(
-        this.guild.recruitment
+        recruitment
           .filter(({ specs }) => specs.some(({ open }) => open))
           .map((recruitmentStatus) => {
             return {
@@ -177,30 +199,7 @@ export default defineComponent({
             }
           }),
         ['className'])
-    },
-    readableWebsiteUrl () {
-      let hostname
-      try {
-        const url = new URL(this.guild.websiteUrl)
-        hostname = url.hostname
-      } catch (error) {
-        hostname = this.guild.websiteUrl
-      }
-      return hostname
-    },
-    websiteRedirectUrl () {
-      if (this.guild.websiteUrl && this.guild.websiteUrl !== this.guild.contactUrl) {
-        return `${this.$config.baseURL}/redirect/?type=website&guild=${this.guild.id}`
-      }
-      return null
-    },
-    hasDiscordContactUrl () {
-      return this.guild.contactUrl?.includes('https://discord.gg/')
     }
-  },
-  methods: {
-    getSpecName,
-    getClassTextColorClass
   }
 })
 </script>
