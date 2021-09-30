@@ -1,10 +1,10 @@
 import Vuex from 'vuex'
-import { mount, createLocalVue } from '@vue/test-utils'
+import { createLocalVue, mount } from '@vue/test-utils'
 import LoginPage from '~/pages/connexion.vue'
 import LoginCard from '~/components/Login/Card.vue'
 import LoginButton from '~/components/Login/Button.vue'
 import BattleNetIcon from '~/components/BattleNetIcon.vue'
-import { state, getters } from '~/store/account'
+import { getters, state } from '~/store/account'
 
 const localVue = createLocalVue()
 localVue.use(Vuex)

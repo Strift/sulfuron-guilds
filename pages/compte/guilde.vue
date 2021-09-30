@@ -102,7 +102,7 @@
 
 <script>
 import { debounce } from 'lodash'
-import { mapState, mapGetters } from 'vuex'
+import { mapGetters, mapState } from 'vuex'
 import isUrl from 'is-url'
 
 import MissingGuildLogo from '~/components/ui/MissingGuildLogo.vue'

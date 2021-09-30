@@ -11,7 +11,8 @@ module.exports = {
   },
   extends: [
     '@nuxtjs',
-    'plugin:nuxt/recommended'
+    'plugin:nuxt/recommended',
+    'plugin:import/recommended'
   ],
   plugins: [
   ],
@@ -23,5 +24,8 @@ module.exports = {
     // https://github.com/babel/babel/issues/10904#issuecomment-730391306
     'template-curly-spacing': 'off',
     'vue/static-class-names-order': 0
+  },
+  settings: {
+    'import/resolver': 'nuxt'
   }
 }

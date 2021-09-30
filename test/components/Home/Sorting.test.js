@@ -1,6 +1,6 @@
-import { mount, createLocalVue } from '@vue/test-utils'
+import { createLocalVue, mount } from '@vue/test-utils'
 import Vuex from 'vuex'
-import { state, mutations, SortingType } from '~/store/search'
+import { SortingType, mutations, state } from '~/store/search'
 import HomeSorting from '~/components/Home/Sorting.vue'
 import BaseSecondaryButton from '~/components/Base/SecondaryButton.vue'
 

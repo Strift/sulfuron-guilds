@@ -1,4 +1,4 @@
-import { mount, createLocalVue } from '@vue/test-utils'
+import { createLocalVue, mount } from '@vue/test-utils'
 import guildFactory from '~/data/factories/guildFactory.js'
 
 import HomeGuildsListItem from '~/components/Home/GuildsListItem.vue'
