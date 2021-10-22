@@ -50,7 +50,7 @@
         <div v-if="guild.websiteUrl && guild.websiteUrl !== guild.contactUrl" class="flex items-center space-x-3">
           <GlobeIcon class="flex-shrink-0 text-gray-600" />
           <a :href="websiteRedirectUrl(guild.id)" rel="noopener" title="Site web" target="_blank" class="hover:text-blue-300">
-            {{ formatWebsiteUrl(guild.id) }}
+            {{ formatWebsiteUrl(guild.websiteUrl) }}
           </a>
         </div>
       </div>
