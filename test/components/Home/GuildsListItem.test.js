@@ -81,10 +81,4 @@ describe('GuildsListItem', () => {
     const wrapper = makeComponent({ updatedAt: undefined })
     expect(wrapper.text()).toContain('Il y a longtemps')
   })
-
-  it('emits a click event on click', async () => {
-    const wrapper = makeComponent()
-    await wrapper.find('button').element.click()
-    expect(wrapper.emitted().click).toBeTruthy()
-  })
 })
