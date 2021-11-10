@@ -12,9 +12,17 @@
 - Testing with [Vue Test Utils](https://vue-test-utils.vuejs.org/) (and [Jest](https://jestjs.io/en/) + [Babel](https://babeljs.io/))
 - Error monitoring with [Sentry](https://sentry.io)
 
+**Nuxt Bridge: migrating from v2 to v3**
+
+- [x] Complete steps from [migration guide](https://v3.nuxtjs.org/getting-started/bridge) as of Nov 10, 2021
+- [x] Make a successful `nuxi dev` (some modules disabled)
+- [] Make a successful `nuxi generate` 
+- [] Re-enable TailwindCSS module config preview
+- [] Re-enable eslint module (failing on '#app' resolution)
+
 **Node versions**
 
-- Front-end website is built with Node.js v12.x (cf. [.nvmrc](.nvmrc))
+- Front-end website is built with Node.js v14.x (cf. [.nvmrc](.nvmrc))
 - Firebase functions running on Node.js v12.x (cf. `engines.node` in [functions/package.json](functions/package.json))
 
 ## 🚧 Development setup
