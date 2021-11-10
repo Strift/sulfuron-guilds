@@ -73,7 +73,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { computed, ref } from '@nuxtjs/composition-api'
+import { computed, ref } from '#app'
 import useSearchStore from '~/composables/useSearchStore'
 import useAccountStore from '~/composables/useAccountStore'
 

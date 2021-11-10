@@ -1,7 +1,7 @@
-import { useStore } from '@nuxtjs/composition-api'
+import { useNuxtApp } from '#app'
 
 export default function useGuildModal () {
-  const store = useStore()
+  const { $store: store } = useNuxtApp()
   const openGuild = (guild) => {
     store.commit('setOpenGuild', guild)
   }

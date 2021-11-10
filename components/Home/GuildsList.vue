@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import { defineComponent } from '@nuxtjs/composition-api'
+import { defineComponent } from '#app'
 import useSearchStore from '~/composables/useSearchStore'
 import useGuildModal from '~/composables/useGuildModal'
 

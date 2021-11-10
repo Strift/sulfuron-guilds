@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { computed, toRefs } from '@vue/composition-api'
+import { computed, toRefs } from '#app'
 import useUsers, {
   STATE_EMPTY as USERS_STATE_EMPTY,
   STATE_LOADED as USERS_STATE_LOADED,

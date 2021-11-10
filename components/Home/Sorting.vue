@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { computed, defineComponent } from '@nuxtjs/composition-api'
+import { computed, defineComponent } from '#app'
 import { SortingType } from '~/store/search'
 import SortAscendingIcon from '~/components/icons/solid/SortAscendingIcon.vue'
 import useSearchStore from '~/composables/useSearchStore'

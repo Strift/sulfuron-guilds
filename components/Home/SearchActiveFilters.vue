@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { defineComponent } from '@nuxtjs/composition-api'
+import { defineComponent } from '#app'
 import ActiveFilter from '~/components/ui/ActiveFilter.vue'
 import SpecializationIcon from '~/components/SpecializationIcon.vue'
 import useGuildsStore from '~/composables/useGuildsStore'

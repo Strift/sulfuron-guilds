@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { defineComponent } from '@nuxtjs/composition-api'
+import { defineComponent } from '#app'
 import CheckCircleIcon from '~/components/icons/outline/CheckCircleIcon.vue'
 
 export default defineComponent({

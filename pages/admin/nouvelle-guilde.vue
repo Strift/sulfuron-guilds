@@ -37,8 +37,8 @@
 </template>
 
 <script>
-import { computed, defineComponent, ref } from '@nuxtjs/composition-api'
 import { Promised } from 'vue-promised'
+import { computed, defineComponent, ref } from '#app'
 import useCreateGuild from '~/composables/admin/useCreateGuild'
 import useGuilds from '~/composables/database/useGuilds'
 

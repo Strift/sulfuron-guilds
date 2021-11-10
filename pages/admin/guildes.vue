@@ -48,8 +48,8 @@
 </template>
 
 <script>
-import { computed, ref } from '@nuxtjs/composition-api'
 import { Promised } from 'vue-promised'
+import { computed, ref } from '#app'
 import useGuilds from '~/composables/database/useGuilds'
 
 export default {

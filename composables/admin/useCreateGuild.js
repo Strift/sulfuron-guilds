@@ -1,4 +1,4 @@
-import { computed, ref } from '@nuxtjs/composition-api'
+import { computed, ref } from '#app'
 import WOW_CLASSES from '~/data/classes.json'
 import guildSlug from '~/data/utils/guildSlug'
 import useGuilds from '~/composables/database/useGuilds'

@@ -98,8 +98,8 @@
 </template>
 
 <script>
-import { defineComponent } from '@nuxtjs/composition-api'
 import sortBy from 'lodash/sortBy'
+import { defineComponent } from '#app'
 import getClassName from '~/data/utils/getClassName'
 import getSpecName from '~/data/utils/getSpecName'
 import getClassTextColorClass from '~/data/utils/getClassTextColorClass'

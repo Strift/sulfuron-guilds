@@ -1,4 +1,4 @@
-import { ref } from '@nuxtjs/composition-api'
+import { ref } from '#app'
 
 export default function useToggle (onByDefault = false) {
   const isOn = ref(onByDefault)

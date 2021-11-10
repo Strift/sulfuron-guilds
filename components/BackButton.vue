@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { defineComponent } from '@nuxtjs/composition-api'
+import { defineComponent } from '#app'
 import ArrowLeftIcon from '~/components/icons/solid/ArrowLeftIcon.vue'
 
 export default defineComponent({

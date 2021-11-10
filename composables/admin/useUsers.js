@@ -1,4 +1,4 @@
-import { ref, useContext } from '@nuxtjs/composition-api'
+import { ref, useNuxtApp } from '#app'
 
 export const STATE_EMPTY = 'empty'
 export const STATE_LOADING = 'loading'
@@ -6,7 +6,7 @@ export const STATE_LOADED = 'loaded'
 export const STATE_ERROR = 'error'
 
 export default function useUsers () {
-  const { $fire } = useContext()
+  const { $fire } = useNuxtApp()
   const listUsers = $fire.functions.httpsCallable('listUsers')
 
   const state = ref(STATE_EMPTY)

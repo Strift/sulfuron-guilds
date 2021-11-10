@@ -1,6 +1,6 @@
-import { useContext } from '@nuxtjs/composition-api'
+import { useNuxtApp } from '#app'
 
 export default function useFirestore () {
-  const { $fire } = useContext()
+  const { $fire } = useNuxtApp()
   return $fire.firestore
 }

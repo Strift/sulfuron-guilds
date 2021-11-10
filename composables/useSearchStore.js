@@ -1,10 +1,10 @@
-import { computed, useStore } from '@nuxtjs/composition-api'
 import sortBy from 'lodash/sortBy'
 import orderBy from 'lodash/orderBy'
+import { computed, useNuxtApp } from '#app'
 import { SortingType } from '~/store/search'
 
 export default function useSearchStore () {
-  const store = useStore()
+  const { $store: store } = useNuxtApp()
 
   const sorting = computed(() => {
     return store.state.search.sorting

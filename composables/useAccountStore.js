@@ -1,7 +1,7 @@
-import { computed, useStore } from '@nuxtjs/composition-api'
+import { computed, useNuxtApp } from '#app'
 
 export default function useAccountStore () {
-  const store = useStore()
+  const { $store: store } = useNuxtApp()
 
   const isGuest = computed(() => store.getters['account/isGuest'])
   const isAuthenticated = computed(() => store.getters['account/isAuthenticated'])

@@ -1,7 +1,7 @@
-import { computed, useStore } from '@nuxtjs/composition-api'
+import { computed, useNuxtApp } from '#app'
 
 export default function () {
-  const store = useStore()
+  const { $store: store } = useNuxtApp()
 
   const classFilters = computed(() => store.state.guilds.classFilters)
 

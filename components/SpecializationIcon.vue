@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { computed, defineComponent, toRefs } from '@nuxtjs/composition-api'
+import { computed, defineComponent, toRefs } from '#app'
 import specializationSlug from '~/data/utils/specializationSlug'
 
 export default defineComponent({
