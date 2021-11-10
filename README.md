@@ -40,8 +40,10 @@ yarn
 # Run the Nuxt app
 yarn dev
 # Run the Firebase emulators
-yarn serve --only  hosting,functions,database
+yarn serve --only  hosting,functions,firestore
 ```
+
+> ⚠️ Using the Firebase Auth emulator creates client-side errors that prevents proper rendering of the page in non-incognito mode. 🤔
 
 ## 🧪 Testing
 
