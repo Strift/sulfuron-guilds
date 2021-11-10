@@ -1,3 +1,4 @@
+import { defineNuxtConfig } from '@nuxt/bridge'
 import git from 'git-rev-sync'
 import guildConverter from './data/converters/guildConverter'
 import firebaseConfig from './firebaseConfig'
@@ -9,7 +10,7 @@ const evalBool = (bool) => {
 const isProduction = () => process.env.NODE_ENV === 'production'
 const getHostname = () => isProduction() ? 'https://guildes.sulfuron.eu' : process.env.BASE_URL
 
-export default {
+export default defineNuxtConfig({
   /*
   ** Nuxt target
   ** See https://nuxtjs.org/api/configuration-target
@@ -73,7 +74,7 @@ export default {
     // Doc: https://github.com/nuxt-community/dotenv-module
     '@nuxtjs/dotenv',
     // Doc: https://github.com/nuxt-community/eslint-module
-    '@nuxtjs/eslint-module',
+    // '@nuxtjs/eslint-module',
     // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
     '@nuxtjs/tailwindcss',
     // Doc: https://sentry.nuxtjs.org/
@@ -189,6 +190,12 @@ export default {
     terminateDatabasesAfterGenerate: true
   },
   /*
+  ** TailwindCSS module configuration
+  */
+  tailwindcss: {
+    viewer: false
+  },
+  /*
   ** Sentry module configuration
   */
   sentry: {
@@ -228,4 +235,4 @@ export default {
   */
   image: {
   }
-}
+})
