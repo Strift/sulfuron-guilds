@@ -56,9 +56,7 @@ export const actions = {
   nuxtServerInit ({ commit }, { req }) {
     if (req) {
       const cookies = cookie.parse(req.headers.cookie)
-      if (cookies.default_faction &&
-        [Factions.HORDE, Factions.ALLIANCE].includes(cookies.default_faction)
-      ) {
+      if ([Factions.HORDE, Factions.ALLIANCE].includes(cookies.default_faction)) {
         commit('setFaction', cookies.default_faction)
       }
     }
