@@ -1,4 +1,5 @@
 import { vuexfireMutations } from 'vuexfire'
+import cookie from 'cookie'
 
 const BACKGROUND_STATE_FACTION = 'faction'
 const BACKGROUND_STATE_PROMO = 'sunwell'
@@ -47,6 +48,13 @@ export const mutations = {
 
   removeNotificationByTimestamp (state, timestamp) {
     state.notifications = state.notifications.filter(notification => notification.timestamp === timestamp)
+  }
+}
+
+export const actions = {
+  nuxtServerInit ({ commit }, { req }) {
+    const { default_faction: defaultFaction } = cookie.parse(req.headers.cookie)
+    commit('setFaction', defaultFaction)
   }
 }
 
