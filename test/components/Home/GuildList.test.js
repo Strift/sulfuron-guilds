@@ -53,7 +53,10 @@ const mountComponent = ({ defaultSorting } = {}) => {
 
   return mount(GuildsList, {
     localVue,
-    store
+    store,
+    stubs: {
+      NuxtLink: true
+    }
   })
 }
 
