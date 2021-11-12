@@ -13,7 +13,8 @@
     "lint": "yarn lint:js",
     "test": "NODE_ICU_DATA=node_modules/full-icu jest --testPathIgnorePatterns=functions/test/",
     "deploy": "firebase deploy",
-    "deploy:dev": "firebase deploy --only hosting:dev"
+    "deploy:dev": "firebase deploy --only hosting:dev",
+    "storybook": "nuxt storybook"
   },
   "lint-staged": {
     "*.{js,vue}": "eslint"

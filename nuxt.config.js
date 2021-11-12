@@ -229,5 +229,10 @@ export default {
   ** Nuxt images
   */
   image: {
+  },
+  /*
+  ** Storybook
+  */
+  storybook: {
   }
 }
