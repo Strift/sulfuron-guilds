@@ -7,9 +7,9 @@
 - Dependencies management with [Yarn](https://yarnpkg.com/)
 - Static site using [Nuxt](https://nuxtjs.org/)
 - Hosting, Functions, Auth, and Firestore from [Firebase](https://firebase.google.com/)
-- CSS utilities from [TailwindCSS v1](https://v1.tailwindcss.com/)
+- CSS utilities from [TailwindCSS](https://tailwindcss.com/)
 - SVG icons from [heroicons](https://heroicons.com/)
-- Testing with [Vue Test Utils](https://vue-test-utils.vuejs.org/) (and [Jest](https://jestjs.io/en/) + [Babel](https://babeljs.io/))
+- Testing with [Jest](https://jestjs.io/en/) and [Vue Test Utils](https://vue-test-utils.vuejs.org/) (with [Babel](https://babeljs.io/))
 - Error monitoring with [Sentry](https://sentry.io)
 
 **Node versions**
