@@ -5,7 +5,7 @@ export default {
   title: 'Base/PrimaryButton'
 }
 
-export const Primary = () => ({
+export const Default = () => ({
   components: { PrimaryButton },
   template: '<PrimaryButton>Default</PrimaryButton>'
 })
