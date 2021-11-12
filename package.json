@@ -54,6 +54,7 @@
     "@nuxtjs/dotenv": "^1.4.1",
     "@nuxtjs/eslint-config": "^3.1.0",
     "@nuxtjs/eslint-module": "^2.0.0",
+    "@nuxtjs/storybook": "^4.2.0",
     "@nuxtjs/tailwindcss": "^4.2.1",
     "@sentry/webpack-plugin": "^1.15.1",
     "@types/jest": "^26.0.23",
@@ -73,6 +74,7 @@
     "husky": "^4.2.5",
     "jest": "^26.6.3",
     "lint-staged": "^10.2.11",
+    "postcss": "^8.3.11",
     "rimraf": "^3.0.2",
     "vue-jest": "^3.0.7"
   }
