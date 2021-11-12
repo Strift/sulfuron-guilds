@@ -234,5 +234,16 @@ export default {
   ** Storybook
   */
   storybook: {
+    stories: [
+      '~/stories/**/*.stories.js'
+    ],
+    parameters: {
+      backgrounds: {
+        default: 'gray-900',
+        values: [
+          { name: 'gray-900', value: '#1a202c' }
+        ]
+      }
+    }
   }
 }
