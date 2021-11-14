@@ -30,7 +30,7 @@
         />
       </template>
       <template v-slot:pending>
-        <BaseLoader class="mx-auto" />
+        <UiLoader class="mx-auto" />
       </template>
     </Promised>
   </div>

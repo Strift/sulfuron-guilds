@@ -26,7 +26,7 @@
         />
       </template>
       <template v-slot:pending>
-        <BaseLoader class="mx-auto" />
+        <UiLoader class="mx-auto" />
       </template>
     </Promised>
     <BaseHeader2 class="flex items-baseline justify-between">
@@ -41,7 +41,7 @@
         />
       </template>
       <template v-slot:pending>
-        <BaseLoader class="mx-auto" />
+        <UiLoader class="mx-auto" />
       </template>
     </Promised>
   </div>

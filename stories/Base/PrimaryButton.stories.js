@@ -1,11 +1,11 @@
-import PrimaryButton from '~/components/Base/PrimaryButton.vue'
+import PrimaryButtonComponent from '~/components/Base/PrimaryButton.vue'
 
 export default {
-  component: PrimaryButton,
+  component: PrimaryButtonComponent,
   title: 'Base/PrimaryButton'
 }
 
-export const Default = () => ({
-  components: { PrimaryButton },
+export const PrimaryButton = () => ({
+  components: { PrimaryButton: PrimaryButtonComponent },
   template: '<PrimaryButton>Default</PrimaryButton>'
 })

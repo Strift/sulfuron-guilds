@@ -23,7 +23,7 @@
       <h1 class="font-bold leading-none pb-8 text-4xl text-gray-900">
         Connexion en cours...
       </h1>
-      <BaseLoader class="m-auto" />
+      <UiLoader class="m-auto" />
       <p class="mt-auto text-center text-gray-500">
         Veuillez patienter.
       </p>

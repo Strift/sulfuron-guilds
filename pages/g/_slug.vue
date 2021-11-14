@@ -14,7 +14,7 @@
         </span>
       </NuxtLink>
     </div>
-    <BaseLoader v-if="$fetchState.pending" class="mx-auto" />
+    <UiLoader v-if="$fetchState.pending" class="mx-auto" />
     <div v-else>
       <div class="justify-end mb-10 sm:flex sm:flex-row-reverse">
         <div class="mb-8 text-center sm:ml-12 sm:mr-0 sm:my-auto sm:text-left">
