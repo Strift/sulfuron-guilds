@@ -72,10 +72,9 @@
               v-for="spec in recruitmentStatus.specs"
               :key="spec.value"
             >
-              <SpecializationIcon
-                :class-value="recruitmentStatus.classValue"
-                :spec-value="spec.value"
-                :alt="`Icone ${recruitmentStatus.className} spéciliasation ${getSpecName(recruitmentStatus.classValue, spec.value)}`"
+              <SpecIcon
+                :specialization-slug="specializationSlug(recruitmentStatus.classValue, spec.value)"
+                :alt-text="`Icone ${recruitmentStatus.className} spéciliasation ${getSpecName(recruitmentStatus.classValue, spec.value)}`"
                 :title="getSpecName(recruitmentStatus.classValue, spec.value)"
                 height="20"
                 width="20"
@@ -103,14 +102,17 @@ import sortBy from 'lodash/sortBy'
 import getClassName from '~/data/utils/getClassName'
 import getSpecName from '~/data/utils/getSpecName'
 import getClassTextColorClass from '~/data/utils/getClassTextColorClass'
+import SpecIcon from '~/components/Ui/SpecIcon.vue'
 import ClockIcon from '~/components/icons/solid/ClockIcon.vue'
 import GlobeIcon from '~/components/icons/solid/GlobeIcon.vue'
 import CalendarIcon from '~/components/icons/solid/CalendarIcon.vue'
 import ArrowLeftIcon from '~/components/icons/solid/ArrowLeftIcon.vue'
 import guildConverter from '~/data/converters/guildConverter'
+import specializationSlug from '~/data/utils/specializationSlug'
 
 export default defineComponent({
   components: {
+    SpecIcon,
     ClockIcon,
     GlobeIcon,
     CalendarIcon,
@@ -156,6 +158,7 @@ export default defineComponent({
   methods: {
     getSpecName,
     getClassTextColorClass,
+    specializationSlug,
     formatGuildType (type) {
       return type === 'Classique'
         ? 'PVE'

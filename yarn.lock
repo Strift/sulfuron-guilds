@@ -4900,6 +4900,13 @@
   resolved "https://registry.yarnpkg.com/@xtuc/long/-/long-4.2.2.tgz#d291c6a4e97989b5c61d9acf396ae4fe133a718d"
   integrity sha512-NuHqBY1PB/D8xU6s/thBgOAiAP7HOYDQ32+BFZILJ8ivkUkAHQnWfn6WhL79Owj1qmUnoN/YPhktdIoucipkAQ==
 
+"@znck/prop-types@^0.6.3":
+  version "0.6.3"
+  resolved "https://registry.yarnpkg.com/@znck/prop-types/-/prop-types-0.6.3.tgz#4d378129216a0877b122ab91d0832620b7037bca"
+  integrity sha512-r4Zc8DMl4fvb7PSmY9GLUwZuIBMGUwmYxx8KrpAQXuUvGgORUyKzO7MhUGnnJoI1FIFrRgu1oGOp8IvxdmSFAw==
+  dependencies:
+    vue "2.*"
+
 abab@^2.0.3, abab@^2.0.5:
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/abab/-/abab-2.0.5.tgz#c0b678fb32d60fc1219c784d6a826fe385aeb79a"
@@ -17597,7 +17604,7 @@ vue2-animate@^2.1.4:
   resolved "https://registry.yarnpkg.com/vue2-animate/-/vue2-animate-2.1.4.tgz#7a241b8a0f839d97b9df63d4551fbe666354175e"
   integrity sha512-tIFHLxLYXwti0E3rJ7OeIUxTl+uVC8t9SYlD4aQ+gfgcheSu9yDbXklBNRIFxBmfNWDVpKQLMvGLxRrrCn3alw==
 
-vue@^2.6.12:
+vue@2.*, vue@^2.6.12:
   version "2.6.14"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.14.tgz#e51aa5250250d569a3fbad3a8a5a687d6036e235"
   integrity sha512-x2284lgYvjOMj3Za7kqzRcUSxBboHqtgRE2zlos1qWaOye5yUmHn42LB1250NJBLRwEcdrB0JRwyPTEPhfQjiQ==
