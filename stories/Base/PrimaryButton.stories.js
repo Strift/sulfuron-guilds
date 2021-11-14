@@ -2,12 +2,7 @@ import PrimaryButton from '~/components/Base/PrimaryButton.vue'
 
 export default {
   component: PrimaryButton,
-  title: 'Base/PrimaryButton',
-  parameters: {
-    backgrounds: {
-      default: 'gray-900'
-    }
-  }
+  title: 'Base/PrimaryButton'
 }
 
 export const Default = () => ({

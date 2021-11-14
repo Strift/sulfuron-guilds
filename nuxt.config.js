@@ -239,6 +239,7 @@ export default {
     ],
     parameters: {
       backgrounds: {
+        default: 'gray-900',
         values: [
           { name: 'gray-900', value: '#1a202c' }
         ]
