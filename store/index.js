@@ -54,7 +54,7 @@ export const mutations = {
 
 export const actions = {
   nuxtServerInit ({ commit }, { req }) {
-    if (req) {
+    if (req && req.headers.cookie) {
       const cookies = cookie.parse(req.headers.cookie)
       if ([Factions.HORDE, Factions.ALLIANCE].includes(cookies.default_faction)) {
         commit('setFaction', cookies.default_faction)
