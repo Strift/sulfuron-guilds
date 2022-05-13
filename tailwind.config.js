@@ -146,6 +146,7 @@ module.exports = {
     },
     extend: {
       colors: {
+        'death-knight': '#c41e3a',
         druid: '#ff7c0a',
         hunter: '#aad372',
         mage: '#3fc7eb',

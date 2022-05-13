@@ -1,5 +1,23 @@
 [
   {
+    "value": "death-knight",
+    "name": "Chevalier de la mort",
+    "specs": [
+      {
+        "name": "Sang",
+        "value": "blood"
+      },
+      {
+        "name": "Givre",
+        "value": "frost"
+      },
+      {
+        "name": "Impie",
+        "value": "unholy"
+      }
+    ]
+  },
+  {
     "value": "druid",
     "name": "Druide",
     "specs": [
