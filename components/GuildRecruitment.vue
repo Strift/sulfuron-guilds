@@ -1,17 +1,17 @@
 <template>
   <component
     :is="expandable ? 'button' : 'div'"
-    class="focus:outline-none group rounded w-full"
+    class="w-full rounded focus:outline-none group"
     :class="{ 'hover:bg-gray-800': isOpen && expandable }"
     @click="expandable && $emit('click')"
   >
     <div class="flex justify-between mb-3" :class="{ 'group-focus:text-blue-300': expandable }">
-      <div class="font-semibold text-xs tracking-widest uppercase">
+      <div class="text-xs font-semibold tracking-widest uppercase">
         Recrutement
       </div>
       <ChevronDownIcon
         v-if="isOpen && expandable"
-        class="duration-200 transform transition-transform"
+        class="transition-transform duration-200 transform"
         :class="{ 'rotate-180': expanded }"
       />
     </div>
@@ -29,7 +29,8 @@
         class="flex space-x-2"
       >
         <ClassIcon
-          :wow-class="classRecruitment.class"
+          :class-slug="classRecruitment.class"
+          :alt-text="classRecruitment.name"
           class="h-6 opacity-75"
         />
         <div v-show="expanded">
@@ -46,7 +47,7 @@
 </template>
 
 <script>
-import ClassIcon from '~/components/ui/ClassIcon.vue'
+import ClassIcon from '~/components/Ui/ClassIcon.vue'
 import ChevronDownIcon from '~/components/icons/solid/ChevronDownIcon.vue'
 
 import WOW_CLASSES from '~/data/classes.json'

@@ -1,4 +1,4 @@
-import { mount, createLocalVue } from '@vue/test-utils'
+import { createLocalVue, mount } from '@vue/test-utils'
 import guildFactory from '~/data/factories/guildFactory.js'
 
 import HomeGuildsListItem from '~/components/Home/GuildsListItem.vue'
@@ -80,11 +80,5 @@ describe('GuildsListItem', () => {
   it('has a default message for missing update date', () => {
     const wrapper = makeComponent({ updatedAt: undefined })
     expect(wrapper.text()).toContain('Il y a longtemps')
-  })
-
-  it('emits a click event on click', async () => {
-    const wrapper = makeComponent()
-    await wrapper.find('button').element.click()
-    expect(wrapper.emitted().click).toBeTruthy()
   })
 })

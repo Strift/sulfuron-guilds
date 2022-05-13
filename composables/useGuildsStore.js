@@ -1,4 +1,4 @@
-import { useStore, computed } from '@nuxtjs/composition-api'
+import { computed, useStore } from '@nuxtjs/composition-api'
 
 export default function () {
   const store = useStore()

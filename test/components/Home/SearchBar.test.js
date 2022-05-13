@@ -1,4 +1,4 @@
-import { mount, createLocalVue } from '@vue/test-utils'
+import { createLocalVue, mount } from '@vue/test-utils'
 import Vuex from 'vuex'
 import HomeSearchBar from '~/components/Home/SearchBar.vue'
 import * as searchStore from '~/store/search'

@@ -12,8 +12,8 @@
 import { computed, toRefs } from '@vue/composition-api'
 import useUsers, {
   STATE_EMPTY as USERS_STATE_EMPTY,
-  STATE_LOADING as USERS_STATE_LOADING,
-  STATE_LOADED as USERS_STATE_LOADED
+  STATE_LOADED as USERS_STATE_LOADED,
+  STATE_LOADING as USERS_STATE_LOADING
 } from '~/composables/admin/useUsers'
 
 export default {

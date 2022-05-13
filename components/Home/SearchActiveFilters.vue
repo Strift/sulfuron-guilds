@@ -8,10 +8,9 @@
       @remove="setClassFilter({ classValue: filter.classValue, specValue: filter.specValue }, false)"
     >
       <template class="space-x-2">
-        <SpecializationIcon
-          :class-value="filter.classValue"
-          :spec-value="filter.specValue"
-          :alt="`Icone ${filter.className} spéciliasation ${filter.specName}`"
+        <SpecIcon
+          :specialization-slug="specializationSlug(filter.classValue, filter.specValue)"
+          :alt-text="`Icone ${filter.className} spéciliasation ${filter.specName}`"
           :title="filter.specName"
           height="20"
           width="20"
@@ -26,14 +25,14 @@
 <script>
 import { defineComponent } from '@nuxtjs/composition-api'
 import ActiveFilter from '~/components/ui/ActiveFilter.vue'
-import SpecializationIcon from '~/components/SpecializationIcon.vue'
+import SpecIcon from '~/components/Ui/SpecIcon.vue'
 import useGuildsStore from '~/composables/useGuildsStore'
 import specializationSlug from '~/data/utils/specializationSlug'
 
 export default defineComponent({
   components: {
     ActiveFilter,
-    SpecializationIcon
+    SpecIcon
   },
   setup () {
     const { activeClassFilters, setClassFilter } = useGuildsStore()

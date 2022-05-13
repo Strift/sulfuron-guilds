@@ -7,9 +7,9 @@
 - Dependencies management with [Yarn](https://yarnpkg.com/)
 - Static site using [Nuxt](https://nuxtjs.org/)
 - Hosting, Functions, Auth, and Firestore from [Firebase](https://firebase.google.com/)
-- CSS utilities from [TailwindCSS v1](https://v1.tailwindcss.com/)
+- CSS utilities from [TailwindCSS](https://tailwindcss.com/)
 - SVG icons from [heroicons](https://heroicons.com/)
-- Testing with [Vue Test Utils](https://vue-test-utils.vuejs.org/) (and [Jest](https://jestjs.io/en/) + [Babel](https://babeljs.io/))
+- Testing with [Jest](https://jestjs.io/en/) and [Vue Test Utils](https://vue-test-utils.vuejs.org/) (with [Babel](https://babeljs.io/))
 - Error monitoring with [Sentry](https://sentry.io)
 
 **Node versions**
@@ -19,13 +19,24 @@
 
 ## 🚧 Development setup
 
-**Setting up the environment**
+### Nuxt environment
 
-Copy the `.env.example` file as `.env` and edit its values. These environment variables are used by the Nuxt app at _build time_.
+Copy `.env.example` as `.env` and edit its values. 
+These environment variables are used by the Nuxt app at _build time_.
 
-Copy the `functions/.runtimeconfig.example.json` file as `functions/.runtimeconfig.json` and edit its values. These environement variables are used by the Firebase Functions _at runtime_.
+- **Sentry:** https://sentry.io/settings/account/api/auth-tokens/
 
-**Running the apps**
+### Firebase Functions
+
+Copy `functions/.runtimeconfig.example.json` as `functions/.runtimeconfig.json` and edit its values. 
+These environment variables are used by the Firebase Functions _at runtime_.
+
+Then, download the Service Account to enable connecting in local and place it at `functions/.service-account.json`. 
+The file is available in your Firebase console project settings. 
+
+- **Battle.net credentials:** https://develop.battle.net/access/clients/
+
+### Running the apps
 
 > ⚠️ As of today, Firebase Auth emulator encounters issues when trying to generate custom tokens with `firebase-admin`, so we're not using it in local. 
 
@@ -40,8 +51,10 @@ yarn
 # Run the Nuxt app
 yarn dev
 # Run the Firebase emulators
-yarn serve --only  hosting,functions,database
+yarn serve --only  hosting,functions,firestore
 ```
+
+> ⚠️ Using the Firebase Auth emulator creates client-side errors that prevents proper rendering of the page in non-incognito mode. 🤔
 
 ## 🧪 Testing
 

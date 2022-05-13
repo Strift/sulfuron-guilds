@@ -9,7 +9,11 @@
       @change="onChange(checkBox, $event)"
     >
       <div class="flex items-center space-x-2">
-        <ClassIcon :wow-class="checkBox.classValue" class="h-5" />
+        <ClassIcon
+          :class-slug="checkBox.classValue"
+          :alt-text="checkBox.className"
+          class="h-5"
+        />
         <span v-if="checkBox.specValue">{{ checkBox.specName }}</span>
         <span v-else class="font-semibold text-gray-700">{{ checkBox.className }}</span>
       </div>
@@ -19,7 +23,7 @@
 
 <script>
 import cloneDeep from 'lodash/cloneDeep'
-import ClassIcon from '~/components/ui/ClassIcon.vue'
+import ClassIcon from '~/components/Ui/ClassIcon.vue'
 import getClassName from '~/data/utils/getClassName'
 import getSpecName from '~/data/utils/getSpecName'
 

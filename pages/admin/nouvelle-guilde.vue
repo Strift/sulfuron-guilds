@@ -30,14 +30,14 @@
         />
       </template>
       <template v-slot:pending>
-        <BaseLoader class="mx-auto" />
+        <UiLoader class="mx-auto" />
       </template>
     </Promised>
   </div>
 </template>
 
 <script>
-import { ref, defineComponent, computed } from '@nuxtjs/composition-api'
+import { computed, defineComponent, ref } from '@nuxtjs/composition-api'
 import { Promised } from 'vue-promised'
 import useCreateGuild from '~/composables/admin/useCreateGuild'
 import useGuilds from '~/composables/database/useGuilds'

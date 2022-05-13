@@ -1,6 +1,6 @@
 <template>
   <div v-if="!guilds.length">
-    <BaseLoader class="mx-auto" />
+    <UiLoader class="mx-auto" />
   </div>
   <transition-group
     v-else

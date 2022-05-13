@@ -1,5 +1,5 @@
 import Vuex from 'vuex'
-import { mount, createLocalVue } from '@vue/test-utils'
+import { createLocalVue, mount } from '@vue/test-utils'
 import sortBy from 'lodash/sortBy'
 import orderBy from 'lodash/orderBy'
 import guildFactory from '~/data/factories/guildFactory'
@@ -53,7 +53,10 @@ const mountComponent = ({ defaultSorting } = {}) => {
 
   return mount(GuildsList, {
     localVue,
-    store
+    store,
+    stubs: {
+      NuxtLink: true
+    }
   })
 }
 

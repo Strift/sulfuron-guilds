@@ -10,7 +10,7 @@
           title="Accueil"
           class="md:ml-0 md:mr-auto"
         >
-          <BaseLogo class="mx-auto" :navbar="true" />
+          <Logo class="mx-auto" :compact="true" />
         </NuxtLink>
         <nav class="w-full">
           <ul class="flex items-center justify-end space-x-5 list-none md:space-x-12">
@@ -55,11 +55,13 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import Logo from '~/components/Ui/Logo.vue'
 import BellIcon from '~/components/icons/outline/BellIcon.vue'
 import UserIcon from '~/components/icons/solid/UserIcon.vue'
 
 export default {
   components: {
+    Logo,
     BellIcon,
     UserIcon
   },

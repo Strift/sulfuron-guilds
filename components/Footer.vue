@@ -1,12 +1,12 @@
 <template>
-  <footer class="bg-gray-900 py-20 space-y-12 text-gray-300">
-    <div class="container md:flex md:space-y-0 mx-auto px-5 space-y-12 xl:px-0">
+  <footer class="py-20 space-y-12 text-gray-300 bg-gray-900">
+    <div class="container px-5 mx-auto space-y-12 md:flex md:space-y-0 xl:px-0">
       <div class="md:w-1/2">
-        <BaseLogo />
+        <Logo />
       </div>
-      <div class="items-baseline justify-end lg:space-x-48 md:flex md:space-x-32 md:space-y-0 md:w-1/2 space-y-12 xl:space-x-64">
+      <div class="items-baseline justify-end space-y-12 lg:space-x-48 md:flex md:space-x-32 md:space-y-0 md:w-1/2 xl:space-x-64">
         <div>
-          <div class="font-semibold mb-6 md:mb-10 text-lg">
+          <div class="mb-6 text-lg font-semibold md:mb-10">
             Sulfuron
           </div>
           <ul class="space-y-5 text-gray-500">
@@ -24,7 +24,7 @@
           </ul>
         </div>
         <div v-if="$config.features.ENABLE_PARTNERS">
-          <div class="font-semibold mb-6 md:mb-10 text-lg">
+          <div class="mb-6 text-lg font-semibold md:mb-10">
             Partenaires
           </div>
           <ul class="space-y-5 text-gray-500">
@@ -32,7 +32,7 @@
           </ul>
         </div>
         <div>
-          <div class="font-semibold mb-6 md:mb-10 text-lg">
+          <div class="mb-6 text-lg font-semibold md:mb-10">
             Contact
           </div>
           <ul class="space-y-5 text-gray-500">
@@ -48,3 +48,11 @@
     </div>
   </footer>
 </template>
+
+<script>
+import Logo from '~/components/Ui/Logo.vue'
+
+export default {
+  components: { Logo }
+}
+</script>

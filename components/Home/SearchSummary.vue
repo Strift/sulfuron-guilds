@@ -1,16 +1,20 @@
 <template>
   <div class="text-center text-gray-500">
-    {{ orderedResults.length }} {{ resultsText }} trouvées.
+    {{ orderedResults.length }} {{ resultsText }}.
   </div>
 </template>
 
 <script>
-import { computed } from 'vue-demi'
+import { computed } from '@nuxtjs/composition-api'
 import useSearchStore from '~/composables/useSearchStore'
 export default {
   setup () {
     const { orderedResults } = useSearchStore()
-    const resultsText = computed(() => orderedResults.length > 1 ? 'guildes' : 'guilde')
+    const resultsText = computed(() => {
+      return orderedResults.value.length === 1
+        ? 'guilde trouvée'
+        : 'guildes trouvées'
+    })
     return {
       orderedResults,
       resultsText

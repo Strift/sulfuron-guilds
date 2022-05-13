@@ -1,5 +1,7 @@
 export default function (classValue) {
   switch (classValue) {
+    case 'death-knight':
+      return 'border-death-knight'
     case 'druid':
       return 'border-druid'
     case 'hunter':

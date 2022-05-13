@@ -1,10 +1,12 @@
 import { vuexfireMutations } from 'vuexfire'
+import cookie from 'cookie'
+import Factions from '~/data/factions'
 
 const BACKGROUND_STATE_FACTION = 'faction'
 const BACKGROUND_STATE_PROMO = 'sunwell'
 
 export const state = () => ({
-  faction: 'Horde',
+  faction: Factions.HORDE,
   background: BACKGROUND_STATE_FACTION,
   openGuild: null,
   notifications: []
@@ -26,10 +28,10 @@ export const mutations = {
   },
 
   toggleFaction (state) {
-    if (state.faction === 'Alliance') {
-      state.faction = 'Horde'
-    } else if (state.faction === 'Horde') {
-      state.faction = 'Alliance'
+    if (state.faction === Factions.ALLIANCE) {
+      state.faction = Factions.HORDE
+    } else if (state.faction === Factions.HORDE) {
+      state.faction = Factions.ALLIANCE
     }
   },
 
@@ -47,6 +49,17 @@ export const mutations = {
 
   removeNotificationByTimestamp (state, timestamp) {
     state.notifications = state.notifications.filter(notification => notification.timestamp === timestamp)
+  }
+}
+
+export const actions = {
+  nuxtServerInit ({ commit }, { req }) {
+    if (req && req.headers.cookie) {
+      const cookies = cookie.parse(req.headers.cookie)
+      if ([Factions.HORDE, Factions.ALLIANCE].includes(cookies.default_faction)) {
+        commit('setFaction', cookies.default_faction)
+      }
+    }
   }
 }
 
