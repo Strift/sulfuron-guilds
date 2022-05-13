@@ -19,13 +19,24 @@
 
 ## 🚧 Development setup
 
-**Setting up the environment**
+### Nuxt environment
 
-Copy the `.env.example` file as `.env` and edit its values. These environment variables are used by the Nuxt app at _build time_.
+Copy `.env.example` as `.env` and edit its values. 
+These environment variables are used by the Nuxt app at _build time_.
 
-Copy the `functions/.runtimeconfig.example.json` file as `functions/.runtimeconfig.json` and edit its values. These environement variables are used by the Firebase Functions _at runtime_.
+- **Sentry:** https://sentry.io/settings/account/api/auth-tokens/
 
-**Running the apps**
+### Firebase Functions
+
+Copy `functions/.runtimeconfig.example.json` as `functions/.runtimeconfig.json` and edit its values. 
+These environment variables are used by the Firebase Functions _at runtime_.
+
+Then, download the Service Account to enable connecting in local and place it at `functions/.service-account.json`. 
+The file is available in your Firebase console project settings. 
+
+- **Battle.net credentials:** https://develop.battle.net/access/clients/
+
+### Running the apps
 
 > ⚠️ As of today, Firebase Auth emulator encounters issues when trying to generate custom tokens with `firebase-admin`, so we're not using it in local. 
 
