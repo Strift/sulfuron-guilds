@@ -1,12 +1,12 @@
 <template>
   <div>
-    <div class="grid grid-flow-row grid-cols-2 gap-5 lg:grid-cols-9 sm:grid-cols-5">
+    <div class="grid grid-flow-row grid-cols-2 gap-5 lg:grid-cols-8 sm:grid-cols-5">
       <SelectCard
         v-for="wowClass in classFilters"
         :key="wowClass.class"
         :selected="hasOneSpecChecked(wowClass)"
         :selected-border-class="getClassBorderColorClass(wowClass.class)"
-        :header-class="getClassTextColorClass(wowClass.class)"
+        :header-class="getClassTextColorClass(wowClass.class) + ' truncate'"
       >
         <template slot="header">
           {{ wowClass.name }}
