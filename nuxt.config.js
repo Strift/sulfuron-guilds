@@ -1,5 +1,4 @@
 import git from 'git-rev-sync'
-// import guildConverter from './data/converters/guildConverter'
 import firebaseConfig from './firebaseConfig'
 
 const evalBool = (bool) => {
@@ -108,6 +107,10 @@ export default {
       // Fix documented in this issue: https://github.com/vueuse/vue-demi/issues/106
       config.resolve.alias['@vue/composition-api'] = '@vue/composition-api/dist/vue-composition-api.mjs'
       config.resolve.alias['@vue/composition-api/dist/vue-composition-api.esm.js'] = '@vue/composition-api/dist/vue-composition-api.mjs'
+
+      // Errors with directory import in @nuxtjs/firebase
+      // Issue: https://github.com/nuxt-community/firebase-module/issues/602
+      config.resolve.alias['firebase/app'] = 'firebase/app/dist/index.cjs.js'
     },
     // Enabled to fix the following issue
     // https://github.com/nuxt/nuxt.js/issues/5800#issuecomment-549404405
@@ -122,33 +125,21 @@ export default {
   ** See https://nuxtjs.org/docs/2.x/configuration-glossary/configuration-generate
   */
   generate: {
-    // async routes () {
-    //   try {
-    //     const { default: firebase } = await import('firebase/app')
-
-    //     await import('firebase/firestore')
-    //     if (!firebase.apps.length) {
-    //       firebase.initializeApp(firebaseConfig)
-    //     }
-    //     const firestore = firebase.firestore()
-
-    //     const querySnapshot = await firestore
-    //       .collection('guilds')
-    //       .withConverter(guildConverter)
-    //       .where('published', '==', true)
-    //       .get()
-
-    //     return querySnapshot.docs.map((doc) => {
-    //       const guild = doc.data()
-    //       return {
-    //         route: `/g/${guild.slug}/`,
-    //         payload: guild
-    //       }
-    //     })
-    //   } catch (error) {
-    //     console.error(error)
-    //   }
-    // },
+    async done (builder) {
+      const appModule = await import('./.nuxt/firebase/app.js')
+      const { session } = await appModule.default(
+        builder.options.firebase.config,
+        {
+          res: null
+        }
+      )
+      try {
+        session.database().goOffline()
+      } catch (e) { }
+      try {
+        session.firestore().terminate()
+      } catch (e) { }
+    },
     /*
      * Do not re-generate when changes happen in these files or folders
      */
@@ -194,7 +185,9 @@ export default {
         collectionEnabled: isProduction()
       }
     },
-    terminateDatabasesAfterGenerate: true
+    // 'true' doesn't work anymore:
+    // Fix: https://firebase.nuxtjs.org/community/faq/#nuxt-generate-warns-with-nuxt-generate-finished-but-did-not-exit
+    terminateDatabasesAfterGenerate: false
   },
   /*
   ** Sentry module configuration
