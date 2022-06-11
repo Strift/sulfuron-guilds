@@ -34,8 +34,26 @@ export default function useGuilds () {
     return guildSnapshot.docs[0].data()
   }
 
+  const updateBySlug = async (slug, payload) => {
+    const guildSnapshot = await firestore
+      .collection('guilds')
+      .withConverter(guildConverter)
+      .where('slug', '==', slug)
+      .get()
+
+    if (guildSnapshot.empty) {
+      throw new Error('Guild does not exist')
+    }
+
+    return guildSnapshot.docs[0].ref.update(payload)
+  }
+
   const deleteById = (id, { hardDelete = false } = {}) => {
-    const docRef = firestore.collection('guilds').withConverter(guildConverter).doc(id)
+    const docRef = firestore
+      .collection('guilds')
+      .withConverter(guildConverter)
+      .doc(id)
+
     if (hardDelete) {
       return docRef.delete()
     } else {
@@ -50,6 +68,7 @@ export default function useGuilds () {
     create,
     list,
     findBySlug,
+    updateBySlug,
     deleteById
   }
 }
