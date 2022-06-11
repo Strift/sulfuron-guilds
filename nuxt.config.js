@@ -1,5 +1,5 @@
 import git from 'git-rev-sync'
-import guildConverter from './data/converters/guildConverter'
+// import guildConverter from './data/converters/guildConverter'
 import firebaseConfig from './firebaseConfig'
 
 const evalBool = (bool) => {
