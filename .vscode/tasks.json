@@ -1,0 +1,30 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "npm",
+			"script": "dev",
+			"problemMatcher": [],
+			"label": "npm: dev",
+			"detail": "nuxt",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		},
+		{
+			"type": "npm",
+			"script": "serve",
+			"problemMatcher": [],
+			"label": "npm: serve",
+			"detail": "firebase emulators:start --only hosting,functions,firestore"
+		},
+		{
+			"type": "npm",
+			"script": "seed",
+			"problemMatcher": [],
+			"label": "npm: seed",
+			"detail": "node -r dotenv/config -r esm"
+		}
+	]
+}
