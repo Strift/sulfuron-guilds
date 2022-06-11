@@ -1,5 +1,5 @@
 import git from 'git-rev-sync'
-import guildConverter from './data/converters/guildConverter'
+// import guildConverter from './data/converters/guildConverter'
 import firebaseConfig from './firebaseConfig'
 
 const evalBool = (bool) => {
@@ -103,6 +103,12 @@ export default {
   ** See https://nuxtjs.org/api/configuration-build/
   */
   build: {
+    extend (config) {
+      // Errors with resolution of @vue/composition-api in vue-demi
+      // Fix documented in this issue: https://github.com/vueuse/vue-demi/issues/106
+      config.resolve.alias['@vue/composition-api'] = '@vue/composition-api/dist/vue-composition-api.mjs'
+      config.resolve.alias['@vue/composition-api/dist/vue-composition-api.esm.js'] = '@vue/composition-api/dist/vue-composition-api.mjs'
+    },
     // Enabled to fix the following issue
     // https://github.com/nuxt/nuxt.js/issues/5800#issuecomment-549404405
     html: {

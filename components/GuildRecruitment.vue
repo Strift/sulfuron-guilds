@@ -30,7 +30,7 @@
       >
         <ClassIcon
           :class-slug="classRecruitment.class"
-          :alt-text="classRecruitment.name"
+          :alt-text="getClassName(classRecruitment.class)"
           class="h-6 opacity-75"
         />
         <div v-show="expanded">
@@ -49,6 +49,7 @@
 <script>
 import ClassIcon from '~/components/Ui/ClassIcon.vue'
 import ChevronDownIcon from '~/components/icons/solid/ChevronDownIcon.vue'
+import getClassName from '~/data/utils/getClassName'
 
 import WOW_CLASSES from '~/data/classes.json'
 
@@ -107,7 +108,8 @@ export default {
         .filter(({ open }) => open)
         .map(({ name }) => name)
         .join(', ')
-    }
+    },
+    getClassName
   }
 }
 </script>
