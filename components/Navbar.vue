@@ -25,6 +25,13 @@
               v-show="showBackButton"
               class="hidden md:inline-flex"
             />
+            <!-- <NavbarLink
+              v-show="showAboutButton"
+              to="/en-savoir-plus/"
+              title="En savoir plus"
+            >
+              En savoir plus
+            </NavbarLink> -->
             <NavbarLink
               v-show="showAdminButton && isAdmin"
               to="/admin/guildes/"
@@ -75,6 +82,9 @@ export default {
     ]),
     showBackButton () {
       return this.$route.path !== '/' && !this.pathStartsWith('/g/')
+    },
+    showAboutButton () {
+      return this.$route.path !== '/en-savoir-plus/'
     },
     showAccountButton () {
       return !(this.pathStartsWith('/compte/') || this.pathStartsWith('/connexion/'))
