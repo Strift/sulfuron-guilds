@@ -3,7 +3,7 @@
     <Heading2 class="flex items-baseline justify-between">
       Changer le GM <span v-if="guild" class="text-base text-gray-600">{{ guild.name }}</span>
     </Heading2>
-    <UiLoader v-if="fetchState.pending" class="mx-auto" />
+    <BaseLoader v-if="fetchState.pending" class="mx-auto" />
     <div v-else class="space-y-8">
       <InformationCard>
         <p v-if="guild.ownerUid">
@@ -31,11 +31,13 @@ import InformationCard from '~/components/atoms/InformationCard.vue'
 import BasePrimaryButton from '~/components/Base/PrimaryButton.vue'
 import AdminUserInput from '~/components/Admin/UserInput.vue'
 import useGuilds from '~/composables/database/useGuilds'
+import BaseLoader from '~/components/atoms/BaseLoader.vue'
 
 export default defineComponent({
   layout: 'admin',
   components: {
     Heading2,
+    BaseLoader,
     InformationCard,
     BasePrimaryButton,
     AdminUserInput

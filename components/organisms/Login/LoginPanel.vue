@@ -23,7 +23,7 @@
       <h1 class="font-bold leading-none pb-8 text-4xl text-gray-900">
         Connexion en cours...
       </h1>
-      <UiLoader class="m-auto" />
+      <BaseLoader class="m-auto" />
       <p class="mt-auto text-center text-gray-500">
         Veuillez patienter.
       </p>
@@ -33,11 +33,13 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import BaseLoader from '~/components/atoms/BaseLoader.vue'
 import IllidanCard from '~/components/molecules/IllidanCard.vue'
 import BattleNetLoginButton from '~/components/molecules/BattleNetLoginButton.vue'
 
 export default {
   components: {
+    BaseLoader,
     IllidanCard,
     BattleNetLoginButton
   },

@@ -14,7 +14,7 @@
         </span>
       </NuxtLink>
     </div>
-    <UiLoader v-if="$fetchState.pending" class="mx-auto" />
+    <BaseLoader v-if="$fetchState.pending" class="mx-auto" />
     <div v-else>
       <div class="justify-end mb-10 sm:flex sm:flex-row-reverse">
         <div class="mb-8 text-center sm:ml-12 sm:mr-0 sm:my-auto sm:text-left">
@@ -102,6 +102,7 @@ import sortBy from 'lodash/sortBy'
 import getClassName from '~/data/utils/getClassName'
 import getSpecName from '~/data/utils/getSpecName'
 import getClassTextColorClass from '~/data/utils/getClassTextColorClass'
+import BaseLoader from '~/components/atoms/BaseLoader.vue'
 import SpecIcon from '~/components/Ui/SpecIcon.vue'
 import ClockIcon from '~/components/icons/solid/ClockIcon.vue'
 import GlobeIcon from '~/components/icons/solid/GlobeIcon.vue'
@@ -112,6 +113,7 @@ import specializationSlug from '~/data/utils/specializationSlug'
 
 export default defineComponent({
   components: {
+    BaseLoader,
     SpecIcon,
     ClockIcon,
     GlobeIcon,

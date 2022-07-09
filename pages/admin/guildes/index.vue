@@ -26,7 +26,7 @@
         />
       </template>
       <template v-slot:pending>
-        <UiLoader class="mx-auto" />
+        <BaseLoader class="mx-auto" />
       </template>
     </Promised>
     <Heading2 class="flex items-baseline justify-between">
@@ -41,7 +41,7 @@
         />
       </template>
       <template v-slot:pending>
-        <UiLoader class="mx-auto" />
+        <BaseLoader class="mx-auto" />
       </template>
     </Promised>
   </div>
@@ -51,11 +51,16 @@
 import { computed, ref } from '@nuxtjs/composition-api'
 import { Promised } from 'vue-promised'
 import Heading2 from '~/components/atoms/Heading2.vue'
+import BaseLoader from '~/components/atoms/BaseLoader.vue'
 import useGuilds from '~/composables/database/useGuilds'
 
 export default {
   layout: 'admin',
-  components: { Heading2, Promised },
+  components: {
+    Heading2,
+    BaseLoader,
+    Promised
+  },
   setup () {
     const { list, deleteById } = useGuilds()
     const searchText = ref('')

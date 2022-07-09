@@ -30,7 +30,7 @@
         />
       </template>
       <template v-slot:pending>
-        <UiLoader class="mx-auto" />
+        <BaseLoader class="mx-auto" />
       </template>
     </Promised>
   </div>
@@ -43,6 +43,7 @@ import useCreateGuild from '~/composables/admin/useCreateGuild'
 import useGuilds from '~/composables/database/useGuilds'
 import Heading2 from '~/components/atoms/Heading2.vue'
 import InformationCard from '~/components/atoms/InformationCard.vue'
+import BaseLoader from '~/components/atoms/BaseLoader.vue'
 
 export default defineComponent({
   layout: 'admin',
@@ -50,7 +51,8 @@ export default defineComponent({
   components: {
     Heading2,
     InformationCard,
-    Promised
+    Promised,
+    BaseLoader
   },
   setup () {
     const { name: guildName, ownerUid, createGuild } = useCreateGuild()
