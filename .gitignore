@@ -102,3 +102,6 @@ functions/.service-account.testing.json
 # Storybook
 .nuxt-storybook
 storybook-static
+
+# VS Code
+.vscode/
