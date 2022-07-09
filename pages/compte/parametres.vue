@@ -1,15 +1,15 @@
 <template>
-  <AccountSettings @logout="logout" />
+  <AccountSettingsPage @logout="logout" />
 </template>
 
 <script>
-import AccountSettings from '~/components/templates/AccountSettings.vue'
+import AccountSettingsPage from '~/components/templates/AccountSettingsPage.vue'
 
 export default {
   name: 'Settings',
   layout: 'account',
   components: {
-    AccountSettings
+    AccountSettingsPage
   },
   methods: {
     async logout () {
