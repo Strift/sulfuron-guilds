@@ -1,4 +1,4 @@
-import SpecIcon from '~/components/Ui/SpecIcon.vue'
+import SpecIcon from '~/components/atoms/icons/SpecIcon.vue'
 
 export default {
   component: SpecIcon,
@@ -6,7 +6,7 @@ export default {
     specializationSlug: 'rogue-assassination',
     altText: 'Voleur Assassinat'
   },
-  title: 'UI/SpecIcon'
+  title: 'atoms/icons/SpecIcon'
 }
 
 const Template = (args, { argTypes }) => ({
