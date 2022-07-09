@@ -1,14 +1,14 @@
 <template>
   <div class="space-y-8">
     <BaseHeader2>Créer une guilde</BaseHeader2>
-    <BaseInformationCard class="space-y-2">
+    <InformationCard class="space-y-2">
       <p class="font-semibold">
         ⚠ Attention
       </p>
       <p>
         Les GMs ne peuvent pas modifier le nom de leur guilde, faites bien attention à l'orthographe.
       </p>
-    </BaseInformationCard>
+    </InformationCard>
     <div class="max-w-sm space-y-10">
       <BaseInput
         v-model="guildName"
@@ -41,11 +41,13 @@ import { computed, defineComponent, ref } from '@nuxtjs/composition-api'
 import { Promised } from 'vue-promised'
 import useCreateGuild from '~/composables/admin/useCreateGuild'
 import useGuilds from '~/composables/database/useGuilds'
+import InformationCard from '~/components/atoms/InformationCard.vue'
 
 export default defineComponent({
   layout: 'admin',
   middleware: ['auth', 'admin'],
   components: {
+    InformationCard,
     Promised
   },
   setup () {
