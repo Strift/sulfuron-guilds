@@ -9,7 +9,12 @@
 </template>
 
 <script>
+import BattleNetIcon from '~/components/atoms/icons/BattleNetIcon.vue'
+
 export default {
+  components: {
+    BattleNetIcon
+  },
   props: {
     href: {
       type: String,

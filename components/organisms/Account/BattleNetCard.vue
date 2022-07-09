@@ -1,8 +1,12 @@
 <script>
 import { mapGetters } from 'vuex'
 import { defineComponent } from '@vue/composition-api'
+import BattleNetIcon from '~/components/atoms/icons/BattleNetIcon.vue'
 
 export default defineComponent({
+  components: {
+    BattleNetIcon
+  },
   computed: {
     ...mapGetters('account', ['username'])
   }

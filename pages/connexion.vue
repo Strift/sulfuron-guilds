@@ -8,7 +8,7 @@
         La connexion est nécessaire uniquement pour administrer une guilde.
       </p>
       <div class="mt-auto text-center">
-        <LoginButton
+        <BattleNetLoginButton
           :href="`${$config.baseURL}/auth/battlenet`"
           class="hover:shadow-lg mb-12 shadow-md"
           @click="startLoading"
@@ -33,12 +33,16 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import BattleNetLoginButton from '~/components/molecules/BattleNetLoginButton.vue'
 
 const AUTH_TOKEN_QUERY = 'auth_token'
 
 export default {
   scrollToTop: true,
   layout: 'default',
+  components: {
+    BattleNetLoginButton
+  },
   computed: {
     ...mapGetters('account', [
       'isGuest'
