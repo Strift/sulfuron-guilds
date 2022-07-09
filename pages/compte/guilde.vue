@@ -106,7 +106,7 @@ import { mapGetters, mapState } from 'vuex'
 import isUrl from 'is-url'
 
 import Heading2 from '~/components/atoms/Heading2.vue'
-import MissingGuildLogo from '~/components/ui/MissingGuildLogo.vue'
+import MissingGuildLogo from '~/components/atoms/MissingGuildLogo.vue'
 
 import WOW_CLASSES from '~/data/classes.json'
 const DAYS_OF_THE_WEEK = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche']
