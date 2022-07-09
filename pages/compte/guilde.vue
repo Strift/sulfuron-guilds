@@ -5,13 +5,13 @@
       @publish="publish"
     />
     <div class="space-y-10">
-      <BaseHeader2>Tableau de bord</BaseHeader2>
+      <Heading2>Tableau de bord</Heading2>
       <AccountGuildOverview
         :website-redirects="websiteRedirectsCount"
         :contact-redirects="contactRedirectsCount"
       />
     </div>
-    <BaseHeader2>Général</BaseHeader2>
+    <Heading2>Général</Heading2>
     <div class="flex flex-col-reverse justify-between lg:flex-row">
       <div class="max-w-sm space-y-10 w-full">
         <BaseInput :value="name" name="name" label="Nom de guilde" disabled />
@@ -51,13 +51,13 @@
         placeholder="Nous sommes une guilde de copains."
       />
     </div>
-    <BaseHeader2>Horaires</BaseHeader2>
+    <Heading2>Horaires</Heading2>
     <div class="lg:flex lg:space-x-12 lg:space-y-0 space-y-10 xl:justify-between">
       <BaseInput v-model="startHour" name="start-hour" type="time" label="Heure de début" class="max-w-sm w-full" />
       <BaseInput v-model="endHour" name="end-hour" type="time" label="Heure de fin" class="max-w-sm w-full" />
     </div>
     <BaseCheckList v-model="raidDays" :options="daysOptions" name="days" label="Jours de raid" />
-    <BaseHeader2>Recrutement</BaseHeader2>
+    <Heading2>Recrutement</Heading2>
     <div>
       <div class="block font-semibold leading-none mb-4 text-blue-400 text-shadow-sm">
         Classes recherchées
@@ -67,7 +67,7 @@
         class="gap-x-6 gap-y-4 grid grid-cols-2 grid-flow-cols lg:grid-cols-5 md:grid-cols-3"
       />
     </div>
-    <BaseHeader2>Contact</BaseHeader2>
+    <Heading2>Contact</Heading2>
     <BaseInput
       v-model="websiteUrl"
       :error-message="urlErrorMessage(websiteUrl)"
@@ -105,6 +105,7 @@ import { debounce } from 'lodash'
 import { mapGetters, mapState } from 'vuex'
 import isUrl from 'is-url'
 
+import Heading2 from '~/components/atoms/Heading2.vue'
 import MissingGuildLogo from '~/components/ui/MissingGuildLogo.vue'
 
 import WOW_CLASSES from '~/data/classes.json'
@@ -114,6 +115,7 @@ export default {
   name: 'Guild',
   layout: 'account',
   components: {
+    Heading2,
     MissingGuildLogo
   },
   data: () => ({

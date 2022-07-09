@@ -28,9 +28,7 @@ export default defineComponent({
     InformationCard
   },
   computed: {
-    ...mapGetters('account', [
-      'isAGuildOwner'
-    ])
+    ...mapGetters('account', ['isAGuildOwner'])
   }
 })
 </script>

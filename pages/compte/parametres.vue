@@ -1,19 +1,8 @@
 <template>
   <div class="space-y-10">
-    <RegisterGuildSection />
-    <BaseHeader2>
-      Battle.net
-    </BaseHeader2>
-    <div class="flex shadow-md">
-      <div class="bg-gray-900 flex h-20 items-center rounded-l w-20">
-        <BattleNetIcon class="h-10" />
-      </div>
-      <div class="bg-gray-300 flex flex-grow items-center p-6 rounded-r text-gray-800">
-        <div>
-          Connecté en tant que <span class="font-semibold">{{ username }}</span>.
-        </div>
-      </div>
-    </div>
+    <RegisterGuildCard />
+    <Heading2>Battle.net</Heading2>
+    <BattleNetCard />
     <BaseDangerButton @click="logout">
       Déconnexion
     </BaseDangerButton>
@@ -22,13 +11,17 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import RegisterGuildSection from '~/components/organisms/Account/RegisterGuildSection.vue'
+import Heading2 from '~/components/atoms/Heading2.vue'
+import RegisterGuildCard from '~/components/organisms/Account/RegisterGuildCard.vue'
+import BattleNetCard from '~/components/organisms/Account/BattleNetCard.vue'
 
 export default {
   name: 'Settings',
   layout: 'account',
   components: {
-    RegisterGuildSection
+    Heading2,
+    RegisterGuildCard,
+    BattleNetCard
   },
   computed: {
     ...mapGetters('account', [

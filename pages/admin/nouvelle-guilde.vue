@@ -1,6 +1,6 @@
 <template>
   <div class="space-y-8">
-    <BaseHeader2>Créer une guilde</BaseHeader2>
+    <Heading2>Créer une guilde</Heading2>
     <InformationCard class="space-y-2">
       <p class="font-semibold">
         ⚠ Attention
@@ -20,7 +20,7 @@
     <BasePrimaryButton @click="onGuildCreate">
       Valider
     </BasePrimaryButton>
-    <BaseHeader2>Guildes non publiées</BaseHeader2>
+    <Heading2>Guildes non publiées</Heading2>
     <Promised :promise="draftGuilds">
       <template v-slot="data">
         <AdminGuildList
@@ -41,12 +41,14 @@ import { computed, defineComponent, ref } from '@nuxtjs/composition-api'
 import { Promised } from 'vue-promised'
 import useCreateGuild from '~/composables/admin/useCreateGuild'
 import useGuilds from '~/composables/database/useGuilds'
+import Heading2 from '~/components/atoms/Heading2.vue'
 import InformationCard from '~/components/atoms/InformationCard.vue'
 
 export default defineComponent({
   layout: 'admin',
   middleware: ['auth', 'admin'],
   components: {
+    Heading2,
     InformationCard,
     Promised
   },

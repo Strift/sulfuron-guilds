@@ -1,8 +1,8 @@
 <template>
   <div class="space-y-8">
-    <BaseHeader2 class="flex items-baseline justify-between">
+    <Heading2 class="flex items-baseline justify-between">
       Changer le GM <span v-if="guild" class="text-base text-gray-600">{{ guild.name }}</span>
-    </BaseHeader2>
+    </Heading2>
     <UiLoader v-if="fetchState.pending" class="mx-auto" />
     <div v-else class="space-y-8">
       <InformationCard>
@@ -26,7 +26,7 @@
 
 <script>
 import { defineComponent, ref, useFetch, useRoute } from '@nuxtjs/composition-api'
-import BaseHeader2 from '~/components/Base/Header2.vue'
+import Heading2 from '~/components/atoms/Heading2.vue'
 import InformationCard from '~/components/atoms/InformationCard.vue'
 import BasePrimaryButton from '~/components/Base/PrimaryButton.vue'
 import AdminUserInput from '~/components/Admin/UserInput.vue'
@@ -35,7 +35,7 @@ import useGuilds from '~/composables/database/useGuilds'
 export default defineComponent({
   layout: 'admin',
   components: {
-    BaseHeader2,
+    Heading2,
     InformationCard,
     BasePrimaryButton,
     AdminUserInput
