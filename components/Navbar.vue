@@ -64,7 +64,7 @@
 import { mapGetters } from 'vuex'
 import BaseContainer from '~/components/atoms/BaseContainer.vue'
 import Logo from '~/components/Ui/Logo.vue'
-import BellIcon from '~/components/icons/outline/BellIcon.vue'
+import BellIcon from '~/components/atoms/icons/outline/BellIcon.vue'
 import UserIcon from '~/components/icons/solid/UserIcon.vue'
 
 export default {
