@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import CloseIcon from '~/components/icons/solid/CloseIcon.vue'
+import CloseIcon from '~/components/atoms/icons/solid/CloseIcon.vue'
 
 export default {
   components: {
