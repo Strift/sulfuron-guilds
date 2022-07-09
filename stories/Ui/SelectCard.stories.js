@@ -1,11 +1,11 @@
-import SelectCard from '~/components/Ui/SelectCard.vue'
+import SelectCard from '~/components/atoms/SelectCard.vue'
 
 export default {
   component: SelectCard,
   args: {
     selected: false
   },
-  title: 'UI/SelectCard'
+  title: 'atoms/SelectCard'
 }
 
 const Template = (args, { argTypes }) => ({
