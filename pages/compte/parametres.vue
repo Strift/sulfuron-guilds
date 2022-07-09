@@ -1,33 +1,15 @@
 <template>
-  <div class="space-y-10">
-    <RegisterGuildCard />
-    <Heading2>Battle.net</Heading2>
-    <BattleNetCard />
-    <BaseDangerButton @click="logout">
-      Déconnexion
-    </BaseDangerButton>
-  </div>
+  <AccountSettings @logout="logout" />
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import Heading2 from '~/components/atoms/Heading2.vue'
-import RegisterGuildCard from '~/components/organisms/Account/RegisterGuildCard.vue'
-import BattleNetCard from '~/components/organisms/Account/BattleNetCard.vue'
+import AccountSettings from '~/components/templates/AccountSettings.vue'
 
 export default {
   name: 'Settings',
   layout: 'account',
   components: {
-    Heading2,
-    RegisterGuildCard,
-    BattleNetCard
-  },
-  computed: {
-    ...mapGetters('account', [
-      'username',
-      'isAGuildOwner'
-    ])
+    AccountSettings
   },
   methods: {
     async logout () {
