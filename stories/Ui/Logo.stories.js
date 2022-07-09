@@ -1,8 +1,8 @@
-import Logo from '~/components/Ui/Logo.vue'
+import Logo from '~/components/atoms/Logo.vue'
 
 export default {
   component: Logo,
-  title: 'Base/Logo',
+  title: 'atoms/Logo',
   template: '<Logo/>'
 }
 

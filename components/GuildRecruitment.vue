@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import ClassIcon from '~/components/Ui/ClassIcon.vue'
+import ClassIcon from '~/components/atoms/icons/ClassIcon.vue'
 import ChevronDownIcon from '~/components/atoms/icons/solid/ChevronDownIcon.vue'
 import getClassName from '~/data/utils/getClassName'
 

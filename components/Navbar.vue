@@ -63,7 +63,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import BaseContainer from '~/components/atoms/BaseContainer.vue'
-import Logo from '~/components/Ui/Logo.vue'
+import Logo from '~/components/atoms/Logo.vue'
 import BellIcon from '~/components/atoms/icons/outline/BellIcon.vue'
 import UserIcon from '~/components/atoms/icons/solid/UserIcon.vue'
 
