@@ -78,8 +78,8 @@ import useSearchStore from '~/composables/useSearchStore'
 import useAccountStore from '~/composables/useAccountStore'
 
 import BaseContainer from '~/components/atoms/BaseContainer.vue'
-import FilterIcon from '~/components/icons/solid/FilterIcon.vue'
-import ChevronDownIcon from '~/components/icons/solid/ChevronDownIcon.vue'
+import FilterIcon from '~/components/atoms/icons/solid/FilterIcon.vue'
+import ChevronDownIcon from '~/components/atoms/icons/solid/ChevronDownIcon.vue'
 
 export default {
   name: 'Index',

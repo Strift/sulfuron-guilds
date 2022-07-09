@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import FilterIcon from '~/components/icons/solid/FilterIcon.vue'
+import FilterIcon from '~/components/atoms/icons/solid/FilterIcon.vue'
 
 export default {
   components: {

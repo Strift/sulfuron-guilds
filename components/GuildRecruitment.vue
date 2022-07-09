@@ -48,7 +48,7 @@
 
 <script>
 import ClassIcon from '~/components/Ui/ClassIcon.vue'
-import ChevronDownIcon from '~/components/icons/solid/ChevronDownIcon.vue'
+import ChevronDownIcon from '~/components/atoms/icons/solid/ChevronDownIcon.vue'
 import getClassName from '~/data/utils/getClassName'
 
 import WOW_CLASSES from '~/data/classes.json'

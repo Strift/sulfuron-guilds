@@ -23,7 +23,7 @@
 <script>
 import { computed, defineComponent } from '@nuxtjs/composition-api'
 import { SortingType } from '~/store/search'
-import SortAscendingIcon from '~/components/icons/solid/SortAscendingIcon.vue'
+import SortAscendingIcon from '~/components/atoms/icons/solid/SortAscendingIcon.vue'
 import useSearchStore from '~/composables/useSearchStore'
 
 export default defineComponent({

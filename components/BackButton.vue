@@ -14,7 +14,7 @@
 
 <script>
 import { defineComponent } from '@nuxtjs/composition-api'
-import ArrowLeftIcon from '~/components/icons/solid/ArrowLeftIcon.vue'
+import ArrowLeftIcon from '~/components/atoms/icons/solid/ArrowLeftIcon.vue'
 
 export default defineComponent({
   components: { ArrowLeftIcon }
