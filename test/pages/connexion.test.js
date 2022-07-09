@@ -1,16 +1,12 @@
 import Vuex from 'vuex'
 import { createLocalVue, mount } from '@vue/test-utils'
 import LoginPage from '~/pages/connexion.vue'
-import LoginCard from '~/components/Login/Card.vue'
-import LoginButton from '~/components/Login/Button.vue'
-import BattleNetIcon from '~/components/BattleNetIcon.vue'
+import LoginPanel from '~/components/organisms/Login/LoginPanel.vue'
 import { getters, state } from '~/store/account'
 
 const localVue = createLocalVue()
 localVue.use(Vuex)
-localVue.component('LoginCard', LoginCard)
-localVue.component('LoginButton', LoginButton)
-localVue.component('BattleNetIcon', BattleNetIcon)
+localVue.component('LoginPanel', LoginPanel)
 
 const store = new Vuex.Store({
   modules: {
@@ -46,9 +42,9 @@ const mountComponent = ({ authToken } = {}) => {
 }
 
 describe('Login Page', () => {
-  it('displays the LoginCard', () => {
+  it('displays the LoginPanel', () => {
     const wrapper = mountComponent()
-    expect(wrapper.findComponent(LoginCard).exists()).toBe(true)
+    expect(wrapper.findComponent(LoginPanel).exists()).toBe(true)
   })
 
   it('attempts login if there is an auth_token query parameter', () => {
