@@ -1,3 +1,13 @@
+<script>
+import CloseIcon from '~/components/atoms/icons/solid/CloseIcon.vue'
+
+export default {
+  components: {
+    CloseIcon
+  }
+}
+</script>
+
 <template>
   <div class="bg-blue-900 bg-opacity-50 flex items-center px-3 py-1 rounded-full space-x-2 text-gray-600">
     <div>
@@ -8,13 +18,3 @@
     </button>
   </div>
 </template>
-
-<script>
-import CloseIcon from '~/components/atoms/icons/solid/CloseIcon.vue'
-
-export default {
-  components: {
-    CloseIcon
-  }
-}
-</script>
