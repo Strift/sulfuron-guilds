@@ -1,12 +1,11 @@
 import Vuex from 'vuex'
 import { createLocalVue, mount } from '@vue/test-utils'
 import LoginPage from '~/pages/connexion.vue'
-import LoginPanel from '~/components/organisms/Login/LoginPanel.vue'
+import LoginPageTemplate from '~/components/templates/LoginPage.vue'
 import { getters, state } from '~/store/account'
 
 const localVue = createLocalVue()
 localVue.use(Vuex)
-localVue.component('LoginPanel', LoginPanel)
 
 const store = new Vuex.Store({
   modules: {
@@ -42,9 +41,9 @@ const mountComponent = ({ authToken } = {}) => {
 }
 
 describe('Login Page', () => {
-  it('displays the LoginPanel', () => {
+  it('displays the LoginPageTemplate', () => {
     const wrapper = mountComponent()
-    expect(wrapper.findComponent(LoginPanel).exists()).toBe(true)
+    expect(wrapper.findComponent(LoginPageTemplate).exists()).toBe(true)
   })
 
   it('attempts login if there is an auth_token query parameter', () => {
