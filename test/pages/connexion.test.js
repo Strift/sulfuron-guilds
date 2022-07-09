@@ -36,6 +36,7 @@ const mountComponent = ({ authToken } = {}) => {
         baseURL: 'https://guildes.sulfuron.eu'
       },
       $router: {
+        push: jest.fn(),
         currentRoute: {
           query
         }
