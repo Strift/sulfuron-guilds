@@ -1,12 +1,23 @@
 import git from 'git-rev-sync'
-import firebaseConfig from './firebaseConfig'
+import firebaseConfig from './config/firebase'
+
+const getNodeEnv = () => process.env.NODE_ENV
 
 const evalBool = (bool) => {
   if (bool === 'true') { return true } else if (bool === 'false') { return false }
   return bool
 }
-const isProduction = () => process.env.NODE_ENV === 'production'
+const isProduction = () => getNodeEnv() === 'production'
+const isDevelopment = () => getNodeEnv() === 'development'
 const getHostname = () => isProduction() ? 'https://guildes.sulfuron.eu' : process.env.BASE_URL
+
+const getFirebaseConfig = () => {
+  const env = getNodeEnv()
+  if (!Object.keys(firebaseConfig).includes(env)) {
+    throw new Error(`No firebase configuration defined for ${env}`)
+  }
+  return firebaseConfig[env]
+}
 
 export default {
   /*
@@ -21,6 +32,11 @@ export default {
     baseURL: getHostname(),
     features: {
       ENABLE_PARTNERS: evalBool(process.env.FEATURES_ENABLE_PARTNERS)
+    },
+    sentry: {
+      config: {
+        environment: getNodeEnv()
+      }
     }
   },
   /*
@@ -161,7 +177,7 @@ export default {
   ** Firebase module configuration
   */
   firebase: {
-    config: firebaseConfig,
+    config: getFirebaseConfig(),
     services: {
       auth: {
         emulatorPort: (process.env.NODE_ENV === 'development' && process.env.FIREBASE_EMULATOR_AUTH === 'true')
@@ -193,7 +209,7 @@ export default {
   ** Sentry module configuration
   */
   sentry: {
-    disabled: !isProduction(),
+    disabled: isDevelopment(),
     dsn: 'https://c641e9d80e684743befafefdbe54d3d9@o571625.ingest.sentry.io/5720079',
     publishRelease: true,
     sourceMapStyle: 'hidden-source-map',

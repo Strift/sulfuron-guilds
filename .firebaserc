@@ -8,8 +8,8 @@
         "production": [
           "sulfuron-guilds"
         ],
-        "dev": [
-          "sulfuron-guilds-dev"
+        "staging": [
+          "sulfuron-guilds-staging"
         ]
       }
     }

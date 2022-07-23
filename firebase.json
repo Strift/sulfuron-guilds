@@ -29,7 +29,7 @@
 			]
     },
     {
-			"target": "dev",
+			"target": "staging",
 			"public": "dist",
 			"trailingSlash": true,
 			"ignore": [

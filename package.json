@@ -9,11 +9,12 @@
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "rimraf dist && nuxt generate",
+    "generate:staging": "rimraf dist && NODE_ENV=staging nuxt generate",
     "lint:js": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "lint": "yarn lint:js",
     "test": "NODE_ICU_DATA=node_modules/full-icu jest --testPathIgnorePatterns=functions/test/",
     "deploy": "firebase deploy",
-    "deploy:dev": "firebase deploy --only hosting:dev",
+    "deploy:staging": "firebase deploy --only hosting:staging",
     "storybook": "nuxt storybook"
   },
   "lint-staged": {
