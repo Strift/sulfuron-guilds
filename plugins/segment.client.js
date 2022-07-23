@@ -1,34 +1,86 @@
-export default function () {
+export default function (_, inject) {
+  const options = {
+    writeKey: 'WFOBvQ3QsErx4LLRiZej4bIgpClIxRyH'
+  }
+
+  if (!options.disabled && (!options.writeKey || options.writeKey.length === 0)) {
+    console.warn('Please enter a Segment Write Key')
+    return
+  }
+
   const analytics = window.analytics = window.analytics || []
-  if (!analytics.initialize) {
-    if (analytics.invoked) {
-      window.console && console.error && console.error('Segment snippet included twice.')
-    } else {
-      analytics.invoked = !0
-      analytics.methods = ['trackSubmit', 'trackClick', 'trackLink', 'trackForm', 'pageview', 'identify', 'reset', 'group', 'track', 'ready', 'alias', 'debug', 'page', 'once', 'off', 'on']
-      analytics.factory = function (t) {
-        return function () {
-          const e = Array.prototype.slice.call(arguments)
-          e.unshift(t); analytics.push(e)
-          return analytics
-        }
-      }
-      for (let t = 0; t < analytics.methods.length; t++) {
-        const e = analytics.methods[t]
-        analytics[e] = analytics.factory(e)
-      }
-      analytics.load = function (t, e) {
-        const n = document.createElement('script')
-        n.type = 'text/javascript'
-        n.async = !0
-        n.src = 'https://cdn.segment.com/analytics.js/v1/' + t + '/analytics.min.js'
-        const a = document.getElementsByTagName('script')[0]
-        a.parentNode.insertBefore(n, a)
-        analytics._loadOptions = e
-      }
-      analytics.SNIPPET_VERSION = '4.1.0'
-      analytics.load('WFOBvQ3QsErx4LLRiZej4bIgpClIxRyH')
-      analytics.page()
+
+  if (analytics.initialize) {
+    return
+  }
+
+  if (analytics.invoked) {
+    if (window.console && console.error) {
+      console.error('Segment snippet included twice.')
+    }
+    return
+  }
+
+  analytics.invoked = true
+
+  analytics.methods = [
+    'trackSubmit',
+    'trackClick',
+    'trackLink',
+    'trackForm',
+    'pageview',
+    'identify',
+    'reset',
+    'group',
+    'track',
+    'ready',
+    'alias',
+    'debug',
+    'page',
+    'once',
+    'off',
+    'on'
+  ]
+
+  analytics.factory = function (method) {
+    return function () {
+      const args = Array.prototype.slice.call(arguments)
+      args.unshift(method)
+      analytics.push(args)
+      return analytics
     }
   }
+
+  for (let i = 0; i < analytics.methods.length; i++) {
+    const key = analytics.methods[i]
+    analytics[key] = analytics.factory(key)
+  }
+
+  analytics.SNIPPET_VERSION = '4.1.0'
+
+  analytics.load = function (key, options) {
+    const script = document.createElement('script')
+    script.type = 'text/javascript'
+    script.async = true
+    script.src = 'https://cdn.segment.com/analytics.js/v1/' +
+        key + '/analytics.min.js'
+
+    const first = document.getElementsByTagName('script')[0]
+    first.parentNode.insertBefore(script, first)
+    analytics._loadOptions = options
+  }
+
+  if (!options.disabled) {
+    analytics.load(options.writeKey, options.settings)
+  }
+
+  if (options.router) {
+    options.router.afterEach(function (to, from) {
+      window.analytics.page(options.pageCategory || '', to.name || '', {
+        path: to.fullPath
+      })
+    })
+  }
+
+  inject('segment', analytics)
 }
