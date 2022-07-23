@@ -3,6 +3,7 @@ const config = require('../config')
 const logger = require('../services/logger')
 const firebase = require('../services/firebase')
 const passport = require('../middlewares/passport')
+const analytics = require('../services/segment')
 
 const AUTH_PAGE_URL = `${config.hosting.app}/connexion/`
 
@@ -19,6 +20,16 @@ server.get('/auth/battlenet/callback',
     logger.debug(`Successful battlenet authentication with account ${uid}`)
     firebase.auth().createCustomToken(uid)
       .then((token) => {
+        analytics.identify({
+          userId: uid,
+          traits: {
+            createdAt: new Date(firebase.database.ServerValue.TIMESTAMP)
+          }
+        })
+        analytics.track({
+          userId: uid,
+          event: 'Signed Up'
+        })
         logger.debug(`Successful token creation for ${uid}`)
         res.redirect(`${AUTH_PAGE_URL}?auth_token=${token}`)
       })

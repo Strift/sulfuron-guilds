@@ -17,6 +17,7 @@
   "dependencies": {
     "@google-cloud/connect-firestore": "^2.0.0",
     "@google-cloud/firestore": "^4.7.1",
+    "analytics-node": "^6.1.0",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "express-validator": "^6.10.0",
