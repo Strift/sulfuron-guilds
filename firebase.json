@@ -3,31 +3,29 @@
     "rules": "firestore.rules",
     "indexes": "firestore.indexes.json"
   },
-  "hosting": [
-    {
-			"public": "dist",
-			"trailingSlash": true,
-			"ignore": [
-				"firebase.json",
-				"**/.*",
-				"**/node_modules/**"
-			],
-			"rewrites": [
-				{
-					"source": "/redirect{,/**}",
-					"function": "redirect"
-				},
-				{
-					"source": "/auth{,/**}",
-					"function": "auth"
-				},
-				{
-					"source": "**",
-					"destination": "/index.html"
-				}
-			]
-    }
-	],
+  "hosting": {
+		"public": "dist",
+		"trailingSlash": true,
+		"ignore": [
+			"firebase.json",
+			"**/.*",
+			"**/node_modules/**"
+		],
+		"rewrites": [
+			{
+				"source": "/redirect{,/**}",
+				"function": "redirect"
+			},
+			{
+				"source": "/auth{,/**}",
+				"function": "auth"
+			},
+			{
+				"source": "**",
+				"destination": "/index.html"
+			}
+		]
+	},
   "emulators": {
     "functions": {
       "port": 5001

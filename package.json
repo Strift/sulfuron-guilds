@@ -13,7 +13,7 @@
     "lint:js": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "lint": "yarn lint:js",
     "test": "NODE_ICU_DATA=node_modules/full-icu jest --testPathIgnorePatterns=functions/test/",
-    "deploy": "firebase deploy",
+    "deploy:production": "firebase deploy --project production",
     "deploy:staging": "firebase deploy --project staging",
     "storybook": "nuxt storybook"
   },

@@ -9,7 +9,15 @@ const evalBool = (bool) => {
 }
 const isProduction = () => getNodeEnv() === 'production'
 const isDevelopment = () => getNodeEnv() === 'development'
-const getHostname = () => isProduction() ? 'https://guildes.sulfuron.eu' : process.env.BASE_URL
+const getHostname = () => {
+  const env = getNodeEnv()
+  if (env === 'staging') {
+    return 'https://sulfuron-guilds-staging.web.app/'
+  } else if (env === 'production') {
+    return 'https://guildes.sulfuron.eu'
+  }
+  return process.env.BASE_URL
+}
 
 const getFirebaseConfig = () => {
   const env = getNodeEnv()
