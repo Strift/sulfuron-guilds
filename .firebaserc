@@ -1,9 +1,26 @@
 {
   "projects": {
-    "default": "sulfuron-guilds"
+    "default": "sulfuron-guilds",
+    "staging": "sulfuron-guilds-staging"
   },
   "targets": {
     "sulfuron-guilds": {
+      "firestore": {
+        "production": [
+          "sulfuron-guilds"
+        ],
+        "staging": [
+          "sulfuron-guilds-staging"
+        ]
+      },
+      "functions": {
+        "production": [
+          "sulfuron-guilds"
+        ],
+        "staging": [
+          "sulfuron-guilds-staging"
+        ]
+      },
       "hosting": {
         "production": [
           "sulfuron-guilds"
