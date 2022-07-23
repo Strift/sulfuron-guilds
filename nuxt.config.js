@@ -78,7 +78,8 @@ export default {
   ** https://nuxtjs.org/guide/plugins
   */
   plugins: [
-    '~/plugins/vue-cookies.client.js'
+    '~/plugins/vue-cookies.client.js',
+    '~/plugins/segment.client.js'
   ],
   /*
   ** Nuxt.js dev-modules
