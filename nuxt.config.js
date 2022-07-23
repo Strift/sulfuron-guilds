@@ -1,5 +1,4 @@
 import git from 'git-rev-sync'
-import firebaseConfig from './config/firebase'
 
 const getNodeEnv = () => process.env.NODE_ENV
 
@@ -17,14 +16,6 @@ const getHostname = () => {
     return 'https://guildes.sulfuron.eu'
   }
   return process.env.BASE_URL
-}
-
-const getFirebaseConfig = () => {
-  const env = getNodeEnv()
-  if (!Object.keys(firebaseConfig).includes(env)) {
-    throw new Error(`No firebase configuration defined for ${env}`)
-  }
-  return firebaseConfig[env]
 }
 
 export default {
@@ -185,7 +176,33 @@ export default {
   ** Firebase module configuration
   */
   firebase: {
-    config: getFirebaseConfig(),
+    config: {
+      production: {
+        apiKey: 'AIzaSyDgCfIFFy-5Lw8rQ-HF3M--T-oT270LdpE',
+        authDomain: 'sulfuron-guilds.firebaseapp.com',
+        databaseURL: 'https://sulfuron-guilds.firebaseio.com',
+        projectId: 'sulfuron-guilds',
+        storageBucket: 'sulfuron-guilds.appspot.com',
+        messagingSenderId: '229682010576',
+        appId: '1:229682010576:web:db892c4df7f3ba3b1281d5'
+      },
+      staging: {
+        apiKey: 'AIzaSyA6JtdseEsctm9fmOkkSUg4VY3QHFbVglE',
+        authDomain: 'sulfuron-guilds-staging.firebaseapp.com',
+        projectId: 'sulfuron-guilds-staging',
+        storageBucket: 'sulfuron-guilds-staging.appspot.com',
+        messagingSenderId: '406027081529',
+        appId: '1:406027081529:web:69a25de34dd3cd99787ae8'
+      },
+      development: {
+        apiKey: 'AIzaSyA6JtdseEsctm9fmOkkSUg4VY3QHFbVglE',
+        authDomain: 'sulfuron-guilds-staging.firebaseapp.com',
+        projectId: 'sulfuron-guilds-staging',
+        storageBucket: 'sulfuron-guilds-staging.appspot.com',
+        messagingSenderId: '406027081529',
+        appId: '1:406027081529:web:69a25de34dd3cd99787ae8'
+      }
+    },
     services: {
       auth: {
         emulatorPort: (process.env.NODE_ENV === 'development' && process.env.FIREBASE_EMULATOR_AUTH === 'true')
