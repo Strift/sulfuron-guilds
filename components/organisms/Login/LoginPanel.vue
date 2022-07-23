@@ -9,7 +9,7 @@
       </p>
       <div class="mt-auto text-center">
         <BattleNetLoginButton
-          :href="`${$config.baseURL}/auth/battlenet`"
+          :href="loginUrl"
           class="hover:shadow-lg mb-12 shadow-md"
           @click="startLoading"
         />
@@ -44,7 +44,10 @@ export default {
     BattleNetLoginButton
   },
   computed: {
-    ...mapGetters('account', ['isGuest'])
+    ...mapGetters('account', ['isGuest']),
+    loginUrl () {
+      return `${this.$config.baseURL}/auth/battlenet`
+    }
   },
   methods: {
     startLoading () {
