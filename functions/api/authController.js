@@ -28,7 +28,7 @@ server.get('/auth/battlenet/callback',
         })
         analytics.track({
           userId: uid,
-          event: 'Signed Up'
+          event: 'SignUp'
         })
         logger.debug(`Successful token creation for ${uid}`)
         res.redirect(`${AUTH_PAGE_URL}?auth_token=${token}`)
