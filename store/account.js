@@ -47,9 +47,9 @@ export const actions = {
       dispatch('fetchAdmin')
       dispatch('fetchGuild')
     } else {
-      this.$segment.reset()
       commit('setUser', null)
       commit('setAuthState', AUTH_STATE_GUEST)
+      this.$segment.reset()
     }
   },
   async login ({ commit, state }, authToken) {
@@ -69,12 +69,12 @@ export const actions = {
   },
   logout ({ commit, dispatch }) {
     try {
-      this.$segment.track('SignOut')
       this.$fire.auth.signOut()
       commit('setAuthState', AUTH_STATE_GUEST)
       commit('setAdmin', false)
-      dispatch('disableGuildSync')
+      this.$segment.track('SignOut')
       // user state update is managed by onFirebaseAuthStateChanged
+      dispatch('disableGuildSync')
     } catch (error) {
       commit('setError', error)
       commit('setAuthState', AUTH_STATE_ERROR)

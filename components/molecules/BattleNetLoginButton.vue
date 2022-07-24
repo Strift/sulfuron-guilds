@@ -2,6 +2,7 @@
   <a
     class="border inline-flex items-center px-4 py-2 space-x-4 text-gray-200"
     :href="href"
+    @click="trackClick"
   >
     <BattleNetIcon class="h-8 w-8" />
     <div>Connexion</div>
@@ -19,6 +20,11 @@ export default {
     href: {
       type: String,
       required: true
+    }
+  },
+  methods: {
+    trackClick () {
+      this.$segment.track('LoginButton Clicked')
     }
   }
 }
