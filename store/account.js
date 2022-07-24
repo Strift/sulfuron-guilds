@@ -72,6 +72,7 @@ export const actions = {
   },
   logout ({ commit, dispatch }) {
     try {
+      this.$segment.track('SignOut')
       this.$fire.auth.signOut()
       commit('setAuthState', AUTH_STATE_GUEST)
       commit('setAdmin', false)
