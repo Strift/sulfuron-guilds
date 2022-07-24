@@ -23,7 +23,7 @@ server.get('/auth/battlenet/callback',
         analytics.identify({
           userId: uid,
           traits: {
-            createdAt: new Date(firebase.database.ServerValue.TIMESTAMP)
+            createdAt: new Date()
           }
         })
         analytics.track({

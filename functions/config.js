@@ -9,5 +9,8 @@ module.exports = {
   battlenet: {
     clientId: functions.config().battlenet.client_id,
     clientSecret: functions.config().battlenet.client_secret
+  },
+  segment: {
+    enabled: functions.config().segment.enabled
   }
 }
