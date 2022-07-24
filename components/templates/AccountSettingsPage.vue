@@ -3,7 +3,7 @@
     <RegisterGuildCard />
     <Heading2>Battle.net</Heading2>
     <BattleNetCard />
-    <DangerButton @click="$emit('logout')">
+    <DangerButton @click="logout">
       Déconnexion
     </DangerButton>
   </div>
@@ -21,6 +21,12 @@ export default {
     DangerButton,
     RegisterGuildCard,
     BattleNetCard
+  },
+  methods: {
+    logout () {
+      this.$segment.track('SignOutButton Clicked')
+      this.$emit('logout')
+    }
   }
 }
 </script>
