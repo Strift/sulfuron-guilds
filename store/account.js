@@ -40,12 +40,10 @@ export const mutations = {
 export const actions = {
   onFirebaseAuthStateChanged ({ commit, dispatch }, { authUser }) {
     if (authUser) {
-      commit('setUser', {
-        name: authUser.uid
-      })
+      commit('setUser', { name: authUser.uid })
+      commit('setAuthState', AUTH_STATE_AUTHENTICATED)
       this.$segment.identify(authUser.uid)
       this.$segment.track('SignIn')
-      commit('setAuthState', AUTH_STATE_AUTHENTICATED)
       dispatch('fetchAdmin')
       dispatch('fetchGuild')
     } else {
@@ -59,12 +57,11 @@ export const actions = {
       if (state.authState !== AUTH_STATE_LOADING) {
         commit('setAuthState', AUTH_STATE_LOADING)
       }
-
       const { user } = await this.$fire.auth.signInWithCustomToken(authToken)
-      commit('setUser', {
-        name: user.uid
-      })
+      commit('setUser', { name: user.uid })
       commit('setAuthState', AUTH_STATE_AUTHENTICATED)
+      this.$segment.identify(user.uid)
+      this.$segment.track('SignIn')
     } catch (error) {
       commit('setError', error)
       commit('setAuthState', AUTH_STATE_ERROR)
@@ -92,7 +89,7 @@ export const actions = {
     if (userRef.exists) {
       const isAdmin = userRef.data().admin
       commit('setAdmin', isAdmin)
-      this.$segment.identify(state.user, {
+      this.$segment.identify(state.user.name, {
         isAdmin
       })
     }
@@ -107,7 +104,7 @@ export const actions = {
     if (querySnapshot.empty) {
       return
     }
-    this.$segment.identify(state.user, {
+    this.$segment.identify(state.user.name, {
       isGuildOwner: true
     })
 
