@@ -24,7 +24,7 @@ export default {
   },
   methods: {
     trackClick () {
-      this.$segment.track('LoginButton Clicked')
+      this.$segment.track('BNetLoginButton Clicked')
     }
   }
 }
