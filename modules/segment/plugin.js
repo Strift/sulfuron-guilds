@@ -7,6 +7,9 @@ const localAnalytics = {
   },
   track (arg) {
     console.info('Segment: track', arg)
+  },
+  reset () {
+    console.info('Segment: reset')
   }
 }
 

@@ -49,6 +49,7 @@ export const actions = {
       dispatch('fetchAdmin')
       dispatch('fetchGuild')
     } else {
+      this.$segment.reset()
       commit('setUser', null)
       commit('setAuthState', AUTH_STATE_GUEST)
     }
@@ -81,17 +82,21 @@ export const actions = {
       commit('setAuthState', AUTH_STATE_ERROR)
     }
   },
-  async fetchAdmin ({ commit }) {
+  async fetchAdmin ({ commit, state }) {
     const userRef = await this.$fire.firestore
       .collection('users')
       .doc(this.$fire.auth.currentUser.uid)
       .get()
 
     if (userRef.exists) {
-      commit('setAdmin', userRef.data().admin)
+      const isAdmin = userRef.data().admin
+      commit('setAdmin', isAdmin)
+      this.$segment.identify(state.user, {
+        isAdmin
+      })
     }
   },
-  async fetchGuild ({ commit, dispatch }) {
+  async fetchGuild ({ state, dispatch }) {
     const querySnapshot = await this.$fire.firestore
       .collection('guilds')
       .withConverter(guildConverter)
@@ -101,6 +106,10 @@ export const actions = {
     if (querySnapshot.empty) {
       return
     }
+    this.$segment.identify(state.user, {
+      isGuildOwner: true
+    })
+
     await dispatch('enableGuildSync', querySnapshot.docs[0].ref) // There should be only one query result
     await dispatch('fetchRedirects')
   },
