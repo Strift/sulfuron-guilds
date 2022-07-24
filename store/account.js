@@ -49,7 +49,6 @@ export const actions = {
     } else {
       commit('setUser', null)
       commit('setAuthState', AUTH_STATE_GUEST)
-      this.$segment.reset()
     }
   },
   async login ({ commit, state }, authToken) {
@@ -73,6 +72,7 @@ export const actions = {
       commit('setAuthState', AUTH_STATE_GUEST)
       commit('setAdmin', false)
       this.$segment.track('SignOut')
+      this.$segment.reset()
       // user state update is managed by onFirebaseAuthStateChanged
       dispatch('disableGuildSync')
     } catch (error) {
