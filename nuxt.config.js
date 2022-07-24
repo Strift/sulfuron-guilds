@@ -78,8 +78,7 @@ export default {
   ** https://nuxtjs.org/guide/plugins
   */
   plugins: [
-    '~/plugins/vue-cookies.client.js',
-    '~/plugins/segment.client.js'
+    '~/plugins/vue-cookies.client.js'
   ],
   /*
   ** Nuxt.js dev-modules
@@ -111,7 +110,8 @@ export default {
       directiveOnly: true
     }],
     // Doc: https://sitemap.nuxtjs.org/
-    '@nuxtjs/sitemap'
+    '@nuxtjs/sitemap',
+    '~/modules/segment'
   ],
   /*
   ** Build configuration
@@ -258,6 +258,14 @@ export default {
         '.nuxt/dist/client/img'
       ]
     }
+  },
+  /*
+  ** Firebase module configuration
+  */
+  segment: {
+    disabled: isDevelopment(),
+    writeKey: process.env.SEGMENT_WRITE_KEY,
+    settings: {}
   },
   /*
   ** Site map

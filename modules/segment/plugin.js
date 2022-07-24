@@ -1,10 +1,9 @@
-export default function (_, inject) {
-  const options = {
-    writeKey: 'WFOBvQ3QsErx4LLRiZej4bIgpClIxRyH'
-  }
+const OPTIONS = '<%= serialize(options) %>'
+const options = JSON.parse(OPTIONS)
 
+export default function ({ app: { router } }, inject) {
   if (!options.disabled && (!options.writeKey || options.writeKey.length === 0)) {
-    console.warn('Please enter a Segment Write Key')
+    console.warn('Missing Segment Write Key')
     return
   }
 
@@ -74,13 +73,11 @@ export default function (_, inject) {
     analytics.load(options.writeKey, options.settings)
   }
 
-  if (options.router) {
-    options.router.afterEach(function (to, from) {
-      window.analytics.page(options.pageCategory || '', to.name || '', {
-        path: to.fullPath
-      })
+  router.afterEach(function (to, from) {
+    window.analytics.page(options.pageCategory || '', to.name || '', {
+      path: to.fullPath
     })
-  }
+  })
 
   inject('segment', analytics)
 }
