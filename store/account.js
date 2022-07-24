@@ -43,6 +43,8 @@ export const actions = {
       commit('setUser', {
         name: authUser.uid
       })
+      this.$segment.identify(authUser.uid)
+      this.$segment.track('SignIn')
       commit('setAuthState', AUTH_STATE_AUTHENTICATED)
       dispatch('fetchAdmin')
       dispatch('fetchGuild')

@@ -1,8 +1,24 @@
 const OPTIONS = '<%= serialize(options) %>'
 const options = JSON.parse(OPTIONS)
 
+const localAnalytics = {
+  identify (arg) {
+    console.info('Segment: identify', arg)
+  },
+  track (arg) {
+    console.info('Segment: track', arg)
+  }
+}
+
 export default function ({ app: { router } }, inject) {
-  if (!options.disabled && (!options.writeKey || options.writeKey.length === 0)) {
+  if (options.disabled) {
+    // eslint-disable-next-line
+    console.info('Segment analytics disabled, injecting local analytics plugin')
+    inject('segment', localAnalytics)
+    return
+  }
+
+  if ((!options.writeKey || options.writeKey.length === 0)) {
     console.warn('Missing Segment Write Key')
     return
   }
@@ -69,9 +85,7 @@ export default function ({ app: { router } }, inject) {
     analytics._loadOptions = options
   }
 
-  if (!options.disabled) {
-    analytics.load(options.writeKey, options.settings)
-  }
+  analytics.load(options.writeKey, options.settings)
 
   router.afterEach(function (to, from) {
     window.analytics.page(options.pageCategory || '', to.name || '', {
