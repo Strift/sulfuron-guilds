@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import ChevronDownIcon from '~/components/icons/solid/ChevronDownIcon.vue'
+import ChevronDownIcon from '~/components/atoms/icons/solid/ChevronDownIcon.vue'
 
 export default {
   components: {

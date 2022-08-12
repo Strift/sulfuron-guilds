@@ -1,14 +1,14 @@
 <template>
   <div class="space-y-8">
-    <BaseHeader2>Créer une guilde</BaseHeader2>
-    <BaseInformationCard class="space-y-2">
+    <Heading2>Créer une guilde</Heading2>
+    <InformationCard class="space-y-2">
       <p class="font-semibold">
         ⚠ Attention
       </p>
       <p>
         Les GMs ne peuvent pas modifier le nom de leur guilde, faites bien attention à l'orthographe.
       </p>
-    </BaseInformationCard>
+    </InformationCard>
     <div class="max-w-sm space-y-10">
       <BaseInput
         v-model="guildName"
@@ -20,7 +20,7 @@
     <BasePrimaryButton @click="onGuildCreate">
       Valider
     </BasePrimaryButton>
-    <BaseHeader2>Guildes non publiées</BaseHeader2>
+    <Heading2>Guildes non publiées</Heading2>
     <Promised :promise="draftGuilds">
       <template v-slot="data">
         <AdminGuildList
@@ -30,7 +30,7 @@
         />
       </template>
       <template v-slot:pending>
-        <UiLoader class="mx-auto" />
+        <BaseLoader class="mx-auto" />
       </template>
     </Promised>
   </div>
@@ -41,12 +41,18 @@ import { computed, defineComponent, ref } from '@nuxtjs/composition-api'
 import { Promised } from 'vue-promised'
 import useCreateGuild from '~/composables/admin/useCreateGuild'
 import useGuilds from '~/composables/database/useGuilds'
+import Heading2 from '~/components/atoms/Heading2.vue'
+import InformationCard from '~/components/atoms/InformationCard.vue'
+import BaseLoader from '~/components/atoms/BaseLoader.vue'
 
 export default defineComponent({
   layout: 'admin',
   middleware: ['auth', 'admin'],
   components: {
-    Promised
+    Heading2,
+    InformationCard,
+    Promised,
+    BaseLoader
   },
   setup () {
     const { name: guildName, ownerUid, createGuild } = useCreateGuild()

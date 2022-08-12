@@ -14,7 +14,7 @@
         </span>
       </NuxtLink>
     </div>
-    <UiLoader v-if="$fetchState.pending" class="mx-auto" />
+    <BaseLoader v-if="$fetchState.pending" class="mx-auto" />
     <div v-else>
       <div class="justify-end mb-10 sm:flex sm:flex-row-reverse">
         <div class="mb-8 text-center sm:ml-12 sm:mr-0 sm:my-auto sm:text-left">
@@ -102,16 +102,18 @@ import sortBy from 'lodash/sortBy'
 import getClassName from '~/data/utils/getClassName'
 import getSpecName from '~/data/utils/getSpecName'
 import getClassTextColorClass from '~/data/utils/getClassTextColorClass'
-import SpecIcon from '~/components/Ui/SpecIcon.vue'
-import ClockIcon from '~/components/icons/solid/ClockIcon.vue'
-import GlobeIcon from '~/components/icons/solid/GlobeIcon.vue'
-import CalendarIcon from '~/components/icons/solid/CalendarIcon.vue'
-import ArrowLeftIcon from '~/components/icons/solid/ArrowLeftIcon.vue'
+import BaseLoader from '~/components/atoms/BaseLoader.vue'
+import SpecIcon from '~/components/atoms/icons/SpecIcon.vue'
+import ClockIcon from '~/components/atoms/icons/solid/ClockIcon.vue'
+import GlobeIcon from '~/components/atoms/icons/solid/GlobeIcon.vue'
+import CalendarIcon from '~/components/atoms/icons/solid/CalendarIcon.vue'
+import ArrowLeftIcon from '~/components/atoms/icons/solid/ArrowLeftIcon.vue'
 import guildConverter from '~/data/converters/guildConverter'
 import specializationSlug from '~/data/utils/specializationSlug'
 
 export default defineComponent({
   components: {
+    BaseLoader,
     SpecIcon,
     ClockIcon,
     GlobeIcon,

@@ -29,7 +29,7 @@
 <script>
 import { defineComponent } from '@nuxtjs/composition-api'
 import HomeBanner from '~/components/Home/Banner.vue'
-import BellIcon from '~/components/icons/solid/BellIcon.vue'
+import BellIcon from '~/components/atoms/icons/solid/BellIcon.vue'
 
 export default defineComponent({
   components: {

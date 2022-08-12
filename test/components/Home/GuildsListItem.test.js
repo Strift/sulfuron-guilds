@@ -2,7 +2,7 @@ import { createLocalVue, mount } from '@vue/test-utils'
 import guildFactory from '~/data/factories/guildFactory.js'
 
 import HomeGuildsListItem from '~/components/Home/GuildsListItem.vue'
-import MissingGuildLogo from '~/components/ui/MissingGuildLogo.vue'
+import MissingGuildLogo from '~/components/atoms/MissingGuildLogo.vue'
 import GuildRecruitment from '~/components/GuildRecruitment.vue'
 
 const localVue = createLocalVue()

@@ -24,8 +24,8 @@
 
 <script>
 import { defineComponent } from '@nuxtjs/composition-api'
-import ActiveFilter from '~/components/ui/ActiveFilter.vue'
-import SpecIcon from '~/components/Ui/SpecIcon.vue'
+import ActiveFilter from '~/components/molecules/ActiveFilter.vue'
+import SpecIcon from '~/components/atoms/icons/SpecIcon.vue'
 import useGuildsStore from '~/composables/useGuildsStore'
 import specializationSlug from '~/data/utils/specializationSlug'
 

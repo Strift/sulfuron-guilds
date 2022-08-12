@@ -1,8 +1,8 @@
 <template>
   <div class="space-y-8">
-    <BaseHeader2 class="flex items-baseline justify-between">
+    <Heading2 class="flex items-baseline justify-between">
       Guildes publiées <span class="text-base text-gray-600">{{ publishedGuilds.length }} guildes</span>
-    </BaseHeader2>
+    </Heading2>
     <div class="flex space-x-8">
       <div class="w-1/2">
         <BaseInput v-model="searchText" name="Recherche" label="Recherche" placeholder="Nom de guilde, Battle.net" />
@@ -26,12 +26,12 @@
         />
       </template>
       <template v-slot:pending>
-        <UiLoader class="mx-auto" />
+        <BaseLoader class="mx-auto" />
       </template>
     </Promised>
-    <BaseHeader2 class="flex items-baseline justify-between">
+    <Heading2 class="flex items-baseline justify-between">
       Guildes supprimées <span class="text-base text-gray-600">{{ deletedGuilds.length }} guildes</span>
-    </BaseHeader2>
+    </Heading2>
     <Promised :promise="deletedGuilds">
       <template #default="data">
         <AdminGuildList
@@ -41,7 +41,7 @@
         />
       </template>
       <template v-slot:pending>
-        <UiLoader class="mx-auto" />
+        <BaseLoader class="mx-auto" />
       </template>
     </Promised>
   </div>
@@ -50,11 +50,17 @@
 <script>
 import { computed, ref } from '@nuxtjs/composition-api'
 import { Promised } from 'vue-promised'
+import Heading2 from '~/components/atoms/Heading2.vue'
+import BaseLoader from '~/components/atoms/BaseLoader.vue'
 import useGuilds from '~/composables/database/useGuilds'
 
 export default {
   layout: 'admin',
-  components: { Promised },
+  components: {
+    Heading2,
+    BaseLoader,
+    Promised
+  },
   setup () {
     const { list, deleteById } = useGuilds()
     const searchText = ref('')

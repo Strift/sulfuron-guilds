@@ -1,12 +1,22 @@
 import git from 'git-rev-sync'
-import firebaseConfig from './firebaseConfig'
+
+const getNodeEnv = () => process.env.NODE_ENV
 
 const evalBool = (bool) => {
   if (bool === 'true') { return true } else if (bool === 'false') { return false }
   return bool
 }
-const isProduction = () => process.env.NODE_ENV === 'production'
-const getHostname = () => isProduction() ? 'https://guildes.sulfuron.eu' : process.env.BASE_URL
+const isProduction = () => getNodeEnv() === 'production'
+const isDevelopment = () => getNodeEnv() === 'development'
+const getHostname = () => {
+  const env = getNodeEnv()
+  if (env === 'staging') {
+    return 'https://sulfuron-guilds-staging.web.app/'
+  } else if (env === 'production') {
+    return 'https://guildes.sulfuron.eu'
+  }
+  return process.env.BASE_URL
+}
 
 export default {
   /*
@@ -21,6 +31,11 @@ export default {
     baseURL: getHostname(),
     features: {
       ENABLE_PARTNERS: evalBool(process.env.FEATURES_ENABLE_PARTNERS)
+    },
+    sentry: {
+      config: {
+        environment: getNodeEnv()
+      }
     }
   },
   /*
@@ -163,7 +178,33 @@ export default {
   ** Firebase module configuration
   */
   firebase: {
-    config: firebaseConfig,
+    config: {
+      production: {
+        apiKey: 'AIzaSyDgCfIFFy-5Lw8rQ-HF3M--T-oT270LdpE',
+        authDomain: 'sulfuron-guilds.firebaseapp.com',
+        databaseURL: 'https://sulfuron-guilds.firebaseio.com',
+        projectId: 'sulfuron-guilds',
+        storageBucket: 'sulfuron-guilds.appspot.com',
+        messagingSenderId: '229682010576',
+        appId: '1:229682010576:web:db892c4df7f3ba3b1281d5'
+      },
+      staging: {
+        apiKey: 'AIzaSyA6JtdseEsctm9fmOkkSUg4VY3QHFbVglE',
+        authDomain: 'sulfuron-guilds-staging.firebaseapp.com',
+        projectId: 'sulfuron-guilds-staging',
+        storageBucket: 'sulfuron-guilds-staging.appspot.com',
+        messagingSenderId: '406027081529',
+        appId: '1:406027081529:web:69a25de34dd3cd99787ae8'
+      },
+      development: {
+        apiKey: 'AIzaSyA6JtdseEsctm9fmOkkSUg4VY3QHFbVglE',
+        authDomain: 'sulfuron-guilds-staging.firebaseapp.com',
+        projectId: 'sulfuron-guilds-staging',
+        storageBucket: 'sulfuron-guilds-staging.appspot.com',
+        messagingSenderId: '406027081529',
+        appId: '1:406027081529:web:69a25de34dd3cd99787ae8'
+      }
+    },
     services: {
       auth: {
         emulatorPort: (process.env.NODE_ENV === 'development' && process.env.FIREBASE_EMULATOR_AUTH === 'true')
@@ -195,7 +236,7 @@ export default {
   ** Sentry module configuration
   */
   sentry: {
-    disabled: !isProduction(),
+    disabled: isDevelopment(),
     dsn: 'https://c641e9d80e684743befafefdbe54d3d9@o571625.ingest.sentry.io/5720079',
     publishRelease: true,
     sourceMapStyle: 'hidden-source-map',

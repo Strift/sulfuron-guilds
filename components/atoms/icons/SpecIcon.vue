@@ -1,15 +1,6 @@
-<template>
-  <nuxt-img
-    :src="`/images/class-icons/${specializationSlug}.jpg`"
-    :alt="altText"
-    class="rounded-sm"
-    :class="{ 'grayscale-75': grayscale }"
-  />
-</template>
-
 <script>
-import PropTypes from '@znck/prop-types'
 import { defineComponent } from '@nuxtjs/composition-api'
+import PropTypes from '@znck/prop-types'
 
 export default defineComponent({
   props: {
@@ -21,3 +12,12 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <nuxt-img
+    :src="`/images/class-icons/${specializationSlug}.jpg`"
+    :alt="altText"
+    class="rounded-sm"
+    :class="{ 'grayscale-75': grayscale }"
+  />
+</template>

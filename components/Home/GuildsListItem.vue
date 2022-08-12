@@ -57,9 +57,9 @@
 import { DateTime } from 'luxon'
 import GuildLogo from '../Guild/Logo.vue'
 import GuildRecruitment from '../GuildRecruitment.vue'
-import ClockIcon from '~/components/icons/solid/ClockIcon.vue'
-import CalendarIcon from '~/components/icons/solid/CalendarIcon.vue'
-import ArrowNarrowRightIcon from '~/components/icons/solid/ArrowNarrowRightIcon.vue'
+import ClockIcon from '~/components/atoms/icons/solid/ClockIcon.vue'
+import CalendarIcon from '~/components/atoms/icons/solid/CalendarIcon.vue'
+import ArrowNarrowRightIcon from '~/components/atoms/icons/solid/ArrowNarrowRightIcon.vue'
 
 export default {
   name: 'GuildCard',

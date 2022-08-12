@@ -44,8 +44,8 @@
 
 <script>
 import { defineComponent } from '@nuxtjs/composition-api'
-import SpecIcon from '~/components/Ui/SpecIcon.vue'
-import SelectCard from '~/components/Ui/SelectCard.vue'
+import SpecIcon from '~/components/atoms/icons/SpecIcon.vue'
+import SelectCard from '~/components/atoms/SelectCard.vue'
 import useGuildsStore from '~/composables/useGuildsStore'
 import specializationSlug from '~/data/utils/specializationSlug'
 import getClassTextColorClass from '~/data/utils/getClassTextColorClass'

@@ -75,10 +75,10 @@
 <script>
 import vClickOutside from 'v-click-outside'
 import GuildLogo from '~/components/Guild/Logo.vue'
-import ClockIcon from '~/components/icons/solid/ClockIcon.vue'
-import GlobeIcon from '~/components/icons/solid/GlobeIcon.vue'
-import CalendarIcon from '~/components/icons/solid/CalendarIcon.vue'
-import ArrowLeftIcon from '~/components/icons/solid/ArrowLeftIcon.vue'
+import ClockIcon from '~/components/atoms/icons/solid/ClockIcon.vue'
+import GlobeIcon from '~/components/atoms/icons/solid/GlobeIcon.vue'
+import CalendarIcon from '~/components/atoms/icons/solid/CalendarIcon.vue'
+import ArrowLeftIcon from '~/components/atoms/icons/solid/ArrowLeftIcon.vue'
 import GuildRecruitment from '~/components/GuildRecruitment.vue'
 import GuildContactButton from '~/components/GuildContactButton.vue'
 
