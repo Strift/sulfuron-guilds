@@ -1,8 +1,8 @@
 const functions = require('firebase-functions')
 
-const authController = require('./api/authController')
-const listUsers = require('./api/listUsers')
-const redirect = require('./api/redirect')
+const authController = require('./src/api/authController')
+const listUsers = require('./src/api/listUsers')
+const redirect = require('./src/api/redirect')
 
 const onGuildUpdate = require('./background/onGuildUpdate')
 

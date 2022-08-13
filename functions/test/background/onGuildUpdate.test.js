@@ -7,7 +7,7 @@ const test = require('firebase-functions-test')()
 
 // Mock config values here
 
-const functions = require('../../index.js')
+const functions = require('../../_toberemovedindex.js')
 
 jest.setTimeout(6000)
 

@@ -3,3 +3,9 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Test folders
+test/
+
+# Firebase functions
+functions/

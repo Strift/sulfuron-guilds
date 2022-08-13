@@ -961,6 +961,13 @@
     "@types/qs" "*"
     "@types/range-parser" "*"
 
+"@types/express-session@^1.17.5":
+  version "1.17.5"
+  resolved "https://registry.yarnpkg.com/@types/express-session/-/express-session-1.17.5.tgz#13f48852b4aa60ff595835faeb4b4dda0ba0866e"
+  integrity sha512-l0DhkvNVfyUPEEis8fcwbd46VptfA/jmMwHfob2TfDMf3HyPLiB9mKD71LXhz5TMUobODXPD27zXSwtFQLHm+w==
+  dependencies:
+    "@types/express" "*"
+
 "@types/express-unless@*":
   version "0.5.2"
   resolved "https://registry.yarnpkg.com/@types/express-unless/-/express-unless-0.5.2.tgz#07e29883d280778588644b03563d8796f870f20e"
@@ -6652,6 +6659,11 @@ typedarray-to-buffer@^3.1.5:
   integrity sha512-zdu8XMNEDepKKR+XYOXAVPtWui0ly0NtohUscw+UmaHiAWT8hrV1rr//H6V+0DvJ3OQ19S979M0laLfX8rm82Q==
   dependencies:
     is-typedarray "^1.0.0"
+
+typescript@^4.7.4:
+  version "4.7.4"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.7.4.tgz#1a88596d1cf47d59507a1bcdfb5b9dfe4d488235"
+  integrity sha512-C0WQT0gezHuw6AdY1M2jxUO83Rjf0HP7Sk1DtXj6j1EwkQNZrHAg2XPWlq62oqEhYvONq5pkC2Y9oPljWToLmQ==
 
 uid-safe@~2.1.5:
   version "2.1.5"
