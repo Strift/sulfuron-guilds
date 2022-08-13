@@ -2,7 +2,7 @@ const logger = require('../services/logger')
 const firebase = require('../services/firebase')
 const FirestoreFieldValue = firebase.firestore.FieldValue
 
-module.exports = (snap, context) => {
+module.exports = (snap, _context) => {
   const data = snap.after.data()
   const previousData = snap.before.data()
 

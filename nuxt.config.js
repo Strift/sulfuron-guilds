@@ -93,7 +93,9 @@ export default {
     // Doc: https://sentry.nuxtjs.org/
     '@nuxtjs/sentry',
     // Doc: https://image.nuxtjs.org/
-    '@nuxt/image'
+    '@nuxt/image',
+    // Doc: https://typescript.nuxtjs.org/
+    '@nuxt/typescript-build'
   ],
   /*
   ** Nuxt.js modules

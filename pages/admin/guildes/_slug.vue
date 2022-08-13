@@ -53,7 +53,7 @@ export default defineComponent({
       guild.value = await findBySlug(route.value.params.slug)
     })
 
-    const onSave = async (ownerUid) => {
+    const onSave = async () => {
       await updateBySlug(route.value.params.slug, { ownerUid: newOwnerUid.value })
       newOwnerUid.value = null
       fetch()

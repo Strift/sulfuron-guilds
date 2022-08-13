@@ -1,3 +1,5 @@
+// Babel is only used for Jest
+
 module.exports = {
   presets: [
     [
