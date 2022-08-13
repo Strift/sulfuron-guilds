@@ -131,7 +131,6 @@ export default defineComponent({
       .get()
 
     if (guildSnapshot.empty) {
-      console.log('Throwing')
       this.$nuxt.context.error({
         statusCode: 404,
         message: 'Hmm... on dirait que cette guilde n\'existe pas'
