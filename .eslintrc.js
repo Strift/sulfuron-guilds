@@ -12,6 +12,9 @@ module.exports = {
     'plugin:nuxt/recommended',
     'plugin:import/recommended'
   ],
+  ignorePatterns: [
+    '/functions'
+  ],
   plugins: [
   ],
   // add your custom rules here

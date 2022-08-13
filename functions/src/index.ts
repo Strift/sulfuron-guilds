@@ -13,8 +13,16 @@ import listUsers from './api/listUsers'
 import redirect from './api/redirect'
 import onGuildUpdate from './background/onGuildUpdate'
 
-exports.auth = functions.https.onRequest(authController)
-exports.listUsers = functions.https.onCall(listUsers)
-exports.redirect = functions.https.onRequest(redirect)
+export default {
+  auth: functions.https.onRequest(authController),
+  listUsers: functions.https.onCall(listUsers),
+  redirect: functions.https.onRequest(redirect),
 
-exports.onGuildUpdate = functions.firestore.document('guilds/{guildId}').onUpdate(onGuildUpdate)
+  onGuildUpdate: functions.firestore.document('guilds/{guildId}').onUpdate(onGuildUpdate)
+}
+
+// exports.auth = functions.https.onRequest(authController)
+// exports.listUsers = functions.https.onCall(listUsers)
+// exports.redirect = functions.https.onRequest(redirect)
+
+// exports.onGuildUpdate = functions.firestore.document('guilds/{guildId}').onUpdate(onGuildUpdate)

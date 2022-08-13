@@ -1,3 +1,7 @@
+// Mock config values here
+
+import functions from '../../src/index'
+
 const admin = require('firebase-admin')
 
 process.env.FIREBASE_FIRESTORE_EMULATOR_HOST = 'localhost:8080'
@@ -5,14 +9,10 @@ process.env.FIREBASE_FUNCTIONS_EMULATOR_HOST = 'localhost:9099'
 
 const test = require('firebase-functions-test')()
 
-// Mock config values here
-
-const functions = require('../../_toberemovedindex.js')
-
 jest.setTimeout(6000)
 
 describe('onGuildUpdate', () => {
-  let wrapped
+  let wrapped: any
 
   beforeAll(() => {
     wrapped = test.wrap(functions.onGuildUpdate)

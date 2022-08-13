@@ -19,7 +19,7 @@
     "storybook": "nuxt storybook"
   },
   "lint-staged": {
-    "*.{js,vue}": "eslint"
+    "*.{js,ts,vue}": "eslint --resolve-plugins-relative-to ."
   },
   "husky": {
     "hooks": {
