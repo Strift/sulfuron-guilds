@@ -15,7 +15,7 @@
       </NuxtLink>
     </div>
     <BaseLoader v-if="$fetchState.pending" class="mx-auto" />
-    <div v-else>
+    <div v-else-if="!$fetchState.error">
       <div class="justify-end mb-10 sm:flex sm:flex-row-reverse">
         <div class="mb-8 text-center sm:ml-12 sm:mr-0 sm:my-auto sm:text-left">
           <h1 class="mb-1 text-4xl text-blue-100">
@@ -131,7 +131,13 @@ export default defineComponent({
       .get()
 
     if (guildSnapshot.empty) {
-      throw new Error('Hmm... on dirait que cette guilde n\'existe pas')
+      console.log('Throwing')
+      this.$nuxt.context.error({
+        statusCode: 404,
+        message: 'Hmm... on dirait que cette guilde n\'existe pas'
+      })
+      this.$fetchState.error = new Error('Hmm... on dirait que cette guilde n\'existe pas')
+      return
     }
     this.guild = guildSnapshot.docs[0].data()
   },
