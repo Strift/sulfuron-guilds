@@ -99,7 +99,7 @@ export const getters = {
   ** Result of the fuzzy-search
   ** Used internally by `searchResults` getter
   */
-  fuzzySearchResults (state, _, rootState) {
+  fuzzySearchResults (state, _getters, rootState) {
     if (rootState.search.textQuery.length === 0) {
       return state.list
     }
@@ -116,7 +116,7 @@ export const getters = {
   /*
   ** Final search results displayed by the UI
   */
-  searchResults (getters, rootState) {
+  searchResults (_state, getters, rootState) {
     const guilds = getters.fuzzySearchResults
     const searchedSpecsIds = getters.searchedSpecsIds
 
