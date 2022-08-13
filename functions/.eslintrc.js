@@ -1,11 +1,15 @@
 module.exports = {
-  // extends: '../.eslintrc.js',
+  root: true,
   extends: [
     'eslint:recommended',
-    'plugin:@typescript-eslint/recommended'
+    'plugin:@typescript-eslint/recommended',
+    'eslint-config-standard-with-typescript'
   ],
-  parser: '@typescript-eslint/parser',
   plugins: [
     '@typescript-eslint'
-  ]
+  ],
+  parser: '@typescript-eslint/parser',
+  parserOptions: {
+    project: './functions/tsconfig.eslint.json'
+  }
 }
