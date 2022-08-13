@@ -32,7 +32,7 @@
 
 <script>
 import { mapGetters, mapMutations } from 'vuex'
-import SwitchIcon from '~/components/icons/solid/SwitchIcon.vue'
+import SwitchIcon from '~/components/atoms/icons/solid/SwitchIcon.vue'
 
 export default {
   components: {

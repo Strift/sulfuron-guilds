@@ -1,12 +1,12 @@
-import Logo from '~/components/Ui/Logo.vue'
+import Logo from '~/components/atoms/Logo.vue'
 
 export default {
   component: Logo,
-  title: 'Base/Logo',
+  title: 'atoms/Logo',
   template: '<Logo/>'
 }
 
-const Template = (args, { argTypes }) => ({
+const Template = (_args, { argTypes }) => ({
   components: { Logo },
   props: Object.keys(argTypes),
   // Storybook provides all the args in a $props variable.

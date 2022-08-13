@@ -21,7 +21,7 @@
 
 <script>
 import { defineComponent } from '@nuxtjs/composition-api'
-import CheckCircleIcon from '~/components/icons/outline/CheckCircleIcon.vue'
+import CheckCircleIcon from '~/components/atoms/icons/outline/CheckCircleIcon.vue'
 
 export default defineComponent({
   components: {

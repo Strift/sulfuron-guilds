@@ -1,14 +1,15 @@
 <template>
-  <div class="group overflow-hidden relative rounded-md shadow-lg">
+  <div class="relative overflow-hidden rounded-md shadow-lg group">
     <img
-      src="~/static/images/phase-2-banner-600.jpg"
-      alt="Blizzard Phase 2 announcement image"
+      style="aspect-ratio: 1920/600;"
+      src="~/static/images/lk-banner.jpg"
+      alt="Blizzard annonce Wrath of the Lich King Classic"
     >
-    <div class="absolute bg-black bg-opacity-25 inset-0 transition-background" />
-    <div class="absolute left-0 pt-6 px-10 right-0 text-blue-300 text-shadow-sm to-black top-0 uppercase">
+    <div class="absolute inset-0 bg-black bg-opacity-10 transition-background" />
+    <div class="absolute top-0 left-0 right-0 px-5 pt-5 font-semibold tracking-wide text-yellow-500 uppercase sm:px-10 sm:pt-6 text-shadow-sm to-black">
       <slot name="tag" />
     </div>
-    <div class="absolute bg-gradient-to-b bottom-0 from-transparent left-0 p-10 pb-6 right-0 to-black">
+    <div class="absolute bottom-0 left-0 right-0 p-5 sm:px-10 sm:pb-6 bg-gradient-to-b from-transparent to-black">
       <slot name="default" />
     </div>
   </div>

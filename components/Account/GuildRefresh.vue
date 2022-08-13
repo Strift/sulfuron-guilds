@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import CheckIcon from '~/components/icons/solid/CheckIcon.vue'
+import CheckIcon from '~/components/atoms/icons/solid/CheckIcon.vue'
 
 export default {
   components: { CheckIcon },

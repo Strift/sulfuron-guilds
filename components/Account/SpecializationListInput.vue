@@ -23,7 +23,7 @@
 
 <script>
 import cloneDeep from 'lodash/cloneDeep'
-import ClassIcon from '~/components/Ui/ClassIcon.vue'
+import ClassIcon from '~/components/atoms/icons/ClassIcon.vue'
 import getClassName from '~/data/utils/getClassName'
 import getSpecName from '~/data/utils/getSpecName'
 

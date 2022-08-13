@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import SearchIcon from '~/components/icons/solid/SearchIcon.vue'
+import SearchIcon from '~/components/atoms/icons/solid/SearchIcon.vue'
 import useSearchStore from '~/composables/useSearchStore'
 
 export default {

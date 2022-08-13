@@ -1,14 +1,14 @@
-import SelectCard from '~/components/Ui/SelectCard.vue'
+import SelectCard from '~/components/atoms/SelectCard.vue'
 
 export default {
   component: SelectCard,
   args: {
     selected: false
   },
-  title: 'UI/SelectCard'
+  title: 'atoms/SelectCard'
 }
 
-const Template = (args, { argTypes }) => ({
+const Template = (_args, { argTypes }) => ({
   components: { SelectCard },
   props: Object.keys(argTypes),
   // Storybook provides all the args in a $props variable.

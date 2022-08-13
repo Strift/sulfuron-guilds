@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import MissingGuildLogo from '~/components/ui/MissingGuildLogo.vue'
+import MissingGuildLogo from '~/components/atoms/MissingGuildLogo.vue'
 
 export default {
   components: {

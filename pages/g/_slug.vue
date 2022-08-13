@@ -14,8 +14,8 @@
         </span>
       </NuxtLink>
     </div>
-    <UiLoader v-if="$fetchState.pending" class="mx-auto" />
-    <div v-else>
+    <BaseLoader v-if="$fetchState.pending" class="mx-auto" />
+    <div v-else-if="!$fetchState.error">
       <div class="justify-end mb-10 sm:flex sm:flex-row-reverse">
         <div class="mb-8 text-center sm:ml-12 sm:mr-0 sm:my-auto sm:text-left">
           <h1 class="mb-1 text-4xl text-blue-100">
@@ -102,16 +102,18 @@ import sortBy from 'lodash/sortBy'
 import getClassName from '~/data/utils/getClassName'
 import getSpecName from '~/data/utils/getSpecName'
 import getClassTextColorClass from '~/data/utils/getClassTextColorClass'
-import SpecIcon from '~/components/Ui/SpecIcon.vue'
-import ClockIcon from '~/components/icons/solid/ClockIcon.vue'
-import GlobeIcon from '~/components/icons/solid/GlobeIcon.vue'
-import CalendarIcon from '~/components/icons/solid/CalendarIcon.vue'
-import ArrowLeftIcon from '~/components/icons/solid/ArrowLeftIcon.vue'
+import BaseLoader from '~/components/atoms/BaseLoader.vue'
+import SpecIcon from '~/components/atoms/icons/SpecIcon.vue'
+import ClockIcon from '~/components/atoms/icons/solid/ClockIcon.vue'
+import GlobeIcon from '~/components/atoms/icons/solid/GlobeIcon.vue'
+import CalendarIcon from '~/components/atoms/icons/solid/CalendarIcon.vue'
+import ArrowLeftIcon from '~/components/atoms/icons/solid/ArrowLeftIcon.vue'
 import guildConverter from '~/data/converters/guildConverter'
 import specializationSlug from '~/data/utils/specializationSlug'
 
 export default defineComponent({
   components: {
+    BaseLoader,
     SpecIcon,
     ClockIcon,
     GlobeIcon,
@@ -129,7 +131,13 @@ export default defineComponent({
       .get()
 
     if (guildSnapshot.empty) {
-      throw new Error('Hmm... on dirait que cette guilde n\'existe pas')
+      console.log('Throwing')
+      this.$nuxt.context.error({
+        statusCode: 404,
+        message: 'Hmm... on dirait que cette guilde n\'existe pas'
+      })
+      this.$fetchState.error = new Error('Hmm... on dirait que cette guilde n\'existe pas')
+      return
     }
     this.guild = guildSnapshot.docs[0].data()
   },

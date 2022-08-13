@@ -96,9 +96,12 @@ sw.*
 functions/.runtimeconfig.json
 
 # Service account
-functions/.service-account.json
-functions/.service-account.testing.json
+functions/.service-account.production.json
+functions/.service-account.staging.json
 
 # Storybook
 .nuxt-storybook
 storybook-static
+
+# VS Code
+.vscode/

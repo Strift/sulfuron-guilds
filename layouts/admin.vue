@@ -17,7 +17,12 @@
 </template>
 
 <script>
+import BaseContainer from '~/components/atoms/BaseContainer.vue'
+
 export default {
+  components: {
+    BaseContainer
+  },
   middleware: ['auth', 'admin'],
   data: () => ({
     account: '',

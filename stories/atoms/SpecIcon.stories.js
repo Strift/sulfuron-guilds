@@ -1,4 +1,4 @@
-import SpecIcon from '~/components/Ui/SpecIcon.vue'
+import SpecIcon from '~/components/atoms/icons/SpecIcon.vue'
 
 export default {
   component: SpecIcon,
@@ -6,10 +6,10 @@ export default {
     specializationSlug: 'rogue-assassination',
     altText: 'Voleur Assassinat'
   },
-  title: 'UI/SpecIcon'
+  title: 'atoms/icons/SpecIcon'
 }
 
-const Template = (args, { argTypes }) => ({
+const Template = (_args, { argTypes }) => ({
   components: { SpecIcon },
   props: Object.keys(argTypes),
   // Storybook provides all the args in a $props variable.

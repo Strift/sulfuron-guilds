@@ -25,6 +25,13 @@
               v-show="showBackButton"
               class="hidden md:inline-flex"
             />
+            <!-- <NavbarLink
+              v-show="showAboutButton"
+              to="/en-savoir-plus/"
+              title="En savoir plus"
+            >
+              En savoir plus
+            </NavbarLink> -->
             <NavbarLink
               v-show="showAdminButton && isAdmin"
               to="/admin/guildes/"
@@ -55,12 +62,14 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import Logo from '~/components/Ui/Logo.vue'
-import BellIcon from '~/components/icons/outline/BellIcon.vue'
-import UserIcon from '~/components/icons/solid/UserIcon.vue'
+import BaseContainer from '~/components/atoms/BaseContainer.vue'
+import Logo from '~/components/atoms/Logo.vue'
+import BellIcon from '~/components/atoms/icons/outline/BellIcon.vue'
+import UserIcon from '~/components/atoms/icons/solid/UserIcon.vue'
 
 export default {
   components: {
+    BaseContainer,
     Logo,
     BellIcon,
     UserIcon
@@ -75,6 +84,9 @@ export default {
     ]),
     showBackButton () {
       return this.$route.path !== '/' && !this.pathStartsWith('/g/')
+    },
+    showAboutButton () {
+      return this.$route.path !== '/en-savoir-plus/'
     },
     showAccountButton () {
       return !(this.pathStartsWith('/compte/') || this.pathStartsWith('/connexion/'))

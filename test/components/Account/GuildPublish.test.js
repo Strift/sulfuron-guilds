@@ -2,7 +2,7 @@ import { createLocalVue, mount } from '@vue/test-utils'
 
 import AccountGuildPublish from '~/components/Account/GuildPublish.vue'
 import BasePrimaryButton from '~/components/Base/PrimaryButton.vue'
-import BaseInformationCard from '~/components/Base/InformationCard.vue'
+import BaseInformationCard from '~/components/atoms/InformationCard.vue'
 
 const localVue = createLocalVue()
 // TODO: replace with real nuxt components registration logic

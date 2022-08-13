@@ -41,7 +41,7 @@ export const actions = {
     }))
     commit('setGuilds', guilds)
   },
-  async softDeleteGuildById (ctx, guildId) {
+  async softDeleteGuildById (guildId) {
     await this.$fire.firestore
       .collection('guilds')
       .withConverter(guildConverter)
@@ -51,7 +51,7 @@ export const actions = {
         deleted: true
       })
   },
-  async hardDeleteGuildById (ctx, guildId) {
+  async hardDeleteGuildById (guildId) {
     await this.$fire.firestore
       .collection('guilds')
       .withConverter(guildConverter)

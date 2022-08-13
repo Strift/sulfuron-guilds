@@ -1,3 +1,11 @@
+<script>
+import Logo from '~/components/atoms/Logo.vue'
+
+export default {
+  components: { Logo }
+}
+</script>
+
 <template>
   <footer class="py-20 space-y-12 text-gray-300 bg-gray-900">
     <div class="container px-5 mx-auto space-y-12 md:flex md:space-y-0 xl:px-0">
@@ -48,11 +56,3 @@
     </div>
   </footer>
 </template>
-
-<script>
-import Logo from '~/components/Ui/Logo.vue'
-
-export default {
-  components: { Logo }
-}
-</script>

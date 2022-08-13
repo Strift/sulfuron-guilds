@@ -1,3 +1,13 @@
+<script>
+import PropTypes from '@znck/prop-types'
+
+export default {
+  props: {
+    compact: PropTypes.bool.defaultValue(false)
+  }
+}
+</script>
+
 <template>
   <div class="flex items-center space-x-2 group">
     <nuxt-img
@@ -12,14 +22,3 @@
     >Sulfuron</span>
   </div>
 </template>
-
-<script>
-export default {
-  props: {
-    compact: {
-      type: Boolean,
-      default: false
-    }
-  }
-}
-</script>

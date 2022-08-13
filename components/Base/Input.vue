@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import LockIcon from '~/components/icons/solid/LockIcon.vue'
+import LockIcon from '~/components/atoms/icons/solid/LockIcon.vue'
 
 export default {
   components: {

@@ -1,6 +1,6 @@
 <template>
   <div v-if="!guilds.length">
-    <UiLoader class="mx-auto" />
+    <BaseLoader class="mx-auto" />
   </div>
   <transition-group
     v-else
@@ -36,8 +36,12 @@
 import { defineComponent } from '@nuxtjs/composition-api'
 import useSearchStore from '~/composables/useSearchStore'
 import useGuildModal from '~/composables/useGuildModal'
+import BaseLoader from '~/components/atoms/BaseLoader.vue'
 
 export default defineComponent({
+  components: {
+    BaseLoader
+  },
   setup () {
     const { orderedResults } = useSearchStore()
     const { openGuild } = useGuildModal()
