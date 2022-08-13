@@ -1,6 +1,7 @@
 {
   "projects": {
     "production": "sulfuron-guilds",
-    "staging": "sulfuron-guilds-staging"
+    "staging": "sulfuron-guilds-staging",
+    "default": "sulfuron-guilds"
   }
 }

@@ -175,6 +175,16 @@ export default {
     fallback: '404.html'
   },
   /*
+  ** Watchers configuration
+  */
+  watchers: {
+    webpack: {
+      ignored: [
+        'functions'
+      ]
+    }
+  },
+  /*
   ** Firebase module configuration
   */
   firebase: {
