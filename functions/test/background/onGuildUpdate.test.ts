@@ -1,6 +1,6 @@
 // Mock config values here
 
-import functions from '../../src/index'
+import * as functions from '../../src/index'
 
 const admin = require('firebase-admin')
 
