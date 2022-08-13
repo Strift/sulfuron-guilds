@@ -66,7 +66,7 @@ export const actions = {
   disableSync: firestoreAction(function ({ unbindFirestoreRef }) {
     unbindFirestoreRef('list', false)
   }),
-  async findBySlug (ctx, slug) {
+  async findBySlug (slug) {
     const guildSnapshot = await this.$fire.firestore
       .collection('guilds')
       .withConverter(guildConverter)
@@ -116,7 +116,7 @@ export const getters = {
   /*
   ** Final search results displayed by the UI
   */
-  searchResults (state, getters, rootState) {
+  searchResults (getters, rootState) {
     const guilds = getters.fuzzySearchResults
     const searchedSpecsIds = getters.searchedSpecsIds
 

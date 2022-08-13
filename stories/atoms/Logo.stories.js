@@ -6,7 +6,7 @@ export default {
   template: '<Logo/>'
 }
 
-const Template = (args, { argTypes }) => ({
+const Template = (_args, { argTypes }) => ({
   components: { Logo },
   props: Object.keys(argTypes),
   // Storybook provides all the args in a $props variable.

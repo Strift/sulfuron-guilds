@@ -9,7 +9,7 @@ export default {
   title: 'atoms/icons/SpecIcon'
 }
 
-const Template = (args, { argTypes }) => ({
+const Template = (_args, { argTypes }) => ({
   components: { SpecIcon },
   props: Object.keys(argTypes),
   // Storybook provides all the args in a $props variable.
