@@ -18,6 +18,14 @@ const getHostname = () => {
   return process.env.BASE_URL
 }
 
+const ignorePatterns = [
+  'node_modules',
+  'functions',
+  'test',
+  'dist',
+  '*.log'
+]
+
 export default {
   /*
   ** Nuxt target
@@ -115,6 +123,10 @@ export default {
     '@nuxtjs/sitemap'
   ],
   /*
+  ** Ignored files
+  */
+  ignore: ignorePatterns,
+  /*
   ** Build configuration
   ** See https://nuxtjs.org/api/configuration-build/
   */
@@ -161,10 +173,7 @@ export default {
      * Do not re-generate when changes happen in these files or folders
      */
     cache: {
-      ignore: [
-        'functions',
-        '*.log'
-      ]
+      ignore: ignorePatterns
     },
     /*
      * Do not generate page for these routes, as they will be handled by Firebase hosting
@@ -179,10 +188,17 @@ export default {
   */
   watchers: {
     webpack: {
-      ignored: [
-        'functions'
-      ]
+      ignored: ignorePatterns
+    },
+    chokidar: {
+      ignored: ignorePatterns
     }
+  },
+  /*
+  ** Eslint module
+  */
+  eslint: {
+    exclude: ignorePatterns
   },
   /*
   ** Firebase module configuration
