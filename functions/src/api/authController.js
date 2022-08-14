@@ -17,16 +17,16 @@ server.get('/auth/battlenet/callback',
   passport.authorize('bnet', { failureRedirect: '/?auth_error', session: false }),
   (req, res) => {
     const { battletag: userId } = req.account
-    analytics.signIn(userId)
-    logger.info(`Auth: Successful battlenet login ${userId}`)
+    analytics.battlenetAuthorized(userId)
+    logger.info(`Battlenet authorized ${userId}`)
 
     firebase.auth().createCustomToken(userId)
       .then((token) => {
-        logger.debug(`Successful token creation for ${userId}`)
+        logger.debug(`JWT token created for ${userId}`)
         res.redirect(`${AUTH_PAGE_URL}?auth_token=${token}`)
       })
       .catch((error) => {
-        logger.debug(`Failed to create token for ${userId}`, error)
+        logger.warn(`Failed to create JWT token for ${userId}`, error)
       })
   })
 

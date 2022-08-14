@@ -7,4 +7,4 @@ firebase.initializeApp({
   // databaseURL: 'http://localhost:9000/?ns=sulfuron-guilds'
 })
 
-module.exports = firebase
+export default firebase

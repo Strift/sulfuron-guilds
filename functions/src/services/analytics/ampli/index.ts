@@ -7,13 +7,13 @@
  * To update run 'ampli pull firebase-functions'
  *
  * Required dependencies: @amplitude/node@^1.10.0
- * Tracking Plan Version: 5
+ * Tracking Plan Version: 6
  * Build: 1.0.0
  * Runtime: node.js:typescript-ampli
  *
- * [View Tracking Plan](https://data.amplitude.com/strift/Sulfuron%20Guilds/events/main/latest)
+ * [View Tracking Plan](https://data.amplitude.com/strift/sulfuron-guilds-prod/events/main/latest)
  *
- * [Full Setup Instructions](https://data.amplitude.com/strift/Sulfuron%20Guilds/implementation/firebase-functions)
+ * [Full Setup Instructions](https://data.amplitude.com/strift/sulfuron-guilds-prod/implementation/firebase-functions)
  */
 
 import { Identify as AmplitudeIdentify } from '@amplitude/identify';
@@ -25,7 +25,7 @@ import {
 export type Environment = 'development' | 'production';
 
 export const ApiKey: Record<Environment, string> = {
-  development: '',
+  development: '0d49ce6386219a0c60e57c1d713a206a',
   production: 'ccd672a208e44643d6dbb610b3fb9f16'
 };
 
@@ -34,10 +34,10 @@ export const ApiKey: Record<Environment, string> = {
 */
 export const DefaultOptions: Partial<Options> = {
   plan: {
-    version: '5',
+    version: '6',
     branch: 'main',
     source: 'firebase-functions',
-    versionId: 'e78e8dfc-e22d-4be9-aa7c-ca8d46311c99'
+    versionId: 'd44712aa-83a7-4523-9df7-1fd12915750a'
   }
 };
 
@@ -72,12 +72,8 @@ export class Group implements BaseEvent {
   event_type = 'Group';
 }
 
-export class SignIn implements BaseEvent {
-  event_type = 'SignIn';
-}
-
-export class SignUp implements BaseEvent {
-  event_type = 'SignUp';
+export class BattlenetAuthorized implements BaseEvent {
+  event_type = 'Battlenet Authorized';
 }
 
 const getDefaultPromiseResponse = () => Promise.resolve<Response>({
@@ -210,11 +206,9 @@ export class Ampli {
   }
 
   /**
-   * SignIn
+   * Battlenet Authorized
    *
-   * [View in Tracking Plan](https://data.amplitude.com/strift/Sulfuron%20Guilds/events/main/latest/SignIn)
-   *
-   * A user sign in
+   * [View in Tracking Plan](https://data.amplitude.com/strift/sulfuron-guilds-prod/events/main/latest/Battlenet%20Authorized)
    *
    * Owner: Laurent Cazanove
    *
@@ -222,33 +216,12 @@ export class Ampli {
    * @param options Amplitude event options.
    * @param extra Extra untyped parameters for use in middleware.
    */
-  signIn(
+  battlenetAuthorized(
     userId: string | undefined,
     options?: EventOptions,
     extra?: MiddlewareExtra,
   ) {
-    return this.track(userId, new SignIn(), options, extra);
-  }
-
-  /**
-   * SignUp
-   *
-   * [View in Tracking Plan](https://data.amplitude.com/strift/Sulfuron%20Guilds/events/main/latest/SignUp)
-   *
-   * A user sign up
-   *
-   * Owner: Laurent Cazanove
-   *
-   * @param userId The user's ID.
-   * @param options Amplitude event options.
-   * @param extra Extra untyped parameters for use in middleware.
-   */
-  signUp(
-    userId: string | undefined,
-    options?: EventOptions,
-    extra?: MiddlewareExtra,
-  ) {
-    return this.track(userId, new SignUp(), options, extra);
+    return this.track(userId, new BattlenetAuthorized(), options, extra);
   }
 }
 

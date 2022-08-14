@@ -1,12 +1,14 @@
 import { ampli } from './ampli'
 
-ampli.load({
-  environment: 'development'
-})
+const environment = process.env.NODE_ENV === 'production'
+  ? 'production'
+  : 'development'
+
+ampli.load({ environment })
 
 export default {
-  signIn (userId: string) {
+  battlenetAuthorized (userId: string) {
     ampli.identify(userId)
-    ampli.signIn(userId)
+    ampli.battlenetAuthorized(userId)
   }
 }
