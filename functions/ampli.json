@@ -1,0 +1,11 @@
+{
+  "Zone": "us",
+  "OrgId": "183130",
+  "WorkspaceId": "cae0412d-b029-45d1-980d-7d9186c469ac",
+  "SourceId": "e05f56c2-590f-4c55-b928-14a1a725f08b",
+  "Runtime": "node.js:typescript-ampli",
+  "Branch": "main",
+  "Version": "5.0.0",
+  "VersionId": "e78e8dfc-e22d-4be9-aa7c-ca8d46311c99",
+  "Path": "./src/services/analytics/ampli"
+}

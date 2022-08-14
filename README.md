@@ -11,6 +11,7 @@
 - SVG icons from [heroicons](https://heroicons.com/)
 - Testing with [Jest](https://jestjs.io/en/) and [Vue Test Utils](https://vue-test-utils.vuejs.org/) (with [Babel](https://babeljs.io/))
 - Error monitoring with [Sentry](https://sentry.io)
+- Analytics with [Amplitude](https://amplitude.com)
 
 **Node versions**
 
@@ -35,6 +36,15 @@ Then, download the Service Account to enable connecting in local and place it at
 The file is available in your Firebase console project settings. 
 
 - **Battle.net credentials:** https://develop.battle.net/access/clients/
+
+**Amplitude (Node.js)**
+
+Update the local `ampli.json` and ampli wrapper by running:
+
+```bash
+cd functions
+ampli pull --path=./src/services/analytics/ampli
+```
 
 ### Running the apps
 

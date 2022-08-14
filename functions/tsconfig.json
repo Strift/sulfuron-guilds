@@ -10,8 +10,9 @@
     "strict": true,
     "target": "es2017",
     "types": [
+      "@types/jest",
       "@types/express-session",
-      "@types/jest"
+      "@amplitude/types"
     ]
   },
   "compileOnSave": true,
