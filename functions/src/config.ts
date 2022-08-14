@@ -1,6 +1,6 @@
 import * as functions from 'firebase-functions'
 
-module.exports = {
+export default {
   development: functions.config().development,
   hosting: {
     app: functions.config().hosting.app,

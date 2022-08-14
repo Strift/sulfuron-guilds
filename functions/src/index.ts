@@ -1,3 +1,5 @@
+import 'source-map-support/register'
+
 import * as functions from 'firebase-functions'
 
 import authController from './api/authController'

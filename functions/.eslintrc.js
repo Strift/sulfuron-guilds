@@ -10,6 +10,7 @@ module.exports = {
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
+    // I don't know why I have to reference this from the root
     project: './functions/tsconfig.eslint.json'
   }
 }

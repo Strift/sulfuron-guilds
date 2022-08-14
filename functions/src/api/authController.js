@@ -1,8 +1,9 @@
-const express = require('express')
-const config = require('../config')
-const logger = require('../services/logger')
-const firebase = require('../services/firebase')
-const passport = require('../middlewares/passport')
+import config from '../config'
+import express from 'express'
+
+import logger from '../services/logger'
+import firebase from '../services/firebase'
+import passport from '../middlewares/passport'
 
 const AUTH_PAGE_URL = `${config.hosting.app}/connexion/`
 
@@ -17,6 +18,7 @@ server.get('/auth/battlenet/callback',
   (req, res) => {
     const uid = req.account.battletag
     logger.debug(`Successful battlenet authentication with account ${uid}`)
+
     firebase.auth().createCustomToken(uid)
       .then((token) => {
         logger.debug(`Successful token creation for ${uid}`)
@@ -27,4 +29,4 @@ server.get('/auth/battlenet/callback',
       })
   })
 
-module.exports = server
+export default server

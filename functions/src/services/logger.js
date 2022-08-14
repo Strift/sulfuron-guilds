@@ -1,3 +1,5 @@
-const functions = require('firebase-functions')
+import * as functions from 'firebase-functions'
 
-module.exports = functions.logger
+const logger = functions.logger
+
+export default logger
