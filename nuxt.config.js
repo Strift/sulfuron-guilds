@@ -86,7 +86,8 @@ export default {
   ** https://nuxtjs.org/guide/plugins
   */
   plugins: [
-    '~/plugins/vue-cookies.client.js'
+    '~/plugins/vue-cookies.client.js',
+    { src: '~/plugins/analytics/index.ts', mode: 'client' }
   ],
   /*
   ** Nuxt.js dev-modules
@@ -126,6 +127,11 @@ export default {
   ** Ignored files
   */
   ignore: ignorePatterns,
+  /*
+  ** TypeScript module
+  */
+  typescript: {
+  },
   /*
   ** Build configuration
   ** See https://nuxtjs.org/api/configuration-build/

@@ -40,6 +40,7 @@ export const mutations = {
 export const actions = {
   onFirebaseAuthStateChanged ({ commit, dispatch }, { authUser }) {
     if (authUser) {
+      this.$analytics.signIn()
       commit('setUser', {
         name: authUser.uid
       })
@@ -58,6 +59,7 @@ export const actions = {
       }
 
       const { user } = await this.$fire.auth.signInWithCustomToken(authToken)
+      this.$analytics.signIn();
       commit('setUser', {
         name: user.uid
       })
