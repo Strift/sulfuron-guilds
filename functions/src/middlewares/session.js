@@ -1,7 +1,6 @@
-const session = require('express-session')
-
-const { Firestore } = require('@google-cloud/firestore')
-const { FirestoreStore } = require('@google-cloud/connect-firestore')
+import session from 'express-session'
+import { Firestore } from '@google-cloud/firestore'
+import { FirestoreStore } from '@google-cloud/connect-firestore'
 
 const middleware = session({
   store: new FirestoreStore({

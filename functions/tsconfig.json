@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "esModuleInterop": true,
+    "module": "commonjs",
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "outDir": "dist",
+    "sourceMap": true,
+    "strict": true,
+    "target": "es2017",
+    "types": [
+      "@types/express-session",
+      "@types/jest"
+    ]
+  },
+  "compileOnSave": true,
+  "include": [
+    "src"
+  ]
+}

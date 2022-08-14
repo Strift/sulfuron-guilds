@@ -1,8 +1,9 @@
-const express = require('express')
-const { query, validationResult } = require('express-validator')
-const config = require('../config')
-const logger = require('../services/logger')
-const firebase = require('../services/firebase')
+import express from 'express'
+import { query, validationResult } from 'express-validator'
+import config from '../config'
+import logger from '../services/logger'
+import firebase from '../services/firebase'
+
 const FirestoreFieldValue = firebase.firestore.FieldValue
 
 const PAGE_NOT_FOUND_URL = `${config.hosting.app}/404.html`
@@ -56,4 +57,4 @@ server.get('/redirect',
     }
   })
 
-module.exports = server
+export default server

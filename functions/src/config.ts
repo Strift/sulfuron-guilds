@@ -1,6 +1,6 @@
-const functions = require('firebase-functions')
+import * as functions from 'firebase-functions'
 
-module.exports = {
+export default {
   development: functions.config().development,
   hosting: {
     app: functions.config().hosting.app,
@@ -9,5 +9,8 @@ module.exports = {
   battlenet: {
     clientId: functions.config().battlenet.client_id,
     clientSecret: functions.config().battlenet.client_secret
+  },
+  amplitude: {
+    apiKey: functions.config().amplitude.api_key
   }
 }

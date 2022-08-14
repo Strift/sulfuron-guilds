@@ -109,11 +109,12 @@ export const actions = {
   disableGuildSync: firestoreAction(function ({ unbindFirestoreRef }) {
     return unbindFirestoreRef('guild', false)
   }),
-  updateGuild: firestoreAction(async function (payload) {
+  updateGuild: firestoreAction(async function (_, payload) {
     const query = await this.$fire.firestore
       .collection('guilds')
       .where('ownerUid', '==', this.$fire.auth.currentUser.uid)
       .get()
+
     query.docs[0].ref.set(payload, { merge: true })
   }),
   async fetchRedirects ({ state, commit }) {

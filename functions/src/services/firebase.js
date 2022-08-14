@@ -1,6 +1,5 @@
-const firebase = require('firebase-admin')
-
-const serviceAccount = require('../.service-account.staging.json')
+import firebase from 'firebase-admin'
+import serviceAccount from '../../.service-account.staging.json'
 
 firebase.initializeApp({
   credential: firebase.credential.cert(serviceAccount),

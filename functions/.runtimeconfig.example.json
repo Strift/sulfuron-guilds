@@ -7,5 +7,8 @@
   "battlenet": {
     "client_secret": "",
     "client_id": ""
+  },
+  "amplitude": {
+    "api_key": ""
   }
 }

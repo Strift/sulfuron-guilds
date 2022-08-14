@@ -1,15 +1,15 @@
+// Mock config values here
+
+import * as functions from '../../src/index'
+
 const admin = require('firebase-admin')
 
 process.env.FIREBASE_AUTH_EMULATOR_HOST = 'localhost:9099'
 
 const test = require('firebase-functions-test')()
 
-// Mock config values here
-
-const functions = require('../../index.js')
-
 describe('listUsers', () => {
-  let wrapped
+  let wrapped: any
 
   beforeAll(() => {
     wrapped = test.wrap(functions.listUsers)
