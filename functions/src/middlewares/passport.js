@@ -1,7 +1,6 @@
-const passport = require('passport')
-const BattlenetStrategy = require('passport-bnet').Strategy
-
-const config = require('../config')
+import passport from 'passport'
+import { Strategy as BattlenetStrategy } from 'passport-bnet'
+import config from '../config'
 
 const HOSTING_EMULATOR_HOST = 'http://localhost:5000'
 
@@ -21,4 +20,4 @@ passport.use(new BattlenetStrategy({
   return done(null, profile)
 }))
 
-module.exports = passport
+export default passport

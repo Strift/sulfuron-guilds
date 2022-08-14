@@ -13,7 +13,7 @@ module.exports = {
     'plugin:import/recommended'
   ],
   ignorePatterns: [
-    '/functions'
+    'functions'
   ],
   plugins: [
   ],
