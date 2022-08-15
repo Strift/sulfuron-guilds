@@ -59,7 +59,7 @@ export const actions = {
       }
 
       const { user } = await this.$fire.auth.signInWithCustomToken(authToken)
-      this.$analytics.signIn();
+      this.$analytics.signIn()
       commit('setUser', {
         name: user.uid
       })

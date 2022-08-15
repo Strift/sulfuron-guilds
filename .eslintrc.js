@@ -7,10 +7,10 @@ module.exports = {
     node: true
   },
   extends: [
-    '@nuxtjs',
-    '@nuxtjs/eslint-config-typescript',
-    'plugin:nuxt/recommended',
-    'plugin:import/recommended'
+    // '@nuxtjs',
+    '@nuxtjs/eslint-config-typescript'
+    // 'plugin:nuxt/recommended',
+    // 'plugin:import/recommended'
   ],
   ignorePatterns: [
     'functions'

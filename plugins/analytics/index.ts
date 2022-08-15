@@ -7,13 +7,14 @@ interface Analytics {
 
 declare module 'vue/types/vue' {
   interface Vue {
-    $analytics(): Analytics
+    $analytics: Analytics
   }
 }
 
 declare module 'vuex/types/index' {
+  /* eslint-disable-next-line */
   interface Store<S> {
-    $analytics(): Analytics
+    $analytics: Analytics
   }
 }
 
@@ -23,16 +24,13 @@ const analyticsPlugin: Plugin = (_context, inject) => {
     : 'development'
   ampli.load({ environment })
 
-  const analytics: Analytics = {
+  const analytics = {
     signIn (userId: string) {
       ampli.identify(userId)
       ampli.signIn()
     }
   }
-
   inject('analytics', analytics)
-
-  console.log('Analytics plugin installed')
 }
 
 export default analyticsPlugin
