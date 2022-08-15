@@ -83,12 +83,12 @@ import ChevronDownIcon from '~/components/atoms/icons/solid/ChevronDownIcon.vue'
 
 export default {
   name: 'Index',
-  layout: 'default',
   components: {
     BaseContainer,
     FilterIcon,
     ChevronDownIcon
   },
+  layout: 'default',
   setup () {
     const { removeOutdatedGuilds, setRemoveOutdatedGuilds } = useSearchStore()
     const { isGuest, isAuthenticated } = useAccountStore()
@@ -104,6 +104,18 @@ export default {
       removeOutdatedResults,
       isGuest,
       isAuthenticated
+    }
+  },
+  head () {
+    return {
+      title: 'Trouvez et rejoignez votre nouvelle guilde - Sulfuron-EU',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: 'Trouvez et rejoignez votre nouvelle guilde WoW Classic sur le serveur Sulfuron (The Burning Crusade).'
+        }
+      ]
     }
   },
   computed: {
@@ -122,18 +134,6 @@ export default {
   },
   async beforeDestroy () {
     await this.$store.dispatch('guilds/disableSync')
-  },
-  head () {
-    return {
-      title: 'Trouvez et rejoignez votre nouvelle guilde - Sulfuron-EU',
-      meta: [
-        {
-          hid: 'description',
-          name: 'description',
-          content: 'Trouvez et rejoignez votre nouvelle guilde WoW Classic sur le serveur Sulfuron (The Burning Crusade).'
-        }
-      ]
-    }
   }
 }
 </script>

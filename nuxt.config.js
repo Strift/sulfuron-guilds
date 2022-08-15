@@ -28,6 +28,15 @@ const ignorePatterns = [
 
 export default {
   /*
+  ** Vue config
+  */
+  vue: {
+    config: {
+      productionTip: isDevelopment(),
+      devtools: isDevelopment()
+    }
+  },
+  /*
   ** Nuxt target
   ** See https://nuxtjs.org/api/configuration-target
   */
@@ -86,8 +95,19 @@ export default {
   ** https://nuxtjs.org/guide/plugins
   */
   plugins: [
-    '~/plugins/vue-cookies.client.js'
+    '~/plugins/vue-cookies.client.js',
+    { src: '~/plugins/analytics', mode: 'client' }
   ],
+  // Analytics plugin should load before Firebase because it is called in `onAuthStateChanged` action
+  extendPlugins (plugins) {
+    const analyticsPluginIndex = plugins.findIndex(
+      plugin => (typeof plugin === 'string' ? plugin : plugin.src) === '~/plugins/analytics'
+    )
+    const analyticsPlugin = plugins[analyticsPluginIndex]
+    plugins.splice(analyticsPluginIndex, 1)
+    plugins.unshift(analyticsPlugin)
+    return plugins
+  },
   /*
   ** Nuxt.js dev-modules
   */
@@ -121,11 +141,17 @@ export default {
     }],
     // Doc: https://sitemap.nuxtjs.org/
     '@nuxtjs/sitemap'
+    // '~/modules/analytics'
   ],
   /*
   ** Ignored files
   */
   ignore: ignorePatterns,
+  /*
+  ** TypeScript module
+  */
+  typescript: {
+  },
   /*
   ** Build configuration
   ** See https://nuxtjs.org/api/configuration-build/
