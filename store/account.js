@@ -40,7 +40,7 @@ export const mutations = {
 export const actions = {
   onFirebaseAuthStateChanged ({ commit, dispatch }, { authUser }) {
     if (authUser) {
-      this.$analytics.signIn()
+      this.$analytics.signIn(authUser.uid)
       commit('setUser', {
         name: authUser.uid
       })
@@ -59,7 +59,7 @@ export const actions = {
       }
 
       const { user } = await this.$fire.auth.signInWithCustomToken(authToken)
-      this.$analytics.signIn()
+      this.$analytics.signIn(authUser.uid)
       commit('setUser', {
         name: user.uid
       })
@@ -89,6 +89,7 @@ export const actions = {
 
     if (userRef.exists) {
       commit('setAdmin', userRef.data().admin)
+      this.$analytics.updateAdmin(this.$fire.auth.currentUser.uid, userRef.data().admin)
     }
   },
   async fetchGuild ({ dispatch }) {
@@ -101,6 +102,7 @@ export const actions = {
     if (querySnapshot.empty) {
       return
     }
+    this.$analytics.updateGuild(this.$fire.auth.currentUser.uid, querySnapshot.docs[0].data().name)
     await dispatch('enableGuildSync', querySnapshot.docs[0].ref) // There should be only one query result
     await dispatch('fetchRedirects')
   },

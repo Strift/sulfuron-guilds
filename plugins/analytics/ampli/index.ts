@@ -7,7 +7,7 @@
  * To update run 'ampli pull nuxt'
  *
  * Required dependencies: @amplitude/analytics-browser@^1.0.0
- * Tracking Plan Version: 8
+ * Tracking Plan Version: 10
  * Build: 1.0.0
  * Runtime: browser:typescript-ampli-v2
  *
@@ -32,10 +32,10 @@ export const ApiKey: Record<Environment, string> = {
  */
 export const DefaultConfiguration: BrowserOptions = {
   plan: {
-    version: '8',
+    version: '10',
     branch: 'main',
     source: 'nuxt',
-    versionId: '1ff777d3-5720-4826-b9b5-88f790e5d2dd'
+    versionId: 'd62436ac-9380-45ae-b6cc-2a867f859c5b'
   }
 };
 
@@ -50,6 +50,14 @@ export interface LoadOptions {
 }
 
 export interface IdentifyProperties {
+  /**
+   * Whether the user is an admin
+   */
+  isAdmin?: boolean;
+  /**
+   * The user's owned guild name
+   */
+  ownedGuildName?: string;
   /**
    * Date of user sign up
    */

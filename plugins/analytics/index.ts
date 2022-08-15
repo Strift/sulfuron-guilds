@@ -28,6 +28,16 @@ const analyticsPlugin: Plugin = (_context, inject) => {
     signIn (userId: string) {
       ampli.identify(userId)
       ampli.signIn()
+    },
+    updateAdmin (userId: string, isAdmin: boolean) {
+      ampli.identify(userId, {
+        isAdmin
+      })
+    },
+    updateGuild (userId: string, guildName: string) {
+      ampli.identify(userId, {
+        ownedGuildName: guildName
+      })
     }
   }
   inject('analytics', analytics)
