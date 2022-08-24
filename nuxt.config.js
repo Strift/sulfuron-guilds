@@ -295,7 +295,7 @@ export default {
     tracing: true,
     config: {
       release: git.long(), // GIT_COMMIT_SHA
-      environment: process.env.ENVIRONMENT || 'development'
+      environment: process.env.NODE_ENV || 'development'
     },
     // Options passed to @sentry/webpack-plugin.
     // Docs: https://github.com/getsentry/sentry-webpack-plugin/blob/master/README.md

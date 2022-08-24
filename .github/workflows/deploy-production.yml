@@ -10,6 +10,9 @@ jobs:
   deploy:
     name: Deploy to Firebase Hosting
     runs-on: ubuntu-latest
+    environment: 
+      name: production
+      url: https://guildes.sulfuron.eu
     env:
       SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
       SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
