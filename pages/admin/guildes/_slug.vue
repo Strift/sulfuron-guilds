@@ -34,7 +34,6 @@ import useGuilds from '~/composables/database/useGuilds'
 import BaseLoader from '~/components/atoms/BaseLoader.vue'
 
 export default defineComponent({
-  layout: 'admin',
   components: {
     Heading2,
     BaseLoader,
@@ -42,6 +41,7 @@ export default defineComponent({
     BasePrimaryButton,
     AdminUserInput
   },
+  layout: 'admin',
   setup () {
     const guild = ref(null)
     const newOwnerUid = ref(null)

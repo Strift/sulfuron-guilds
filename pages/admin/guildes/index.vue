@@ -25,7 +25,7 @@
           @remove="onGuildRemove"
         />
       </template>
-      <template v-slot:pending>
+      <template #pending>
         <BaseLoader class="mx-auto" />
       </template>
     </Promised>
@@ -40,7 +40,7 @@
           :search="searchText"
         />
       </template>
-      <template v-slot:pending>
+      <template #pending>
         <BaseLoader class="mx-auto" />
       </template>
     </Promised>
@@ -55,12 +55,12 @@ import BaseLoader from '~/components/atoms/BaseLoader.vue'
 import useGuilds from '~/composables/database/useGuilds'
 
 export default {
-  layout: 'admin',
   components: {
     Heading2,
     BaseLoader,
     Promised
   },
+  layout: 'admin',
   setup () {
     const { list, deleteById } = useGuilds()
     const searchText = ref('')

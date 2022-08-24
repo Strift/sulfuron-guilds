@@ -1,8 +1,7 @@
+import config from '../../config'
 import { ampli } from './ampli'
 
-const environment = process.env.NODE_ENV === 'production'
-  ? 'production'
-  : 'development'
+const environment = config.amplitude.environment
 
 ampli.load({ environment })
 

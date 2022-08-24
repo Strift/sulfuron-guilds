@@ -11,6 +11,7 @@ export default {
     clientSecret: functions.config().battlenet.client_secret
   },
   amplitude: {
+    environment: functions.config().amplitude.environment,
     apiKey: functions.config().amplitude.api_key
   }
 }

@@ -18,10 +18,8 @@ declare module 'vuex/types/index' {
   }
 }
 
-const analyticsPlugin: Plugin = (_context, inject) => {
-  const environment = process.env.NODE_ENV === 'production'
-    ? 'production'
-    : 'development'
+const analyticsPlugin: Plugin = ({ $config: { amplitudeEnvironment } }, inject) => {
+  const environment = amplitudeEnvironment
   ampli.load({ environment })
 
   const analytics = {
