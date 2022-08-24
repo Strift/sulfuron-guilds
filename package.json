@@ -14,8 +14,8 @@
     "lint:js": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "lint": "yarn lint:js",
     "test": "NODE_ICU_DATA=node_modules/full-icu jest --testPathIgnorePatterns=functions/test/",
-    "deploy:production": "firebase deploy --project production",
-    "deploy:staging": "firebase deploy --project staging",
+    "deploy:production": "DEPLOY_TARGET=production firebase deploy --project production",
+    "deploy:staging": "DEPLOY_TARGET=staging firebase deploy --project staging",
     "storybook": "nuxt storybook"
   },
   "lint-staged": {
