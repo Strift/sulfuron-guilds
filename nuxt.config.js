@@ -17,6 +17,12 @@ const getHostname = () => {
   }
   return process.env.BASE_URL
 }
+const getAmplitudeEnv = () => {
+  const env = getNodeEnv()
+  return env === 'production'
+    ? 'production'
+    : 'development'
+}
 
 const ignorePatterns = [
   'node_modules',
@@ -54,7 +60,7 @@ export default {
         environment: getNodeEnv()
       }
     },
-    amplitudeEnvironment: getNodeEnv()
+    amplitudeEnvironment: getAmplitudeEnv()
   },
   /*
   ** Components config
@@ -296,7 +302,7 @@ export default {
     tracing: true,
     config: {
       release: git.long(), // GIT_COMMIT_SHA
-      // Pulled from
+      // Pulled from publicRuntimeConfig
       environment: process.env.ENVIRONMENT || 'development'
     },
     // Options passed to @sentry/webpack-plugin.
