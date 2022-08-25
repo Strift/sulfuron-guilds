@@ -6,13 +6,10 @@
 import FeaturesPage from '~/components/templates/FeaturesPage.vue'
 
 export default {
-  layout: 'default',
   components: {
     FeaturesPage
   },
-  mounted () {
-    this.$store.commit('setPromoBackground')
-  },
+  layout: 'default',
   head () {
     return {
       title: 'Pourquoi cette plateforme ? - Sulfuron-EU',
@@ -25,6 +22,9 @@ export default {
         }
       ]
     }
+  },
+  mounted () {
+    this.$store.commit('setPromoBackground')
   }
 }
 </script>

@@ -123,6 +123,9 @@ export default defineComponent({
   layout: 'default',
   scrollToTop: true,
   fetchOnServer: false,
+  data: () => ({
+    guild: null
+  }),
   async fetch () {
     const guildSnapshot = await this.$fire.firestore
       .collection('guilds')
@@ -140,9 +143,6 @@ export default defineComponent({
     }
     this.guild = guildSnapshot.docs[0].data()
   },
-  data: () => ({
-    guild: null
-  }),
   // head () {
   //   const title = `${this.guild.name} - Sulfuron-EU`
   //   const description = `Rejoignez la guilde ${this.guildType} ${this.guild.name} sur le serveur The Burning Crusade, Sulfuron.`

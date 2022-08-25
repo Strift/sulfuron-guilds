@@ -113,11 +113,11 @@ const DAYS_OF_THE_WEEK = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Sa
 
 export default {
   name: 'Guild',
-  layout: 'account',
   components: {
     Heading2,
     MissingGuildLogo
   },
+  layout: 'account',
   data: () => ({
     factionOptions: [
       { value: 'Alliance', label: 'Alliance' },

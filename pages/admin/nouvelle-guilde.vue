@@ -22,14 +22,14 @@
     </BasePrimaryButton>
     <Heading2>Guildes non publiées</Heading2>
     <Promised :promise="draftGuilds">
-      <template v-slot="data">
+      <template #default="data">
         <AdminGuildList
           :guilds="data"
           :advanced-mode="true"
           @remove="onGuildRemove"
         />
       </template>
-      <template v-slot:pending>
+      <template #pending>
         <BaseLoader class="mx-auto" />
       </template>
     </Promised>
@@ -46,14 +46,14 @@ import InformationCard from '~/components/atoms/InformationCard.vue'
 import BaseLoader from '~/components/atoms/BaseLoader.vue'
 
 export default defineComponent({
-  layout: 'admin',
-  middleware: ['auth', 'admin'],
   components: {
     Heading2,
     InformationCard,
     Promised,
     BaseLoader
   },
+  layout: 'admin',
+  middleware: ['auth', 'admin'],
   setup () {
     const { name: guildName, ownerUid, createGuild } = useCreateGuild()
     const { list, deleteById } = useGuilds()
