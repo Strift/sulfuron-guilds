@@ -4,7 +4,8 @@ export default {
   development: functions.config().development,
   hosting: {
     app: functions.config().hosting.app,
-    authFunction: functions.config().hosting.auth_function
+    authFunction: functions.config().hosting.auth_function,
+    databaseURL: functions.config().hosting.database_url
   },
   battlenet: {
     clientId: functions.config().battlenet.client_id,

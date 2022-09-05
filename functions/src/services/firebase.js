@@ -1,13 +1,13 @@
-import firebase from 'firebase-admin'
+import * as firebase from 'firebase-admin'
+import 'firebase-functions' // necessary for ServiceAccount when initializing in TypeScript
+// Read more: https://firebase.google.com/docs/functions/config-env#automatically_populated_environment_variables
 import config from '../config'
 import serviceAccount from '../../.service-account.staging.json'
 
 if (config.development) {
   firebase.initializeApp({
-    credential: firebase.credential.cert(serviceAccount),
-    // databaseURL: 'https://sulfuron-guilds.firebaseio.com'
-    // databaseURL: 'https://sulfuron-guilds-staging.firebaseio.com'
-    databaseURL: 'http://localhost:9000/?ns=sulfuron-guilds'
+    credential: firebase.credential.cert(serviceAccount)
+    // databaseURL: config.hosting.databaseURL
   })
 } else {
   firebase.initializeApp()
