@@ -33,11 +33,11 @@ server.get('/redirect',
 
       // 2. Fetch the URL in database
       const guildRef = firebase.firestore().collection('guilds').doc(guildId)
-      const guild = (await guildRef.get()).data()
-
-      if (guild === undefined) {
+      const guildDoc = await guildRef.get()
+      if (!guildDoc.exists) {
         logger.error(`No guild found for ID ${guildId}`)
         response.redirect(PAGE_NOT_FOUND_URL)
+        return
       }
 
       // 3. Update the "redirections" counter in database
@@ -47,6 +47,7 @@ server.get('/redirect',
       })
 
       // 4. Send the redirect response
+      const guild = guildDoc.data()
       const url = type === 'contact'
         ? guild.contactUrl
         : guild.websiteUrl
