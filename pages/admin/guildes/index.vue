@@ -1,7 +1,7 @@
 <template>
   <div class="space-y-8">
     <Heading2 class="flex items-baseline justify-between">
-      Guildes publiées <span class="text-base text-gray-600">{{ publishedGuilds.length }} guildes</span>
+      Guildes publiées <span class="text-base text-gray-600"><Promised :promise="publishedGuilds"><template #default="data">{{ data.length }}</template></Promised> guildes</span>
     </Heading2>
     <div class="flex space-x-8">
       <div class="w-1/2">
@@ -30,7 +30,7 @@
       </template>
     </Promised>
     <Heading2 class="flex items-baseline justify-between">
-      Guildes supprimées <span class="text-base text-gray-600">{{ deletedGuilds.length }} guildes</span>
+      Guildes supprimées <span class="text-base text-gray-600"><Promised :promise="deletedGuilds"><template #default="data">{{ data.length }}</template></Promised> guildes</span>
     </Heading2>
     <Promised :promise="deletedGuilds">
       <template #default="data">
