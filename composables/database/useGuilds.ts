@@ -4,7 +4,7 @@ import guildConverter from '~/data/converters/guildConverter'
 import type { Guild } from '~/data/types'
 
 export default function useGuilds () {
-  const { add, findBy, list: listDocuments } = useCollection<Guild>('guilds', { converter: guildConverter })
+  const { add, findBy, list: listDocuments, updateBy } = useCollection<Guild>('guilds', { converter: guildConverter })
 
   const firestore = useFirestore()
 
@@ -17,7 +17,6 @@ export default function useGuilds () {
   }
 
   const list = ({ published } = { published: undefined }) => {
-    console.log('useGuilds: list')
     const whereEquals = published === undefined
       ? {}
       : { published }
@@ -25,18 +24,8 @@ export default function useGuilds () {
     return listDocuments({ whereEquals, subCollections: ['redirects'] })
   }
 
-  const updateBySlug = async (slug, payload) => {
-    const guildSnapshot = await firestore
-      .collection('guilds')
-      .withConverter(guildConverter)
-      .where('slug', '==', slug)
-      .get()
-
-    if (guildSnapshot.empty) {
-      throw new Error('Guild does not exist')
-    }
-
-    return guildSnapshot.docs[0].ref.update(payload)
+  const updateBySlug = (slug: string, payload: Partial<Guild>) => {
+    return updateBy('slug', slug, payload)
   }
 
   const deleteById = (id, { hardDelete = false } = {}) => {
