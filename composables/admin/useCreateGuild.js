@@ -35,12 +35,12 @@ export default function useCreateGuild () {
   const createGuild = async () => {
     const guildWithSameSlug = await findBySlug(slug.value)
     if (guildWithSameSlug) {
-      alert(`Impossible de créer la guilde <${name.value}> car l'URL '${slug.value}' est déjà utilisée par <${guildWithSameSlug.name}.`)
+      alert(`Impossible de créer la guilde <${name.value}> car l'URL '${slug.value}' est déjà utilisée par <${guildWithSameSlug.name}.>`)
       return null
     }
     const guild = guildData(ownerUid.value, name.value, slug.value)
-    const guildRef = await create(guild)
-    return guildRef.id
+    const guildId = await create(guild)
+    return guildId
   }
 
   return {

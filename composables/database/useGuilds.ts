@@ -1,11 +1,19 @@
 import useFirestore from '../services/firebase/useFirestore'
+import useCollection from '../services/firebase/useCollection'
 import guildConverter from '~/data/converters/guildConverter'
+import type { Guild } from '~/data/types'
 
 export default function useGuilds () {
+  const { add, findBy } = useCollection<Guild>('guilds', { converter: guildConverter })
+
   const firestore = useFirestore()
 
-  const create = (guild) => {
-    return firestore.collection('guilds').add(guild)
+  const create = (guild: Guild) => {
+    return add(guild)
+  }
+
+  const findBySlug = (slug: string) => {
+    return findBy('slug', slug)
   }
 
   const list = async ({ published } = {}) => {
@@ -21,17 +29,6 @@ export default function useGuilds () {
       }
     }))
     return guilds
-  }
-
-  const findBySlug = async (slug) => {
-    const guildSnapshot = await firestore.collection('guilds').withConverter(guildConverter)
-      .where('slug', '==', slug)
-      .get()
-
-    if (guildSnapshot.empty) {
-      return null
-    }
-    return guildSnapshot.docs[0].data()
   }
 
   const updateBySlug = async (slug, payload) => {
