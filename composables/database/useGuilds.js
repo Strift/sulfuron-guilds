@@ -1,4 +1,4 @@
-import useFirestore from '../useFirestore'
+import useFirestore from '../services/useFirestore'
 import guildConverter from '~/data/converters/guildConverter'
 
 export default function useGuilds () {
