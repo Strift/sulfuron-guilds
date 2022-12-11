@@ -1,5 +1,6 @@
 import useFirestore from '../services/firebase/useFirestore'
 import guildConverter from '~/data/converters/guildConverter'
+// import useCollection from '~/composables/services/firebase/useCollection'
 
 export default function useGuilds () {
   const firestore = useFirestore()

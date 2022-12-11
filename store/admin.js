@@ -1,4 +1,4 @@
-import guildConverter from '~/data/converters/guildConverter.js'
+import guildConverter from '~/data/converters/guildConverter'
 
 export const state = () => ({
   guilds: []

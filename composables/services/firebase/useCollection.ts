@@ -15,7 +15,7 @@ export default function useCollection<T extends firebase.firestore.DocumentData>
     ? collection.withConverter(options.converter)
     : collection
 
-  const create = (document: T) => {
+  const add = (document: T) => {
     return collection.add(document)
   }
 
@@ -57,7 +57,7 @@ export default function useCollection<T extends firebase.firestore.DocumentData>
   }
 
   return {
-    create,
+    add,
     list,
     findBy,
     updateBy,
