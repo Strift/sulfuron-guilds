@@ -3,6 +3,11 @@ import useFirestore from './useFirestore'
 
 type QueryOrCollectionReference = firebase.firestore.CollectionReference | firebase.firestore.Query
 
+interface ListOptions {
+  whereEquals?: Record<string, any>
+  subCollections?: Array<string>
+}
+
 export default function useCollection<Type extends firebase.firestore.DocumentData> (
   collectionPath: string,
   options?: { converter: firebase.firestore.FirestoreDataConverter<Type> }
@@ -20,16 +25,34 @@ export default function useCollection<Type extends firebase.firestore.DocumentDa
     return documentRef.id
   }
 
-  const list = async (whereEquals: Record<string, any> = {}) => {
-    const query =
-      Object.entries(whereEquals)
+  const list = async (options: ListOptions): Promise<Type[]> => {
+    const query = options.whereEquals
+      ? Object.entries(options.whereEquals)
         .reduce(
           (query, [key, value]) => query.where(key, '==', value),
           collectionQuery
         )
+      : collectionQuery
 
     const documentsSnapshot = await query.get()
-    return documentsSnapshot.docs.map(document => document.data())
+
+    if (options.subCollections === undefined) {
+      return documentsSnapshot.docs.map(document => document.data() as Type)
+    }
+
+    return Promise.all(documentsSnapshot.docs.map(async (document) => {
+      const subCollectionsData: Record<string, any> = {}
+
+      for (const subCollectionPath of options.subCollections) {
+        const subCollectionSnapshot = await document.ref.collection(subCollectionPath).get()
+        subCollectionsData[subCollectionPath] = subCollectionSnapshot.docs.map(subDocument => subDocument.data())
+      }
+
+      return {
+        ...subCollectionsData,
+        ...document.data()
+      } as Type
+    }))
   }
 
   const findBy = async (key: string, value: any) => {

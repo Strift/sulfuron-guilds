@@ -47,12 +47,13 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { computed, ref } from '@nuxtjs/composition-api'
 import { Promised } from 'vue-promised'
 import Heading2 from '~/components/atoms/Heading2.vue'
 import BaseLoader from '~/components/atoms/BaseLoader.vue'
 import useGuilds from '~/composables/database/useGuilds'
+import type { Guild } from '~/data/types'
 
 export default {
   components: {
@@ -66,7 +67,7 @@ export default {
     const searchText = ref('')
     const editionMode = ref(false)
 
-    const guilds = ref([])
+    const guilds = ref<Guild[]>()
     const publishedGuilds = computed(() => {
       return guilds.value.then(guilds => guilds.filter(guild => guild.published && !guild.deleted))
     })

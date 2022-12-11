@@ -4,7 +4,7 @@ import guildConverter from '~/data/converters/guildConverter'
 import type { Guild } from '~/data/types'
 
 export default function useGuilds () {
-  const { add, findBy } = useCollection<Guild>('guilds', { converter: guildConverter })
+  const { add, findBy, list: listDocuments } = useCollection<Guild>('guilds', { converter: guildConverter })
 
   const firestore = useFirestore()
 
@@ -16,19 +16,13 @@ export default function useGuilds () {
     return findBy('slug', slug)
   }
 
-  const list = async ({ published } = {}) => {
-    const guildsQuerySnapshot = published === undefined
-      ? await firestore.collection('guilds').withConverter(guildConverter).get()
-      : await firestore.collection('guilds').withConverter(guildConverter).where('published', '==', published).get()
+  const list = ({ published } = { published: undefined }) => {
+    console.log('useGuilds: list')
+    const whereEquals = published === undefined
+      ? {}
+      : { published }
 
-    const guilds = await Promise.all(guildsQuerySnapshot.docs.map(async (guildDoc) => {
-      const redirectsQuerySnapshot = await guildDoc.ref.collection('redirects').get()
-      return {
-        ...guildDoc.data(),
-        redirects: redirectsQuerySnapshot.docs.map(doc => doc.data())
-      }
-    }))
-    return guilds
+    return listDocuments({ whereEquals, subCollections: ['redirects'] })
   }
 
   const updateBySlug = async (slug, payload) => {
