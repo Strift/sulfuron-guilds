@@ -3,9 +3,9 @@ import useFirestore from './useFirestore'
 
 type QueryOrCollectionReference = firebase.firestore.CollectionReference | firebase.firestore.Query
 
-export default function useCollection<T extends firebase.firestore.DocumentData> (
+export default function useCollection<Type extends firebase.firestore.DocumentData> (
   collectionPath: string,
-  options?: { converter: firebase.firestore.FirestoreDataConverter<T> }
+  options?: { converter: firebase.firestore.FirestoreDataConverter<Type> }
 ) {
   const firestore = useFirestore()
 
@@ -15,8 +15,9 @@ export default function useCollection<T extends firebase.firestore.DocumentData>
     ? collection.withConverter(options.converter)
     : collection
 
-  const add = (document: T) => {
-    return collection.add(document)
+  const add = async (document: Type): Promise<string> => {
+    const documentRef = await collection.add(document)
+    return documentRef.id
   }
 
   const list = async (whereEquals: Record<string, any> = {}) => {
@@ -40,7 +41,7 @@ export default function useCollection<T extends firebase.firestore.DocumentData>
       : documentSnapshot.docs[0].data()
   }
 
-  const updateBy = async (key: string, value: any, payload: Partial<T>) => {
+  const updateBy = async (key: string, value: any, payload: Partial<Type>) => {
     const documentSnapshot = await collectionQuery
       .where(key, '==', value)
       .get()
