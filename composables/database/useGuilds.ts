@@ -1,12 +1,15 @@
-import useFirestore from '../services/firebase/useFirestore'
-import useCollection from '../services/firebase/useCollection'
+import useCollection from '~/composables/services/firebase/useCollection'
 import guildConverter from '~/data/converters/guildConverter'
 import type { Guild } from '~/data/types'
 
 export default function useGuilds () {
-  const { add, findBy, list: listDocuments, updateBy } = useCollection<Guild>('guilds', { converter: guildConverter })
-
-  const firestore = useFirestore()
+  const {
+    add,
+    findBy,
+    list: listDocuments,
+    updateBy,
+    deleteById: deleteDocument
+  } = useCollection<Guild>('guilds', { converter: guildConverter })
 
   const create = (guild: Guild) => {
     return add(guild)
@@ -28,16 +31,11 @@ export default function useGuilds () {
     return updateBy('slug', slug, payload)
   }
 
-  const deleteById = (id, { hardDelete = false } = {}) => {
-    const docRef = firestore
-      .collection('guilds')
-      .withConverter(guildConverter)
-      .doc(id)
-
+  const deleteById = (id: string, { hardDelete = false } = {}) => {
     if (hardDelete) {
-      return docRef.delete()
+      return deleteDocument(id)
     } else {
-      return docRef.update({
+      return updateBy('id', id, {
         ownerUid: null,
         deleted: true
       })

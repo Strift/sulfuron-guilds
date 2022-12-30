@@ -80,10 +80,14 @@ export default {
     }
 
     const onGuildRemove = async (guild) => {
-      const confirmed = confirm(`Voulez-vous supprimer ${guild.name} ?`)
-      if (confirmed) {
-        await deleteById(guild.id)
-        fetchGuilds()
+      try {
+        const confirmed = confirm(`Voulez-vous supprimer ${guild.name} ?`)
+        if (confirmed) {
+          await deleteById(guild.id)
+          fetchGuilds()
+        }
+      } catch (error) {
+        console.error(error)
       }
     }
 

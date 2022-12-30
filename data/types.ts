@@ -5,7 +5,7 @@ type FrenchWeekDay = 'Lundi' | 'Mardi' | 'Mercredi' | 'Jeudi' | 'Vendredi' | 'Sa
 
 export interface Guild {
   id: string
-  ownerUid: string
+  ownerUid: string | null
   name: string
   slug: string
   description: string
@@ -28,4 +28,5 @@ export interface Guild {
   websiteUrl: string
   contactUrl: string
   updatedAt?: Date
+  deleted?: boolean
 }

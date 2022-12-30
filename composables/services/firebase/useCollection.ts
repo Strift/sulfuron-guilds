@@ -65,14 +65,19 @@ export default function useCollection<Type extends firebase.firestore.DocumentDa
   }
 
   const updateBy = async (key: string, value: any, payload: Partial<Type>) => {
-    const documentSnapshot = await collectionQuery
-      .where(key, '==', value)
-      .get()
-
-    if (documentSnapshot.empty) {
-      throw new Error(`No document found in ${collectionPath} where ${key} == ${value}`)
+    let documentRef
+    if (key === 'id') {
+      documentRef = collection.doc(value)
+    } else {
+      const documentSnapshot = await collectionQuery
+        .where(key, '==', value)
+        .get()
+      if (documentSnapshot.empty) {
+        throw new Error(`No document found in ${collectionPath} where ${key} == ${value}`)
+      }
+      documentRef = documentSnapshot.docs[0].ref
     }
-    return documentSnapshot.docs[0].ref.update(payload)
+    return documentRef.update(payload)
   }
 
   const deleteById = (id: string) => {
