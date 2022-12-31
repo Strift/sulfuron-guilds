@@ -50,6 +50,7 @@
 <script lang="ts">
 import { computed, ref } from '@nuxtjs/composition-api'
 import { Promised } from 'vue-promised'
+import * as Sentry from '@sentry/vue'
 import Heading2 from '~/components/atoms/Heading2.vue'
 import BaseLoader from '~/components/atoms/BaseLoader.vue'
 import useGuilds from '~/composables/database/useGuilds'
@@ -67,27 +68,40 @@ export default {
     const searchText = ref('')
     const editionMode = ref(false)
 
-    const guilds = ref<Guild[]>()
+    const guilds = ref<Promise<Guild[]>>()
     const publishedGuilds = computed(() => {
-      return guilds.value.then(guilds => guilds.filter(guild => guild.published && !guild.deleted))
+      if (guilds.value) {
+        return guilds.value.then(guilds => guilds.filter(guild => guild.published && !guild.deleted))
+      }
+      return []
     })
     const deletedGuilds = computed(() => {
-      return guilds.value.then(guilds => guilds.filter(guild => guild.deleted))
+      if (guilds.value) {
+        return guilds.value.then(guilds => guilds.filter(guild => guild.deleted))
+      }
+      return []
     })
 
     const fetchGuilds = () => {
       guilds.value = list({ published: true })
     }
 
-    const onGuildRemove = async (guild) => {
+    const onGuildRemove = async (guild: Guild) => {
       try {
         const confirmed = confirm(`Voulez-vous supprimer ${guild.name} ?`)
         if (confirmed) {
           await deleteById(guild.id)
           fetchGuilds()
         }
-      } catch (error) {
-        console.error(error)
+      } catch (error: any) {
+        let message
+        if (error instanceof Error) {
+          message = error.message
+        } else {
+          message = String(error)
+        }
+        alert(message)
+        Sentry.captureException(error)
       }
     }
 

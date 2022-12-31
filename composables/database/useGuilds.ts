@@ -19,7 +19,7 @@ export default function useGuilds () {
     return findBy('slug', slug)
   }
 
-  const list = ({ published } = { published: undefined }) => {
+  const list = ({ published }: { published?: boolean } = {}) => {
     const whereEquals = published === undefined
       ? {}
       : { published }
