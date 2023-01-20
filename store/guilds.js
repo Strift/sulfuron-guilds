@@ -3,7 +3,7 @@ import { DateTime } from 'luxon'
 import sortBy from 'lodash/sortBy'
 import { firestoreAction } from 'vuexfire'
 
-import guildConverter from '~/data/converters/guildConverter'
+import guildConverter from '~/data/converters/guildConverter.ts'
 import findClassIndex from '~/data/utils/findClassIndex'
 import findSpecIndex from '~/data/utils/findSpecIndex'
 import getSpecId from '~/data/utils/getSpecId'

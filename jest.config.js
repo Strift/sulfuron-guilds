@@ -6,8 +6,8 @@ module.exports = {
     'vue'
   ],
   transform: {
-    // process `*.js` files with `babel-jest`
-    '.*\\.(js)$': 'babel-jest',
+    // process `*.js` and `*.ts files with `babel-jest`
+    '.*\\.[jt]s$': 'babel-jest',
     // process `*.vue` files with `vue-jest`
     '.*\\.(vue)$': 'vue-jest'
   },

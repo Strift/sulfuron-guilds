@@ -2,14 +2,10 @@
 
 module.exports = {
   presets: [
-    [
-      '@babel/preset-env',
-      {
-        targets: {
-          esmodules: true
-        }
-      }
-    ]
+    ['@babel/preset-env', {
+      targets: { esmodules: true }
+    }],
+    '@babel/preset-typescript'
   ],
   plugins: [
     // Added because of https://github.com/znck/prop-types

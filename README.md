@@ -78,6 +78,8 @@ yarn test
 
 Tests that involves browser locale (to format dates) require `full-icu` to be installed.
 
+**Unresolved:** Jest has issues with loading `.ts` files if extensions are not specified.
+
 ## 🚀 Production
 
 ### Build
