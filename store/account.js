@@ -1,5 +1,5 @@
 import { firestoreAction } from 'vuexfire'
-import guildConverter from '~/data/converters/guildConverter'
+import guildConverter from '~/data/converters/guildConverter.ts'
 
 const AUTH_STATE_GUEST = 'guest'
 const AUTH_STATE_LOADING = 'loading'
