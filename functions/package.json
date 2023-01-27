@@ -28,7 +28,7 @@
     "express-validator": "^6.10.0",
     "firebase-admin": "^9.2.0",
     "firebase-functions": "^3.11.0",
-    "passport": "^0.4.1",
+    "passport": "^0.6.0",
     "passport-bnet": "^2.0.0"
   },
   "devDependencies": {
