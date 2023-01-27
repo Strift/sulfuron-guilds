@@ -26,6 +26,10 @@ export default function useCollection<Type extends firebase.firestore.DocumentDa
   }
 
   const list = async (options: ListOptions): Promise<Type[]> => {
+    const subCollections = options.subCollections
+      ? options.subCollections
+      : []
+
     const query = options.whereEquals
       ? Object.entries(options.whereEquals)
         .reduce(
@@ -36,23 +40,23 @@ export default function useCollection<Type extends firebase.firestore.DocumentDa
 
     const documentsSnapshot = await query.get()
 
-    if (options.subCollections === undefined) {
+    if (subCollections.length === 0) {
       return documentsSnapshot.docs.map(document => document.data() as Type)
+    } else {
+      return Promise.all(documentsSnapshot.docs.map(async (document) => {
+        const subCollectionsData: Record<string, any> = {}
+
+        for (const subCollectionPath of subCollections) {
+          const subCollectionSnapshot = await document.ref.collection(subCollectionPath).get()
+          subCollectionsData[subCollectionPath] = subCollectionSnapshot.docs.map(subDocument => subDocument.data())
+        }
+
+        return {
+          ...subCollectionsData,
+          ...document.data()
+        } as Type
+      }))
     }
-
-    return Promise.all(documentsSnapshot.docs.map(async (document) => {
-      const subCollectionsData: Record<string, any> = {}
-
-      for (const subCollectionPath of options.subCollections) {
-        const subCollectionSnapshot = await document.ref.collection(subCollectionPath).get()
-        subCollectionsData[subCollectionPath] = subCollectionSnapshot.docs.map(subDocument => subDocument.data())
-      }
-
-      return {
-        ...subCollectionsData,
-        ...document.data()
-      } as Type
-    }))
   }
 
   const findBy = async (key: string, value: any) => {
