@@ -1,6 +1,8 @@
+import firebase from 'firebase/app'
 import transformRecruitmentArray from './utils/transformRecruitmentArray.js'
+import { Guild } from '~/data/types'
 
-export default {
+const converter: firebase.firestore.FirestoreDataConverter<Guild> = {
   toFirestore (guild) {
     return guild
   },
@@ -14,6 +16,8 @@ export default {
       description: data.description || '',
       // Transform `recruitment` array for guilds with old data structure
       recruitment: transformRecruitmentArray(data.recruitment)
-    }
+    } as Guild
   }
 }
+
+export default converter

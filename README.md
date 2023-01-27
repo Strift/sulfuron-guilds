@@ -61,7 +61,7 @@ yarn
 # Run the Nuxt app
 yarn dev
 # Run the Firebase emulators
-yarn serve --only  hosting,functions,firestore
+yarn serve --only hosting,functions,firestore
 ```
 
 > ⚠️ Using the Firebase Auth emulator creates client-side errors that prevents proper rendering of the page in non-incognito mode. 🤔
@@ -77,6 +77,8 @@ yarn test
 > This commands just runs Jest, so you can use any Jest CLI flags like `--watch`. 
 
 Tests that involves browser locale (to format dates) require `full-icu` to be installed.
+
+**Unresolved:** Jest has issues with loading `.ts` files if extensions are not specified.
 
 ## 🚀 Production
 
