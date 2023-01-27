@@ -3,10 +3,10 @@ import transformRecruitmentArray from './utils/transformRecruitmentArray.js'
 import { Guild } from '~/data/types'
 
 const converter: firebase.firestore.FirestoreDataConverter<Guild> = {
-  toFirestore (guild) {
+  toFirestore (guild: Guild) {
     return guild
   },
-  fromFirestore (snapshot, options) {
+  fromFirestore (snapshot, options): Guild {
     const data = snapshot.data(options)
     return {
       id: snapshot.id,
