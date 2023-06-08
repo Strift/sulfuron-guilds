@@ -113,7 +113,7 @@ export default {
         {
           hid: 'description',
           name: 'description',
-          content: 'Trouvez et rejoignez votre nouvelle guilde WoW Classic sur le serveur Sulfuron (The Burning Crusade).'
+          content: 'Trouvez et rejoignez votre nouvelle guilde WoW Classic sur le serveur Sulfuron (Wrath of the Lich King).'
         }
       ]
     }
